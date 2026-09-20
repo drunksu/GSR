@@ -1,4 +1,4 @@
-# GSR —— 面向 MobileBench-OL 的「执行顺序 → 成功率」实验工作台
+﻿# GSR —— 面向 MobileBench-OL 的「执行顺序 → 成功率」实验工作台
 
 > 课题：**面向移动 GUI 智能体评测的应用状态污染检测和恢复方法研究**（开题报告见 `开题报告 ….md`）
 >
@@ -77,15 +77,39 @@ mobile\Scripts\python.exe -m pip install -i https://pypi.tuna.tsinghua.edu.cn/si
 > 用清华镜像：`pypi.org` 官方源在国内网络下 TLS 握手会被中断（`SSLEOFError`）。
 > cmd 里续行符是 `^`（不是 PowerShell 的反引号），一行写不下时才需要。
 
-## 3) 装 adb（platform-tools）
+## 3) adb —— **已经随仓库提供，不用下载**
+
+仓库里已包含 adb 运行必需的 3 个文件（`adb.exe` + `AdbWinApi.dll` + `AdbWinUsbApi.dll`，共 8.1 MB），
+clone 完直接验证即可：
 
 ```cmd
-curl -L -o third_party\platform-tools.zip https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+third_party\platform-tools\adb.exe version
+```
+
+> **为什么随仓库提供**：Windows 自带 curl 走 schannel，下载时会先去**联网校验证书吊销状态**，
+> 一旦连不上吊销服务器就直接失败（新机器上实测踩到）：
+> ```
+> curl: (35) schannel: next InitializeSecurityContext failed:
+> CRYPT_E_REVOCATION_OFFLINE (0x80092013) - 由于吊销服务器已脱机，吊销功能无法检查吊销。
+> ```
+
+**若你手上是旧版本仓库（没有这 3 个文件）**，任选一种方式补上：
+
+```cmd
+rem 方式 1：跳过吊销检查（curl 8.x；更温和的写法是 --ssl-revoke-best-effort）
+curl --ssl-no-revoke -L -o third_party\platform-tools.zip https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+
+rem 方式 2：换 PowerShell 下载（走 .NET，不做吊销检查）
+powershell -Command "Invoke-WebRequest -Uri 'https://dl.google.com/android/repository/platform-tools-latest-windows.zip' -OutFile 'third_party\platform-tools.zip'"
+
+rem 方式 3：浏览器手动下载，放到 third_party\ 下
+
+rem 然后解压 + 验证
 tar -xf third_party\platform-tools.zip -C third_party
 third_party\platform-tools\adb.exe version
 ```
 
-> `curl` 和 `tar` 都是 Windows 10/11 自带的（`C:\Windows\System32\curl.exe`、`tar.exe`），不需要额外安装。
+> `tar` 是 Windows 10/11 自带的（`C:\Windows\System32\tar.exe`），不需要额外安装。
 
 ## 4) 手机 + 改一行配置
 
@@ -251,7 +275,7 @@ git pull
 
 ---
 
-# D. 七个必踩的坑
+# D. 八个必踩的坑
 
 | # | 坑 | 后果 / 对策 |
 |---|---|---|
@@ -262,6 +286,7 @@ git pull
 | 5 | **cmd 里写中文注释** | cmd.exe 用本地代码页（中文 Windows 是 GBK）读 `.bat/.cmd`，UTF-8 中文会被误读、`rem` 行断掉后被当成命令执行。**批处理文件一律纯 ASCII**（本仓库的 `.cmd` 已遵守；想写中文说明就写进 `.md`） |
 | 6 | **cmd 里 `set` 与 `%VAR%` 写在同一行** | cmd 在**解析整行时**就展开 `%VAR%`，`set PY=x && %PY% y.py` 会让 `%PY%` 变成空值。**`set` 必须单独一行**（实测踩过） |
 | 7 | **相对路径的基准目录** | `results\...` 是相对 benchmark 目录，`mobile\Scripts\...` 是相对仓库根 —— 混用会报"文件不存在"。对策：按 B0 设好绝对路径变量 |
+| 8 | **Windows curl 下载失败（schannel 吊销检查）** | `curl: (35) ... CRYPT_E_REVOCATION_OFFLINE (0x80092013)` —— curl 走 schannel，联网查不到证书吊销状态就拒绝下载。对策：`curl --ssl-no-revoke ...`、或换 `Invoke-WebRequest`、或浏览器下载。（adb 已随仓库提供，正常情况下不需要下载） |
 
 其他已修掉的两个静默失效：
 
