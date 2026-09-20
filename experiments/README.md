@@ -1,10 +1,20 @@
 # experiments/ —— 「执行顺序 → 成功率」（OD flaky）实验工作台
 
+> 📌 **部署、运行命令、同步方式、必踩的坑、当前进度 → 见仓库根目录 [`../README.md`](../README.md)**
+> 本文件只说明"每个脚本干什么"与"已验证到哪一步"。
+
 为开题报告（`面向移动GUI智能体评测的应用状态污染检测和恢复方法研究`）里那一项实验准备的可执行工作台：
 
 > **做点实验：OD Flaky tests 是否影响成功率？某个任务因为执行顺序变化而失败**
 > - 顺序执行 vs. 乱序执行
 > - 多个 Agent
+
+**两条技术路线**：
+
+| 路线 | 平台 | 状态 |
+|---|---|---|
+| **MobileBench-OL（当前主线）** | 真机 + 12 个真实中国 App + 托管 API（qwen3-vl-plus） | ✅ 已跑通，规范序 310 任务完成 |
+| AndroidWorld | 模拟器 + app 快照 | ✅ 代码与合成数据自检通过，真机路径未验证 |
 
 ---
 
@@ -112,12 +122,16 @@ python analyze_order_effects.py --input ..\results\pilot --out ..\results\pilot\
 
 ## 下一步（建议顺序）
 
-1. **装环境**：Python 3.11+、Android Studio + AVD、API key（见 `docs/01` §4）
-2. **阶段 0**：跑通上面第 3 步（已通过，可跳过）
-3. **阶段 1 试点**：`--tasks-file data/pilot_tasks.txt`，10 重复，实测 episode 时长 → 回填 `docs/02` §6.2 的预算表
-4. **信号带筛选**：保留 SR ∈ [0.2, 0.8] 的 (agent, task)
-5. **阶段 2 主实验**：按 `docs/02` §6.2 的 B/B+ 档执行，多模拟器并行
-6. **阶段 3/4**：MobileBench-OL（在线复核）+ WebArena（负对照）
+**MobileBench-OL 主线**（命令见根目录 README 的 B 节）：
+
+1. **续跑乱序**：`results/base_shuffle` 停在 26/310（接口断连崩的），重跑同一条命令自动续
+2. **清洗 + 出报告**：`mbl_purge_tasks.py --blank-only` 摘掉黑屏 episode 后补跑，再跑分析器
+3. **加第二个 Agent**：`qwen3-vl-flash`（同代更弱 → 更容易落在 0.2–0.8 信号带）
+4. **补 reset 通道**：填上分析器 §1 的 C1/C3 与 DiD 交互项
+5. **加重复**：同一顺序跑 ≥3 次，才能出 polluter 排名与 per-task 显著性
+6. **可选**：实现对抗序（`adversarial`）与分块随机（`blocked`）—— 见根目录 README 术语表
+
+**AndroidWorld 支线**（另一条路线，本机无模拟器故未验证）：
 
 ---
 
