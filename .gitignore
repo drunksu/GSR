@@ -1,0 +1,46 @@
+# ============================================================================
+#  .gitignore —— 只同步"代码 + 配置 + 文档"，不同步大体积产物
+# ============================================================================
+
+# ---- 虚拟环境（244 MB，每台机器自己重建）----
+/mobile/
+
+# ---- 评测产物：截图与元素树（本机已 3 GB+）----
+# 新机器从头跑，不需要同步；只保留体积很小的报告性文件
+**/results/**
+!experiments/results/
+!experiments/results/*.md
+!experiments/results/*.json
+
+# ---- 合成实验数据（可用 make_sim_data.py 重新生成，9 MB）----
+/experiments/results/sim/
+
+# ---- 下载物与临时文件（新机器重新下载）----
+/third_party/platform-tools/
+/third_party/platform-tools.zip
+/third_party/android_home/
+/third_party/mbl.tar.gz
+/third_party/mbl_paper.html
+/third_party/mbl_paper.txt
+/third_party/models_all.json
+/third_party/*.zip
+/third_party/*.tar.gz
+
+# ---- MobileBench-OL 上游自带的演示图片（约 20 MB，跑实验用不到）----
+/third_party/mobilebench-ol-main/MobileAgent_new/Mobile-Agent-v2/results/
+/third_party/mobilebench-ol-main/MobileAgent_new/Mobile-Agent-v2/screenshot/
+/third_party/mobilebench-ol-main/MobileAgent_new/Mobile-Agent-v2/assets/
+/third_party/mobilebench-ol-main/tmp_smoke/
+/third_party/mobilebench-ol-main/*.bak
+
+# ---- 参考论文 PDF（7.6 MB；想同步就 git add -f paper/）----
+/paper/
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ---- 零散产物 ----
+/experiments/scripts/coord_probe.png
+*.log

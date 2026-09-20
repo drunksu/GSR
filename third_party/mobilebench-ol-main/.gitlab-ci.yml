@@ -1,0 +1,10 @@
+stages:
+  - link
+
+flake8:
+  stage: link
+  image: 
+  before_script:
+    - pip3 install flake8
+  script:
+    - flake8 .

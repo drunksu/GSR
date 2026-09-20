@@ -1,0 +1,14 @@
+# 阶段 1 试点任务集（6 个）：覆盖 3 个状态域 + 1 个快照外状态域
+# 用法：python order_runner.py --backend androidworld --tasks-file ../data/pilot_tasks.txt ...
+#
+# 设计意图：
+#   1 对"写→读"同 App 配对（日历），用于验证对抗序能否制造 OD 失败
+#   1 个基于"最新/重复"语义的写任务（Markor 删最新笔记），污染会改变操作对象
+#   1 个明确的快照外污染源（剪贴板）
+#   2 个高成功率任务（日历查询类），用于估计该 agent 的基础成功率
+SimpleCalendarAnyEventsOnDate
+SimpleCalendarNextEvent
+SimpleCalendarAddOneEventTomorrow
+MarkorCreateNote
+MarkorDeleteNewestNote
+SystemCopyToClipboard
