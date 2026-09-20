@@ -10,6 +10,10 @@
 **核心机制**：MobileBench-OL 的执行顺序 = **CSV 行序**（`load_tasks()` 用 `csv.DictReader` 顺序读、无排序无打乱）。
 所以"打乱任务"= 生成同一批任务的另一份行序排列的 CSV —— 本仓库提供生成器。
 
+**本文档所有命令都写成 CMD 版本**（Windows 命令提示符，可直接粘贴）。
+两个入口 `run_mbl.cmd` / `pilot.cmd` 是 PowerShell 脚本的包装，环境变量会自动载入，cmd 里不需要事先 `set` 任何东西。
+（想用 PowerShell 直接调也可以：`powershell -NoProfile -File run_mbl.ps1 -TaskFile ... `）
+
 ---
 
 ## 目录速查
@@ -17,8 +21,8 @@
 | 路径 | 内容 |
 |---|---|
 | `mobile.env.ps1` | **环境配置**：API key、模型注册表（含坐标约定）、路径、设备序列号 |
-| `run_mbl.ps1` | 跑一轮：自检 → 写 manifest → 执行 → 提示转格式 |
-| `pilot.ps1` | **一条命令跑完两轮顺序 + 自动分析** |
+| `run_mbl.cmd` / `run_mbl.ps1` | 跑一轮：自检 → 写 manifest → 执行 → 提示转格式 |
+| `pilot.cmd` / `pilot.ps1` | **一条命令跑完两轮顺序 + 自动分析** |
 | `experiments/docs/` | 01 数据集与 Agent 选型、02 实验方案（2×2 析因 / 指标 / 样本量） |
 | `experiments/scripts/` | 全部脚本（见下） |
 | `third_party/mobilebench-ol-main/` | **已打补丁**的 MobileBench-OL（源码 + 全套 CSV + 顺序任务集 + reset 配置） |
@@ -45,53 +49,64 @@
 # A. 新机器部署（6 步）
 
 ## 0) 前置
-**Git** + **Python 3.10+**（本仓库实测 3.10.7）。
+**Git** + **Python 3.10 或以上**（本仓库实测 3.10.7）。
+
+```cmd
+git --version
+python --version
+```
 
 ## 1) 克隆（路径随意 —— 脚本已改为自动定位）
 
-```powershell
-$MBL = 'D:\GSR'
-git clone https://github.com/drunksu/GSR.git $MBL
-cd $MBL
+```cmd
+set MBL=D:\GSR
+git clone https://github.com/drunksu/GSR.git %MBL%
+cd /d %MBL%
 ```
+
+> `cd /d` 在 cmd 里跨盘符切换必须加 `/d`。
 
 ## 2) 建虚拟环境（★ 名字必须叫 `mobile`，必须在仓库根目录）
 
-```powershell
+```cmd
 python -m venv mobile
-& "$MBL\mobile\Scripts\python.exe" -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
-& "$MBL\mobile\Scripts\python.exe" -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple `
-    uiautomator2 pillow opencv-python numpy openai defusedxml lxml requests
+mobile\Scripts\python.exe -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
+mobile\Scripts\python.exe -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple uiautomator2 pillow opencv-python numpy openai defusedxml lxml requests
 ```
 
 > 用清华镜像：`pypi.org` 官方源在国内网络下 TLS 握手会被中断（`SSLEOFError`）。
+> cmd 里续行符是 `^`（不是 PowerShell 的反引号），一行写不下时才需要。
 
 ## 3) 装 adb（platform-tools）
 
-```powershell
-Invoke-WebRequest -Uri 'https://dl.google.com/android/repository/platform-tools-latest-windows.zip' -OutFile "$MBL\third_party\platform-tools.zip"
-Expand-Archive "$MBL\third_party\platform-tools.zip" -DestinationPath "$MBL\third_party" -Force
-& "$MBL\third_party\platform-tools\adb.exe" version
+```cmd
+curl -L -o third_party\platform-tools.zip https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+tar -xf third_party\platform-tools.zip -C third_party
+third_party\platform-tools\adb.exe version
 ```
+
+> `curl` 和 `tar` 都是 Windows 10/11 自带的（`C:\Windows\System32\curl.exe`、`tar.exe`），不需要额外安装。
 
 ## 4) 手机 + 改一行配置
 
-```powershell
-& "$MBL\third_party\platform-tools\adb.exe" devices     # 拿序列号
-notepad "$MBL\mobile.env.ps1"                           # ★ 只改 $DEVICE 那一行
+```cmd
+third_party\platform-tools\adb.exe devices
+notepad mobile.env.ps1
 ```
+
+`notepad` 打开后**只改 `$DEVICE` 那一行**（换成新手机的序列号）。API key 已经在仓库里，不用重填。
 
 手机端要求：
 
 - 开 **USB 调试**（国产机型还要开"USB 调试（安全设置）"）
 - **系统语言中文**（成功条件是中文文案的 xpath）
-- **充电时保持常亮**（`adb shell svc power stayon true`；熄屏会造成整轮假失败）
+- **充电时保持常亮**（见 B1；熄屏会造成整轮假失败）
 - base 子集的 **12 个 App**：B站 / 网易云 / 番茄 / 拼多多 / QQ / 58同城 / 同花顺 / 今日头条 / 高德 / 百度 / 钉钉 / 美柚（**要登录**，很多任务依赖账号既有状态）
 
 ## 5) 自检（不插手机也能跑）
 
-```powershell
-& "$MBL\run_mbl.ps1" -TaskFile data/smoke_2task.csv -Output results/_selftest -DryRun
+```cmd
+run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\_selftest -DryRun
 ```
 
 看到 `[run_mbl] 模型 = qwen3-vl-plus   坐标约定 = norm` 即环境就绪。
@@ -102,55 +117,63 @@ notepad "$MBL\mobile.env.ps1"                           # ★ 只改 $DEVICE 那
 
 # B. 运行命令
 
-```powershell
-$MBL = 'D:\GSR'     # 按你的克隆路径改
+## B0 先设好这几个变量（每个新的 cmd 窗口跑一次）
+
+```cmd
+set MBL=D:\GSR
+set PY=%MBL%\mobile\Scripts\python.exe
+set S=%MBL%\experiments\scripts
+set REPO=%MBL%\third_party\mobilebench-ol-main
+set ADB=%MBL%\third_party\platform-tools\adb.exe
+cd /d %REPO%
 ```
+
+> ⚠️ **`set` 必须单独一行**。cmd 在**解析整行时**就展开 `%VAR%`，所以
+> `set PY=x && %PY% y.py` 这种写法里 `%PY%` 会展开成**空值**（实测踩过）。
+> ⚠️ `set VAR=值`：等号两边**不能有空格**，值**不要加引号**（引号会变成值的一部分）。
+> ⚠️ `cd /d` 换盘符时必须加 `/d`。
+> ⚠️ 若你的路径含空格，调用时加引号：`"%MBL%\run_mbl.cmd" ...`。
+
+**为什么要 `cd` 到 `%REPO%`**：benchmark 用相对路径 `data\...` 解析任务集，输出目录 `results\...` 也落在 benchmark 目录下（与官方一致）。
+`%PY%` / `%S%` / `%ADB%` 都是**绝对路径**，所以在哪个目录下都能用。
 
 ## B1 唤醒手机（**每次长跑前必做**）
 
-```powershell
-& "$MBL\third_party\platform-tools\adb.exe" -s <你的序列号> shell `
-  "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
+```cmd
+%ADB% -s 你的序列号 shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
 ```
 
 ## B2 冒烟：2 个 B站任务（约 3 分钟）
 
-```powershell
-cd "$MBL\third_party\mobilebench-ol-main"
-& "$MBL\run_mbl.ps1" -TaskFile data/smoke_2task.csv -Output results/smoke
+```cmd
+%MBL%\run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\smoke
 ```
 
 ## B3 全量两种顺序（一条命令跑完两轮 + 自动分析）
 
-```powershell
-& "$MBL\pilot.ps1" -Tag base `
-    -TasksCanonical data/base_canonical.csv `
-    -TasksShuffle   data/base_shuffle0.csv
+```cmd
+%MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
 ```
 
 - 310 个任务 / 一种顺序约 **3 小时**、约 17 M tokens
-- 报告自动生成在 `results/base_analysis/report.md`
+- 报告自动生成在 `results\base_analysis\report.md`
 - **中断不用怕**：结果按任务落盘，重跑同一条命令会自动续跑（已完成任务跳过）
 
 ## B4 reset 通道（跑 benchmark 自带的 cleaner）
 
-```powershell
-# 先 2 个任务验证通道本身
-& "$MBL\run_mbl.ps1" -ConfigFile config/interact_API_qwen3vl_reset.conf `
-    -TaskFile data/reset_smoke_2task.csv -Output results/reset_smoke
-# 完整 65 个任务（约 40 分钟）
-& "$MBL\run_mbl.ps1" -ConfigFile config/interact_API_qwen3vl_reset.conf `
-    -TaskFile data/reset_canonical.csv -Output results/reset_r1
+```cmd
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_smoke_2task.csv -Output results\reset_smoke
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\reset_r1
 ```
+
+第一条是 2 个任务的通道验证（约 3 分钟），第二条是完整的 65 个任务（约 40 分钟）。
 
 ⚠️ **reset 必须用独立的 `-Output`**：reset 集的 65 个 task_identifier 与主集**完全重叠**，共用目录会让主运行把它们当成"已完成"跳过。
 
 ## B5 换模型 / 多 Agent 对比
 
-```powershell
-# 更强更快的同代模型（坐标约定自动带出）
-& "$MBL\pilot.ps1" -Model qwen3-vl-flash -Tag baseflash `
-    -TasksCanonical data/base_canonical.csv -TasksShuffle data/base_shuffle0.csv
+```cmd
+%MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
 ```
 
 **可用模型与坐标约定**（`mobile.env.ps1` 里的注册表；★ 约定填错 → 所有点击挤到左上角、任务全灭）
@@ -166,68 +189,86 @@ cd "$MBL\third_party\mobilebench-ol-main"
 | `qwen-vl-plus` | norm（推测） | 输出格式有点脏 |
 | `qwen3-vl-max` / `qwen2.5-vl-7b/72b-instruct` | — | **不可用**（404 / 403） |
 
-**加新模型**：先跑坐标检测，再把结果写进注册表。
+**加新模型**：先跑坐标检测（这两个诊断脚本走标准库直连 API、不经过 PowerShell，所以要自己 `set`；key 可从 `mobile.env.ps1` 里复制）：
 
-```powershell
-& "$MBL\mobile\Scripts\python.exe" "$MBL\experiments\scripts\mbl_coord_convention_check.py" `
-    --model <新模型> --repo "$MBL\third_party\mobilebench-ol-main"
+```cmd
+set MBL_API_KEY=sk-你的key
+%PY% %S%\mbl_coord_convention_check.py --model 新模型名 --repo %REPO%
 ```
 
 ## B6 生成新的顺序任务集
 
-```powershell
-$PY = "$MBL\mobile\Scripts\python.exe"; $S = "$MBL\experiments\scripts"
-$repo = "$MBL\third_party\mobilebench-ol-main"
-# 反向序 / 第二个随机置换 / 子集
-& $PY "$S\mbl_make_task_csv.py" --repo $repo --order reverse --out base_reverse.csv
-& $PY "$S\mbl_make_task_csv.py" --repo $repo --order shuffle --seed 1 --out base_shuffle1.csv
-& $PY "$S\mbl_make_task_csv.py" --repo $repo --limit 30 --order shuffle --seed 0 --out sub30_shuffle0.csv
+```cmd
+%PY% %S%\mbl_make_task_csv.py --repo %REPO% --order reverse --out base_reverse.csv
+%PY% %S%\mbl_make_task_csv.py --repo %REPO% --order shuffle --seed 1 --out base_shuffle1.csv
+%PY% %S%\mbl_make_task_csv.py --repo %REPO% --limit 30 --order shuffle --seed 0 --out sub30_shuffle0.csv
 ```
 
-> 文件名必须含 `shuffle<数字>` 才会被 manifest 识别为乱序并记录 seed。
+> `--out` 写成纯文件名时，输出落到 `%REPO%\data\` 下；文件名必须含 `shuffle<数字>` 才会被 manifest 识别为乱序并记录 seed。
 
 ## B7 长跑后的清洗与补跑
 
-```powershell
-& $PY "$S\mbl_purge_tasks.py" --run-dir results/base_shuffle --blank-only --dry-run   # 先看
-& $PY "$S\mbl_purge_tasks.py" --run-dir results/base_shuffle --blank-only            # 摘掉后重跑 B3 即可补
+```cmd
+%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-only --dry-run
+%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-only
 ```
+
+摘掉那些与顺序无关的失败（黑屏等）之后，重跑 B3 就会自动补跑它们。
 
 ## B8 单独出报告
 
-```powershell
-& $PY "$S\analyze_order_effects.py" `
-  --input results/base_canonical/episodes.jsonl results/base_shuffle/episodes.jsonl `
-  --out results/base_analysis --official-condition none
+```cmd
+%PY% %S%\analyze_order_effects.py --input results\base_canonical\episodes.jsonl results\base_shuffle\episodes.jsonl --out results\base_analysis --official-condition none
+type results\base_analysis\report.md
+```
+
+## B9 其他常用查看命令
+
+```cmd
+type results\base_canonical\result_list.txt
+dir /b results\base_canonical | find /c /v ""
+notepad results\base_analysis\report.md
 ```
 
 ---
 
 # C. 同步方式
 
-```powershell
-# 在新机器上：提交并推
-git add -A; git commit -m "描述"; git push
+```cmd
+git add -A
+git commit -m "描述"
+git push
+```
 
-# 在另一台机器上：拉
+拉取：
+
+```cmd
 git pull
 ```
 
-**已排除的内容**（见 `.gitignore`）：截图与元素树（3 GB+）、venv（245 MB）、platform-tools、参考论文 PDF、合成数据、以及各机器的运行结果。
+**已排除的内容**（见 `.gitignore`）：截图与元素树（3 GB+）、venv（245 MB）、platform-tools、参考论文 PDF、合成数据、各机器的运行结果。
 只同步"代码 + 配置 + 文档"，约 **1.7 MB**。
 
 ---
 
-# D. 四个必踩的坑
+# D. 七个必踩的坑
 
 | # | 坑 | 后果 / 对策 |
 |---|---|---|
 | 1 | **坐标约定** | 模型输出 0–1000 归一化坐标而代码当像素用 → 所有点击挤到左上角、**任务全灭且看不出原因**。对策：注册表 + `MBL_COORD`，换模型必跑检测 |
-| 2 | **`--output` 目录复用** | `result_list.txt` 是续跑缓存，重名会让任务**全部被跳过**。对策：每种顺序用独立目录 |
+| 2 | **`-Output` 目录复用** | `result_list.txt` 是续跑缓存，重名会让任务**全部被跳过**。对策：每种顺序用独立目录 |
 | 3 | **venv 必须叫 `mobile` 且在仓库根** | `mobile.env.ps1` 里 `$PY = "$MBL_ROOT\mobile\Scripts\python.exe"` |
 | 4 | **手机熄屏** | 截图全黑 → 整轮变成"假失败"，与污染无关。对策：B1 唤醒 + 保持充电；分析前用 `mbl_purge_tasks.py --blank-only` 剔除 |
+| 5 | **cmd 里写中文注释** | cmd.exe 用本地代码页（中文 Windows 是 GBK）读 `.bat/.cmd`，UTF-8 中文会被误读、`rem` 行断掉后被当成命令执行。**批处理文件一律纯 ASCII**（本仓库的 `.cmd` 已遵守；想写中文说明就写进 `.md`） |
+| 6 | **cmd 里 `set` 与 `%VAR%` 写在同一行** | cmd 在**解析整行时**就展开 `%VAR%`，`set PY=x && %PY% y.py` 会让 `%PY%` 变成空值。**`set` 必须单独一行**（实测踩过） |
+| 7 | **相对路径的基准目录** | `results\...` 是相对 benchmark 目录，`mobile\Scripts\...` 是相对仓库根 —— 混用会报"文件不存在"。对策：按 B0 设好绝对路径变量 |
 
-另外还有一个静默失效的坑已经修掉：PowerShell 变量名大小写不敏感，参数 `$Config` 会和 `mobile.env.ps1` 里的 `$CONFIG` 撞成同一个变量被覆盖 → 已改名 `$ConfigFile`（保留 `-Config` 别名）。
+其他已修掉的两个静默失效：
+
+- PowerShell 变量名大小写不敏感，参数 `$Config` 会和 `mobile.env.ps1` 里的 `$CONFIG` 撞成同一个变量被覆盖 → 已改名 `$ConfigFile`（保留 `-Config` 别名）。
+- Git 换行符若被转成 CRLF，会让"按精确文本锚点打补丁"的脚本全部失配 → 已加 `.gitattributes` 统一 LF。
+
+**cmd 里中文输出乱码时**：先执行 `chcp 65001`（本仓库的 `.cmd` 没有强制切换，以免影响你终端其他程序的输出）。
 
 ---
 
@@ -235,8 +276,8 @@ git pull
 
 `mobilebench/utils/mbl_api_shim.py` 是新增模块；7 个文件共 50+ 处标记。全部幂等、自动备份、`--revert` 可回滚。
 
-```powershell
-& $PY "$S\mbl_apply_api_patch.py" --repo $repo --with-retry --coord-norm --task-file-env --metrics --resilient
+```cmd
+%PY% %S%\mbl_apply_api_patch.py --repo third_party\mobilebench-ol-main --with-retry --coord-norm --task-file-env --metrics --resilient
 ```
 
 | 补丁 | 解决什么 |
@@ -277,4 +318,4 @@ git pull
 | **PASR** | Pollution-Aware Success Rate：最坏顺序下的期望成功率（可信下界） |
 | **DiD** | Difference-in-Differences：顺序 × 重置的交互项 |
 | **condition** | 重置条件：`official`（跑了 cleaner）/ `none`（只重启 App） |
-| **order_mode** | 顺序档位：`canonical` / `reverse` / `shuffle<seed>` / `adversarial`（后两者中 adversarial 尚未实现） |
+| **order_mode** | 顺序档位：`canonical` / `reverse` / `shuffle<seed>` / `adversarial`（adversarial 尚未实现） |

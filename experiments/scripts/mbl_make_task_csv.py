@@ -114,10 +114,14 @@ def main() -> int:
     print(f"\n写出 {len(rows)} 个任务 -> {out}   （order={args.order}"
           + (f", seed={args.seed}" if args.order == "shuffle" else "") + "）")
     print(f"  {CANONICAL_COL_NOTE}")
-    for i, r in enumerate(rows, 1):
+    # 任务多时只列前 15 个，避免刷屏
+    show = rows if len(rows) <= 20 else rows[:15]
+    for i, r in enumerate(show, 1):
         print(f"  {i:3d}. {(r.get('task_identifier') or ''):20s} "
               f"[{(r.get('task_app') or '?'):13s}] steps={r.get('golden_steps','?'):>3s} "
               f"reset={(r.get('Reset') or '-') or '-':7s} {r.get('goal','')[:34]}")
+    if len(rows) > len(show):
+        print(f"  … 其余 {len(rows) - len(show)} 个已省略（完整顺序见生成的 CSV）")
     print(f"\n用法: set MBL_TASK_FILE={os.path.relpath(out, repo).replace(os.sep, '/')}")
     return 0
 
