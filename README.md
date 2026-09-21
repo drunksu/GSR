@@ -1,4 +1,4 @@
-﻿# GSR —— 面向 MobileBench-OL 的「执行顺序 → 成功率」实验工作台
+# GSR —— 面向 MobileBench-OL 的「执行顺序 → 成功率」实验工作台
 
 > 课题：**面向移动 GUI 智能体评测的应用状态污染检测和恢复方法研究**（开题报告见 `开题报告 ….md`）
 >
@@ -258,24 +258,50 @@ notepad results\base_analysis\report.md
 
 # C. 同步方式
 
+## C1 上传自己的实验结果（**每轮跑完都要做**）
+
 ```cmd
+cd /d "D:\projects\GUI state recovery"
 git add -A
-git commit -m "描述"
+git commit -m "results: base_shuffle 310/310"
 git push
 ```
 
-拉取：
+`git add -A` 之后**先看一眼将要提交什么**，别盲推：
 
 ```cmd
-git pull
+git status --short
+git diff --cached --stat
 ```
 
-**已排除的内容**（见 `.gitignore`）：截图与元素树（3 GB+）、venv（245 MB）、platform-tools、参考论文 PDF、合成数据、各机器的运行结果。
-只同步"代码 + 配置 + 文档"，约 **1.7 MB**。
+只要看到 `results\...\episodes.jsonl`、`run_manifest.json`、`trajectory.json`、`result_list.txt`、`*_analysis\report.md` 出现在列表里，就是对的。
+**如果列表里一个 `results\` 都没有 → 停，先看坑 #9。**
+
+## C2 拉取别人的结果
+
+```cmd
+cd /d "D:\projects\GUI state recovery"
+git stash
+git pull
+git stash pop
+```
+
+`git stash` 只是为了保护你可能还在改的本地文件；工作区干净时可以跳过。
+
+## C3 什么会同步、什么不会
+
+| 会同步（约 3.2 MB） | 不会同步 |
+|---|---|
+| 代码、配置、文档 | `step_*.png` / `step_*.xml` / `*_som.png`（截图与元素树，3 GB+） |
+| `results\*\episodes.jsonl`（每任务一行，判定+步数） | `mobile\`（venv，245 MB） |
+| `results\*\run_manifest.json`（这个目录是哪种顺序/条件） | `third_party\platform-tools.zip` |
+| `results\*\*\trajectory.json`、`api_metrics.jsonl`、`step_timing.jsonl`、`result_list.txt` | `paper\`（参考论文 PDF） |
+| `results\*_analysis\report.md` 等分析产物 | `experiments\results\sim\`（合成数据，可重生成） |
+| adb（`adb.exe` + 2 个 DLL，8.1 MB，见 A3） | |
 
 ---
 
-# D. 八个必踩的坑
+# D. 九个必踩的坑
 
 | # | 坑 | 后果 / 对策 |
 |---|---|---|
@@ -287,6 +313,7 @@ git pull
 | 6 | **cmd 里 `set` 与 `%VAR%` 写在同一行** | cmd 在**解析整行时**就展开 `%VAR%`，`set PY=x && %PY% y.py` 会让 `%PY%` 变成空值。**`set` 必须单独一行**（实测踩过） |
 | 7 | **相对路径的基准目录** | `results\...` 是相对 benchmark 目录，`mobile\Scripts\...` 是相对仓库根 —— 混用会报"文件不存在"。对策：按 B0 设好绝对路径变量 |
 | 8 | **Windows curl 下载失败（schannel 吊销检查）** | `curl: (35) ... CRYPT_E_REVOCATION_OFFLINE (0x80092013)` —— curl 走 schannel，联网查不到证书吊销状态就拒绝下载。对策：`curl --ssl-no-revoke ...`、或换 `Invoke-WebRequest`、或浏览器下载。（adb 已随仓库提供，正常情况下不需要下载） |
+| 9 | **`.gitignore` 把 `results\` 全排掉 → 实验结果悄悄传不上去** | 实测踩过：另一台机器跑完 `git add -A; git commit -m "add report"; git push`，**看着一切正常**，但推上来的 commit 只改了 `mobile.env.ps1` 一个文件，310 个任务的日志全留在本地。原因就是 `.gitignore` 里的 `**/results/**`。对策：只排除 `step_*.png/xml/som/jpg`（当前 `.gitignore` 已如此），并且**推送前用 `git diff --cached --stat` 确认 `results\` 在列表里** |
 
 其他已修掉的两个静默失效：
 
