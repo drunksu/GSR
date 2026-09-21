@@ -1,4 +1,4 @@
-﻿# ============================================================================
+# ============================================================================
 #  MobileBench-OL 运行环境配置
 #  用法（每个新开的终端里执行一次）：
 #      . 'D:\projects\GUI state recovery\mobile.env.ps1'
@@ -57,7 +57,7 @@ $MBL_ROOT = $PSScriptRoot
 $REPO     = "$MBL_ROOT\third_party\mobilebench-ol-main"
 $PY       = "$MBL_ROOT\mobile\Scripts\python.exe"
 $ADB      = "$MBL_ROOT\third_party\platform-tools\adb.exe"
-$DEVICE   = 'GAGU8HGYW8JF9TIJ '
+$DEVICE   = 'GAGU8HGYW8JF9TIJ'   # ★ 换机器/换手机必须改这里（用 adb devices 查），注意别把空格带进来
 $CONFIG   = 'config/interact_API_qwen3vl_base.conf'
 
 $env:PATH = "$MBL_ROOT\third_party\platform-tools;$env:PATH"

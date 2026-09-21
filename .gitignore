@@ -5,12 +5,15 @@
 # ---- 虚拟环境（244 MB，每台机器自己重建）----
 /mobile/
 
-# ---- 评测产物：截图与元素树（本机已 3 GB+）----
-# 新机器从头跑，不需要同步；只保留体积很小的报告性文件
-**/results/**
-!experiments/results/
-!experiments/results/*.md
-!experiments/results/*.json
+# ---- 评测产物：只排除体积巨大的截图与元素树，**小文件要同步** ----
+# 单轮 310 个任务的 PNG 就 2.7 GB、XML 另有 200 MB；而
+# trajectory.json / episodes.jsonl / result_list.txt / report.md / api_metrics.jsonl
+# 加起来才几 MB —— 这些是另一台机器唯一能看到结果的途径，必须入库。
+# （曾经用 **/results/** 整目录排除，导致"上传了报告"其实什么都没上来）
+step_*.png
+step_*.xml
+*_som.png
+step_*.jpg
 
 # ---- 合成实验数据（可用 make_sim_data.py 重新生成，9 MB）----
 /experiments/results/sim/

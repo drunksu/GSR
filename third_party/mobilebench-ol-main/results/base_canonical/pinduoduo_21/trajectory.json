@@ -1,0 +1,63 @@
+{
+  "task_id": "pinduoduo_21",
+  "task_goal": "在拼多多查看我待付款的订单",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1097,
+          2585
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.9,
+          0.95
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          122,
+          702
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.1,
+          0.26
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "已查看拼多多待付款订单"
+      },
+      "normalized_params": {
+        "text": "已查看拼多多待付款订单"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\base_canonical\\pinduoduo_21\\step_1.png",
+    "results\\base_canonical\\pinduoduo_21\\step_2.png",
+    "results\\base_canonical\\pinduoduo_21\\step_3.png"
+  ],
+  "history_response": [
+    "Thought: 我需要查看待付款的订单，通常这类信息会在“个人中心”中找到。当前界面是拼多多的首页，底部导航栏有“个人中心”选项，点击它应该能进入我的账户页面，在那里可以找到订单相关的信息。\nAction: click(point='<point>899 953</point>')",
+    "Thought: 在“我的订单”区域中，我可以看到“待付款”选项，图标是一个钱包形状，位于第一项。这正是我要找的入口，点击它应该能进入待付款订单列表页面。\nAction: click(point='<point>100 259</point>')",
+    "Thought: 我已经成功进入了“待付款”订单页面，屏幕上显示了多个待付款的订单商品信息，说明任务已完成。\nAction: finished(content='已查看拼多多待付款订单')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

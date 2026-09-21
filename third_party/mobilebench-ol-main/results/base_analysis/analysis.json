@@ -1,0 +1,48 @@
+{
+  "baseline_order": "canonical",
+  "official_condition": "none",
+  "delta": 0.2,
+  "alpha": 0.05,
+  "conditions": [
+    "official"
+  ],
+  "order_modes": [
+    "canonical",
+    "shuffle"
+  ],
+  "contrasts": {},
+  "order_contrasts": {},
+  "od_flaky_tasks": {
+    "qwen3-vl-plus": []
+  },
+  "groups": {
+    "qwen3-vl-plus|official": {
+      "n_tasks": 26,
+      "suite_sr_ref": 0.46153846153846156,
+      "suite_sr_treat": 0.46153846153846156,
+      "delta_sr": 0.0,
+      "delta_sr_ci95": [
+        -0.15384615384615385,
+        0.15384615384615385
+      ],
+      "ctci": 0.15384615384615385,
+      "pasr": 0.38461538461538464,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "agent": "qwen3-vl-plus",
+      "condition": "official",
+      "suite_sr_by_order": {
+        "canonical": 0.46153846153846156,
+        "shuffle": 0.46153846153846156
+      },
+      "n_by_order": {
+        "canonical": 26,
+        "shuffle": 26
+      },
+      "n_comparable_tasks": 26
+    }
+  },
+  "warnings": [],
+  "polluters": []
+}
