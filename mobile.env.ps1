@@ -57,7 +57,7 @@ $MBL_ROOT = $PSScriptRoot
 $REPO     = "$MBL_ROOT\third_party\mobilebench-ol-main"
 $PY       = "$MBL_ROOT\mobile\Scripts\python.exe"
 $ADB      = "$MBL_ROOT\third_party\platform-tools\adb.exe"
-$DEVICE   = 'GAGU8HGYW8JF9TIJ'
+$DEVICE   = 'GAGU8HGYW8JF9TIJ '
 $CONFIG   = 'config/interact_API_qwen3vl_base.conf'
 
 $env:PATH = "$MBL_ROOT\third_party\platform-tools;$env:PATH"
