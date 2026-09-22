@@ -265,6 +265,46 @@ dir /b results\base_canonical | find /c /v ""
 notepad results\base_analysis\report.md
 ```
 
+## B10 重复实验（**让 §3 victim / §4 polluter 两张表有内容的前提**）
+
+单轮每格只有 1 个样本时，Fisher 双边 p **恒等于 1.0**、polluter 需要的前序支持度也只有 1 —— 这两张表**必然为空**，和真实效应无关。要它们有内容就必须重复跑。
+
+```cmd
+rem 预注册的 8 个 QQ 任务子集（writer→reader 顺序，即规范序）
+%MBL%\run_repeats.cmd data\qqset_canonical.csv results\qqset_A 6
+
+rem 同一批任务的反向顺序（reader 先跑，writer 最后）
+%MBL%\run_repeats.cmd data\qqset_reverse.csv results\qqset_B 6
+
+rem 可选：第二个 Agent 跑同一套（多 Agent 维度）
+%MBL%\run_repeats.cmd data\qqset_canonical.csv results\qqset_A 6 -Model qwen3-vl-flash
+```
+
+`run_repeats.cmd TASKFILE OUTPREFIX N [额外参数]` 会把同一份任务集跑 N 遍，每遍写进**独立的 `-Output`**（`OUTPREFIX_r1` … `OUTPREFIX_rN`）—— 共用目录会被 `result_list.txt` 当成"已完成"整轮跳过，这是必须分开的原因。
+
+**重复次数怎么定**：不是拍脑袋，由多重比较负担决定（`§0 空表诊断` 会直接算给你）。在最理想的 0/n vs n/n 分裂下：
+
+| 同时检验的任务数 | 需要的最少重复次数 |
+|---|---|
+| 6 个 | 5 |
+| 8 个 | 6 |
+| 12 个 | 6 |
+| 40 个 | 7 |
+| 310 个（全量） | 8 |
+
+所以**减少预注册的任务数**比无限加重复更有效。代价参考：8 个任务 × 2 顺序 × 6 遍 ≈ 96 episode ≈ **50 分钟**。
+
+出报告时把**所有重复目录一起**喂进去（顺序模式靠各目录自己的 `run_manifest.json` 区分，不用手动分组）：
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input ^
+  results\qqset_A_r1 results\qqset_A_r2 results\qqset_A_r3 results\qqset_A_r4 results\qqset_A_r5 results\qqset_A_r6 ^
+  results\qqset_B_r1 results\qqset_B_r2 results\qqset_B_r3 results\qqset_B_r4 results\qqset_B_r5 results\qqset_B_r6 ^
+  --out results\qqset_analysis --official-condition official
+```
+
+> `--input` 传**目录**时只读该目录下的 `episodes.jsonl`（见坑 #15 的修复），所以可以直接传运行目录名，不必写全 `\episodes.jsonl`。
+
 ---
 
 # C. 同步方式
@@ -312,7 +352,7 @@ git stash pop
 
 ---
 
-# D. 十四个必踩的坑
+# D. 十五个必踩的坑
 
 | # | 坑 | 后果 / 对策 |
 |---|---|---|
@@ -330,6 +370,7 @@ git stash pop
 | 12 | **用 `Get-Content \| Set-Content` 回写含中文的文件会双重编码** | 实测踩过（代价：整份 README 变乱码 + 被推上远端）：本环境的 `Get-Content -Raw` 不带 `-Encoding` 时按 **GBK** 解码 UTF-8 文件，`Set-Content -Encoding UTF8` 再写回 → 全文中文字符串变成 `鈥斺€?` 之类，同时被加上 BOM、换行符也被改写。对策：**不要用 cmdlet 回写要保留的文本**；用编辑工具改，或用 `[System.IO.File]::ReadAllText($p, [System.Text.UTF8Encoding]::new($false))` / `WriteAllText`（显式指定 UTF-8 无 BOM）。改完用 `git diff --stat` 核对：**行数不该出现"整文件重写"那种规模** |
 | 13 | **`run_mbl.ps1` 的 reset 判定恒为真 → 所有轮次被标成 `official`** | 原代码 `((Get-Content $cfg \| Select-String '^reset=') -match 'true').Count -gt 0` **永远为真**：config 里实际写的是 `[reset=false]`（带方括号）→ `^reset=` 匹配不到 → 左边是 `$null` → `$null -match 'true'` 得到标量 `$false` → 而 **PowerShell 3+ 给标量也加了 `.Count`（恒为 1）** → `1 -gt 0` = `$true`。后果：用 `reset=false` 的 base.conf 跑出来的 6 个 manifest 全被写成 `reset=True / condition=official`，**把"没跑 cleaner"的轮次标成了官方重置**。拿这种标签做 2×2，两格合并成一格、**交互项静默消失**。已修（显式解析 `[reset=...]` 并跳过注释行），并用 `experiments\scripts\mbl_fix_condition_labels.py` 把已产生的 5 个目录标签改正 |
 | 14 | **改完 `.ps1` 一定要重跑自检** | 坑 #11（BOM 被吃掉）、#13（PowerShell 标量 `.Count` 陷阱）都属于"看着没问题、结果全错"的类型。`%PY% %S%\selftest.py` 不依赖手机与 API key，15 项检查约 10 秒，是唯一能在长跑前挡住这类错误的关卡 |
+| 15 | **`analyze_order_effects.py --input` 传目录会读进无关文件** | 原实现用 `os.walk` 收目录下**所有** `*.jsonl`，于是每个任务子目录里的 `api_metrics.jsonl` / `step_timing.jsonl`（完全不同的 schema）也被当成 episode 读入 → `KeyError: 'agent'`；若某些行恰好带同名字段，则会**静默**混进统计。而"传目录"恰恰是最自然的写法（B10 就是这么用的）。已修为**只认 `episodes.jsonl`**，找不到时给出明确报错 |
 
 其他已修掉的两个静默失效：
 
