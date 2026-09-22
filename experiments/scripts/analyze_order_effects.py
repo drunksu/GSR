@@ -43,11 +43,12 @@ import math
 import os
 import random
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from typing import Any, Callable, Sequence
 
 OFFICIAL = "official"
 CANONICAL = "canonical"
+MIN_POLLUTER_SUPPORT = 3
 
 
 # ==========================================================================
@@ -125,17 +126,39 @@ def _sr(rows: Sequence[dict[str, Any]], filt: Callable[[dict[str, Any]], bool]) 
 # ==========================================================================
 # 载入
 # ==========================================================================
+EPISODE_FILE = "episodes.jsonl"
+
+
 def load_episodes(paths: Sequence[str]) -> list[dict[str, Any]]:
+    """读 episode 行。
+
+    ⚠️ 传目录时**只认 `episodes.jsonl`**。
+    实测踩过：早期版本用 `os.walk` 收所有 `*.jsonl`，于是每个任务子目录里的
+    `api_metrics.jsonl` / `step_timing.jsonl` 也被当成 episode 读进来 —— 它们
+    是完全不同的 schema（没有 `agent` 字段），后果是 `KeyError: 'agent'`；
+    更糟的情形是某些行恰好带着同名字段，会**静默**混进统计。
+    """
     files: list[str] = []
     for p in paths:
         if os.path.isdir(p):
-            for root, _dirs, names in os.walk(p):
-                files += [os.path.join(root, n) for n in names if n.endswith(".jsonl")]
+            hits = [
+                os.path.join(root, n)
+                for root, _dirs, names in os.walk(p)
+                for n in names
+                if n == EPISODE_FILE
+            ]
+            if not hits:
+                raise FileNotFoundError(
+                    f"{p} 目录下没有找到 {EPISODE_FILE}；"
+                    f"请传 episodes.jsonl 的具体路径，或确认那一轮确实跑过任务。"
+                )
+            files += sorted(hits)
         else:
             files.append(p)
     rows: list[dict[str, Any]] = []
     for f in files:
-        with open(f, encoding="utf-8") as fh:
+        # utf-8-sig：兼容带 BOM 的文件；不带 BOM 时行为与 utf-8 一致
+        with open(f, encoding="utf-8-sig") as fh:
             for line in fh:
                 line = line.strip()
                 if not line:
@@ -260,6 +283,7 @@ def analyze(
         "od_flaky_tasks": {},
         "groups": {},
         "warnings": [],
+        "diagnostics": gate_diagnostics(rows, alpha),
     }
     if not weak:
         report["warnings"].append("只有 official 条件，无法估计污染主效应（C1/C3）。")
@@ -371,7 +395,7 @@ def analyze(
     return report
 
 
-def polluter_lift(rows: Sequence[dict[str, Any]], min_support: int = 3) -> list[dict[str, Any]]:
+def polluter_lift(rows: Sequence[dict[str, Any]], min_support: int = MIN_POLLUTER_SUPPORT) -> list[dict[str, Any]]:
     """P(fail | 前序任务 = P) / P(fail)：污染源排序 + Fisher 检验。"""
     out: list[dict[str, Any]] = []
     by_group: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
@@ -475,6 +499,93 @@ def _sanitize(obj: Any) -> Any:
     return obj
 
 
+# ==========================================================================
+# 空表诊断
+# ==========================================================================
+def min_reps_for_victim_gate(n_tasks: int, alpha: float) -> int | None:
+    """在 BH-FDR 校正下，**最理想分裂**（0/n vs n/n，即 ΔSR=1.0）需要多少次重复，
+    才能让一个任务跨过 §3 的 q < alpha 门槛。
+
+    这是下界：真实数据里 ΔSR 通常远小于 1.0，所以实际需要的重复次数只会更多。
+    """
+    for n in range(2, 201):
+        p = fisher_exact_2x2(n, 0, 0, n)
+        q = benjamini_hochberg([p] + [1.0] * (max(n_tasks, 1) - 1))[0]
+        if q < alpha:
+            return n
+    return None
+
+
+def gate_diagnostics(rows: Sequence[dict[str, Any]], alpha: float = 0.05) -> list[dict[str, str]]:
+    """把"数据不够"和"算法失效"区分开：逐条列出哪张表为什么是空的、要补什么。
+
+    动机：只跑一轮时报告里 §1/§2b/§3/§4 全是空表，很容易被误读成
+    "没有顺序效应"。实际上这几张表各自有硬门槛，达不到就**必然**为空。
+    """
+    diags: list[dict[str, str]] = []
+    conds = sorted({str(r.get("condition", "?")) for r in rows})
+    modes = sorted({str(r.get("order_mode", "?")) for r in rows})
+    agents = sorted({str(r.get("agent", "?")) for r in rows})
+
+    if len(conds) < 2:
+        diags.append({
+            "表": "§1 / §2b",
+            "原因": f"数据里只有 1 种重置条件 {conds}，缺可对比的第二格。",
+            "补什么": "跑一轮 reset 通道（README B4），再把两个 results 目录一起喂给 --input。",
+        })
+    if len(modes) < 2:
+        diags.append({
+            "表": "§1 / §2 / §3",
+            "原因": f"数据里只有 1 种顺序模式 {modes}，没有任何顺序对比可做。",
+            "补什么": "至少要有 canonical 与 shuffle 两种顺序各一轮（README B3）。",
+        })
+
+    # 重复次数：决定 §3/§4 是否在数学上可达
+    reps: dict[tuple[str, str, str], int] = Counter(
+        (str(r.get("agent", "?")), str(r.get("task", "?")), str(r.get("order_mode", "?")))
+        for r in rows
+    )
+    n_rep = max(reps.values()) if reps else 0
+    n_tasks = len({str(r.get("task", "?")) for r in rows})
+    need = min_reps_for_victim_gate(n_tasks, alpha)
+
+    if n_rep < 2:
+        diags.append({
+            "表": "§3 victim",
+            "原因": (f"每个 (任务 × 顺序) 只有 {n_rep} 次重复。参照组与处理组各 1 个样本时，"
+                     f"2×2 表只有两种取值，Fisher 双边 p **恒等于 1.0**，q 也恒为 1.0 —— "
+                     f"victim 表在数学上不可能有内容，与真实效应无关。"),
+            "补什么": (f"重复跑同一任务集（同一 CSV、不同 -Output 目录），"
+                       f"并把多个目录一起 --input。当前 {n_tasks} 个任务下，"
+                       f"即使最理想的 0/n vs n/n 分裂也需要 ≥ {need} 次重复/序才可能 q<{alpha}。"),
+        })
+    elif need and n_rep < need:
+        diags.append({
+            "表": "§3 victim",
+            "原因": (f"重复次数 {n_rep} < {need}：在当前 {n_tasks} 个任务的多重比较负担下，"
+                     f"**最理想**的 0/{n_rep} vs {n_rep}/{n_rep} 分裂的 q 仍 ≥ {alpha}，"
+                     f"victim 表必然为空。"),
+            "补什么": f"把重复次数提到 ≥ {need}，或减少同时检验的任务数（预注册更小的候选集）。",
+        })
+
+    pred_support = Counter(
+        str(r.get("predecessor"))
+        for r in rows
+        if r.get("position", 0) > 0 and r.get("predecessor")
+    )
+    top_support = max(pred_support.values()) if pred_support else 0
+    if top_support < MIN_POLLUTER_SUPPORT:
+        diags.append({
+            "表": "§4 polluter",
+            "原因": (f"同一前序任务最多只出现过 {top_support} 次，低于 min_support="
+                     f"{MIN_POLLUTER_SUPPORT}，所有前序都被跳过。单轮里每个位置只有一个前序，"
+                     f"重复跑同一顺序才会把支持度堆上去。"),
+            "补什么": f"同一顺序至少重复 {MIN_POLLUTER_SUPPORT} 轮，再一起 --input。",
+        })
+
+    return diags
+
+
 def write_report(report: dict[str, Any], out_dir: str, truth: dict[str, Any] | None) -> str:
     os.makedirs(out_dir, exist_ok=True)
     md: list[str] = ["# 顺序效应（OD flaky）分析报告", ""]
@@ -484,6 +595,18 @@ def write_report(report: dict[str, Any], out_dir: str, truth: dict[str, Any] | N
     for w in report["warnings"]:
         md.append(f"- ⚠️ {w}")
     md.append("")
+
+    diags = report.get("diagnostics") or []
+    if diags:
+        md.append("## 0. 空表诊断（为什么有些表没有内容）")
+        md.append("")
+        md.append("> 下面是**门槛没达到**，不是「没有效应」。别把空表读成零效应。")
+        md.append("")
+        md.append("| 表 | 为什么是空的 | 要补什么 |")
+        md.append("|---|---|---|")
+        for d in diags:
+            md.append(f"| {d['表']} | {d['原因']} | {d['补什么']} |")
+        md.append("")
 
     md.append("## 1. 主结果：2×2 析因（顺序 × 重置）")
     md.append("")
