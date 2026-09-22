@@ -239,11 +239,21 @@ set MBL_API_KEY=sk-你的key
 ## B7 长跑后的清洗与补跑
 
 ```cmd
-%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-only --dry-run
-%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-only
+## B7 长跑后的清洗与补跑
+
+```cmd
+rem 先干跑看看要摘哪些
+%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
+%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only
 ```
 
-摘掉那些与顺序无关的失败（黑屏等）之后，重跑 B3 就会自动补跑它们。
+摘掉那些与顺序无关的失败（黑屏/熄屏这类**设备问题**）之后，重跑 B3 就会自动补跑它们。
+
+> ⚠️ **用 `--blank-failed-only`，不要用 `--blank-only`。** 实测 `base_canonical` 的 310 条记录里，
+> 末帧偏暗的有 20 个，但其中 **12 个其实是成功的** —— 播放类任务（网易云）成功之后屏幕就熄了，
+> 即时通讯类成功之后也常常息屏。"末帧变暗"是**设备活动信号，不是失败原因**。
+> `--blank-only` 会把这 12 个成功结果一起删掉、污染 SR；`--blank-failed-only`
+> 只取「末帧暗 **且** 失败」的交集（实测 20 → 8）。
 
 ## B8 单独出报告
 

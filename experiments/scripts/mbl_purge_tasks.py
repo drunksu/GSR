@@ -81,7 +81,10 @@ def main() -> int:
     ap.add_argument("--run-dir", required=True)
     ap.add_argument("--tasks", default=None, help="逗号分隔的任务 id")
     ap.add_argument("--failed-only", action="store_true", help="删掉所有判为失败的任务")
-    ap.add_argument("--blank-only", action="store_true", help="删掉末帧黑屏/纯色的任务")
+    ap.add_argument("--blank-only", action="store_true",
+                    help="删掉末帧黑屏的任务（⚠️ 会连成功的也删，见下）")
+    ap.add_argument("--blank-failed-only", action="store_true",
+                    help="只删「末帧黑屏 **且** 失败」的任务 —— 这才是与顺序无关的设备问题，推荐用这个")
     ap.add_argument("--thresh", type=float, default=25.0)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
@@ -101,8 +104,24 @@ def main() -> int:
         targets |= {k for k, v in pairs if v.lower() != "true"}
     if args.blank_only:
         bl = blank_tasks(run_dir, args.thresh)
-        print(f"检测到黑屏/纯色末帧的任务 {len(bl)} 个: {bl}")
+        # ⚠️ 实测（base_canonical 310）：「末帧暗」并不等于「失败」—— 21 个被标记的任务里
+        #    有 13 个其实**成功**了。原因很合理：音乐/播放类任务成功之后屏幕就熄了，
+        #    即时通讯类成功之后也常常息屏。把成功的结果一起删掉会让 SR 失真。
+        #    只想摘掉"设备问题"造成的假失败，请用 --blank-failed-only。
+        succ = {k for k, v in pairs if v.lower() == "true"}
+        overlap = sorted(set(bl) & succ)
+        print(f"检测到末帧黑屏的任务 {len(bl)} 个: {bl}")
+        if overlap:
+            print(f"  ⚠️ 其中 {len(overlap)} 个其实**是成功的**: {overlap}")
+            print("     末帧变暗 ≠ 失败（播放类任务成功后就会息屏）。"
+                  "只摘设备问题请改用 --blank-failed-only。")
         targets |= set(bl)
+    if args.blank_failed_only:
+        bl = set(blank_tasks(run_dir, args.thresh))
+        fails = {k for k, v in pairs if v.lower() != "true"}
+        both = bl & fails
+        print(f"末帧黑屏 {len(bl)} 个 ∩ 失败 {len(fails)} 个 → 认定设备问题 {len(both)} 个: {sorted(both)}")
+        targets |= both
 
     # 只保留确实存在的 key
     known = {k for k, _ in pairs}
