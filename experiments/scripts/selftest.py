@@ -133,6 +133,28 @@ def main() -> int:
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
+    # ---- G. 仓库自身的坑（回归守卫）------------------------------------
+    # G1: PowerShell 5.1 会用本地代码页（中文 Windows = GBK）读**无 BOM** 的 .ps1，
+    #     含中文的脚本会被读成乱码，轻则输出乱码、重则解析失败。
+    #     .cmd/.bat 反过来必须纯 ASCII（同样是本地代码页）。
+    root = os.path.abspath(os.path.join(HERE, "..", ".."))
+    bad_ps1, bad_cmd = [], []
+    for name in sorted(os.listdir(root)):
+        p = os.path.join(root, name)
+        if not os.path.isfile(p):
+            continue
+        raw = open(p, "rb").read()
+        if name.endswith(".ps1"):
+            has_bom = raw[:3] == b"\xef\xbb\xbf"
+            has_nonascii = any(b > 127 for b in raw)
+            if has_nonascii and not has_bom:
+                bad_ps1.append(name)
+        elif name.endswith((".cmd", ".bat")):
+            if any(b > 127 for b in raw):
+                bad_cmd.append(name)
+    check("G1. 含中文的 .ps1 都带 UTF-8 BOM", not bad_ps1, f"缺 BOM: {bad_ps1}" if bad_ps1 else "OK")
+    check("G2. .cmd/.bat 全是纯 ASCII", not bad_cmd, f"含非 ASCII: {bad_cmd}" if bad_cmd else "OK")
+
     # ---- F. 样本量 -----------------------------------------------------
     ns = [pw.n_two_proportion(0.6, 0.6 - d) for d in (0.1, 0.2, 0.3, 0.45)]
     check("F. 样本量随 ΔSR 增大而单调下降", all(ns[i] > ns[i + 1] for i in range(len(ns) - 1)), f"n={ns}")

@@ -120,11 +120,28 @@ Write-Host "退出码: $code"
 if (Test-Path "$Output/result_list.txt") {
     Write-Host "结果: $(Get-Content "$Output/result_list.txt" -Raw)"
 }
-Write-Host "转成分析格式: & $PY 'D:\projects\GUI state recovery\experiments\scripts\mbl_traj_to_episodes.py' --run-dir '$Output'"
-& $PY @runArgs
-$code = $LASTEXITCODE
+
+# ---------------------------------------------------------------------------
+# 转成分析格式 episodes.jsonl
+#
+# ⚠️ 修过的 bug（2026-09 发现）：这里**原来又调用了一次 `& $PY @runArgs`**，
+#    也就是把 benchmark 跑两遍。后果有三：
+#      ① 第一遍之后 result_list.txt 已满，第二遍会把所有任务当成"已完成"跳过 ——
+#         白跑一遍扫描，长跑时这一下就是好几分钟；
+#      ② 万一第一遍中途崩了，第二遍会**悄悄续跑**，让"退出码"变得没法解读；
+#      ③ 最要命的：上面那行提示写着"转成分析格式 mbl_traj_to_episodes.py"，
+#         但实际执行的是 run.py —— 于是 `run_mbl.cmd` 跑完**根本没有 episodes.jsonl**，
+#         分析脚本会直接报"没有读到任何 episode"。
+# ---------------------------------------------------------------------------
 Write-Host ("-" * 70)
-Write-Host "退出码: $code"
-if (Test-Path "$Output/result_list.txt") {
-    Write-Host "结果: $(Get-Content "$Output/result_list.txt" -Raw)"
+Write-Host "转成分析格式: episodes.jsonl"
+& $PY "$PSScriptRoot\experiments\scripts\mbl_traj_to_episodes.py" --run-dir $Output
+Write-Host "退出码: $LASTEXITCODE"
+$ep = Join-Path $REPO "$Output/episodes.jsonl"
+if (Test-Path $ep) {
+    $n = (Get-Content $ep | Measure-Object -Line).Lines
+    Write-Host "episodes: $n 行 -> $ep"
+    Write-Host "下一步（出报告）: %PY% %S%\analyze_order_effects.py --input $Output\episodes.jsonl ..."
+} else {
+    Write-Host "⚠️  没有生成 episodes.jsonl —— 可能是这一轮一个任务都没完成，请检查 result_list.txt" -ForegroundColor Yellow
 }
