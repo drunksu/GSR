@@ -21,12 +21,14 @@
 | 路径 | 内容 |
 |---|---|
 | `mobile.env.ps1` | **环境配置**：API key、模型注册表（含坐标约定）、路径、设备序列号 |
-| `run_mbl.cmd` / `run_mbl.ps1` | 跑一轮：自检 → 写 manifest → 执行 → 提示转格式 |
+| `run_mbl.cmd` / `run_mbl.ps1` | 跑一轮：自检 → 写 manifest → 执行 → **自动转 `episodes.jsonl`** |
 | `pilot.cmd` / `pilot.ps1` | **一条命令跑完两轮顺序 + 自动分析** |
+| `run_repeats.cmd` | 把**同一份任务集跑 N 遍**，每遍独立 `-Output`（重复实验用，见 B10） |
+| `sync.cmd` | 一键 `add → 校验有没有 results\ → commit → push`（见 C1） |
 | `experiments/docs/` | 01 数据集与 Agent 选型、02 实验方案（2×2 析因 / 指标 / 样本量） |
 | `experiments/scripts/` | 全部脚本（见下） |
 | `third_party/mobilebench-ol-main/` | **已打补丁**的 MobileBench-OL（源码 + 全套 CSV + 顺序任务集 + reset 配置） |
-| `third_party/mobilebench-ol-main/results/` | 运行产物（**已被 .gitignore 排除**，体积 3 GB+） |
+| `third_party/mobilebench-ol-main/results/` | 运行产物。**小文件（episodes / manifest / trajectory / report）会入库**，只有截图与元素树被 `.gitignore` 排除 |
 
 **脚本清单**（都在 `experiments/scripts/`）
 
@@ -34,15 +36,313 @@
 |---|---|
 | `mbl_make_task_csv.py` | **生成顺序任务集**：子集 + canonical / reverse / shuffle(seed) |
 | `mbl_traj_to_episodes.py` | 真机结果 → `episodes.jsonl`（分析器的输入）；含黑屏检测 |
-| `analyze_order_effects.py` | **核心分析**：2×2 析因、ΔSR / CTCI / PASR / victim / polluter / DiD |
+| `analyze_order_effects.py` | **核心分析**：2×2 析因、ΔSR / CTCI / PASR / victim / polluter / DiD；报告带「§0 空表诊断」 |
 | `mbl_apply_api_patch.py` | 给 MobileBench-OL 打补丁（幂等 / 自动备份 / `--revert`） |
 | `mbl_api_probe.py` | 零依赖探测端点（模型可用性、`--scan`、`--dump-models`） |
 | `mbl_coord_convention_check.py` | **判定模型坐标约定**（norm / pixel）—— 换模型必跑 |
 | `mbl_app_checklist.py` | 生成"要装哪些 App"清单（可查设备已装情况） |
 | `mbl_task_audit.py` | 任务集审计（编码 / 坏行 / App / Reset 标注 / reset 集重叠） |
-| `mbl_purge_tasks.py` | 长跑后摘掉"与实验无关的失败"（黑屏等）以便补跑 |
+| `mbl_purge_tasks.py` | 长跑后摘掉**设备问题**造成的假失败以便补跑（用 `--blank-failed-only`，见 B7） |
+| `mbl_fix_condition_labels.py` | **修正 manifest / episodes 里写错的重置条件标签**（见坑 #13） |
 | `mbl_find_actions.py` | **轨迹取证**：查"是哪个任务的哪一步改了什么" |
-| `task_catalog.py` / `order_runner.py` / `make_sim_data.py` / `power_analysis.py` / `selftest.py` | AndroidWorld 那条链路（另一条路线，已验证） |
+| `task_catalog.py` / `order_runner.py` / `make_sim_data.py` / `power_analysis.py` / `selftest.py` | AndroidWorld 那条链路（另一条路线，已验证）；`selftest.py` 同时守卫本仓库自己的坑（G1/G2） |
+
+---
+
+# ★ 待跑清单 —— 照着从上往下粘贴
+
+> 这一节是**操作手册**：还需要跑的所有命令，按顺序排好，每一阶段末尾都带**跑完之后的 Git 操作**。
+> 命令都是 CMD。**同一阶段的命令放在同一个 cmd 窗口里跑**（`set` 的变量只在当前窗口有效）。
+> 跑不动或想了解每个脚本的细节，再去看 B / C / D 节。
+
+## 现状：2×2 的四个格里只填了一个
+
+| 格 | 顺序 | 重置条件 | 状态 |
+|---|---|---|---|
+| A | canonical | `none`（不跑 cleaner） | ✅ **310/310**，SR 57.1% |
+| B | shuffle | `none` | ⚠️ **26/310** ← 阶段 1 补 |
+| C | canonical | `official`（跑 cleaner） | ❌ 0 ← 阶段 2 补 |
+| D | shuffle | `official` | ❌ 0 ← 阶段 2 补 |
+
+每格重复次数 **全是 1**、Agent 只有 `qwen3-vl-plus` —— 这就是为什么报告里 §3/§4 是空的。
+
+---
+
+## 阶段 0 · 准备（约 5 分钟）
+
+**换机器、或每开一个新的 cmd 窗口，都要重做 0.2。**
+
+### 0.1 拉最新代码（本轮所有修复都在里面）
+
+```cmd
+cd /d D:\GSR
+git stash
+git pull
+git stash pop
+```
+
+> 仓库不在 `D:\GSR` 就换成你的路径。`git stash` 是保护你未提交的本地改动，工作区干净时可以跳过。
+> 若 `git pull` 报冲突，先 `git status` 看清楚是哪个文件，别强推。
+
+### 0.2 设变量（每个新 cmd 窗口一次）
+
+```cmd
+set MBL=D:\GSR
+set PY=%MBL%\mobile\Scripts\python.exe
+set S=%MBL%\experiments\scripts
+set REPO=%MBL%\third_party\mobilebench-ol-main
+set ADB=%MBL%\third_party\platform-tools\adb.exe
+cd /d %REPO%
+```
+
+### 0.3 自检 + 设备检查（**必须过，别跳**）
+
+```cmd
+%PY% %S%\selftest.py
+%ADB% devices
+```
+
+要看到 `✅ 全部通过`（17 项）和一行 `device`。少一样就先修，别开长跑。
+
+### 0.4 唤醒手机并设常亮（**每次长跑前必做**）
+
+```cmd
+%ADB% -s 你的序列号 shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
+```
+
+序列号在 `mobile.env.ps1` 的 `$DEVICE` 里。熄屏 = 截图全黑 = 整轮变成"假失败"，与污染无关。
+
+---
+
+## 阶段 1 · 把「乱序 × 不跑 cleaner」格跑满（约 2.6 小时）★ 先做这个
+
+**买到什么**：§2 的 ΔSR 从"26 个公共任务"变成 **n=310/侧**，CTCI / PASR 覆盖全量 —— 这是论文的主数字。
+
+### 1.1 跑（A 格 310 个会秒跳过，从第 27 个接着跑 B 格）
+
+```cmd
+%MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+```
+
+`pilot.cmd` 会自己唤醒手机、跑两轮、转格式、出报告。**中途断了不要紧，重跑同一条命令就续跑**（`result_list.txt` 是续跑缓存）。
+
+### 1.2 清洗掉"设备问题"造成的假失败
+
+```cmd
+%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
+```
+
+先看 dry-run 的数字合不合理，再删掉 `--dry-run` 真跑一次，然后**重跑 1.1** 让它自动补跑被摘掉的任务。
+
+> ⚠️ 必须用 `--blank-failed-only`，**不要用 `--blank-only`**：实测 310 条里有 20 个末帧偏暗，但其中 **12 个其实是成功的**（播放类任务成功后屏幕就熄了）。`--blank-only` 会把成功的也删掉、污染 SR。
+
+### 1.3 出报告（**先读最上面那节「§0 空表诊断」**）
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle --out results\base_analysis --official-condition official
+type results\base_analysis\report.md
+```
+
+§0 会逐表告诉你"为什么这张表是空的、实测值多少、要补什么"。**别对着空表猜"没有效应"。**
+
+### 1.4 【Git】上传
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: base_shuffle 310/310"
+```
+
+`sync.cmd` 会 `add → 打印将要提交的文件 → 检查有没有 results\ → commit → push`。
+**必须看到 `[OK] results\ files are staged.`**；如果是 `[WARN]`，说明结果没进暂存区，**别推**，先看坑 #9。
+
+---
+
+## 阶段 2 · 填上「跑 cleaner」的两个格（约 1.5 小时）
+
+reset 通道**只能用带 `reset_query` / `reset_xpath` 两列的 CSV**，而 310 个任务里只有 65 个有（`data\reset_canonical.csv`）。所以 2×2 落在这 65 个任务的交集上 —— 分析器本来就只在公共任务上算，**不用手动筛**。
+
+### 2.1 通道验证（2 个任务，约 3 分钟）
+
+```cmd
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_smoke_2task.csv -Output results\reset_smoke
+```
+
+结尾要看到 `退出码: 0` 和 `episodes: 2 行`。这一步是验证 cleaner 通道本身通的。
+
+### 2.2 C 格：规范序 + 跑 cleaner
+
+```cmd
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\reset_can
+```
+
+### 2.3 生成 D 格要用的乱序版（生成器会保留 reset_query / reset_xpath 两列）
+
+```cmd
+%PY% %S%\mbl_make_task_csv.py --repo %REPO% --source reset_canonical.csv --order shuffle --seed 0 --out reset_shuffle0.csv
+```
+
+### 2.4 D 格：乱序 + 跑 cleaner
+
+```cmd
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv -Output results\reset_shf
+```
+
+> ⚠️ `-Output` **必须独立**：reset 集的 65 个 id 与主集完全重叠，共用目录会让框架把它们当成"已完成"整轮跳过（坑 #2）。
+
+### 2.5 出 2×2 报告
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\reset_can results\reset_shf --out results\full_analysis --official-condition official
+type results\full_analysis\report.md
+```
+
+跑到这里，**§1（2×2 析因 + DiD 交互项）和 §2b 应该终于有内容了**。
+
+### 2.6 【Git】上传
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: reset 2x2 (canonical+shuffle x cleaner)"
+```
+
+同样确认 `[OK] results\ files are staged.`。
+
+---
+
+## 阶段 3 · 重复实验 —— 让 §3 victim / §4 polluter 有内容（约 50 分钟）★ 回答原始问题
+
+单轮每格只有 1 个样本时，Fisher 双边 p **恒等于 1.0**、polluter 需要的前序支持度只有 1 —— 这两张表**必然为空**，和真实效应无关。**只有重复跑才能让它们有内容。**
+
+子集已按现有证据**预注册**好了，不用你再挑（`data\qqset_canonical.csv` / `data\qqset_reverse.csv`，各 8 个任务）：
+
+| 角色 | 任务 | 证据 |
+|---|---|---|
+| 写状态（polluter） | `qq_1` | 判"查看"，实际提交了 DND 群加群申请（答了验证问题"龙与地下城"） |
+| 写状态 | `qq_4` | 添加好友 `1098074562`；作者自己标 `Reset=Need` |
+| 读状态（victim 候选） | `qq_10` ~ `qq_14` | 规范序里**紧跟 `qq_1` 之后连续 5 个失败**（18/14/20/15/20 步，末帧亮度 238–243 **不是黑屏**） |
+| 对照 | `qq_17` | 快速失败（3 步） |
+
+### 3.1 A 序：writer 在前、reader 在后（污染可发生）
+
+```cmd
+%MBL%\run_repeats.cmd data\qqset_canonical.csv results\qqset_A 6
+```
+
+### 3.2 B 序：reader 先跑、writer 最后（污染来不及发生）
+
+```cmd
+%MBL%\run_repeats.cmd data\qqset_reverse.csv results\qqset_B 6
+```
+
+`run_repeats.cmd TASKFILE OUTPREFIX N` 把同一份任务集跑 N 遍，每遍写进**独立的 `-Output`**（`qqset_A_r1` … `_r6`）。共用目录会被 `result_list.txt` 整轮跳过 —— 这是必须分开的原因。
+
+**为什么是 6 遍**：由多重比较负担算出来的（§0 会直接算给你），最理想分裂下 8 个任务需 6 遍、12 个需 6 遍、40 个需 7 遍、**310 个需 8 遍**。所以**减少预注册任务数**比无限加重复有效得多。
+
+### 3.3 出报告（所有重复目录一起喂，顺序模式靠各目录自己的 manifest 区分）
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input ^
+  results\qqset_A_r1 results\qqset_A_r2 results\qqset_A_r3 results\qqset_A_r4 results\qqset_A_r5 results\qqset_A_r6 ^
+  results\qqset_B_r1 results\qqset_B_r2 results\qqset_B_r3 results\qqset_B_r4 results\qqset_B_r5 results\qqset_B_r6 ^
+  --out results\qqset_analysis --official-condition official
+type results\qqset_analysis\report.md
+```
+
+**这一步的 §3 / §4 两张表就是"哪个任务因为执行顺序变化而失败"的答案。**
+
+### 3.4 【Git】上传
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: qqset repeats 6x2 (victim/polluter)"
+```
+
+---
+
+## 阶段 4 · 第二个 Agent（可选，约 50 分钟）
+
+原始课题里有"**多个 Agent**"。同理在预注册子集上换 `qwen3-vl-flash`（同代更弱更便宜，**更容易落在 0.2–0.8 信号带**）。坐标约定会从 `mobile.env.ps1` 的注册表自动取，不用手动指定。
+
+```cmd
+%MBL%\run_repeats.cmd data\qqset_canonical.csv results\qqset_Af 6 -Model qwen3-vl-flash
+%MBL%\run_repeats.cmd data\qqset_reverse.csv   results\qqset_Bf 6 -Model qwen3-vl-flash
+```
+
+出报告时把两个 Agent 的目录一起喂（分析器按 `agent` 字段分组）：
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input ^
+  results\qqset_A_r1 results\qqset_A_r2 results\qqset_A_r3 results\qqset_A_r4 results\qqset_A_r5 results\qqset_A_r6 ^
+  results\qqset_B_r1 results\qqset_B_r2 results\qqset_B_r3 results\qqset_B_r4 results\qqset_B_r5 results\qqset_B_r6 ^
+  results\qqset_Af_r1 results\qqset_Af_r2 results\qqset_Af_r3 results\qqset_Af_r4 results\qqset_Af_r5 results\qqset_Af_r6 ^
+  results\qqset_Bf_r1 results\qqset_Bf_r2 results\qqset_Bf_r3 results\qqset_Bf_r4 results\qqset_Bf_r5 results\qqset_Bf_r6 ^
+  --out results\qqset_multiagent_analysis --official-condition official
+```
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: qqset second agent (qwen3-vl-flash)"
+```
+
+---
+
+## 阶段 5 · 在**分析机**上汇总（不插手机的那台）
+
+阶段 1–4 全部上传之后，在另一台机器上：
+
+```cmd
+cd /d D:\projects\GUI state recovery
+git stash
+git pull
+git stash pop
+
+set MBL=D:\projects\GUI state recovery
+set PY=%MBL%\mobile\Scripts\python.exe
+set S=%MBL%\experiments\scripts
+set REPO=%MBL%\third_party\mobilebench-ol-main
+cd /d %REPO%
+```
+
+### 5.1 先核验标签（防止再出现"轮次被标错条件"）
+
+```cmd
+%PY% %S%\mbl_fix_condition_labels.py --run-dir results\base_canonical results\base_shuffle results\reset_can results\reset_shf --dry-run
+```
+
+### 5.2 出总报告
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input ^
+  results\base_canonical results\base_shuffle ^
+  results\reset_can results\reset_shf ^
+  --out results\master_analysis --official-condition official
+type results\master_analysis\report.md
+```
+
+### 5.3 确认 §0 空表诊断已经空掉
+
+报告顶部那节「§0 空表诊断」如果还在报"缺什么"，说明对应阶段还没跑完 —— **回去补，不要解释空表**。
+
+### 5.4 【Git】
+
+```cmd
+cd /d %MBL%
+sync.cmd "analysis: master report"
+```
+
+---
+
+## 每阶段跑完的固定动作（速查）
+
+| 步骤 | 命令 | 判据 |
+|---|---|---|
+| 1 看这轮是否正常结束 | （看 `run_mbl.cmd` 结尾） | `退出码: 0` + `episodes: N 行` |
+| 2 清洗设备问题 | `mbl_purge_tasks.py --run-dir <目录> --blank-failed-only --dry-run` | 数字合理再真删，然后补跑 |
+| 3 出报告 | `analyze_order_effects.py --input <各目录> --out <分析目录> --official-condition official` | **先读 §0** |
+| 4 上传 | `sync.cmd "results: <这一轮>"` | **`[OK] results\ files are staged.`** |
+| 5 分析机汇总 | `git pull` → 重新跑分析器 | §0 里不再有告警 |
+
+> `⚠️ 没有生成 episodes.jsonl` = 这一轮一个任务都没完成，先查目录里的 `result_list.txt`，别急着分析。
 
 ---
 
@@ -239,9 +539,6 @@ set MBL_API_KEY=sk-你的key
 ## B7 长跑后的清洗与补跑
 
 ```cmd
-## B7 长跑后的清洗与补跑
-
-```cmd
 rem 先干跑看看要摘哪些
 %PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
 %PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only
@@ -258,7 +555,7 @@ rem 先干跑看看要摘哪些
 ## B8 单独出报告
 
 ```cmd
-%PY% %S%\analyze_order_effects.py --input results\base_canonical\episodes.jsonl results\base_shuffle\episodes.jsonl --out results\base_analysis --official-condition official
+%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle --out results\base_analysis --official-condition official
 type results\base_analysis\report.md
 ```
 
@@ -413,15 +710,22 @@ git stash pop
 
 # F. 当前进度（诚实记录）
 
+> 更新的时间点：2026-09-22。**要跑的命令见上面的「★ 待跑清单」。**
+
 | 项 | 状态 |
 |---|---|
-| `base_canonical`（规范序 310 任务，qwen3-vl-plus） | ✅ **310/310 完成，SR = 57.1%（177/310）**，用时 2.85 h |
-| `base_shuffle`（乱序 310 任务） | ⚠️ **26/310** —— 2026-09-20 04:03 接口断连导致进程崩溃，需用 B3 续跑 |
-| `pilot12`（12 任务 × 2 顺序） | ✅ 完成：ΔSR +0.083 [0.000, +0.250]、CTCI 0.154、PASR 0.385，1 个任务翻转（`bili_4`） |
+| `base_canonical`（格 A：规范序 × 不跑 cleaner，qwen3-vl-plus） | ✅ **310/310 完成，SR = 57.1%（177/310）**，用时 2.85 h |
+| `base_shuffle`（格 B：乱序 × 不跑 cleaner） | ⚠️ **26/310** —— 2026-09-20 04:03 接口断连导致进程崩溃，**待跑清单阶段 1 续跑** |
+| 格 C / D（跑 cleaner × 两种顺序） | ❌ **未跑** —— 待跑清单阶段 2 |
+| 重复次数（§3/§4 的前提） | ❌ **全是 1 次** —— 待跑清单阶段 3 |
+| 第二个 Agent | ❌ 未跑 —— 待跑清单阶段 4（推荐 `qwen3-vl-flash`） |
+| `pilot12`（12 任务 × 2 顺序） | ✅ 完成：ΔSR +0.083 [0.000, +0.250]、CTCI 0.083、PASR 0.583，1 个任务翻转（`bili_4`） |
 | 冒烟（2 任务） | ✅ 1/2；坐标换算在真机上精确吻合（`378,756` → `461,2050` = 378/1000×1220, 756/1000×2712） |
-| reset 通道 | ⏳ 配置与任务集已就绪，未跑 |
+| 报告 §1 / §2b / §3 / §4 | ⚠️ **目前为空表**，原因是门槛没达到（见坑 #13 与「§0 空表诊断」），**不是"没有效应"** |
+| 条件标签 | 🔧 2026-09-22 修掉一个静默 bug：6 个 manifest 原被误标为 `reset=True / condition=official`（实际全是不跑 cleaner），已用 `mbl_fix_condition_labels.py` 改正为 `none` |
+| 净 SR 口径 | ℹ️ 310 条里 20 个末帧偏暗，但其中 **12 个是成功的** → 清洗必须用 `--blank-failed-only`（20 → 8），用 `--blank-only` 会删掉成功结果 |
 | 跨运行状态残留 | ✅ 已有铁证：规范序把百度浏览器切到夜间模式（末帧亮度 44.7），乱序那轮**首帧就是 34.4** —— 继承了下来 |
-| QQ 群/好友污染链 | ✅ 已定位：`qq_1`（"**查看**QQ搜索找DND群组"，判定**成功**）实际提交了加群申请（回答了验证问题"龙与地下城"）；`qq_4` 添加了好友。随后 5 个 QQ 任务连续失败（平均 17 步），推理里反复被那个群误导 |
+| QQ 群/好友污染链 | ✅ 已定位：`qq_1`（"**查看**QQ搜索找DND群组"，判定**成功**）实际提交了加群申请（回答了验证问题"龙与地下城"）；`qq_4` 添加了好友。随后 `qq_10`~`qq_14` **连续 5 个失败**（18/14/20/15/20 步，末帧亮度 238–243 不是黑屏），推理里反复被那个群误导 → 已据此预注册 `qqset` 子集（待跑清单阶段 3） |
 
 ---
 
