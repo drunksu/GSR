@@ -1,10 +1,10 @@
 {
   "baseline_order": "canonical",
-  "official_condition": "none",
+  "official_condition": "official",
   "delta": 0.2,
   "alpha": 0.05,
   "conditions": [
-    "official"
+    "none"
   ],
   "order_modes": [
     "canonical",
@@ -16,7 +16,7 @@
     "qwen3-vl-plus": []
   },
   "groups": {
-    "qwen3-vl-plus|official": {
+    "qwen3-vl-plus|none": {
       "n_tasks": 26,
       "suite_sr_ref": 0.46153846153846156,
       "suite_sr_treat": 0.46153846153846156,
@@ -31,7 +31,7 @@
       "victims": [],
       "victims_direction": {},
       "agent": "qwen3-vl-plus",
-      "condition": "official",
+      "condition": "none",
       "suite_sr_by_order": {
         "canonical": 0.46153846153846156,
         "shuffle": 0.46153846153846156
@@ -47,7 +47,7 @@
   "diagnostics": [
     {
       "表": "§1 / §2b",
-      "原因": "数据里只有 1 种重置条件 ['official']，缺可对比的第二格。",
+      "原因": "数据里只有 1 种重置条件 ['none']，缺可对比的第二格。",
       "补什么": "跑一轮 reset 通道（README B4），再把两个 results 目录一起喂给 --input。"
     },
     {

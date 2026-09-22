@@ -84,11 +84,11 @@ foreach ($od in @($outA, $outB)) {
 # ---------------------------------------------------------------- ⑤ 分析
 Step 5 '顺序效应分析'
 if ($DryRun) {
-    Write-Host "  & python analyze_order_effects.py --input $outA/episodes.jsonl $outB/episodes.jsonl --out $analysis --official-condition none"
+    Write-Host "  & python analyze_order_effects.py --input $outA/episodes.jsonl $outB/episodes.jsonl --out $analysis --official-condition official"
 } else {
     & $PY "$S\analyze_order_effects.py" `
         --input "$outA/episodes.jsonl" "$outB/episodes.jsonl" `
-        --out $analysis --official-condition none
+        --out $analysis --official-condition official
 }
 
 # ---------------------------------------------------------------- ⑥ 摘要

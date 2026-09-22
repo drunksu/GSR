@@ -84,7 +84,32 @@ elseif ($tf -match 'shuffle(\d+)') { $orderMode = 'shuffle' }
 elseif ($tf -match 'adversarial') { $orderMode = 'adversarial' }
 $seed = 0
 if ($tf -match 'shuffle(\d+)') { $seed = [int]$Matches[1] }
-$resetOn = ((Get-Content (Join-Path $REPO $CONFIG) | Select-String -Pattern '^reset=') -match 'true').Count -gt 0
+
+# ---------------------------------------------------------------------------
+# 读 config 里的 reset 开关。
+#
+# ⚠️ 原来写的是：((Get-Content $cfg | Select-String '^reset=') -match 'true').Count -gt 0
+#    这行**永远为真**，是个纯静默 bug：
+#      ① config 里的实际写法是 `[reset=false]`，带方括号，`^reset=` 根本匹配不到；
+#      ② 匹配不到 → 左边是 $null → `$null -match 'true'` 得到标量 $false；
+#      ③ 而 PowerShell 3+ 给**标量**也加了 .Count 属性（恒等于 1）→ `1 -gt 0` = $true。
+#    实测后果：base.conf(reset=false) 跑出来的 6 个 run_manifest.json 全被写成
+#    reset=True / condition=official —— 也就是把"没跑 cleaner"的轮次标成了官方重置。
+#    如果拿这样的标签去做 2×2，两格会被合并成一格，交互项静默消失。
+#    现在改成显式解析 `[reset=true|false]`，并跳过以 # 开头的注释行。
+# ---------------------------------------------------------------------------
+$resetOn = $false
+$cfgPath = Join-Path $REPO $CONFIG
+if (Test-Path $cfgPath) {
+    $hit = Get-Content $cfgPath -Encoding UTF8 |
+        Select-String -Pattern '^\s*\[?\s*reset\s*=\s*(true|false)' |
+        Select-Object -First 1
+    if ($hit) { $resetOn = ($hit.Matches[0].Groups[1].Value -eq 'true') }
+    else { Write-Host "⚠️  $CONFIG 里没找到 reset= 开关，按 reset=false 处理" -ForegroundColor Yellow }
+} else {
+    Write-Host "⚠️  找不到 config: $cfgPath" -ForegroundColor Yellow
+}
+
 $taskIds = @()
 if ($tf -and (Test-Path (Join-Path $REPO $tf))) {
     $taskIds = (Import-Csv (Join-Path $REPO $tf) -Encoding UTF8 | ForEach-Object { $_.task_identifier })
