@@ -1,0 +1,82 @@
+{
+  "task_id": "minimap_16",
+  "task_goal": "高德设置一下家的地址为北京大学东门",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1097,
+          2587
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.9,
+          0.95
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1113,
+          201
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.91,
+          0.07
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          609,
+          1418
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.5,
+          0.52
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "高德地图中家的地址已成功设置为北京大学东门"
+      },
+      "normalized_params": {
+        "text": "高德地图中家的地址已成功设置为北京大学东门"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\base_shuffle\\minimap_16\\step_1.png",
+    "results\\base_shuffle\\minimap_16\\step_2.png",
+    "results\\base_shuffle\\minimap_16\\step_3.png",
+    "results\\base_shuffle\\minimap_16\\step_4.png"
+  ],
+  "history_response": [
+    "Thought: 我需要将高德地图中的“家”地址设置为“北京大学东门”。首先，我应该进入个人中心或设置页面，因为通常这类地址管理功能位于“我的”页面中。当前界面底部有“我的”选项卡，点击它应该能进入相关设置页面。\nAction: click(point='<point>899 954</point>')",
+    "Thought: 我现在在高德地图的“我的”页面，但没有直接看到设置“家”地址的选项。通常这类常用地址（如家、公司）的设置会在“设置”或“常用地址”相关入口中。右上角有一个齿轮图标，这很可能是“设置”入口，点击它应该能进入更详细的设置页面，从而找到管理常用地址的地方。\nAction: click(point='<point>912 74</point>')",
+    "Thought: 在设置页面中，我找到了“常去地点管理”这一项，这正是用来管理常用地址（如家、公司等）的功能入口。点击它应该可以进入编辑常用地址的界面，从而将“家”设置为“北京大学东门”。\nAction: click(point='<point='499 523</point>')",
+    "Thought: 我已经进入了“常去地点管理”页面，看到“家”已经被设置为“北京大学(东门)”，这说明任务已经完成。无需进一步操作。\nAction: finished(content='高德地图中家的地址已成功设置为北京大学东门')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}
