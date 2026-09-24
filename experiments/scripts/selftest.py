@@ -23,6 +23,22 @@ import subprocess
 import sys
 import tempfile
 
+# ---------------------------------------------------------------------------
+# 让本脚本在中文 Windows 的默认 cmd（控制台代码页 GBK/cp936）里也能正常输出。
+#
+# ⚠️ 实测踩过：不加这段，`%PY% %S%\selftest.py` 在**新开的 cmd 窗口**里会直接崩：
+#      UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'
+#    因为最后那行 print("✅ 全部通过…") 的 ✅ 无法用 GBK 编码。
+#    后果比崩掉更糟 —— **它会看起来像"自检失败"**，而其实是输出编码问题。
+#    （run_mbl.cmd / pilot.cmd 不会有这个问题：mobile.env.ps1 里设了
+#      PYTHONUTF8=1 与 PYTHONIOENCODING=utf-8，但直接调 python 就没有。）
+# ---------------------------------------------------------------------------
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:  # noqa: BLE001  (老 Python / 被重定向的流)
+        pass
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
@@ -98,15 +114,20 @@ def main() -> int:
 
     # ---- E. 端到端管道 --------------------------------------------------
     tmp = tempfile.mkdtemp(prefix="odflaky_selftest_")
+    # 子进程用 UTF-8 输出（否则中文 Windows 上它们按 GBK 打印，
+    # 父进程按 utf-8 解码会在 reader 线程里抛 UnicodeDecodeError、拿不到输出）。
+    child_env = {**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"}
     try:
         r1 = subprocess.run([sys.executable, os.path.join(HERE, "make_sim_data.py"),
                              "--out", tmp, "--repeats", "12"],
-                            capture_output=True, text=True, encoding="utf-8")
+                            capture_output=True, text=True, encoding="utf-8",
+                            errors="replace", env=child_env)
         r2 = subprocess.run([sys.executable, os.path.join(HERE, "analyze_order_effects.py"),
                              "--input", os.path.join(tmp, "episodes.jsonl"),
                              "--out", os.path.join(tmp, "analysis"),
                              "--check-against", os.path.join(tmp, "ground_truth.json")],
-                            capture_output=True, text=True, encoding="utf-8")
+                            capture_output=True, text=True, encoding="utf-8",
+                            errors="replace", env=child_env)
         check("E1. 合成数据 + 分析命令成功退出", r1.returncode == 0 and r2.returncode == 0,
               (r1.stderr or r2.stderr or "")[-200:])
 

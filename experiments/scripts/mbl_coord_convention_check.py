@@ -84,10 +84,12 @@ def main() -> int:
     ap.add_argument("--repo", default=None, help="可选：用仓库真实 prompt 与解析器")
     args = ap.parse_args()
 
-    key = os.environ.get("MBL_API_KEY", "")
-    if not key:
-        print("❌ 未设置 MBL_API_KEY")
-        return 2
+    # key 来源：环境变量 → 仓库根的 mobile.env.ps1（见 mbl_env.py 的说明）。
+    # 这样在新开的 cmd 窗口里直接 `%PY% %S%\mbl_coord_convention_check.py` 也能跑，
+    # 不需要先 `set MBL_API_KEY=...`（实测踩过：不这么做会报"未设置 MBL_API_KEY"）。
+    import mbl_env  # noqa: PLC0415
+
+    key = mbl_env.require_api_key()
 
     png = make_screen()
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coord_probe.png")

@@ -112,10 +112,10 @@ def main() -> int:
     ap.add_argument("--size", default="1080x2400", help="测试图尺寸，如 540x1200（省 token）")
     args = ap.parse_args()
 
-    key = os.environ.get("MBL_API_KEY", "")
-    if not key:
-        print("❌ 未设置 MBL_API_KEY")
-        return 2
+    # key 来源：环境变量 → 仓库根的 mobile.env.ps1（见 mbl_env.py 的说明）
+    import mbl_env  # noqa: PLC0415
+
+    key = mbl_env.require_api_key()
     base = args.base_url.rstrip("/")
     print(f"endpoint: {base}")
     print(f"key: {key[:8]}…{key[-4:]}  (len={len(key)})\n")
