@@ -444,6 +444,106 @@ sync.cmd "results: same-day 2x2 pairing"
 
 ---
 
+## 阶段 7 · 补齐 `qwen3-vl-flash` 的模型覆盖（**要求：每个实验都有两个模型**）
+
+### 7.1 现状：flash 只覆盖了 96 个 episode，还都在那个无效的 `qqset` 上
+
+| 实验格 | 任务数 | `qwen3-vl-plus` | `qwen3-vl-flash` | 缺口 |
+|---|---|---|---|---|
+| `base_canonical` × `none` | 310 | ✅ 310 | ❌ | **310** |
+| `base_shuffle` × `none` | 310 | ⚠️ 308 | ❌ | **310** |
+| `reset_can` × `official` | 65 | ✅ 65 | ❌ | **65** |
+| `reset_shf` × `official` | 65 | ✅ 65 | ❌ | **65** |
+| `pilot12` | 12 | ✅ 24 | ❌ | （可选）24 |
+| `qqset` | 8 | ✅ 96 | ✅ 96 | 0（但实验本身无效，见 F3） |
+
+**flash 总缺口 = 750 episode。**
+
+### 7.2 经济性（用同一批任务上两模型的实测值外推，不是估算）
+
+同一批 8 个任务、各 96 episode 的实测对比：
+
+| | `qwen3-vl-plus` | `qwen3-vl-flash` | flash/plus |
+|---|---|---|---|
+| 平均步数 | 7.5 | 8.6 | 1.14× |
+| 单轮墙钟 | 81.6 s | **70.4 s** | **0.86×** |
+| tokens/任务 | 106,888 | **130,842** | **1.22×** |
+
+★ **反直觉但重要**：flash **更快**（墙钟省 14%），但**更贵**（tokens 多 22%）——
+因为它步数更多，而每步的 prompt 里带着历史截图，token 随步数**超线性**增长。
+所以"用 flash 省钱"是错的，它省的是墙钟不是 token。
+
+**两个补齐方案：**
+
+| 方案 | 内容 | episodes | 墙钟 | tokens | 买到的覆盖 |
+|---|---|---|---|---|---|
+| **B 小** | 只在 65 任务公共集上把 2×2 补成双模型 | 260 | **≈ 5.8 h** | ≈ 38 M | §1 四个对比 × 2 模型；§2 双模型 n=65 |
+| **A 全** | 再补 base 310 × 2 顺序 | +620 | **≈ 12.1 h** | ≈ 81 M | 追加 §2 双模型 **n=310** |
+| A = 小 + 全 | | 880 | **≈ 17.9 h** | ≈ 119 M | 全部双模型 |
+
+（`reset` 侧因为 cleaner 每任务多跑一趟，flash 约 91 s/任务、163k tokens/任务；
+`none` 侧约 70 s、131k tokens/任务。base 侧约 70 s、131k tokens/任务。磁盘：base 类约 9.45 MB/任务 → A 方案再占约 6 GB，D: 还有 72 GB。）
+
+### 7.3 方案 B 的命令（**推荐先做这个**，约 5.8 小时）
+
+四格背靠背成对跑，让时间漂移在两格之间摊平：
+
+```cmd
+rem 规范序：不跑 cleaner / 跑 cleaner
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\f_none_can
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\f_off_can
+
+rem 乱序：不跑 cleaner / 跑 cleaner
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv -Output results\f_none_shf
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv -Output results\f_off_shf
+```
+
+> `-Model qwen3-vl-flash` 会**自动**从 `mobile.env.ps1` 的注册表取坐标约定（`norm`），不用手填。
+> 但换了机器先验一次更稳：
+> ```cmd
+> %PY% %S%\mbl_coord_convention_check.py --model qwen3-vl-flash --repo %REPO%
+> ```
+
+双模型 2×2 报告（四个 plus 格 + 四个 flash 格一起喂，分析器按 `agent` 分组）：
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input ^
+  results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf ^
+  results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf ^
+  --out results\twomodel_2x2 --official-condition official
+type results\twomodel_2x2\report.md
+```
+
+（`p1_*`/`p2_*` 是阶段 6.2 方案 2 的 plus 同日四格；如果那一档还没跑，就换成现有的
+`results\reset_can results\reset_shf results\none_can results\none_shf`。）
+
+### 7.4 方案 A 追加的命令（约 12 小时，为了 §2 的 n=310 双模型）
+
+```cmd
+%MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+```
+
+产出 `results\baseflash_canonical`（310）与 `results\baseflash_shuffle`（310）。
+`pilot.cmd` 会自己唤醒手机、跑两轮、转格式、出报告；中断后重跑同一条命令自动续跑。
+
+### 7.5 上传
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: flash model coverage (two-model 2x2)"
+```
+
+### 7.6 到齐之后报告里应该出现什么
+
+`§1` 的四个对比（C1/C2/C3/DiD）**每个都有两行**（`qwen3-vl-plus` 一行、`qwen3-vl-flash` 一行）；
+`§2` 的双模型分组表两侧 `n` 相等。**如果 flash 的 C1 也显著为负、C2 ≈ 0，那"cleaner 挡住顺序效应"
+这个结论就不是单模型的偶然，可以直接写进论文。**
+
+> ⚠️ **`qwen3-vl-max` 不存在**（托管端 261 个模型里没有它），唯一可用的 "max" 是 `qwen-vl-max`，
+> 且它是 **pixel** 坐标约定 —— 见 B5。
+
+---
+
 # A. 新机器部署（6 步）
 
 ## 0) 前置
@@ -577,7 +677,12 @@ cd /d %REPO%
 %MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
 ```
 
-- 310 个任务 / 一种顺序约 **3 小时**、约 17 M tokens
+- 310 个任务 / 一种顺序：**实测 6.9 小时**、**31.6 M tokens**（平均 80.5 s、101,960 tokens/任务）
+
+> ⏱️ **别再按"3 小时"做预算了**（这个数字早先是拍脑袋估的，实测差 2.4 倍）。
+> 2026-09-24 用 `sum(episode.run_time_s)` 核过：`base_canonical` **6.93 h**、`base_shuffle` **6.54 h**，
+> 与 `base_shuffle` 那次的真实墙钟（09-22 22:55 → 09-23 06:04 = 7.15 h，含跳过的规范序一轮）对得上。
+
 - 报告自动生成在 `results\base_analysis\report.md`
 - **中断不用怕**：结果按任务落盘，重跑同一条命令会自动续跑（已完成任务跳过）
 
@@ -590,10 +695,11 @@ cd /d %REPO%
 
 第一条是 2 个任务的通道验证（约 3 分钟），第二条是完整的 65 个任务。
 
-> ⏱️ **实测耗时（2026-09-23）**：`reset_canonical` 65 个任务用了 **2 小时 35 分**（10:21→12:56），
-> `reset_shuffle0` 用了 **2 小时 19 分**（13:21→15:40）。比一开始估的 40 分钟长得多 ——
-> 因为 cleaner 是**同一个 GUI agent 去执行 `reset_query`**，每个任务等于要多跑一趟。
-> 反过来，65 个任务**不跑 cleaner**（base.conf）只要约 40 分钟。做时间预算时按这个量级算。
+> ⏱️ **实测耗时（2026-09-23）**：`reset_canonical` 65 个任务墙钟 **2 h 35 m**（10:21→12:56）、
+> `reset_shuffle0` **2 h 19 m**（13:21→15:40）；折算到 agent 身上的净时间分别是 **1.91 h / 1.65 h**
+> （106.0 s 与 91.4 s / 任务）。比一开始估的 40 分钟长得多 —— 因为 cleaner 是
+> **同一个 GUI agent 去执行 `reset_query`**，每个任务等于多跑一趟。
+> 反过来，65 个任务**不跑 cleaner**（base.conf）约 **1.2 h**（约 70 s/任务）。做时间预算时按这个量级算。
 
 跑完 `run_mbl.cmd` 会**自动**在同目录生成 `episodes.jsonl`（转格式已内置，见坑 #10）。所以只有「用别的办法跑的轮次」才需要手动转：
 
@@ -857,7 +963,7 @@ git stash pop
 
 | 项 | 状态 |
 |---|---|
-| `base_canonical`（格 A：规范序 × 不跑 cleaner，qwen3-vl-plus） | ✅ **310/310**，SR = 57.1%（177/310），数据本体跑于 **09-20**，用时 2.85 h |
+| `base_canonical`（格 A：规范序 × 不跑 cleaner，qwen3-vl-plus） | ✅ **310/310**，SR = 57.1%（177/310），数据本体跑于 **09-20**，**实测 6.93 h**（早期写的 2.85 h 是错的） |
 | `base_shuffle`（格 B：乱序 × 不跑 cleaner） | ⚠️ **308/310** —— 09-20 崩溃后续跑完成于 09-23 06:04；`minimap_9`、`neteasemusic_26` 被 `--blank-failed-only` 摘掉未补 → **阶段 6.1** |
 | `reset_can`（格 C：规范序 × 跑 cleaner） | ✅ 65/65，**09-23** 10:21→12:56（**2 h 35 m**，比预估的 40 m 长得多） |
 | `reset_shf`（格 D：乱序 × 跑 cleaner） | ✅ 65/65，**09-23** 13:21→15:40（2 h 19 m） |
@@ -865,16 +971,20 @@ git stash pop
 | `qqset` 重复（同上，qwen3-vl-flash） | ⚠️ ΔSR `+0.021`、CTCI `0.021` —— 只有 `qq_4` 一个任务有方差 |
 | `pilot12`（12 任务 × 2 顺序） | ✅ ΔSR +0.083 [0.000, +0.250]、CTCI 0.083、PASR 0.583，1 个任务翻转（`bili_4`） |
 
-### F1c 补第二个 Agent 要花多少（估算）
+### F1c 补 `qwen3-vl-flash` 要花多少（**用实测值外推**）
 
-| 做法 | 内容 | 机器时间 |
-|---|---|---|
-| 全量复制 | base 310 × 2 顺序 + reset 65 × 2 顺序 × 2 条件 | **≈ 16 h / 模型** |
-| 只在公共 65 任务上做完整 2×2 | 65 × 2 顺序 × 2 条件 | **≈ 6.5 h / 模型** |
-| 只补 `none` 一侧（先看趋势） | 65 × 2 顺序 | **≈ 1.2 h / 模型** |
+flash 实测：**70.4 s**、**130,842 tokens / 任务**（`none` 条件）；带 cleaner 约 **91 s**、**163k tokens / 任务**。
 
-推荐中间那档：**在 `reset_canonical.csv` / `reset_shuffle0.csv` 这 65 个任务上，把 2×2 从"一个模型"扩成"两个模型"**，
-这样 §1 的四个对比每个都有两个 agent，才能回答"结论是否依赖 Agent"。见「★ 待跑清单」阶段 6.2 的成对命令。
+| 做法 | 内容 | episodes | 墙钟 | tokens |
+|---|---|---|---|---|
+| **B 小**（推荐先做） | 65 任务公共集 → 2 顺序 × 2 条件 | 260 | **≈ 5.8 h** | ≈ 38 M |
+| **A 全** | 再补 base 310 × 2 顺序 | +620 | **≈ 12.1 h** | ≈ 81 M |
+| A 合计 | | 880 | **≈ 17.9 h** | ≈ 119 M |
+
+详细命令见「★ 待跑清单」**阶段 7**。★ 注意 **flash 比 plus 更快但更贵**（tokens 多 22%，
+因为步数多、而每步 prompt 带历史截图 → token 随步数超线性增长），所以别指望用 flash 省 token。
+
+推荐 **B 档**：这样 §1 的四个对比每个都有两个 agent，才能回答"结论是否依赖 Agent"。
 
 ## F2 分析结果（`results\master_analysis\report.md`）
 
