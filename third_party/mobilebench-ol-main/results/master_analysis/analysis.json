@@ -1,0 +1,239 @@
+{
+  "baseline_order": "canonical",
+  "official_condition": "official",
+  "delta": 0.2,
+  "alpha": 0.05,
+  "conditions": [
+    "none",
+    "official"
+  ],
+  "order_modes": [
+    "canonical",
+    "shuffle"
+  ],
+  "contrasts": {
+    "qwen3-vl-plus|C1_pollution_main": {
+      "n_tasks": 65,
+      "suite_sr_ref": 0.7230769230769231,
+      "suite_sr_treat": 0.5846153846153846,
+      "delta_sr": -0.13846153846153847,
+      "delta_sr_ci95": [
+        -0.27692307692307694,
+        -0.015384615384615385
+      ],
+      "ctci": 0.14615384615384616,
+      "pasr": 0.5923076923076923,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=弱/规范序(none) vs R=官方/规范序"
+    },
+    "qwen3-vl-plus|C2_order_main": {
+      "n_tasks": 65,
+      "suite_sr_ref": 0.7230769230769231,
+      "suite_sr_treat": 0.7076923076923077,
+      "delta_sr": -0.015384615384615385,
+      "delta_sr_ci95": [
+        -0.09230769230769231,
+        0.06153846153846154
+      ],
+      "ctci": 0.14615384615384616,
+      "pasr": 0.5923076923076923,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/乱序(shuffle) vs R=官方/规范序"
+    },
+    "qwen3-vl-plus|C3_combined": {
+      "n_tasks": 64,
+      "suite_sr_ref": 0.71875,
+      "suite_sr_treat": 0.640625,
+      "delta_sr": -0.078125,
+      "delta_sr_ci95": [
+        -0.203125,
+        0.046875
+      ],
+      "ctci": 0.1484375,
+      "pasr": 0.5859375,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=弱/乱序 vs R=官方/规范序"
+    },
+    "qwen3-vl-plus|DiD_interaction": {
+      "definition": "C3 − C1 − C2（顺序效应是否只在重置被削弱时被放大）",
+      "n_tasks": 64,
+      "delta_sr": 0.078125,
+      "delta_sr_ci95": [
+        -0.046875,
+        0.203125
+      ],
+      "per_task_did": {
+        "articlenews_12": 0.0,
+        "articlenews_13": 0.0,
+        "articlenews_15": 1.0,
+        "articlenews_16": 0.0,
+        "articlenews_19": 0.0,
+        "articlenews_4": 0.0,
+        "baidubrowser_13": 0.0,
+        "baidubrowser_14": 0.0,
+        "baidubrowser_15": 1.0,
+        "baidubrowser_16": 0.0,
+        "baidubrowser_17": 0.0,
+        "baidubrowser_18": 0.0,
+        "baidubrowser_7": 1.0,
+        "bili_13": 0.0,
+        "bili_17": 0.0,
+        "bili_18": -1.0,
+        "bili_27": 1.0,
+        "bili_28": 0.0,
+        "fanqieread_17": -1.0,
+        "fanqieread_18": 0.0,
+        "fanqieread_25": 0.0,
+        "fanqieread_26": 0.0,
+        "fanqieread_5": 0.0,
+        "fanqieread_6": 0.0,
+        "minimap_13": 1.0,
+        "minimap_15": 0.0,
+        "minimap_16": 0.0,
+        "neteasemusic_19": 0.0,
+        "neteasemusic_21": 0.0,
+        "neteasemusic_22": 0.0,
+        "neteasemusic_28": 0.0,
+        "neteasemusic_7": 0.0,
+        "neteasemusic_8": 0.0,
+        "pinduoduo_16": -1.0,
+        "pinduoduo_26": 0.0,
+        "pinduoduo_27": 0.0,
+        "pinduoduo_28": 0.0,
+        "pinduoduo_7": 0.0,
+        "qq_12": -1.0,
+        "qq_13": 1.0,
+        "qq_15": 0.0,
+        "qq_19": 0.0,
+        "qq_2": 1.0,
+        "qq_20": 0.0,
+        "qq_27": 0.0,
+        "rimet_16": 0.0,
+        "rimet_17": 0.0,
+        "rimet_18": 0.0,
+        "rimet_19": 0.0,
+        "rimet_4": 0.0,
+        "seeyou_19": 0.0,
+        "seeyou_5": -1.0,
+        "seeyou_6": 0.0,
+        "seeyou_7": 0.0,
+        "tonghuashun_27": 1.0,
+        "tonghuashun_28": 0.0,
+        "tonghuashun_29": 0.0,
+        "tonghuashun_9": 0.0,
+        "wuba_12": 0.0,
+        "wuba_23": 0.0,
+        "wuba_24": 0.0,
+        "wuba_26": 1.0,
+        "wuba_27": 0.0,
+        "wuba_7": 1.0
+      }
+    }
+  },
+  "order_contrasts": {
+    "qwen3-vl-plus|order:shuffle": {
+      "n_tasks": 65,
+      "suite_sr_ref": 0.7230769230769231,
+      "suite_sr_treat": 0.7076923076923077,
+      "delta_sr": -0.015384615384615385,
+      "delta_sr_ci95": [
+        -0.09230769230769231,
+        0.06153846153846154
+      ],
+      "ctci": 0.14615384615384616,
+      "pasr": 0.5923076923076923,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/顺序=shuffle vs R=官方/规范序（纯顺序效应）"
+    },
+    "qwen3-vl-plus|polluted_order:shuffle": {
+      "n_tasks": 64,
+      "suite_sr_ref": 0.71875,
+      "suite_sr_treat": 0.640625,
+      "delta_sr": -0.078125,
+      "delta_sr_ci95": [
+        -0.203125,
+        0.046875
+      ],
+      "ctci": 0.1484375,
+      "pasr": 0.5859375,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=弱/顺序=shuffle vs R=官方/规范序（污染+顺序叠加）"
+    }
+  },
+  "od_flaky_tasks": {
+    "qwen3-vl-plus": []
+  },
+  "groups": {
+    "qwen3-vl-plus|none": {
+      "n_tasks": 308,
+      "suite_sr_ref": 0.5714285714285714,
+      "suite_sr_treat": 0.5941558441558441,
+      "delta_sr": 0.022727272727272728,
+      "delta_sr_ci95": [
+        -0.01948051948051948,
+        0.06818181818181818
+      ],
+      "ctci": 0.1525974025974026,
+      "pasr": 0.5064935064935064,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "suite_sr_by_order": {
+        "canonical": 0.5714285714285714,
+        "shuffle": 0.5941558441558441
+      },
+      "n_by_order": {
+        "canonical": 308,
+        "shuffle": 308
+      },
+      "n_comparable_tasks": 308
+    },
+    "qwen3-vl-plus|official": {
+      "n_tasks": 65,
+      "suite_sr_ref": 0.7230769230769231,
+      "suite_sr_treat": 0.7076923076923077,
+      "delta_sr": -0.015384615384615385,
+      "delta_sr_ci95": [
+        -0.09230769230769231,
+        0.06153846153846154
+      ],
+      "ctci": 0.1076923076923077,
+      "pasr": 0.6615384615384615,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "agent": "qwen3-vl-plus",
+      "condition": "official",
+      "suite_sr_by_order": {
+        "canonical": 0.7230769230769231,
+        "shuffle": 0.7076923076923077
+      },
+      "n_by_order": {
+        "canonical": 65,
+        "shuffle": 65
+      },
+      "n_comparable_tasks": 65
+    }
+  },
+  "warnings": [],
+  "diagnostics": [
+    {
+      "表": "§3 victim",
+      "原因": "重复次数 2 < 8：在当前 310 个任务的多重比较负担下，**最理想**的 0/2 vs 2/2 分裂的 q 仍 ≥ 0.05，victim 表必然为空。",
+      "补什么": "把重复次数提到 ≥ 8，或减少同时检验的任务数（预注册更小的候选集）。"
+    }
+  ],
+  "polluters": []
+}

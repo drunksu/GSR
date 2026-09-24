@@ -1,0 +1,327 @@
+{
+  "baseline_order": "canonical",
+  "official_condition": "none",
+  "delta": 0.2,
+  "alpha": 0.05,
+  "conditions": [
+    "none"
+  ],
+  "order_modes": [
+    "canonical",
+    "reverse"
+  ],
+  "contrasts": {
+    "qwen3-vl-flash|C2_order_main": {
+      "n_tasks": 8,
+      "suite_sr_ref": 0.4583333333333333,
+      "suite_sr_treat": 0.4791666666666667,
+      "delta_sr": 0.020833333333333343,
+      "delta_sr_ci95": [
+        0.0,
+        0.06250000000000003
+      ],
+      "ctci": 0.020833333333333343,
+      "pasr": 0.4583333333333333,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/乱序(reverse) vs R=官方/规范序"
+    },
+    "qwen3-vl-plus|C2_order_main": {
+      "n_tasks": 8,
+      "suite_sr_ref": 0.5,
+      "suite_sr_treat": 0.5,
+      "delta_sr": 0.0,
+      "delta_sr_ci95": [
+        0.0,
+        0.0
+      ],
+      "ctci": 0.0,
+      "pasr": 0.5,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/乱序(reverse) vs R=官方/规范序"
+    }
+  },
+  "order_contrasts": {
+    "qwen3-vl-flash|order:reverse": {
+      "n_tasks": 8,
+      "suite_sr_ref": 0.4583333333333333,
+      "suite_sr_treat": 0.4791666666666667,
+      "delta_sr": 0.020833333333333343,
+      "delta_sr_ci95": [
+        0.0,
+        0.06250000000000003
+      ],
+      "ctci": 0.020833333333333343,
+      "pasr": 0.4583333333333333,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/顺序=reverse vs R=官方/规范序（纯顺序效应）"
+    },
+    "qwen3-vl-plus|order:reverse": {
+      "n_tasks": 8,
+      "suite_sr_ref": 0.5,
+      "suite_sr_treat": 0.5,
+      "delta_sr": 0.0,
+      "delta_sr_ci95": [
+        0.0,
+        0.0
+      ],
+      "ctci": 0.0,
+      "pasr": 0.5,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/顺序=reverse vs R=官方/规范序（纯顺序效应）"
+    }
+  },
+  "od_flaky_tasks": {
+    "qwen3-vl-flash": [],
+    "qwen3-vl-plus": []
+  },
+  "groups": {
+    "qwen3-vl-flash|none": {
+      "n_tasks": 8,
+      "suite_sr_ref": 0.4583333333333333,
+      "suite_sr_treat": 0.4791666666666667,
+      "delta_sr": 0.020833333333333343,
+      "delta_sr_ci95": [
+        0.0,
+        0.06250000000000003
+      ],
+      "ctci": 0.020833333333333343,
+      "pasr": 0.4583333333333333,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "suite_sr_by_order": {
+        "canonical": 0.4583333333333333,
+        "reverse": 0.4791666666666667
+      },
+      "n_by_order": {
+        "canonical": 48,
+        "reverse": 48
+      },
+      "n_comparable_tasks": 8
+    },
+    "qwen3-vl-plus|none": {
+      "n_tasks": 8,
+      "suite_sr_ref": 0.5,
+      "suite_sr_treat": 0.5,
+      "delta_sr": 0.0,
+      "delta_sr_ci95": [
+        0.0,
+        0.0
+      ],
+      "ctci": 0.0,
+      "pasr": 0.5,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "suite_sr_by_order": {
+        "canonical": 0.5,
+        "reverse": 0.5
+      },
+      "n_by_order": {
+        "canonical": 48,
+        "reverse": 48
+      },
+      "n_comparable_tasks": 8
+    }
+  },
+  "warnings": [
+    "只有 official 条件，无法估计污染主效应（C1/C3）。"
+  ],
+  "diagnostics": [
+    {
+      "表": "§1 / §2b",
+      "原因": "数据里只有 1 种重置条件 ['none']，缺可对比的第二格。",
+      "补什么": "跑一轮 reset 通道（README B4），再把两个 results 目录一起喂给 --input。"
+    }
+  ],
+  "polluters": [
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_10",
+      "n": 12,
+      "fail_rate": 1.0,
+      "baseline_fail_rate": 0.5,
+      "lift": 2.0,
+      "p_value": 0.00019573119366082502,
+      "q_value": 0.0015658495492866002
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_10",
+      "n": 12,
+      "fail_rate": 1.0,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 1.909090909090909,
+      "p_value": 0.00023609923987505372,
+      "q_value": 0.0018887939190004297
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_11",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5,
+      "lift": 1.0,
+      "p_value": 0.9999999999999523,
+      "q_value": 0.9999999999999523
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_12",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5,
+      "lift": 1.0,
+      "p_value": 0.9999999999999523,
+      "q_value": 0.9999999999999523
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_13",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5,
+      "lift": 1.0,
+      "p_value": 0.9999999999999523,
+      "q_value": 0.9999999999999523
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_14",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5,
+      "lift": 1.0,
+      "p_value": 0.9999999999999523,
+      "q_value": 0.9999999999999523
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_4",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5,
+      "lift": 1.0,
+      "p_value": 0.9999999999999523,
+      "q_value": 0.9999999999999523
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_11",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.9545454545454545,
+      "p_value": 0.9999999999999285,
+      "q_value": 0.9999999999999285
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_12",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.9545454545454545,
+      "p_value": 0.9999999999999285,
+      "q_value": 0.9999999999999285
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_13",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.9545454545454545,
+      "p_value": 0.9999999999999285,
+      "q_value": 0.9999999999999285
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_14",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.9545454545454545,
+      "p_value": 0.9999999999999285,
+      "q_value": 0.9999999999999285
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_4",
+      "n": 12,
+      "fail_rate": 0.5,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.9545454545454545,
+      "p_value": 0.9999999999999285,
+      "q_value": 0.9999999999999285
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_1",
+      "n": 6,
+      "fail_rate": 0.3333333333333333,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.6363636363636362,
+      "p_value": 0.4175959437902403,
+      "q_value": 0.9999999999999285
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_1",
+      "n": 6,
+      "fail_rate": 0.0,
+      "baseline_fail_rate": 0.5,
+      "lift": 0.0,
+      "p_value": 0.025810697078044835,
+      "q_value": 0.0688285255414529
+    },
+    {
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "polluter": "qq_17",
+      "n": 6,
+      "fail_rate": 0.0,
+      "baseline_fail_rate": 0.5238095238095238,
+      "lift": 0.0,
+      "p_value": 0.009442937955382069,
+      "q_value": 0.037771751821528275
+    },
+    {
+      "agent": "qwen3-vl-plus",
+      "condition": "none",
+      "polluter": "qq_17",
+      "n": 6,
+      "fail_rate": 0.0,
+      "baseline_fail_rate": 0.5,
+      "lift": 0.0,
+      "p_value": 0.025810697078044835,
+      "q_value": 0.0688285255414529
+    }
+  ]
+}

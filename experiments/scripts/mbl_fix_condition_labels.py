@@ -58,23 +58,36 @@ def read_reset_flag(config_path: str) -> bool | None:
 
 
 def find_config(repo: str, config_field: str, run_dir: str) -> str | None:
-    """把 manifest 里的 config 字段解析成真实路径（试几种基准目录）。"""
+    """把 manifest 里的 config 字段解析成**本机**的真实路径。
+
+    ⚠️ 必须能跨机器：manifest 里的 `repo` 是**产生这轮实验那台机器**的绝对路径
+    （例如 `D:\\GSR\\third_party\\mobilebench-ol-main`）。pull 到另一台机器后
+    这个路径根本不存在；如果只按它找，所有目录都会报"找不到 config"（实测踩过）。
+    所以这里**从 run_dir 逐级往上找** —— run_dir 是本机确实存在的路径，
+    它的某个祖先目录就是 benchmark 根（含 `config/`）。
+    """
     if not config_field:
         return None
-    cands = [
-        os.path.join(repo or "", config_field),
-        os.path.join(run_dir, config_field),
-        config_field,
-    ]
+    base = os.path.basename(config_field)
+
+    cands: list[str] = []
+    # 1) manifest 记录的 repo（跑实验那台机器上最快命中）
+    if repo:
+        cands += [os.path.join(repo, config_field), os.path.join(repo, "config", base)]
+    # 2) 从 run_dir 往上逐级找 —— 跨机器的关键
+    cur = os.path.abspath(run_dir)
+    for _ in range(6):
+        cands += [os.path.join(cur, config_field), os.path.join(cur, "config", base)]
+        parent = os.path.dirname(cur)
+        if parent == cur:
+            break
+        cur = parent
+    # 3) 相对当前工作目录
+    cands += [config_field, os.path.join("config", base)]
+
     for c in cands:
         if c and os.path.isfile(c):
-            return c
-    # 最后兜底：在 repo/config 下按文件名找
-    if repo:
-        base = os.path.basename(config_field)
-        c = os.path.join(repo, "config", base)
-        if os.path.isfile(c):
-            return c
+            return os.path.abspath(c)
     return None
 
 
