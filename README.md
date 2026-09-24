@@ -606,28 +606,48 @@ cd /d %REPO%
 ## B5 换模型 / 多 Agent 对比
 
 ```cmd
+rem 一条命令跑完两轮顺序（换模型）
 %MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+
+rem 或者只跑某一轮（换模型；重复实验用 run_repeats.cmd）
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\reset_canonical.csv -Output results\flash_none_can
 ```
 
 **可用模型与坐标约定**（`mobile.env.ps1` 里的注册表；★ 约定填错 → 所有点击挤到左上角、任务全灭）
 
 | 模型 | 约定 | 备注 |
 |---|---|---|
-| `qwen3-vl-plus` | **norm** | 主力，定位 1 px，已有 310 个结果 |
+| `qwen3-vl-plus` | **norm** | 主力，定位 1 px，已有 872 episode |
 | `qwen3-vl-flash` | **norm** | 同代更弱更便宜 → 更容易落在 0.2–0.8 信号带，**推荐当第二个 Agent** |
 | `qwen3-vl-plus-2025-12-19` | **norm** | 日期快照 → 可做版本消融 |
 | `qwen3.8-omni-flash` / `qwen3.5-omni-plus` | **norm** | 更新世代，实测精确 |
-| `qwen-vl-max` | **pixel** | 老世代，合成图定位偏 630 px |
+| `qwen-vl-max` | **pixel** | **唯一可用的 "max"**；老世代，合成图定位偏 630 px |
 | `gui-plus` | **pixel** | GUI 专用但定位最差（偏 890 px） |
 | `qwen-vl-plus` | norm（推测） | 输出格式有点脏 |
+| `qwen-vl-ocr` | pixel | 纯 OCR，**不是 agent**，只能当定位器用 |
 | `qwen3-vl-max` / `qwen2.5-vl-7b/72b-instruct` | — | **不可用**（404 / 403） |
+
+**2026-09-24 复核**：`mbl_api_probe.py --dump-models` 拿到托管端**全部 261 个模型**，其中 VL/omni/GUI 系列实测存在的是：
+
+```
+gui-plus, qwen-vl-max, qwen-vl-ocr[-2025-11-20|-latest], qwen-vl-plus,
+qwen3-vl-flash[-2025-10-15|-2026-01-22], qwen3-vl-plus[-2025-09-23|-2025-12-19],
+qwen3-omni-flash[-2025-09-15|-2025-12-01|-realtime], qwen3.5-omni-flash|plus[-2026-03-15|-realtime],
+qwen3.8-omni-flash[-realtime], qwen-omni-turbo
+```
+
+★ **`qwen3-vl-max` 不在列表里**（两次确认：既 404、也不在这 261 个里）→ 所以"max 版"只能用老世代的
+`qwen-vl-max`，而且它是 **pixel** 约定。想要"强模型对照"的话这一点要在论文里写清楚。
 
 **加新模型**：先跑坐标检测（这两个诊断脚本走标准库直连 API、不经过 PowerShell，所以要自己 `set`；key 可从 `mobile.env.ps1` 里复制）：
 
 ```cmd
 set MBL_API_KEY=sk-你的key
 %PY% %S%\mbl_coord_convention_check.py --model 新模型名 --repo %REPO%
+%PY% %S%\mbl_api_probe.py --scan 模型名1,模型名2      rem 批量试可用性
 ```
+
+> ⚠️ 换模型**必须**先跑坐标检测再开长跑：约定填错的表现是"任务全灭但看不出原因"（见坑 #1）。
 
 ## B6 生成新的顺序任务集
 
@@ -817,6 +837,24 @@ git stash pop
 
 ## F1 实验数据
 
+### F1a 模型覆盖矩阵（⚠️ 主实验**只有 plus 一个模型**）
+
+| 实验 | 任务数 | `qwen3-vl-plus` | `qwen3-vl-flash` | 两模型都跑？ |
+|---|---|---|---|---|
+| `base_canonical` × `none` | 310 | ✅ 310 | ❌ | ❌ |
+| `base_shuffle` × `none` | 310 | ✅ 308 | ❌ | ❌ |
+| `reset_can` × `official` | 65 | ✅ 65 | ❌ | ❌ |
+| `reset_shf` × `official` | 65 | ✅ 65 | ❌ | ❌ |
+| `pilot12` × 2 顺序 | 12 | ✅ 24 | ❌ | ❌ |
+| `qqset` × 2 顺序 × 6 遍 | 8 | ✅ 96 | ✅ 96 | ✅ **唯一双模型，但它无效**（见 F3） |
+
+按模型汇总：`qwen3-vl-plus` **872 episode**、`qwen3-vl-flash` **96 episode**。
+
+**结论：主结果（2×2 的 C1/C2/C3/DiD 与 n=308 的 ΔSR/CTCI/PASR）目前无法回答"换个 Agent 还成不成立"。**
+"多个 Agent"这个维度目前只落在那个无效的 `qqset` 上。
+
+### F1b 各轮数据
+
 | 项 | 状态 |
 |---|---|
 | `base_canonical`（格 A：规范序 × 不跑 cleaner，qwen3-vl-plus） | ✅ **310/310**，SR = 57.1%（177/310），数据本体跑于 **09-20**，用时 2.85 h |
@@ -826,7 +864,17 @@ git stash pop
 | `qqset` 重复（8 任务 × 2 顺序 × 6 遍，plus） | ⚠️ **跑了但没有信息量** —— ΔSR 恒等于 `+0.000`、CI `[+0.000, +0.000]`（见 F3） |
 | `qqset` 重复（同上，qwen3-vl-flash） | ⚠️ ΔSR `+0.021`、CTCI `0.021` —— 只有 `qq_4` 一个任务有方差 |
 | `pilot12`（12 任务 × 2 顺序） | ✅ ΔSR +0.083 [0.000, +0.250]、CTCI 0.083、PASR 0.583，1 个任务翻转（`bili_4`） |
-| Agent 数 | 2 个：`qwen3-vl-plus`（主力，norm）、`qwen3-vl-flash`（norm） |
+
+### F1c 补第二个 Agent 要花多少（估算）
+
+| 做法 | 内容 | 机器时间 |
+|---|---|---|
+| 全量复制 | base 310 × 2 顺序 + reset 65 × 2 顺序 × 2 条件 | **≈ 16 h / 模型** |
+| 只在公共 65 任务上做完整 2×2 | 65 × 2 顺序 × 2 条件 | **≈ 6.5 h / 模型** |
+| 只补 `none` 一侧（先看趋势） | 65 × 2 顺序 | **≈ 1.2 h / 模型** |
+
+推荐中间那档：**在 `reset_canonical.csv` / `reset_shuffle0.csv` 这 65 个任务上，把 2×2 从"一个模型"扩成"两个模型"**，
+这样 §1 的四个对比每个都有两个 agent，才能回答"结论是否依赖 Agent"。见「★ 待跑清单」阶段 6.2 的成对命令。
 
 ## F2 分析结果（`results\master_analysis\report.md`）
 
