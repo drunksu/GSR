@@ -55,16 +55,31 @@
 > 命令都是 CMD。**同一阶段的命令放在同一个 cmd 窗口里跑**（`set` 的变量只在当前窗口有效）。
 > 跑不动或想了解每个脚本的细节，再去看 B / C / D 节。
 
-## 现状：2×2 的四个格里只填了一个
+## 现状（2026-09-24 更新）：四格都填上了，但有两处要补
 
 | 格 | 顺序 | 重置条件 | 状态 |
 |---|---|---|---|
-| A | canonical | `none`（不跑 cleaner） | ✅ **310/310**，SR 57.1% |
-| B | shuffle | `none` | ⚠️ **26/310** ← 阶段 1 补 |
-| C | canonical | `official`（跑 cleaner） | ❌ 0 ← 阶段 2 补 |
-| D | shuffle | `official` | ❌ 0 ← 阶段 2 补 |
+| A | canonical | `none`（不跑 cleaner） | ✅ 310/310（数据本体 09-20），SR 57.1% |
+| B | shuffle | `none` | ⚠️ **308/310** —— 有 2 个被摘掉没补 ← **阶段 6.1** |
+| C | canonical | `official`（跑 cleaner） | ✅ 65/65（09-23） |
+| D | shuffle | `official` | ✅ 65/65（09-23） |
 
-每格重复次数 **全是 1**、Agent 只有 `qwen3-vl-plus` —— 这就是为什么报告里 §3/§4 是空的。
+`results\master_analysis\report.md` 已经出结果，**C1（污染主效应）ΔSR = −0.138，CI [−0.277, −0.015] 显著**；
+C2（顺序主效应）≈ 0 不显著 —— 与"cleaner 挡住了同 app 污染"的预期一致。
+
+**但两件事要做**：
+
+1. **阶段 6.1**：`base_shuffle` 补回 2 个任务（1 分钟）。
+2. **阶段 6.2**：C1 的两侧不对等（`official` 是 09-23 的 65 任务块，`none` 是 09-20 的 310 任务序列里的 65 个），
+   日期差与运行上下文差都混在里面 → 要四格一起重跑才是严格配对。
+
+**阶段 3（重复实验）已跑完但没有信息量**：`qqset` 的 ΔSR 恒等于 `+0.000`、CI `[+0.000, +0.000]`。
+原因不是工具坏了（6 次重复的 trajectory MD5 互不相同，确实跑了 48 次），而是：
+① QQ 状态在 09-20 那轮就已经**饱和到固定点**（`qq_1` 那轮成功、现在 12/12 失败）；② **重复之间没有重置**，
+A 序第 1 遍就定了固定点，B 序的起点因此和 A 一样，顺序这个自变量被自己消掉了。
+**重跑同样的东西没用，要改设计**（换"重置便宜"的 writer 任务对，或做轮次级重置）。
+
+每格重复次数仍 **全是 1**（阶段 3 的重复无效）、Agent 有 `qwen3-vl-plus` 与 `qwen3-vl-flash` 两个。
 
 ---
 
@@ -346,6 +361,89 @@ sync.cmd "analysis: master report"
 
 ---
 
+## 阶段 6 · 补跑 + 同日对照（2026-09-24 决定要做）
+
+### 6.1 补 `base_shuffle` 缺的 2 个任务（约 1 分钟）
+
+`minimap_9`、`neteasemusic_26` 被 `mbl_purge_tasks.py --blank-failed-only` 摘掉了
+（`result_list.txt` 里已经查不到它们），所以**重跑同一轮就会自动只补这 2 个**：
+
+```cmd
+%MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+```
+
+跑完 `results\base_shuffle\episodes.jsonl` 应该从 308 行变成 310 行。
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: backfill base_shuffle 310/310"
+```
+
+### 6.2 把 C1（污染主效应）做成真正的同日配对
+
+**为什么要做。** 现在 C1 = −0.138（CI 不含 0，是目前唯一显著的结果），但它两侧并不对等：
+
+| 侧 | 数据来源 | 什么时候跑的 | 运行上下文 |
+|---|---|---|---|
+| `official`（跑 cleaner） | `results\reset_can` | **09-23** | 65 任务独立成块 |
+| `none`（不跑 cleaner） | `results\base_canonical` 里的那 65 个 | **09-20**（数据本体） | 嵌在 310 任务序列里 |
+
+也就是说 −0.138 里同时混了 **① cleaner 开关 ② 日期差 3 天 ③ 运行上下文（310 块 vs 65 块）**。
+要让它变成"同一份 CSV、同一天、只差 cleaner"的严格配对，必须四格一起重跑。
+
+> ⚠️ **只补 `none` 那两格并不能消除这个混淆** —— 只是把"日期差 3 天"变成"2 天"，
+> 上下文差消失了但日期差还在。下面给两个方案，按你要的严格程度选。
+
+**方案 1（省钱，约 1.2 小时）**：只补 `none` 两格。
+
+```cmd
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\reset_canonical.csv -Output results\none_can
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\reset_shuffle0.csv  -Output results\none_shf
+```
+
+**方案 2（严格，约 6.5 小时）**：四格一起重跑。按"同一份 CSV 的两种条件背靠背"成对执行，
+让时间漂移在两格之间**摊平**，而不是全落到其中一格上。
+
+```cmd
+rem 第 1 对：规范序，只差 cleaner（约 3.5 h）
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\p1_none_can
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\p1_off_can
+
+rem 第 2 对：乱序，只差 cleaner（约 3 h）
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv -Output results\p2_none_shf
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv -Output results\p2_off_shf
+```
+
+出**严格 2×2**报告（只喂新的四格，别把旧的 `reset_can`/`reset_shf` 混进来 ——
+同一格混两个日期反而会把日期差带回来）：
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input ^
+  results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf ^
+  --out results\strict2x2_analysis --official-condition official
+type results\strict2x2_analysis\report.md
+```
+
+**全量 §2（n≈310 的 ΔSR / CTCI / PASR）仍然用主分析**，因为它要的是样本量，不是配对严格性：
+
+```cmd
+%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle --out results\base_analysis --official-condition official
+```
+
+上传：
+
+```cmd
+cd /d %MBL%
+sync.cmd "results: same-day 2x2 pairing"
+```
+
+> ℹ️ **`base_canonical` 的 manifest 时间戳不可信**：它的 `started_at/finished_at` 是
+> 09-22 22:55 的**秒级跳过重跑**写进去的（310 个任务全部命中 `result_list.txt` 被跳过，3 秒结束），
+> 而真正的 `trajectory.json` 是 **09-20** 那轮跑出来的。判断数据"什么时候产生的"要看 trajectory 的 mtime，
+> 不要看 manifest。
+
+---
+
 # A. 新机器部署（6 步）
 
 ## 0) 前置
@@ -490,7 +588,12 @@ cd /d %REPO%
 %MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\reset_r1
 ```
 
-第一条是 2 个任务的通道验证（约 3 分钟），第二条是完整的 65 个任务（约 40 分钟）。
+第一条是 2 个任务的通道验证（约 3 分钟），第二条是完整的 65 个任务。
+
+> ⏱️ **实测耗时（2026-09-23）**：`reset_canonical` 65 个任务用了 **2 小时 35 分**（10:21→12:56），
+> `reset_shuffle0` 用了 **2 小时 19 分**（13:21→15:40）。比一开始估的 40 分钟长得多 ——
+> 因为 cleaner 是**同一个 GUI agent 去执行 `reset_query`**，每个任务等于要多跑一趟。
+> 反过来，65 个任务**不跑 cleaner**（base.conf）只要约 40 分钟。做时间预算时按这个量级算。
 
 跑完 `run_mbl.cmd` 会**自动**在同目录生成 `episodes.jsonl`（转格式已内置，见坑 #10）。所以只有「用别的办法跑的轮次」才需要手动转：
 
@@ -710,22 +813,79 @@ git stash pop
 
 # F. 当前进度（诚实记录）
 
-> 更新的时间点：2026-09-22。**要跑的命令见上面的「★ 待跑清单」。**
+> 更新的时间点：**2026-09-24**。**要跑的命令见上面的「★ 待跑清单」。**
+
+## F1 实验数据
 
 | 项 | 状态 |
 |---|---|
-| `base_canonical`（格 A：规范序 × 不跑 cleaner，qwen3-vl-plus） | ✅ **310/310 完成，SR = 57.1%（177/310）**，用时 2.85 h |
-| `base_shuffle`（格 B：乱序 × 不跑 cleaner） | ⚠️ **26/310** —— 2026-09-20 04:03 接口断连导致进程崩溃，**待跑清单阶段 1 续跑** |
-| 格 C / D（跑 cleaner × 两种顺序） | ❌ **未跑** —— 待跑清单阶段 2 |
-| 重复次数（§3/§4 的前提） | ❌ **全是 1 次** —— 待跑清单阶段 3 |
-| 第二个 Agent | ❌ 未跑 —— 待跑清单阶段 4（推荐 `qwen3-vl-flash`） |
-| `pilot12`（12 任务 × 2 顺序） | ✅ 完成：ΔSR +0.083 [0.000, +0.250]、CTCI 0.083、PASR 0.583，1 个任务翻转（`bili_4`） |
-| 冒烟（2 任务） | ✅ 1/2；坐标换算在真机上精确吻合（`378,756` → `461,2050` = 378/1000×1220, 756/1000×2712） |
-| 报告 §1 / §2b / §3 / §4 | ⚠️ **目前为空表**，原因是门槛没达到（见坑 #13 与「§0 空表诊断」），**不是"没有效应"** |
-| 条件标签 | 🔧 2026-09-22 修掉一个静默 bug：6 个 manifest 原被误标为 `reset=True / condition=official`（实际全是不跑 cleaner），已用 `mbl_fix_condition_labels.py` 改正为 `none` |
-| 净 SR 口径 | ℹ️ 310 条里 20 个末帧偏暗，但其中 **12 个是成功的** → 清洗必须用 `--blank-failed-only`（20 → 8），用 `--blank-only` 会删掉成功结果 |
-| 跨运行状态残留 | ✅ 已有铁证：规范序把百度浏览器切到夜间模式（末帧亮度 44.7），乱序那轮**首帧就是 34.4** —— 继承了下来 |
-| QQ 群/好友污染链 | ✅ 已定位：`qq_1`（"**查看**QQ搜索找DND群组"，判定**成功**）实际提交了加群申请（回答了验证问题"龙与地下城"）；`qq_4` 添加了好友。随后 `qq_10`~`qq_14` **连续 5 个失败**（18/14/20/15/20 步，末帧亮度 238–243 不是黑屏），推理里反复被那个群误导 → 已据此预注册 `qqset` 子集（待跑清单阶段 3） |
+| `base_canonical`（格 A：规范序 × 不跑 cleaner，qwen3-vl-plus） | ✅ **310/310**，SR = 57.1%（177/310），数据本体跑于 **09-20**，用时 2.85 h |
+| `base_shuffle`（格 B：乱序 × 不跑 cleaner） | ⚠️ **308/310** —— 09-20 崩溃后续跑完成于 09-23 06:04；`minimap_9`、`neteasemusic_26` 被 `--blank-failed-only` 摘掉未补 → **阶段 6.1** |
+| `reset_can`（格 C：规范序 × 跑 cleaner） | ✅ 65/65，**09-23** 10:21→12:56（**2 h 35 m**，比预估的 40 m 长得多） |
+| `reset_shf`（格 D：乱序 × 跑 cleaner） | ✅ 65/65，**09-23** 13:21→15:40（2 h 19 m） |
+| `qqset` 重复（8 任务 × 2 顺序 × 6 遍，plus） | ⚠️ **跑了但没有信息量** —— ΔSR 恒等于 `+0.000`、CI `[+0.000, +0.000]`（见 F3） |
+| `qqset` 重复（同上，qwen3-vl-flash） | ⚠️ ΔSR `+0.021`、CTCI `0.021` —— 只有 `qq_4` 一个任务有方差 |
+| `pilot12`（12 任务 × 2 顺序） | ✅ ΔSR +0.083 [0.000, +0.250]、CTCI 0.083、PASR 0.583，1 个任务翻转（`bili_4`） |
+| Agent 数 | 2 个：`qwen3-vl-plus`（主力，norm）、`qwen3-vl-flash`（norm） |
+
+## F2 分析结果（`results\master_analysis\report.md`）
+
+**§1 主结果 2×2：**
+
+| 对比 | SR(参照) | SR(处理) | ΔSR | 95% CI | 判读 |
+|---|---|---|---|---|---|
+| **C1 污染主效应**（不跑 cleaner vs 跑，都规范序） | 0.723 | 0.585 | **−0.138** | **[−0.277, −0.015]** | ✅ **显著** |
+| C2 顺序主效应（跑 cleaner 下乱序 vs 规范序） | 0.723 | 0.708 | −0.015 | [−0.092, +0.062] | ❌ 不显著 |
+| C3 组合（弱重置 + 乱序） | 0.719 | 0.641 | −0.078 | [−0.203, +0.047] | ❌ 不显著 |
+| DiD 交互（C3−C1−C2） | — | — | +0.078 | [−0.047, +0.203] | 方向正确，未达显著 |
+
+**§2 分组：**
+
+| condition | n | 规范序 | 乱序 | ΔSR | CTCI | PASR |
+|---|---|---|---|---|---|---|
+| `none` | 308 | 0.571 | 0.594 | +0.023 [−0.019, +0.068] | 0.153 | 0.506 |
+| `official` | 65 | 0.723 | 0.708 | −0.015 [−0.092, +0.062] | 0.108 | 0.662 |
+
+**读法**：只要跑官方 cleaner，执行顺序几乎不影响成功率（C2 ≈ 0）；不跑 cleaner 时，仅状态污染本身就吃掉
+**13.8 个百分点**（C1 显著）；PASR 从 0.506 提到 0.662。DiD 方向为正是预期的故事线，但还没到显著。
+
+⚠️ **C1 的局限**：两侧并非严格配对（`official` 是 09-23 的 65 任务块；`none` 是 09-20 的 310 任务序列里的那 65 个），
+日期差与运行上下文差都混在里面 → **阶段 6.2** 就是为了消除它。
+
+**§3 victim / §4 polluter 仍为空表**：§0 诊断已明确说明门槛（重复次数 2 < 8），不是"没有效应"。
+
+## F3 为什么阶段 3 的重复实验无效（重要）
+
+`qqset` 的 plus 侧 **8 任务 × 6 遍 × 2 顺序 = 96 episode，结果两两完全相同**（0/8 个任务有方差）。
+6 次重复的 `trajectory.json` **MD5 互不相同**，所以确实真跑了 48 次 —— 是**结果确定性**，不是缓存或没执行。
+
+两个原因：
+
+1. **设备状态已饱和。** 这 8 个 QQ 任务在 09-20 那轮已经跑过，状态被推到固定点：`qq_1`（找 DND 群组）
+   当时**成功**（提交了加群申请），现在 **12/12 全失败**（群已加进去、界面路径变了）。
+   其余 7 个是幂等的写/读（加好友、置顶、删聊天记录、看钱包），第一遍就到固定点。
+2. **重复之间没有重置，顺序这个自变量被自己消掉了。** `run_repeats.cmd` 是先跑完 A 序 6 遍再跑 B 序 6 遍，
+   A 序第 1 遍就定了固定点 → B 序的起点与 A 相同 → B 不再是"干净起点先跑 reader"的对照。
+   **ΔSR 恒等于 0 是这个设计的必然结果。**
+
+**结论：重跑同样的东西不会有用，必须改设计**（换"重置便宜"的 writer 任务对，或在轮次之间做**轮次级**重置）。
+
+## F4 已知的判定假阴性（这些任务永远不可能贡献 OD 信号）
+
+| 任务 | 现象 |
+|---|---|
+| `qq_17`「查看我的 QQ 钱包」 | 12/12 判失败，但轨迹里 agent 明确 `terminate` 说"已查看，余额 0.00 元…支付功能暂停" → **xpath 不匹配这个 App 版本** |
+| `baidubrowser_13/14/17` | 早前已怀疑同类问题（状态达到了但 xpath 规则不匹配） |
+
+## F5 已修掉的静默 bug 与口径说明
+
+| 项 | 说明 |
+|---|---|
+| 条件标签 | 2026-09-22 修掉：6 个 manifest 原被误标为 `reset=True / condition=official`（实际全是不跑 cleaner），已用 `mbl_fix_condition_labels.py` 改正为 `none`；该脚本 09-24 又修了**跨机器找不到 config**（manifest 里的 `repo` 指向 `D:\GSR\...`） |
+| 净 SR 口径 | 310 条里 20 个末帧偏暗，但其中 **12 个是成功的** → 清洗必须用 `--blank-failed-only`（20 → 8），用 `--blank-only` 会删掉成功结果 |
+| `base_canonical` 的 manifest 时间戳 | **不可信**：`started_at/finished_at` 是 09-22 那次秒级跳过重跑写进去的（3 秒结束），真实数据是 09-20 的 |
+| 跨运行状态残留 | ✅ 铁证：规范序把百度浏览器切到夜间模式（末帧亮度 44.7），乱序那轮**首帧就是 34.4** |
+| QQ 群/好友污染链 | ✅ 已定位：`qq_1`（"**查看**QQ搜索找DND群组"，判定**成功**）实际提交了加群申请（回答了验证问题"龙与地下城"）；`qq_4` 添加了好友。随后 `qq_10`~`qq_14` **连续 5 个失败**（18/14/20/15/20 步，末帧亮度 238–243 不是黑屏），推理里反复被那个群误导 |
 
 ---
 
