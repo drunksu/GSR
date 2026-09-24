@@ -49,6 +49,176 @@
 
 ---
 
+# ★★ 全量实验一键流程（**一个块，整块复制粘贴到 cmd**）
+
+> **这一块就是"把所有实验跑完"的全部命令。** 总机器时间 **≈ 28 小时**、**≈ 177 M tokens**、磁盘 **≈ 8 GB**。
+> 任何一步中断（断电、接口抖动、手机掉线）：**把整块重新粘贴一遍即可** —— 每个运行目录都有自己的
+> `result_list.txt`，已完成的任务会被跳过，不会重复烧 token。
+>
+> ★ **中途有 12 次需要你在手机上手工操作**（第 4 段的重复实验，恢复 QQ 状态），块里用 `pause` 等你。
+>
+> 想省时间/省 token？每段开头都标了单独的成本，**按 `rem` 注释删掉不想要的整段**即可，
+> 后面几段互不依赖。最贵的是第 2 段的 `baseflash`（12.1 h / 81 M tokens）。
+
+```cmd
+rem ===========================================================================
+rem  GSR 全量实验：plus + flash 两个模型，覆盖全部实验格
+rem  总计 ≈ 28 h / ≈ 177 M tokens。中断后整块重贴即可（自动跳过已完成）。
+rem ===========================================================================
+chcp 65001 >nul
+
+rem ---------------------------------------------------------------------------
+rem 段 0 · 准备（5 分钟，必做）
+rem ---------------------------------------------------------------------------
+cd /d D:\GSR
+git stash
+git pull
+git stash pop
+
+set MBL=D:\GSR
+set PY=%MBL%\mobile\Scripts\python.exe
+set S=%MBL%\experiments\scripts
+set REPO=%MBL%\third_party\mobilebench-ol-main
+set ADB=%MBL%\third_party\platform-tools\adb.exe
+set DEV=你的手机序列号
+cd /d %REPO%
+
+%PY% %S%\selftest.py
+%ADB% devices
+%PY% %S%\mbl_coord_convention_check.py --model qwen3-vl-flash --repo %REPO%
+%ADB% -s %DEV% shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
+
+rem ---------------------------------------------------------------------------
+rem 段 1 · plus：补齐缺口 + 把 65 任务 2×2 做成同日配对       ≈ 6.1 h / 29 M tok
+rem   (1) 补 base_shuffle 缺的 2 个任务（秒级跳过已完成的 308 个）
+rem   (2) 四格背靠背成对跑，让时间漂移在两格之间摊平
+rem   注：results\reset_can / reset_shf 是 09-23 跑的旧数据，最终分析用 p1_/p2_ 这四格，
+rem       旧的留着做历史对照，不参与 twomodel_2x2 报告
+rem ---------------------------------------------------------------------------
+%MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\p1_none_can
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\p1_off_can
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\p2_none_shf
+%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\p2_off_shf
+
+%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
+
+rem ---------------------------------------------------------------------------
+rem 段 2 · flash：65 任务 2×2 + 310 任务全量           ≈ 17.9 h / 119 M tok
+rem   最贵的一段就是 baseflash（310×2 顺序 = 12.1 h / 81 M tok）。
+rem   只想要"每个对比都有两个模型"，可以只留上面四行 f_*、删掉 baseflash。
+rem ---------------------------------------------------------------------------
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\f_none_can
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\f_off_can
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\f_none_shf
+%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\f_off_shf
+
+%MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+
+rem ---------------------------------------------------------------------------
+rem 段 3 · pilot12 两个模型                                        ≈ 0.9 h / 6 M tok
+rem ---------------------------------------------------------------------------
+%MBL%\pilot.cmd -Tag pilot12flash -Model qwen3-vl-flash -TasksCanonical data\pilot12_canonical.csv -TasksShuffle data\pilot12_shuffle0.csv
+
+rem ---------------------------------------------------------------------------
+rem 段 4 · 重复实验（**重做版**，两个模型）                ≈ 3.7 h / 25 M tok
+rem   上一版失败的原因：qqset 是幂等任务、状态在 09-20 那轮就饱和成固定点，
+rem   而且 A×6 再 B×6 之间没有恢复状态 → B 的起点和 A 一样 → ΔSR 恒等于 0。
+rem   这一版：**每轮之后手工恢复 QQ 状态**，让 R 轮都从同一个起点出发。
+rem
+rem   ★ 每一轮都会 pause 等你：请在手机上
+rem      ① 退出那一轮加进去的 "DND5版萌新跑团冒险指南(1921)" 群
+rem      ② 删除好友 1098074562（绕堤沙 / 若不是好友则跳过）
+rem      ③ 把和「绕堤沙」的聊天取消置顶、若被删了聊天记录就随便发一条恢复
+rem     然后回到 cmd 按任意键继续。
+rem
+rem   (在交互式 cmd 里循环变量用 %r；若你把它存成 .cmd 文件，要改成 %%r，
+rem    而且 .cmd 里的中文提示会变乱码 —— 见坑 #5，所以**建议直接粘贴到 cmd 窗口**)
+rem ---------------------------------------------------------------------------
+for /l %r in (1,1,6) do (
+  %MBL%\run_mbl.cmd -TaskFile data\qqset_canonical.csv -Output results\q2_A_%r
+  echo.
+  echo ==== 第 %r 轮 A 序跑完。现在在手机上恢复 QQ 状态（退群 / 删好友 / 取消置顶），然后按任意键 ====
+  pause
+  %MBL%\run_mbl.cmd -TaskFile data\qqset_reverse.csv -Output results\q2_B_%r
+  echo.
+  echo ==== 第 %r 轮 B 序跑完。再恢复一次 QQ 状态，然后按任意键进下一轮 ====
+  pause
+)
+
+rem 同一套重复实验换 flash 跑（可选；要省时间可整段删掉）
+for /l %r in (1,1,6) do (
+  %MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\qqset_canonical.csv -Output results\q2_Af_%r
+  echo.
+  echo ==== flash 第 %r 轮 A 序跑完。恢复 QQ 状态后按任意键 ====
+  pause
+  %MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\qqset_reverse.csv -Output results\q2_Bf_%r
+  echo.
+  echo ==== flash 第 %r 轮 B 序跑完。再恢复一次 QQ 状态，然后按任意键进下一轮 ====
+  pause
+)
+
+rem ---------------------------------------------------------------------------
+rem 段 5 · 出全部报告
+rem ---------------------------------------------------------------------------
+rem 5.1 双模型 2×2（本文主结果：C1/C2/C3/DiD 每个都有两个模型）
+%PY% %S%\analyze_order_effects.py --input ^
+  results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf ^
+  results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf ^
+  --out results\twomodel_2x2 --official-condition official
+
+rem 5.2 双模型规模（n≈310 的顺序效应 ΔSR / CTCI / PASR）
+%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
+
+rem 5.3 单模型全量（保留旧口径，便于和已有报告对比）
+%PY% %S%\analyze_order_effects.py --input ^
+  results\base_canonical results\base_shuffle results\reset_can results\reset_shf ^
+  --out results\master_analysis --official-condition official
+
+rem 5.4 重复实验（重做版）—— 这一份的 §3/§4 才是"哪个任务因顺序而失败"的答案
+%PY% %S%\analyze_order_effects.py --input ^
+  results\q2_A_1 results\q2_A_2 results\q2_A_3 results\q2_A_4 results\q2_A_5 results\q2_A_6 ^
+  results\q2_B_1 results\q2_B_2 results\q2_B_3 results\q2_B_4 results\q2_B_5 results\q2_B_6 ^
+  results\q2_Af_1 results\q2_Af_2 results\q2_Af_3 results\q2_Af_4 results\q2_Af_5 results\q2_Af_6 ^
+  results\q2_Bf_1 results\q2_Bf_2 results\q2_Bf_3 results\q2_Bf_4 results\q2_Bf_5 results\q2_Bf_6 ^
+  --out results\repeat_analysis --official-condition none
+
+rem 5.5 看结果（最要紧的是每份报告最上面那节「§0 空表诊断」）
+type results\twomodel_2x2\report.md
+type results\scale_analysis\report.md
+type results\repeat_analysis\report.md
+
+rem ---------------------------------------------------------------------------
+rem 段 6 · 上传
+rem ---------------------------------------------------------------------------
+cd /d %MBL%
+sync.cmd "results: full experiment set (plus + flash, 2x2 + scale + repeats)"
+```
+
+**分段成本速查（想删哪段就删哪段，互不依赖）**
+
+| 段 | 内容 | 机器时间 | tokens |
+|---|---|---|---|
+| 0 | 准备（自检 / 设备 / flash 坐标检测 / 唤醒） | 5 min | — |
+| 1 | plus 补 `base_shuffle` 2 个 + 65 任务同日四格 | ≈ 6.1 h | ≈ 29 M |
+| 2 | flash 65 任务四格 + flash 310×2 顺序 | ≈ 17.9 h | ≈ 119 M |
+| 3 | `pilot12` 换 flash | ≈ 0.9 h | ≈ 6 M |
+| 4 | 重复实验重做版（6 轮 × 2 顺序 × 2 模型，人工恢复） | ≈ 3.7 h | ≈ 25 M |
+| 5–6 | 分析 + 上传 | 几分钟 | — |
+| **合计** | | **≈ 28 h** | **≈ 177 M** |
+
+**跑到什么程度算"所有实验都有两个模型"**
+
+| 报告 | 需要的目录 | 每个对比的模型数 |
+|---|---|---|
+| §1 2×2（主结果） | `p1_* p2_* f_*` 共 8 格 | **2** ✅ |
+| §2 规模（n≈310） | `base_* baseflash_*` | **2** ✅ |
+| §2 小样本（n=65） | 同上 8 格 | **2** ✅ |
+| §3 victim / §4 polluter | `q2_*`（＋`q2_*f`） | **2** ✅ |
+
+---
+
 # ★ 待跑清单 —— 照着从上往下粘贴
 
 > 这一节是**操作手册**：还需要跑的所有命令，按顺序排好，每一阶段末尾都带**跑完之后的 Git 操作**。
@@ -1026,7 +1196,26 @@ flash 实测：**70.4 s**、**130,842 tokens / 任务**（`none` 条件）；带
    A 序第 1 遍就定了固定点 → B 序的起点与 A 相同 → B 不再是"干净起点先跑 reader"的对照。
    **ΔSR 恒等于 0 是这个设计的必然结果。**
 
-**结论：重跑同样的东西不会有用，必须改设计**（换"重置便宜"的 writer 任务对，或在轮次之间做**轮次级**重置）。
+**结论：重跑同样的东西不会有用，必须改设计**（在**轮次之间做轮次级重置** → 见「★★ 全量实验一键流程」段 4 的重做版）。
+
+### F3b 「用 `Reset=Need` 任务当 writer」这个思路**不成立**（实测否定）
+
+原本打算用作者标注 `Reset=Need`（"会产生残留"）的任务当 polluter，配合它们现成的 `reset_query`
+做轮次级重置。**用 `base_canonical` 的 310 条实测把这个前提否掉了**：
+
+| 统计量 | 值 |
+|---|---|
+| 前序任务带 `Reset=Need`/`Search`/`Message` 标注的相邻对数 | 65 |
+| 这些后继任务的失败率 | **26/65 = 0.400** |
+| 全体基线失败率 | 0.429 |
+| **lift** | **0.93**（比基线还略低） |
+
+也就是说：**作者标的"有残留"，并不抬高紧邻后继任务的失败率。** 残留存在（`Reset` 列是证据），
+但它大多**不破坏下一个任务**。→ **污染是任务特定的，不是 `Reset=Need` 的普遍性质**；
+唯一坐实的耦合仍是 QQ 那条链（加群改变了聊天列表），而它的前序 `qq_1` 根本不在 reset 集里。
+
+这条负结果本身有价值：它说明"状态污染检测"不能靠一个通用的"哪些任务会写脏"的清单来解决 ——
+这正是课题要做**检测方法**而不是人工标注的理由。
 
 ## F4 已知的判定假阴性（这些任务永远不可能贡献 OD 信号）
 
