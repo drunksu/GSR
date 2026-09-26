@@ -22,12 +22,17 @@
 | | 有手机的那台（仓库在 `D:\GSR`） | 分析机（本文档所在机器） |
 |---|---|---|
 | 干什么 | **跑实验**（全部 ≈ 28 h） | **只出报告**，不插手机 |
-| 怎么做 | ① `git pull --rebase --autostash` ② 粘下面 **「★★ 全量实验一键流程」** 那一块 ③ 中途 12 次 `pause` 时在手机上恢复 QQ 状态 ④ 块尾的 `sync.cmd` 会自动上传 | `git pull` → 跑 `analyze_order_effects.py`，见 **「二、分析机」** |
-| 命令在哪 | 本文件 **「一、有手机的那台机器」**那**一个**代码块 | **「二、分析机」**那一节 |
+| 怎么做 | `git pull --rebase --autostash`，然后跑 **`D:\GSR\run_all.cmd`** —— 就这一条。中途 12 次 `pause` 时在手机上恢复 QQ 状态 | `git pull` → 跑 `analyze_order_effects.py`，见 **「二、分析机」** |
+| 命令在哪 | **「一、有手机的那台机器」**（一条命令） | **「二、分析机」** |
 
-**★ 那个一键块是纯 ASCII 的 —— 千万不要往里加中文。** 往 cmd 粘贴的文本里只要有一个非 ASCII 字符，
-cmd 会用 GBK 解码 UTF-8 字节、吃掉下一行的开头，`set` 全部残废 → **28 小时的实验 1 秒"跑完"、什么都没发生**。
-（实测踩过，详见坑 #18。）粘之前先单独敲一行 `chcp 65001` 可以解决中文输出乱码，但**不要**把 `chcp` 写进块里。
+**为什么是一条脚本、而不是让你粘贴一大堆命令**：粘贴大段命令有两个实测踩过的坑 ——
+① 文本里只要有**一个非 ASCII 字符**，cmd 会用 GBK 解码 UTF-8 字节、**吃掉下一行的开头**，所有 `set` 残废；
+② 在一条命令还在执行时把后面几十行灌进去，控制台会**原样回显但不执行**，看起来像"跑完了"其实什么都没发生。
+（详见坑 #18。）`run_all.cmd` 是**纯 ASCII 文件**，这两类问题都不存在。它做的事和原来看起来一样，
+内容可以直接打开核对。
+
+**★ 唯一需要你手动做的**：第 4 步（重复实验）有 **12 次 `pause`**，每次要在手机上
+退出 DND 群 / 删好友 `1098074562` / 取消置顶，做完回 cmd 按任意键。**人不在旁边它会一直停着。**
 
 ---
 
@@ -35,7 +40,7 @@ cmd 会用 GBK 解码 UTF-8 字节、吃掉下一行的开头，`set` 全部残�
 
 | 章节 | 讲什么 | 谁需要看 |
 |---|---|---|
-| **一、有手机的那台机器** | **一个块跑完全部实验**（含 4 段实验 + 出报告 + 上传） | ★ 有手机那台，**只看这个** |
+| **一、有手机的那台机器** | **跑 `run_all.cmd` 一条命令**跑完全部实验（含出报告 + 上传） | ★ 有手机那台，**只看这个** |
 | **二、分析机** | 拉取 → 校验标签 → 出三份报告 → 看判据 → 上传 | 分析机 |
 | **A. 新机器部署** | 克隆 / 建 venv / adb / 装 App / 改设备序列号 | 换新机器时 |
 | **B. 运行命令** | 每个脚本的单独用法：B1 唤醒 · B3 全量两顺序 · B4 reset 通道 · B5 换模型 · B6 造任务集 · B7 清洗 · B8 出报告 · B10 重复实验 | 想单独跑某一步时 |
@@ -45,11 +50,13 @@ cmd 会用 GBK 解码 UTF-8 字节、吃掉下一行的开头，`set` 全部残�
 | **F. 当前进度** | 已经跑出什么结果、还缺什么 | 想了解现状 |
 | **G. 术语** | OD flaky / victim / polluter / CTCI / PASR / DiD | 看报告时 |
 
+
 ## 目录速查
 
 | 路径 | 内容 |
 |---|---|
 | `mobile.env.ps1` | **环境配置**：API key、模型注册表（含坐标约定）、路径、设备序列号 |
+| **`run_all.cmd`** | ★ **跑完全部实验的唯一入口**（一条命令，纯 ASCII，见「一、」） |
 | `run_mbl.cmd` / `run_mbl.ps1` | 跑一轮：自检 → 写 manifest → 执行 → **自动转 `episodes.jsonl`** |
 | `pilot.cmd` / `pilot.ps1` | **一条命令跑完两轮顺序 + 自动分析** |
 | `run_repeats.cmd` | 把**同一份任务集跑 N 遍**，每遍独立 `-Output`（重复实验用，见 B10） |
@@ -79,153 +86,64 @@ cmd 会用 GBK 解码 UTF-8 字节、吃掉下一行的开头，`set` 全部残�
 
 ---
 
-# 一、有手机的那台机器：照抄这一块（全部实验，≈ 28 h）
+# 一、有手机的那台机器：跑一条命令
 
-> **这一块就是"把所有实验跑完"的全部命令，自包含**：打开一个新的 cmd 窗口，把下面整块复制粘贴进去就开始跑，
-> 不需要先做任何设置（路径按 `D:\GSR` 写死，设备序列号已填好）。
-> 总机器时间 **≈ 28 小时**、**≈ 177 M tokens**、磁盘 **≈ 8 GB**。
->
-> ### ⚠️ 动手前先确认这两件事（否则会"瞬间跑完"、什么都发生不了）
->
-> **① 这个块是纯 ASCII 的 —— 千万不要往里加中文。**
-> 实测（2026-09-25）：往 cmd **粘贴**的文本里只要有一个非 ASCII 字符，cmd 会用当前代码页（中文 Windows 是
-> GBK）去解码 UTF-8 字节，多出来的半个字节会**吃掉下一行的开头**：
->
-> ```
-> D:\>jects\GUISTA~1              ← 本来是  set MBL=D:\projects\GUISTA~1
-> D:\>thon.exe                    ← 本来是  set PY=%MBL%\mobile\Scripts\python.exe
-> ```
->
-> `set` 全部残废 → 变量全空 → 后面每条命令都在瞬间报"不是内部或外部命令"，**整块 28 小时的任务 1 秒跑完**。
-> 更狠的是 `chcp 65001`：夹在粘贴流中间会让**后面整段输入被直接丢弃**。所以这一块里**既没有中文、也没有 `chcp`**。
->
-> **② 块里第 15–20 行是 `[CHECK]` 自检** —— 跑完那几行**先看一眼输出**：
->
-> ```
-> [CHECK] MBL=[D:\GSR]
-> [CHECK] PY=[D:\GSR\mobile\Scripts\python.exe]
-> [CHECK] REPO=[D:\GSR\third_party\mobilebench-ol-main]
-> ```
->
-> 三行都必须**有值且路径正确**。如果看到空值或 `[FATAL]`，**停下来**，别让它继续跑 ——
-> 块里那三条 `if not exist ... echo [FATAL]` 就是为此准备的。
->
-> **想让中文输出不乱码**（可选）：在粘贴本块**之前**，先单独敲一行 `chcp 65001` 回车，再粘。
-> 之所以要分开：`chcp` 夹在粘贴流里会截断后续输入（见上）。本块是纯 ASCII 的，所以先切代码页不会有副作用。
->
-> ### 其余说明
->
-> **中断了怎么办**：断电、接口抖动、手机掉线都不用怕 —— **把整块重新粘贴一遍就是续跑**。
-> 每个运行目录都有自己的 `result_list.txt`，已完成的任务会被跳过，不会重复烧 token。
->
-> ★ **中途有 12 次需要你在手机上手工操作**（第 4 段的重复实验，恢复 QQ 状态），块里用 `pause` 停下来等你。
->
-> **想省时间/省 token**：每段开头都标了单独的成本，**按 `rem` 注释整段删掉**即可，段与段互不依赖。
-> 最贵的是第 2 段的 `baseflash`（12.1 h / 81 M tokens）—— 删掉它仍然满足"§1 每个对比都有两个模型"。
->
-> ⚠️ **不要把这一块存成 `.cmd` 文件**：循环变量要从 `%r` 改成 `%%r`。**直接粘贴到 cmd 窗口**。
-
+## 就这样，一条命令
 
 ```cmd
-rem ===== GSR full experiment set (plus + flash). Re-paste = auto resume =====
-rem ===== This block is deliberately 100% ASCII. Do NOT add Chinese to it:  =====
-rem ===== non-ASCII bytes break cmd's pasted input and the next line loses   =====
-rem ===== its head, which silently kills every "set" below (README pit #18). =====
-cd /d D:\GSR
-git pull --rebase --autostash
-set MBL=D:\GSR
-set PY=%MBL%\mobile\Scripts\python.exe
-set S=%MBL%\experiments\scripts
-set REPO=%MBL%\third_party\mobilebench-ol-main
-set ADB=%MBL%\third_party\platform-tools\adb.exe
-set DEV=GAGU8HGYW8JF9TIJ
-set PYTHONUTF8=1
-set PYTHONIOENCODING=utf-8
-cd /d %REPO%
-
-rem ===== CHECK. If a [CHECK] line is empty/wrong or you see [FATAL], STOP. =====
-echo [CHECK] MBL=[%MBL%]
-echo [CHECK] PY=[%PY%]
-echo [CHECK] REPO=[%REPO%]
-if not exist "%MBL%\run_mbl.cmd" echo [FATAL] run_mbl.cmd missing under MBL -- STOP
-if not exist "%PY%" echo [FATAL] venv python missing at PY -- STOP
-if not exist "%REPO%\run.py" echo [FATAL] benchmark missing under REPO -- STOP
-
-rem ===== 0. self-test + flash coord check + wake phone (5 min) =====
-rem   coord check exit code 3 = "norm convention" = EXPECTED, not a failure
-%PY% %S%\selftest.py
-%ADB% devices
-%PY% %S%\mbl_coord_convention_check.py --model qwen3-vl-flash --repo %REPO%
-%ADB% -s %DEV% shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
-
-rem ===== 1. plus: backfill base_shuffle (2 tasks) + 65-task same-day 2x2 (6.1 h) =====
-%MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
-%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\p1_none_can
-%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\p1_off_can
-%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\p2_none_shf
-%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\p2_off_shf
-%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
-
-rem ===== 2. flash: 65-task 2x2 + 310x2 full scale (17.9 h) =====
-%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\f_none_can
-%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\f_off_can
-%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\f_none_shf
-%MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\f_off_shf
-%MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
-
-rem ===== 3. pilot12 with flash (0.9 h) =====
-%MBL%\pilot.cmd -Tag pilot12flash -Model qwen3-vl-flash -TasksCanonical data\pilot12_canonical.csv -TasksShuffle data\pilot12_shuffle0.csv
-
-rem ===== 4. repeat experiment, redone: 6 rounds x 2 orders x 2 models (3.7 h) =====
-rem   At every pause, restore QQ state on the phone:
-rem     (a) leave the group "DND5..." (the one added in that round)
-rem     (b) delete friend 1098074562
-rem     (c) unpin the chat with the contact, restore the chat history if deleted
-for /l %r in (1,1,6) do (
-  %MBL%\run_mbl.cmd -TaskFile data\qqset_canonical.csv -Output results\q2_A_%r
-  echo.
-  echo ==== round %r order A done. Restore QQ state on the phone, then press any key ====
-  pause
-  %MBL%\run_mbl.cmd -TaskFile data\qqset_reverse.csv -Output results\q2_B_%r
-  echo.
-  echo ==== round %r order B done. Restore QQ state again, then press any key ====
-  pause
-)
-for /l %r in (1,1,6) do (
-  %MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\qqset_canonical.csv -Output results\q2_Af_%r
-  echo.
-  echo ==== flash round %r order A done. Restore QQ state, then press any key ====
-  pause
-  %MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\qqset_reverse.csv -Output results\q2_Bf_%r
-  echo.
-  echo ==== flash round %r order B done. Restore QQ state again, then press any key ====
-  pause
-)
-
-rem ===== 5. build all reports =====
-%PY% %S%\analyze_order_effects.py --input results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf --out results\twomodel_2x2 --official-condition official
-%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
-%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\reset_can results\reset_shf --out results\master_analysis --official-condition official
-%PY% %S%\analyze_order_effects.py --input results\q2_A_1 results\q2_A_2 results\q2_A_3 results\q2_A_4 results\q2_A_5 results\q2_A_6 results\q2_B_1 results\q2_B_2 results\q2_B_3 results\q2_B_4 results\q2_B_5 results\q2_B_6 results\q2_Af_1 results\q2_Af_2 results\q2_Af_3 results\q2_Af_4 results\q2_Af_5 results\q2_Af_6 results\q2_Bf_1 results\q2_Bf_2 results\q2_Bf_3 results\q2_Bf_4 results\q2_Bf_5 results\q2_Bf_6 --out results\repeat_analysis --official-condition none
-type results\twomodel_2x2\report.md
-type results\scale_analysis\report.md
-type results\repeat_analysis\report.md
-
-rem ===== 6. upload =====
-%MBL%\sync.cmd "results: full experiment set, plus and flash, 2x2 scale repeats"
+D:\GSR\run_all.cmd
 ```
 
-**分段成本速查（想删哪段就删哪段，互不依赖）**
+> 打开 cmd，敲（或粘贴）上面这一行，回车，然后就不用管了 —— **除了中途 12 次 `pause`**。
+> 脚本会自己检查环境、跑完全部实验、出三份报告、最后 `git pull` + 上传。
 
-| 段 | 内容 | 机器时间 | tokens |
+**为什么是一条脚本而不是让你粘贴一大堆命令**：往 cmd 里粘贴大段命令有两个实测踩过的坑 ——
+① 文本里只要有**一个非 ASCII 字符**，cmd 会用 GBK 解码 UTF-8 字节、**吃掉下一行的开头**，`set` 全部残废；
+② 在一条命令还在执行时把后面几十行灌进去，控制台会先**原样回显**它们但**不执行**，看起来像"跑完了其实什么都没发生"。
+`run_all.cmd` 是**纯 ASCII 文件**（内容等于原来那一大块命令，循环变量已改成 `%%r`），**这两类问题都不存在**。
+脚本内容可直接打开 `run_all.cmd` 核对。
+
+> 想让控制台中文不乱码：先单独敲一行 `chcp 65001` 再跑脚本（可选，不影响实验）。
+
+## 脚本会做什么
+
+| 步 | 内容 | 机器时间 | tokens |
 |---|---|---|---|
-| 0 | 准备（自检 / 设备 / flash 坐标检测 / 唤醒） | 5 min | — |
-| 1 | plus 补 `base_shuffle` 2 个 + 65 任务同日四格 | ≈ 6.1 h | ≈ 29 M |
-| 2 | flash 65 任务四格 + flash 310×2 顺序 | ≈ 17.9 h | ≈ 119 M |
+| 0 | 环境自检（`[CHECK]`/`[FATAL]`）+ flash 坐标检测 + 唤醒手机 | 5 min | — |
+| 1 | plus：补 `base_shuffle` 缺的 2 个任务 + 65 任务同日四格 | ≈ 6.1 h | ≈ 29 M |
+| 2 | flash：65 任务四格 + flash 310×2 顺序（全量） | ≈ 17.9 h | ≈ 119 M |
 | 3 | `pilot12` 换 flash | ≈ 0.9 h | ≈ 6 M |
-| 4 | 重复实验重做版（6 轮 × 2 顺序 × 2 模型，人工恢复） | ≈ 3.7 h | ≈ 25 M |
-| 5–6 | 分析 + 上传 | 几分钟 | — |
+| 4 | 重复实验重做版：6 轮 × 2 顺序 × 2 模型（**12 次人工恢复 QQ 状态**） | ≈ 3.7 h | ≈ 25 M |
+| 5 | 出三份报告（`type` 出来给你看） | 几分钟 | — |
+| 6 | `git pull` + `sync.cmd` 上传 | — | — |
+| 7 | 打印三条报告路径 | — | — |
 | **合计** | | **≈ 28 h** | **≈ 177 M** |
+
+## 三条铁律
+
+1. **先 pull**：跑之前保证仓库是最新的（`cd /d D:\GSR` → `git pull --rebase --autostash`），
+   否则脚本里引用的 `run_all.cmd` / `sync.cmd` / 任务集 CSV 可能不存在。
+2. **中断了就直接重跑 `D:\GSR\run_all.cmd`** —— 每个运行目录有自己的 `result_list.txt`，
+   已完成的任务会跳过，**不会重复烧 token**。断电、接口抖动、手机掉线都不怕。
+3. **第 4 步那 12 次 `pause` 必须有人守着**：每次要在手机上做三件事 ——
+   ① 退出这一轮加进去的那个 DND 群；② 删掉好友 `1098074562`；③ 取消和「绕堤沙」的聊天置顶、
+   如果聊天记录被删了就随便发一条恢复。做完回 cmd 按任意键。
+   **人不在旁边它就会一直停在那里。**
+
+## 想省时间 / 省 token
+
+`run_all.cmd` 里每一步都有 `echo ============ N. ...` 分隔和 `rem` 说明，**整段删掉即可**，段与段互不依赖。
+最贵的是第 2 步里的 `baseflash`（310×2 顺序 = 12.1 h / 81 M tokens）——
+**删掉它仍然满足"§1 每个对比都有两个模型"**（第 2 步剩下的四行 `f_*` 就是 65 任务的 flash 四格）。
+
+## 跑完（或跑挂了）怎么办
+
+**跑完**：脚本最后一条就是上传。直接把 `D:\GSR` 上最新的 commit 号发给我，我在这台机器上出报告。
+
+**跑挂了**：把 cmd 窗口最后 30 行发我。特别注意这几种：
+- 出现 `[FATAL]` → 环境问题，脚本已经停在实验之前，什么都没跑
+- `退出码: 1` 而且上面有 `Connection error` → 接口抖动，**直接重跑脚本**即可续跑
+- 卡在 `Press any key to continue` → 是第 4 步在等你恢复 QQ 状态
 
 **跑到什么程度算"所有实验都有两个模型"**
 
@@ -659,7 +577,7 @@ git stash pop
 | 15 | **`analyze_order_effects.py --input` 传目录会读进无关文件** | 原实现用 `os.walk` 收目录下**所有** `*.jsonl`，于是每个任务子目录里的 `api_metrics.jsonl` / `step_timing.jsonl`（完全不同的 schema）也被当成 episode 读入 → `KeyError: 'agent'`；若某些行恰好带同名字段，则会**静默**混进统计。而"传目录"恰恰是最自然的写法（B10 就是这么用的）。已修为**只认 `episodes.jsonl`**，找不到时给出明确报错 |
 | 16 | **在新开的 cmd 里直接 `%PY% 某脚本.py` 会崩在中文输出上** | `run_mbl.cmd` / `pilot.cmd` 没问题（`mobile.env.ps1` 里设了 `PYTHONUTF8=1` / `PYTHONIOENCODING=utf-8`），但**直接调 python 就没有这两个变量**，Python 会用控制台默认代码页 GBK。实测踩过：`%PY% %S%\selftest.py` 在新 cmd 里 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'` —— 因为它最后一行要打印 `✅ 全部通过`。**后果比崩掉更糟：看起来像"自检失败"，其实是输出编码问题。** 对策：① 块里已 `set PYTHONUTF8=1` + `set PYTHONIOENCODING=utf-8`；② `selftest.py` 自己也做了 `sys.stdout.reconfigure(encoding="utf-8")` 兜底 |
 | 17 | **诊断脚本"未设置 MBL_API_KEY"** | `mbl_api_probe.py` / `mbl_coord_convention_check.py` 是纯标准库直连 API、**不经过 PowerShell**，所以读不到 `mobile.env.ps1` 里设的 key，在新 cmd 里直接跑会报 `❌ 未设置 MBL_API_KEY`。实测踩过（正好卡在一键流程的第 0 段）。已新增 `experiments/scripts/mbl_env.py`：**先看环境变量，找不到就自动去仓库根的 `mobile.env.ps1` 里解析** —— 不用再手动 `set`，也不用把密钥抄到第二个地方 |
-| 18 | **往 cmd 粘贴的命令块里含非 ASCII 字符 → 整块静默失效** | ★ **最容易让人误判"环境坏了"的一个坑。** 实测复现（2026-09-25）：cmd 用**当前代码页**（中文 Windows = GBK）解码粘贴进来的 UTF-8 字节，多出的半个字节会**吃掉下一行的开头**：`set MBL=D:\projects\X` 变成 `jects\X` → 变量全空 → 后面每条命令瞬间报"不是内部或外部命令" → **一个 28 小时的实验块 1 秒钟"跑完"**。更严重的是 `chcp 65001`：夹在粘贴流中间会让**后面整段输入被直接丢弃**（实测整块只剩前两行）。<br>**对策**：① 要粘贴的块**保持纯 ASCII**（本仓库的「★★ 全量实验一键流程」块已改成纯 ASCII，且不含 `chcp`）；② 想显示中文，先**单独敲一行** `chcp 65001` 回车，**再**粘那个 ASCII 块；③ 块里放 `echo [CHECK]` 打印变量、并 `if not exist ... echo [FATAL]` 兜底，**粘贴后先看这几行** |
+| 18 | **手工往 cmd 粘贴大段命令 → 整块静默失效（两个独立原因）** | ★ **最容易让人误判"环境坏了"的坑，实测踩过两次。**<br>**原因 A（非 ASCII）**：cmd 用**当前代码页**（中文 Windows = GBK）解码粘贴进来的 UTF-8 字节，多出的半个字节会**吃掉下一行的开头** —— `set MBL=D:\projects\X` 变成 `jects\X` → 变量全空 → 后面每条命令瞬间报"不是内部或外部命令" → **28 小时的实验块 1 秒"跑完"**。更狠的是 `chcp 65001` 夹在粘贴流中间时，**后面整段输入被直接丢弃**（实测只剩前两行）。<br>**原因 B（输入缓冲）**：在一条命令（如 `adb shell`、`selftest.py`）**还在执行时**把后面几十行灌进去，控制台会先把它们**原样回显**（特征是**没有 `D:\...>` 提示符前缀**），cmd 要等当前命令结束才回到提示符去读 —— 看起来像"跑完了"，实际一条都没执行。<br>**对策（釜底抽薪）**：不要手工粘贴，**把命令写进一个纯 ASCII 的 `.cmd` 文件，跑那个文件** —— 见「一、」的 `run_all.cmd`。若必须粘贴：① 块保持纯 ASCII；② 先单独敲 `chcp 65001` 回车再粘；③ **等上一条命令跑完、提示符回来再粘下一段**；④ 块里放 `echo [CHECK]` 打印变量 + `if not exist ... echo [FATAL]` 兜底，粘完先看这几行 |
 
 其他已修掉的两个静默失效：
 
