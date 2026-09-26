@@ -55,6 +55,36 @@
 > 不需要先做任何设置（路径按 `D:\GSR` 写死，设备序列号已填好）。
 > 总机器时间 **≈ 28 小时**、**≈ 177 M tokens**、磁盘 **≈ 8 GB**。
 >
+> ### ⚠️ 动手前先确认这两件事（否则会"瞬间跑完"、什么都发生不了）
+>
+> **① 这个块是纯 ASCII 的 —— 千万不要往里加中文。**
+> 实测（2026-09-25）：往 cmd **粘贴**的文本里只要有一个非 ASCII 字符，cmd 会用当前代码页（中文 Windows 是
+> GBK）去解码 UTF-8 字节，多出来的半个字节会**吃掉下一行的开头**：
+>
+> ```
+> D:\>jects\GUISTA~1              ← 本来是  set MBL=D:\projects\GUISTA~1
+> D:\>thon.exe                    ← 本来是  set PY=%MBL%\mobile\Scripts\python.exe
+> ```
+>
+> `set` 全部残废 → 变量全空 → 后面每条命令都在瞬间报"不是内部或外部命令"，**整块 28 小时的任务 1 秒跑完**。
+> 更狠的是 `chcp 65001`：夹在粘贴流中间会让**后面整段输入被直接丢弃**。所以这一块里**既没有中文、也没有 `chcp`**。
+>
+> **② 块里第 15–20 行是 `[CHECK]` 自检** —— 跑完那几行**先看一眼输出**：
+>
+> ```
+> [CHECK] MBL=[D:\GSR]
+> [CHECK] PY=[D:\GSR\mobile\Scripts\python.exe]
+> [CHECK] REPO=[D:\GSR\third_party\mobilebench-ol-main]
+> ```
+>
+> 三行都必须**有值且路径正确**。如果看到空值或 `[FATAL]`，**停下来**，别让它继续跑 ——
+> 块里那三条 `if not exist ... echo [FATAL]` 就是为此准备的。
+>
+> **想让中文输出不乱码**（可选）：在粘贴本块**之前**，先单独敲一行 `chcp 65001` 回车，再粘。
+> 之所以要分开：`chcp` 夹在粘贴流里会截断后续输入（见上）。本块是纯 ASCII 的，所以先切代码页不会有副作用。
+>
+> ### 其余说明
+>
 > **中断了怎么办**：断电、接口抖动、手机掉线都不用怕 —— **把整块重新粘贴一遍就是续跑**。
 > 每个运行目录都有自己的 `result_list.txt`，已完成的任务会被跳过，不会重复烧 token。
 >
@@ -63,15 +93,14 @@
 > **想省时间/省 token**：每段开头都标了单独的成本，**按 `rem` 注释整段删掉**即可，段与段互不依赖。
 > 最贵的是第 2 段的 `baseflash`（12.1 h / 81 M tokens）—— 删掉它仍然满足"§1 每个对比都有两个模型"。
 >
-> ⚠️ **如果一次性粘贴太长、cmd 吞了字符**：按 `rem ====` 的分段标记**一段一段粘**，
-> 每段粘完回车，行为完全一样（块首的 `chcp` / `set` 只需要在第一段之前粘一次）。
->
-> ⚠️ **不要把这一块存成 `.cmd` 文件**：文件里的中文提示会被 cmd 按 GBK 读成乱码而断行（坑 #5），
-> 而且循环变量要从 `%r` 改成 `%%r`。**直接粘贴到 cmd 窗口**。
+> ⚠️ **不要把这一块存成 `.cmd` 文件**：循环变量要从 `%r` 改成 `%%r`。**直接粘贴到 cmd 窗口**。
+
 
 ```cmd
-rem ===== GSR 全量实验 (plus + flash)。中断后整块重贴 = 自动续跑 =====
-chcp 65001 >nul
+rem ===== GSR full experiment set (plus + flash). Re-paste = auto resume =====
+rem ===== This block is deliberately 100% ASCII. Do NOT add Chinese to it:  =====
+rem ===== non-ASCII bytes break cmd's pasted input and the next line loses   =====
+rem ===== its head, which silently kills every "set" below (README pit #18). =====
 cd /d D:\GSR
 git pull --rebase --autostash
 set MBL=D:\GSR
@@ -84,14 +113,22 @@ set PYTHONUTF8=1
 set PYTHONIOENCODING=utf-8
 cd /d %REPO%
 
-rem ===== 0. 自检 + flash 坐标检测 + 唤醒手机 (5 min) =====
-rem  坐标检测退出码 3 = 判定为 norm 约定（需要换算）—— 这是**预期结果，不是失败**
+rem ===== CHECK. If a [CHECK] line is empty/wrong or you see [FATAL], STOP. =====
+echo [CHECK] MBL=[%MBL%]
+echo [CHECK] PY=[%PY%]
+echo [CHECK] REPO=[%REPO%]
+if not exist "%MBL%\run_mbl.cmd" echo [FATAL] run_mbl.cmd missing under MBL -- STOP
+if not exist "%PY%" echo [FATAL] venv python missing at PY -- STOP
+if not exist "%REPO%\run.py" echo [FATAL] benchmark missing under REPO -- STOP
+
+rem ===== 0. self-test + flash coord check + wake phone (5 min) =====
+rem   coord check exit code 3 = "norm convention" = EXPECTED, not a failure
 %PY% %S%\selftest.py
 %ADB% devices
 %PY% %S%\mbl_coord_convention_check.py --model qwen3-vl-flash --repo %REPO%
 %ADB% -s %DEV% shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
 
-rem ===== 1. plus: 补 base_shuffle 2 个任务 + 65 任务同日四格 (6.1 h) =====
+rem ===== 1. plus: backfill base_shuffle (2 tasks) + 65-task same-day 2x2 (6.1 h) =====
 %MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
 %MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\p1_none_can
 %MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\p1_off_can
@@ -99,40 +136,43 @@ rem ===== 1. plus: 补 base_shuffle 2 个任务 + 65 任务同日四格 (6.1 h) 
 %MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\p2_off_shf
 %PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
 
-rem ===== 2. flash: 65 任务四格 + 310x2 全量 (17.9 h) =====
+rem ===== 2. flash: 65-task 2x2 + 310x2 full scale (17.9 h) =====
 %MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_canonical.csv -Output results\f_none_can
 %MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\f_off_can
 %MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\f_none_shf
 %MBL%\run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\f_off_shf
 %MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
 
-rem ===== 3. pilot12 换 flash (0.9 h) =====
+rem ===== 3. pilot12 with flash (0.9 h) =====
 %MBL%\pilot.cmd -Tag pilot12flash -Model qwen3-vl-flash -TasksCanonical data\pilot12_canonical.csv -TasksShuffle data\pilot12_shuffle0.csv
 
-rem ===== 4. 重复实验重做: 6 轮 x 2 顺序 x 2 模型 (3.7 h) =====
-rem     每次 pause 时在手机上: 退掉 DND 群 / 删好友 1098074562 / 取消置顶
+rem ===== 4. repeat experiment, redone: 6 rounds x 2 orders x 2 models (3.7 h) =====
+rem   At every pause, restore QQ state on the phone:
+rem     (a) leave the group "DND5..." (the one added in that round)
+rem     (b) delete friend 1098074562
+rem     (c) unpin the chat with the contact, restore the chat history if deleted
 for /l %r in (1,1,6) do (
   %MBL%\run_mbl.cmd -TaskFile data\qqset_canonical.csv -Output results\q2_A_%r
   echo.
-  echo ==== 第 %r 轮 A 序跑完。手机上恢复 QQ 状态，然后按任意键 ====
+  echo ==== round %r order A done. Restore QQ state on the phone, then press any key ====
   pause
   %MBL%\run_mbl.cmd -TaskFile data\qqset_reverse.csv -Output results\q2_B_%r
   echo.
-  echo ==== 第 %r 轮 B 序跑完。再恢复一次，然后按任意键 ====
+  echo ==== round %r order B done. Restore QQ state again, then press any key ====
   pause
 )
 for /l %r in (1,1,6) do (
   %MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\qqset_canonical.csv -Output results\q2_Af_%r
   echo.
-  echo ==== flash 第 %r 轮 A 序跑完。恢复状态后按任意键 ====
+  echo ==== flash round %r order A done. Restore QQ state, then press any key ====
   pause
   %MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\qqset_reverse.csv -Output results\q2_Bf_%r
   echo.
-  echo ==== flash 第 %r 轮 B 序跑完。再恢复一次，然后按任意键 ====
+  echo ==== flash round %r order B done. Restore QQ state again, then press any key ====
   pause
 )
 
-rem ===== 5. 出全部报告 =====
+rem ===== 5. build all reports =====
 %PY% %S%\analyze_order_effects.py --input results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf --out results\twomodel_2x2 --official-condition official
 %PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
 %PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\reset_can results\reset_shf --out results\master_analysis --official-condition official
@@ -141,7 +181,7 @@ type results\twomodel_2x2\report.md
 type results\scale_analysis\report.md
 type results\repeat_analysis\report.md
 
-rem ===== 6. 上传 =====
+rem ===== 6. upload =====
 %MBL%\sync.cmd "results: full experiment set, plus and flash, 2x2 scale repeats"
 ```
 
@@ -1007,7 +1047,7 @@ git stash pop
 
 ---
 
-# D. 十七个必踩的坑
+# D. 十八个必踩的坑
 
 | # | 坑 | 后果 / 对策 |
 |---|---|---|
@@ -1028,6 +1068,7 @@ git stash pop
 | 15 | **`analyze_order_effects.py --input` 传目录会读进无关文件** | 原实现用 `os.walk` 收目录下**所有** `*.jsonl`，于是每个任务子目录里的 `api_metrics.jsonl` / `step_timing.jsonl`（完全不同的 schema）也被当成 episode 读入 → `KeyError: 'agent'`；若某些行恰好带同名字段，则会**静默**混进统计。而"传目录"恰恰是最自然的写法（B10 就是这么用的）。已修为**只认 `episodes.jsonl`**，找不到时给出明确报错 |
 | 16 | **在新开的 cmd 里直接 `%PY% 某脚本.py` 会崩在中文输出上** | `run_mbl.cmd` / `pilot.cmd` 没问题（`mobile.env.ps1` 里设了 `PYTHONUTF8=1` / `PYTHONIOENCODING=utf-8`），但**直接调 python 就没有这两个变量**，Python 会用控制台默认代码页 GBK。实测踩过：`%PY% %S%\selftest.py` 在新 cmd 里 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'` —— 因为它最后一行要打印 `✅ 全部通过`。**后果比崩掉更糟：看起来像"自检失败"，其实是输出编码问题。** 对策：① 块里已 `set PYTHONUTF8=1` + `set PYTHONIOENCODING=utf-8`；② `selftest.py` 自己也做了 `sys.stdout.reconfigure(encoding="utf-8")` 兜底 |
 | 17 | **诊断脚本"未设置 MBL_API_KEY"** | `mbl_api_probe.py` / `mbl_coord_convention_check.py` 是纯标准库直连 API、**不经过 PowerShell**，所以读不到 `mobile.env.ps1` 里设的 key，在新 cmd 里直接跑会报 `❌ 未设置 MBL_API_KEY`。实测踩过（正好卡在一键流程的第 0 段）。已新增 `experiments/scripts/mbl_env.py`：**先看环境变量，找不到就自动去仓库根的 `mobile.env.ps1` 里解析** —— 不用再手动 `set`，也不用把密钥抄到第二个地方 |
+| 18 | **往 cmd 粘贴的命令块里含非 ASCII 字符 → 整块静默失效** | ★ **最容易让人误判"环境坏了"的一个坑。** 实测复现（2026-09-25）：cmd 用**当前代码页**（中文 Windows = GBK）解码粘贴进来的 UTF-8 字节，多出的半个字节会**吃掉下一行的开头**：`set MBL=D:\projects\X` 变成 `jects\X` → 变量全空 → 后面每条命令瞬间报"不是内部或外部命令" → **一个 28 小时的实验块 1 秒钟"跑完"**。更严重的是 `chcp 65001`：夹在粘贴流中间会让**后面整段输入被直接丢弃**（实测整块只剩前两行）。<br>**对策**：① 要粘贴的块**保持纯 ASCII**（本仓库的「★★ 全量实验一键流程」块已改成纯 ASCII，且不含 `chcp`）；② 想显示中文，先**单独敲一行** `chcp 65001` 回车，**再**粘那个 ASCII 块；③ 块里放 `echo [CHECK]` 打印变量、并 `if not exist ... echo [FATAL]` 兜底，**粘贴后先看这几行** |
 
 其他已修掉的两个静默失效：
 
