@@ -169,21 +169,31 @@ def main() -> int:
     # 逻辑判据（比距离更硬）：0-1000 归一化坐标**不可能超过 1000**。
     # 只要出现 >1000 的分量，就必然是像素或别的绝对坐标系。
     if coords[0] > 1000 or coords[1] > 1000:
-        print(f"\n✅ 判定：**像素约定** —— 出现 {coords}，分量 >1000，归一化不可能超过 1000。")
+        print(f"\n[判定] 像素约定（pixel）—— 出现 {coords}，分量 >1000，归一化不可能超过 1000。")
+        print("   → 本仓库应当给这个模型设 MBL_COORD=pixel（不做换算）。")
         if min(d_px, d_nm) > 260:
             print("   ⚠️  但该坐标距真实目标较远 → 这个模型**定位精度**在这张合成图上较差"
                   "（像素约定 + 定位差 = 点击会偏，建议真机复验一次）。")
         return 0
 
     if d_px < d_nm and d_px < 260:
-        print("\n✅ 判定：**像素约定**，与仓库代码一致，可以直接跑。")
+        print("\n[判定] 像素约定（pixel）—— 与 benchmark 原代码一致，原样可用。")
+        print("   → 本仓库应当给这个模型设 MBL_COORD=pixel（不做换算）。")
+        print(f"   → 当前注册表里 {args.model} 的值见 mobile.env.ps1 的 $MBL_MODELS。")
         return 0
     if d_nm < d_px and d_nm < 260:
-        print("\n❌ 判定：**0-1000 归一化约定** —— 仓库代码把它当像素用，会让所有点击挤到左上角。")
-        print("   修法：在 process_response 里把 x,y 按 (x/1000*width, y/1000*height) 换算。")
+        # ⚠️ 这里**故意不再用 ❌**：这个分支的正确读法是
+        #    "benchmark 原代码对这个模型是错的"，而不是"你的环境有问题"。
+        #    实测踩过：用户看到 ❌ 以为环境坏了，其实这正是预期结果（plus/flash 都是 norm）。
+        print("\n[判定] 0-1000 归一化约定（norm）。")
+        print("   注意：这里说的『错』是指 **benchmark 原代码**把 norm 坐标当像素用、")
+        print("   会让所有点击挤到左上角 —— 不是说你环境坏了。")
+        print("   → 本仓库已处理：补丁 mbl_apply_api_patch.py --coord-norm 会在 process_response 里")
+        print("     做 (x/1000*width, y/1000*height) 换算，并且要配合 MBL_COORD=norm。")
+        print("   → 这是**预期结果**，可以直接继续跑（run_all.cmd 就是这么做的）。")
         return 3
-    print("\n⚠️  两种都不接近：模型可能没看准位置，或输出的是别的约定。"
-          "建议换更靠边的目标再测一次（本脚本可改 BOX 常量）。")
+    print("\n[判定] ⚠️ 两种都不接近：模型可能没看准位置，或输出的是别的约定。")
+    print("   建议换更靠边的目标再测一次（本脚本可改 BOX 常量）。")
     return 4
 
 
