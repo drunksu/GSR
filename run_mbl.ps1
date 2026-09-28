@@ -25,6 +25,24 @@ param(
 
 . "$PSScriptRoot\mobile.env.ps1"
 
+# ---------------------------------------------------------------------------
+# 防线：$Subset 收到像参数名的值 = 调用方参数绑定错位。
+#
+# 实例（2026-09-27）：pilot.ps1 用数组 splat 传 `@('-Model', $Model)`，
+# PowerShell 把 '-Model' 当成**位置参数**，于是 $Subset='-Model'、$ConfigFile='qwen3-vl-flash'，
+# 最后发出 `run.py --subset -Model --config qwen3-vl-flash` → argparse 立刻退出 →
+# **每轮 1 秒结束、0 个 episode**（而 manifest 里 agent 仍是默认值，很容易误判成"模型没生效"）。
+# 这里显式拦一下，以后同类错位会当场炸而不是悄悄跑空。
+# ---------------------------------------------------------------------------
+if ($Subset -match '^-') {
+    throw ("❌ -Subset 收到了像参数名的值 '$Subset'。这几乎肯定是调用方用了数组 splat " +
+           "导致位置参数右移（见 pilot.ps1 里同段注释）。请改用显式参数名传参。")
+}
+if ($ConfigFile -and ($ConfigFile -notmatch '\.conf$')) {
+    throw ("❌ -ConfigFile 的值 '$ConfigFile' 不像配置文件路径。同样疑似参数错位" +
+           "（正常应形如 config/interact_API_qwen3vl_base.conf）。")
+}
+
 # 模型切换：坐标约定从注册表自动取，避免"换了模型忘了改约定"这类致命错误
 if ($Model) {
     if (-not $MBL_MODELS.Contains($Model)) {

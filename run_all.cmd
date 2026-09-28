@@ -64,11 +64,18 @@ call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_q
 call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\f_off_can
 call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\f_none_shf
 call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\f_off_shf
-call "%MBL%\pilot.cmd" -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+rem NOTE: do NOT use pilot.cmd with -Model here. pilot.ps1 used to splat an
+rem       array of switches, which PowerShell binds POSITIONALLY, shifting
+rem       $Subset to "-Model" and $ConfigFile to the model name -> run.py got
+rem       "--subset -Model" and died in 1 second with 0 episodes. Call
+rem       run_mbl.cmd twice instead, with explicit parameter names.
+call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\base_canonical.csv -Output results\baseflash_canonical
+call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\base_shuffle0.csv  -Output results\baseflash_shuffle
 
 echo.
 echo ============ 4. pilot12 with flash (0.9 h) ============
-call "%MBL%\pilot.cmd" -Tag pilot12flash -Model qwen3-vl-flash -TasksCanonical data\pilot12_canonical.csv -TasksShuffle data\pilot12_shuffle0.csv
+call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\pilot12_canonical.csv -Output results\pilot12flash_canonical
+call "%MBL%\run_mbl.cmd" -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\pilot12_shuffle0.csv  -Output results\pilot12flash_shuffle
 
 echo.
 echo ============ 5. repeat experiment, redone: 6 rounds x 2 orders x 2 models (3.7 h) ============
