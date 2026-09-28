@@ -1,0 +1,93 @@
+{
+  "task_id": "wuba_12",
+  "task_goal": "在58同城中把当前城市改为北京。步骤如下：1. 打开58同城，首页的左上角显示的是APP定位的当前城市，点击它。 2.在城市列表的顶部是一个搜索框，点击搜索框。3. 在城市列表的搜索框中输入“北京”。 4. 在搜索结果中选中北京。按照以上步骤将当前城市改为北京。",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          133,
+          184
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.11,
+          0.07
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          620,
+          193
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.51,
+          0.07
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "type",
+      "params": {
+        "text": "北京"
+      },
+      "normalized_params": {
+        "text": "北京"
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          144,
+          987
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.12,
+          0.36
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "已将当前城市改为北京"
+      },
+      "normalized_params": {
+        "text": "已将当前城市改为北京"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\f_off_can\\wuba_12\\step_1.png",
+    "results\\f_off_can\\wuba_12\\step_2.png",
+    "results\\f_off_can\\wuba_12\\step_3.png",
+    "results\\f_off_can\\wuba_12\\step_4.png",
+    "results\\f_off_can\\wuba_12\\step_5.png"
+  ],
+  "history_response": [
+    "Thought: 首先需要点击首页左上角显示的当前城市“合肥”，以进入城市选择页面。这个元素位于屏幕左上角，紧邻“合肥”文字和定位图标，点击后应该会打开城市列表。\nAction: click(point='<point>109 68</point>')",
+    "Thought: 现在已经进入城市选择页面，下一步需要点击顶部的搜索框来输入“北京”。搜索框位于页面上部，提示文字为“输入城市/县名搜索”，这是继续操作的关键元素。\nAction: click(point='<point>508 71</point>')",
+    "Thought: 当前已进入城市搜索页面，搜索框已激活，键盘也已弹出。根据任务要求，下一步需要在搜索框中输入“北京”，以便从搜索结果中选择目标城市。\nAction: type(content='北京')",
+    "Thought: 搜索框中已输入“北京”，现在需要在搜索结果中选择“北京”城市选项。观察页面，“北京”出现在“最近访问”和“热门城市”区域，点击其中任意一个“北京”按钮即可完成选择。\nAction: click(point='<point>118 364</point>')",
+    "Thought: 当前页面左上角已显示“北京”，说明城市已成功切换。任务要求是将当前城市改为北京，而这一目标已经达成，因此可以提交任务。\nAction: finished(content='已将当前城市改为北京')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

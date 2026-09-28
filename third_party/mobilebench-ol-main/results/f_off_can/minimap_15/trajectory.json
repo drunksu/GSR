@@ -1,0 +1,120 @@
+{
+  "task_id": "minimap_15",
+  "task_goal": "高德取消设置小米科技园B栋为公司地址。步骤如下：1. 打开高德地图，点击首页右下角的“我的”按钮，进入个人中心页面。 2. 如果个人中心页面右上方的螺帽状的设置图标，进入设置页。 3. 在设置页中点击常去地点管理选项。 4. 在常去地点页面中检查有没有类似“公司 小米科技园”的地点，如果没有，说明任务已完成，无需更多操作。 如果有，点击该地点右侧的三个点形状的图标，打开更多选项。5. 在弹出的选项中点击“删除”。按照以上步骤取消对公司地址的设置。",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1100,
+          2579
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.9,
+          0.95
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1113,
+          198
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.91,
+          0.07
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          605,
+          1421
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.5,
+          0.52
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1128,
+          616
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.92,
+          0.23
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          610,
+          2327
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.5,
+          0.86
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "高德地图已成功取消设置小米科技园B栋为公司地址。"
+      },
+      "normalized_params": {
+        "text": "高德地图已成功取消设置小米科技园B栋为公司地址。"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\f_off_can\\minimap_15\\step_1.png",
+    "results\\f_off_can\\minimap_15\\step_2.png",
+    "results\\f_off_can\\minimap_15\\step_3.png",
+    "results\\f_off_can\\minimap_15\\step_4.png",
+    "results\\f_off_can\\minimap_15\\step_5.png",
+    "results\\f_off_can\\minimap_15\\step_6.png"
+  ],
+  "history_response": [
+    "Thought: 我需要按照步骤进入个人中心页面，首先点击底部导航栏的“我的”按钮，这是完成后续操作的前提。下一步我将点击“我的”图标。\nAction: click(point='<point>902 951</point>')",
+    "Thought: 我已经进入了个人中心页面，接下来需要点击右上角的设置图标（螺帽形状）进入设置页。根据当前截图，右上角有一个齿轮状的设置图标，这是下一步要点击的目标。\nAction: click(point='<point>912 73</point>')",
+    "Thought: 我已经进入设置页面，下一步需要点击“常去地点管理”选项，以便查看和管理常去地点，从而找到并删除“小米科技园B栋”作为公司地址的设置。因此，我将点击“常去地点管理”。\nAction: click(point='<point>496 524</point>')",
+    "Thought: 我在常去地点管理页面中找到了“公司 小米移动互联网产业园B栋”这一条目，这与任务要求中的“小米科技园B栋”可能是同一地点（可能存在名称差异）。根据步骤4，我需要点击该地点右侧的三个点图标以打开更多选项，进而进行删除操作。因此，下一步我将点击该条目右侧的三个点图标。\nAction: click(point='<point>925 227</point>')",
+    "Thought: 在弹出的选项中，我需要点击“删除地点”来取消设置公司地址。该选项位于弹窗的中间位置，颜色为红色，符合任务要求的删除操作。\nAction: click(point='<point>500 858</point>')",
+    "Thought: 在常去地点管理页面中，我已经确认“小米科技园B栋”作为公司地址的设置已被成功取消，因为当前列表中仅显示“家”和“添加公司地点”，没有之前提到的公司地址条目。因此，任务已完成。\nAction: finished(content='高德地图已成功取消设置小米科技园B栋为公司地址。')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

@@ -45,16 +45,16 @@
       "definition": "R=官方/乱序(shuffle) vs R=官方/规范序"
     },
     "qwen3-vl-plus|C3_combined": {
-      "n_tasks": 64,
-      "suite_sr_ref": 0.71875,
-      "suite_sr_treat": 0.640625,
-      "delta_sr": -0.078125,
+      "n_tasks": 65,
+      "suite_sr_ref": 0.7230769230769231,
+      "suite_sr_treat": 0.6461538461538462,
+      "delta_sr": -0.07692307692307693,
       "delta_sr_ci95": [
-        -0.203125,
-        0.046875
+        -0.2,
+        0.046153846153846156
       ],
-      "ctci": 0.1484375,
-      "pasr": 0.5859375,
+      "ctci": 0.14615384615384616,
+      "pasr": 0.5923076923076923,
       "od_flaky_rate": 0.0,
       "victims": [],
       "victims_direction": {},
@@ -62,11 +62,11 @@
     },
     "qwen3-vl-plus|DiD_interaction": {
       "definition": "C3 − C1 − C2（顺序效应是否只在重置被削弱时被放大）",
-      "n_tasks": 64,
-      "delta_sr": 0.078125,
+      "n_tasks": 65,
+      "delta_sr": 0.07692307692307693,
       "delta_sr_ci95": [
-        -0.046875,
-        0.203125
+        -0.046153846153846156,
+        0.18461538461538463
       ],
       "per_task_did": {
         "articlenews_12": 0.0,
@@ -99,6 +99,7 @@
         "neteasemusic_19": 0.0,
         "neteasemusic_21": 0.0,
         "neteasemusic_22": 0.0,
+        "neteasemusic_26": 0.0,
         "neteasemusic_28": 0.0,
         "neteasemusic_7": 0.0,
         "neteasemusic_8": 0.0,
@@ -154,16 +155,16 @@
       "definition": "R=官方/顺序=shuffle vs R=官方/规范序（纯顺序效应）"
     },
     "qwen3-vl-plus|polluted_order:shuffle": {
-      "n_tasks": 64,
-      "suite_sr_ref": 0.71875,
-      "suite_sr_treat": 0.640625,
-      "delta_sr": -0.078125,
+      "n_tasks": 65,
+      "suite_sr_ref": 0.7230769230769231,
+      "suite_sr_treat": 0.6461538461538462,
+      "delta_sr": -0.07692307692307693,
       "delta_sr_ci95": [
-        -0.203125,
-        0.046875
+        -0.2,
+        0.046153846153846156
       ],
-      "ctci": 0.1484375,
-      "pasr": 0.5859375,
+      "ctci": 0.14615384615384616,
+      "pasr": 0.5923076923076923,
       "od_flaky_rate": 0.0,
       "victims": [],
       "victims_direction": {},
@@ -175,30 +176,30 @@
   },
   "groups": {
     "qwen3-vl-plus|none": {
-      "n_tasks": 308,
-      "suite_sr_ref": 0.5714285714285714,
-      "suite_sr_treat": 0.5941558441558441,
-      "delta_sr": 0.022727272727272728,
+      "n_tasks": 310,
+      "suite_sr_ref": 0.5709677419354838,
+      "suite_sr_treat": 0.5935483870967742,
+      "delta_sr": 0.02258064516129032,
       "delta_sr_ci95": [
-        -0.01948051948051948,
-        0.06818181818181818
+        -0.01935483870967742,
+        0.06451612903225806
       ],
-      "ctci": 0.1525974025974026,
-      "pasr": 0.5064935064935064,
+      "ctci": 0.15161290322580645,
+      "pasr": 0.5064516129032258,
       "od_flaky_rate": 0.0,
       "victims": [],
       "victims_direction": {},
       "agent": "qwen3-vl-plus",
       "condition": "none",
       "suite_sr_by_order": {
-        "canonical": 0.5714285714285714,
-        "shuffle": 0.5941558441558441
+        "canonical": 0.5709677419354838,
+        "shuffle": 0.5935483870967742
       },
       "n_by_order": {
-        "canonical": 308,
-        "shuffle": 308
+        "canonical": 310,
+        "shuffle": 310
       },
-      "n_comparable_tasks": 308
+      "n_comparable_tasks": 310
     },
     "qwen3-vl-plus|official": {
       "n_tasks": 65,

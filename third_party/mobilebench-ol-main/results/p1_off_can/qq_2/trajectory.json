@@ -1,0 +1,82 @@
+{
+  "task_id": "qq_2",
+  "task_goal": "去QQ清除搜索历史。步骤如下：1. 打开QQ，确定在\"消息\"的目录栏，点击首页顶部的搜索框。2.在搜索页中的最近搜索那一栏右侧有一个垃圾桶按钮，这代表着清空搜索历史，点击这个垃圾桶按钮。3. 在展开项目中，点击“清空”按钮。  按照以上步骤清空搜索历史",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          609,
+          374
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.5,
+          0.14
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1147,
+          830
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.94,
+          0.31
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          993,
+          830
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.81,
+          0.31
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "QQ搜索历史已清空"
+      },
+      "normalized_params": {
+        "text": "QQ搜索历史已清空"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\p1_off_can\\qq_2\\step_1.png",
+    "results\\p1_off_can\\qq_2\\step_2.png",
+    "results\\p1_off_can\\qq_2\\step_3.png",
+    "results\\p1_off_can\\qq_2\\step_4.png"
+  ],
+  "history_response": [
+    "Thought: 我现在处于QQ的“消息”页面，这是任务要求的第一步。接下来需要点击首页顶部的搜索框，进入搜索页面，以便找到清空搜索历史的选项。  \nAction: click(point='<point>499 138</point>')",
+    "Thought: 现在已经进入搜索页面，可以看到“最近搜索”下方有一个垃圾桶图标，这正是用于清空搜索历史的按钮。根据任务要求，下一步需要点击这个垃圾桶图标。  \nAction: click(point='<point>940 306</point>')",
+    "Thought: 在当前页面中，我已看到“最近搜索”下方有“清空”按钮，这是用于清除搜索历史的关键操作点。根据任务步骤，接下来需要点击“清空”按钮以继续执行清空操作。  \nAction: click(point='<point>814 306</point>')",
+    "Thought: 从当前界面可以看到，“最近搜索”区域显示“没有最近搜索内容”，说明搜索历史已经被成功清空。结合之前的步骤，已经完成了点击搜索框、点击垃圾桶图标、点击“清空”按钮的操作，任务目标已达成。  \nAction: finished(content='QQ搜索历史已清空')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

@@ -1,0 +1,120 @@
+{
+  "task_id": "minimap_16",
+  "task_goal": "高德取消设置北京大学东门为家的地址。步骤如下：1. 打开高德地图，点击首页右下角的“我的”按钮，进入个人中心页面。 2. 如果个人中心页面右上方的螺帽状的设置图标，进入设置页。 3. 在设置页中点击常去地点管理选项。 4. 在常去地点页面中检查有没有类似“家 北京大学”的地点，如果没有，说明任务已完成，无需更多操作。 如果有，点击该地点右侧的三个点形状的图标，打开更多选项。5. 在弹出的选项中点击“删除”。按照以上步骤取消对家的地址的设置。",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1100,
+          2582
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.9,
+          0.95
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1116,
+          201
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.91,
+          0.07
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          223,
+          1421
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.18,
+          0.52
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1122,
+          469
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.92,
+          0.17
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          609,
+          2330
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.5,
+          0.86
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "高德地图中已成功取消设置北京大学东门为家的地址。"
+      },
+      "normalized_params": {
+        "text": "高德地图中已成功取消设置北京大学东门为家的地址。"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\p1_off_can\\minimap_16\\step_1.png",
+    "results\\p1_off_can\\minimap_16\\step_2.png",
+    "results\\p1_off_can\\minimap_16\\step_3.png",
+    "results\\p1_off_can\\minimap_16\\step_4.png",
+    "results\\p1_off_can\\minimap_16\\step_5.png",
+    "results\\p1_off_can\\minimap_16\\step_6.png"
+  ],
+  "history_response": [
+    "Thought: 根据任务要求，首先需要进入高德地图的个人中心页面。当前界面是高德地图的首页，右下角有“我的”按钮，点击它即可进入个人中心。这是完成后续操作的第一步。\nAction: click(point='<point>902 952</point>')",
+    "Thought: 现在已经进入个人中心页面，接下来需要找到并点击右上方的螺帽状设置图标，以进入设置页。这是完成任务的第二步。\nAction: click(point='<point>915 74</point>')",
+    "Thought: 在设置页面中，我需要找到“常去地点管理”选项，这是任务的第三步。该选项位于页面中间偏下的位置，点击它即可进入常去地点管理页面。\nAction: click(point='<point='183 524</point>')",
+    "Thought: 在常去地点管理页面中，我找到了“家 北京大学(东门)”的地址条目。根据任务要求，需要点击该条目右侧的三个点形状图标，以打开更多选项。这是完成删除操作前的关键一步。\nAction: click(point='<point>920 173</point>')",
+    "Thought: 在弹出的选项中，我看到了“删除地点”这一选项，这是任务的最后一步。点击它即可取消设置北京大学东门为家的地址。\nAction: click(point='<point>499 859</point>')",
+    "Thought: 通过观察当前页面，发现“家 北京大学(东门)”的地址已经不再显示，说明该地址已被成功删除。任务已按要求完成。\nAction: finished(content='高德地图中已成功取消设置北京大学东门为家的地址。')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}
