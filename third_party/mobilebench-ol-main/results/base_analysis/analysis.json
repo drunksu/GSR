@@ -1,6 +1,6 @@
 {
   "baseline_order": "canonical",
-  "official_condition": "official",
+  "official_condition": "none",
   "delta": 0.2,
   "alpha": 0.05,
   "conditions": [
@@ -10,8 +10,42 @@
     "canonical",
     "shuffle"
   ],
-  "contrasts": {},
-  "order_contrasts": {},
+  "contrasts": {
+    "qwen3-vl-plus|C2_order_main": {
+      "n_tasks": 310,
+      "suite_sr_ref": 0.5709677419354838,
+      "suite_sr_treat": 0.5935483870967742,
+      "delta_sr": 0.02258064516129032,
+      "delta_sr_ci95": [
+        -0.01935483870967742,
+        0.06451612903225806
+      ],
+      "ctci": 0.15161290322580645,
+      "pasr": 0.5064516129032258,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/乱序(shuffle) vs R=官方/规范序"
+    }
+  },
+  "order_contrasts": {
+    "qwen3-vl-plus|order:shuffle": {
+      "n_tasks": 310,
+      "suite_sr_ref": 0.5709677419354838,
+      "suite_sr_treat": 0.5935483870967742,
+      "delta_sr": 0.02258064516129032,
+      "delta_sr_ci95": [
+        -0.01935483870967742,
+        0.06451612903225806
+      ],
+      "ctci": 0.15161290322580645,
+      "pasr": 0.5064516129032258,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "definition": "R=官方/顺序=shuffle vs R=官方/规范序（纯顺序效应）"
+    }
+  },
   "od_flaky_tasks": {
     "qwen3-vl-plus": []
   },
@@ -43,7 +77,9 @@
       "n_comparable_tasks": 310
     }
   },
-  "warnings": [],
+  "warnings": [
+    "只有 official 条件，无法估计污染主效应（C1/C3）。"
+  ],
   "diagnostics": [
     {
       "表": "§1 / §2b",
