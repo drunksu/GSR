@@ -758,6 +758,10 @@ def write_report(report: dict[str, Any], out_dir: str, truth: dict[str, Any] | N
 def main(argv: Sequence[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="顺序效应 / OD flaky 分析（2×2 析因）")
     ap.add_argument("--input", nargs="+", required=True, help="episodes.jsonl 或包含它的目录")
+    ap.add_argument("--tasks", default=None,
+                    help="只分析这些 task_identifier（逗号分隔）。用于**预注册子集**：FDR 的多重比较"
+                         "负担按参与检验的任务数算，把「在两种顺序下成功率完全相同、不可能成为 victim」"
+                         "的确定性任务排除掉，能显著降低所需重复次数（实测：8 任务需 24 轮，4 任务只需 20 轮）")
     ap.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "..", "results", "analysis"))
     ap.add_argument("--baseline-order", default=CANONICAL)
     ap.add_argument("--official-condition", default=OFFICIAL)
@@ -770,6 +774,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not rows:
         print("没有读到任何 episode。", file=sys.stderr)
         return 2
+
+    # 预注册子集过滤：FDR 负担按参与检验的任务数算，所以把确定性任务排除掉是有意义的
+    if args.tasks:
+        keep = {t.strip() for t in args.tasks.split(",") if t.strip()}
+        before = len(rows)
+        rows = [r for r in rows if str(r.get("task")) in keep]
+        missing = sorted(keep - {str(r.get("task")) for r in rows})
+        print(f"--tasks 过滤: {before} → {len(rows)} episode，保留 {len(keep)} 个任务", file=sys.stderr)
+        if missing:
+            print(f"--tasks 里这些任务没有任何 episode（会被跳过）: {missing}", file=sys.stderr)
+        if not rows:
+            print("过滤后没有剩下任何 episode。", file=sys.stderr)
+            return 2
+
     report = analyze(
         rows,
         baseline_order=args.baseline_order,
@@ -777,6 +795,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         delta=args.delta,
         alpha=args.alpha,
     )
+    if args.tasks:
+        report["task_filter"] = sorted({str(r.get("task")) for r in rows})
     truth = check_against_ground_truth(report, args.check_against) if args.check_against else None
     path = write_report(report, args.out, truth)
     print(f"{len(rows)} episodes -> {path}")
