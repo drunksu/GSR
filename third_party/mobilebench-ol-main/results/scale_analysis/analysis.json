@@ -13,9 +13,36 @@
   "contrasts": {},
   "order_contrasts": {},
   "od_flaky_tasks": {
+    "qwen3-vl-flash": [],
     "qwen3-vl-plus": []
   },
   "groups": {
+    "qwen3-vl-flash|none": {
+      "n_tasks": 309,
+      "suite_sr_ref": 0.5760517799352751,
+      "suite_sr_treat": 0.5242718446601942,
+      "delta_sr": -0.05177993527508091,
+      "delta_sr_ci95": [
+        -0.0970873786407767,
+        -0.003236245954692557
+      ],
+      "ctci": 0.1941747572815534,
+      "pasr": 0.45307443365695793,
+      "od_flaky_rate": 0.0,
+      "victims": [],
+      "victims_direction": {},
+      "agent": "qwen3-vl-flash",
+      "condition": "none",
+      "suite_sr_by_order": {
+        "canonical": 0.5760517799352751,
+        "shuffle": 0.5242718446601942
+      },
+      "n_by_order": {
+        "canonical": 309,
+        "shuffle": 309
+      },
+      "n_comparable_tasks": 309
+    },
     "qwen3-vl-plus|none": {
       "n_tasks": 310,
       "suite_sr_ref": 0.5709677419354838,
@@ -54,11 +81,6 @@
       "表": "§3 victim",
       "原因": "每个 (任务 × 顺序) 只有 1 次重复。参照组与处理组各 1 个样本时，2×2 表只有两种取值，Fisher 双边 p **恒等于 1.0**，q 也恒为 1.0 —— victim 表在数学上不可能有内容，与真实效应无关。",
       "补什么": "重复跑同一任务集（同一 CSV、不同 -Output 目录），并把多个目录一起 --input。当前 310 个任务下，即使最理想的 0/n vs n/n 分裂也需要 ≥ 8 次重复/序才可能 q<0.05。"
-    },
-    {
-      "表": "§4 polluter",
-      "原因": "同一前序任务最多只出现过 2 次，低于 min_support=3，所有前序都被跳过。单轮里每个位置只有一个前序，重复跑同一顺序才会把支持度堆上去。",
-      "补什么": "同一顺序至少重复 3 轮，再一起 --input。"
     }
   ],
   "polluters": []

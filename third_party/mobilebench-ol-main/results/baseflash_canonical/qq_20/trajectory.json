@@ -1,0 +1,63 @@
+{
+  "task_id": "qq_20",
+  "task_goal": "打开QQ的夜间模式",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          112,
+          214
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.09,
+          0.08
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          312,
+          2468
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.26,
+          0.91
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "QQ的夜间模式已打开"
+      },
+      "normalized_params": {
+        "text": "QQ的夜间模式已打开"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\baseflash_canonical\\qq_20\\step_1.png",
+    "results\\baseflash_canonical\\qq_20\\step_2.png",
+    "results\\baseflash_canonical\\qq_20\\step_3.png"
+  ],
+  "history_response": [
+    "Thought: 我需要找到设置夜间模式的选项，通常这类设置会在个人资料或设置菜单中。我注意到左上角有头像和昵称，这通常是进入个人资料或设置的入口，所以我将点击这个区域来寻找设置选项。\nAction: click(point='[92, 79]')",
+    "Thought: 我在当前页面底部发现了“夜间”选项，这正是切换到夜间模式所需要的入口。点击它应该就能开启夜间模式了。\nAction: click(point='[256 910]')",
+    "Thought: 根据当前截图，界面已经呈现为深色背景，说明夜间模式已成功开启。任务已完成。\nAction: finished(content='QQ的夜间模式已打开')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

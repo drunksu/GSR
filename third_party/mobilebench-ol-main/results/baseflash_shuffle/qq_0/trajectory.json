@@ -1,0 +1,74 @@
+{
+  "task_id": "qq_0",
+  "task_goal": "打开qq搜索中国矿业大学",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          605,
+          415
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.5,
+          0.15
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "type",
+      "params": {
+        "text": "中国矿业大学"
+      },
+      "normalized_params": {
+        "text": "中国矿业大学"
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          409,
+          580
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.34,
+          0.21
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "已打开QQ搜索中国矿业大学"
+      },
+      "normalized_params": {
+        "text": "已打开QQ搜索中国矿业大学"
+      }
+    }
+  ],
+  "history_image_path": [
+    "results\\baseflash_shuffle\\qq_0\\step_1.png",
+    "results\\baseflash_shuffle\\qq_0\\step_2.png",
+    "results\\baseflash_shuffle\\qq_0\\step_3.png",
+    "results\\baseflash_shuffle\\qq_0\\step_4.png"
+  ],
+  "history_response": [
+    "Thought: 我需要找到QQ的搜索功能来输入“中国矿业大学”进行搜索。当前界面是一个聊天列表，顶部有一个搜索栏，这应该是全局搜索入口，我应该点击它来进入搜索页面。点击顶部的搜索框。\nAction: click(point='<point>496 153</point>')",
+    "Thought: 我已经进入了QQ的搜索界面，现在需要输入“中国矿业大学”进行搜索。键盘已经打开，我可以直接在搜索框中输入关键词。\nAction: type(content='中国矿业大学')",
+    "Thought: 搜索结果已经显示，其中“中国矿业大学”小程序位于最常用列表的顶部，这是与任务目标直接相关的选项。为了完成打开QQ搜索中国矿业大学的任务，我应该点击这个小程序。\nAction: click(point='335 214')",
+    "Thought: 我已经成功打开了QQ中关于“中国矿业大学”的搜索结果页面，这表明任务已经完成。根据要求，我需要提交任务。\nAction: finished(content='已打开QQ搜索中国矿业大学')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": false
+}
