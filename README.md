@@ -31,8 +31,10 @@
 （详见坑 #18。）`run_all.cmd` 是**纯 ASCII 文件**，这两类问题都不存在。它做的事和原来看起来一样，
 内容可以直接打开核对。
 
-**★ 唯一需要你手动做的**：第 4 步（重复实验）有 **12 次 `pause`**，每次要在手机上
-退出 DND 群 / 删好友 `1098074562` / 取消置顶，做完回 cmd 按任意键。**人不在旁边它会一直停着。**
+**★ 本轮（2026-10-02）不要跑 `run_all.cmd`** —— 主实验 8 格、310 任务规模实验、plus 侧重复实验
+都已经跑完，只剩**重复实验的 flash 侧**（外加 plus 少跑的 1 轮）。本轮命令是 **`run_flash_tail.cmd`**：
+**26 次 `pause`**，每次要在手机上退出 DND 群 / 删好友 `1098074562` / 取消置顶，做完回 cmd 按任意键。
+**人不在旁边它会一直停着。** 命令与逐步核对见下面 **「★ 本轮要跑的命令」**。
 
 ---
 
@@ -40,7 +42,7 @@
 
 | 章节 | 讲什么 | 谁需要看 |
 |---|---|---|
-| **一、有手机的那台机器** | **跑 `run_all.cmd` 一条命令**跑完全部实验（含出报告 + 上传） | ★ 有手机那台，**只看这个** |
+| **一、有手机的那台机器** | **本轮跑 `run_flash_tail.cmd`**（重复实验 flash 侧收尾）；全新一轮才用 `run_all.cmd` | ★ 有手机那台，**只看这个** |
 | **二、分析机** | 拉取 → 校验标签 → 出三份报告 → 看判据 → 上传 | 分析机 |
 | **A. 新机器部署** | 克隆 / 建 venv / adb / 装 App / 改设备序列号 | 换新机器时 |
 | **B. 运行命令** | 每个脚本的单独用法：B1 唤醒 · B3 全量两顺序 · B4 reset 通道 · B5 换模型 · B6 造任务集 · B7 清洗 · B8 出报告 · B10 重复实验 | 想单独跑某一步时 |
@@ -154,18 +156,69 @@ D:\GSR\run_missing.cmd
 > `run_missing.cmd` 故意**绕过 `pilot.cmd`**，直接用 `run_mbl.cmd` 显式传参 ——
 > 这条路径已被 `f_*` 那 4 轮（各 65 episode、agent 全部正确）证明可用。
 
-## 还剩什么要跑：`run_finish.cmd`
+## ★ 本轮要跑的命令（2026-10-02：重复实验 flash 侧收尾）
 
 ```cmd
-D:\GSR\run_finish.cmd
+cd /d D:\GSR
+git pull --rebase --autostash
+D:\GSR\run_flash_tail.cmd
 ```
 
-两件事，约 **5 小时**：
+两条。第二条自己做完「醒来 → 跑 → 逐轮校验 → 重建三份报告 → 上传」。
 
-| 件 | 内容 | 成本 |
-|---|---|---|
-| 1 | 补 `baseflash_shuffle` 缺的 `qq_5`（309 → 310） | ~1 min |
-| 2 | **victim 实验 v3**：4 任务预注册子集，追加 14 轮补到 n=20 | ≈5 h + **56 次手工暂停** |
+**为什么只剩这一轮**：全部实验里唯一不完整的地方，是重复实验 v3（4 任务预注册子集）的 flash 侧。
+
+| 臂 | 计划轮数 | 已有 | 本轮补 | 实测每轮 |
+|---|---|---|---|---|
+| plus 规范序 `s3_A_1..14` | 14 | ✅ 14 | — | 15–19 min |
+| plus 反向序 `s3_B_1..14` | 14 | ⚠️ 13（缺 `s3_B_5`） | **+1** | 15–19 min |
+| flash 规范序 `s3_Af_3..14` | 14 | ⚠️ 2 | **+12** | 11–12 min |
+| flash 反向序 `s3_Bf_2..14` | 14 | ⚠️ 1（`s3_Bf_2` 是空壳，只有 manifest） | **+13** | 11–12 min |
+
+合计 **26 次运行 ≈ 5.3 h + 26 次手工暂停**。跑完四个臂各 14 轮，加上已有的 `q2_*` 6 轮
+= **20 轮/臂**，分析器 §2 会显示 `n=80`（= 4 任务 × 20 轮）——§3.2b 那个「模型 × 顺序」交互
+就从「20/19 vs 8/7 的不平衡臂」变成对称臂。
+
+**每次 `pause` 时在手机上做的事**（不做的话下一轮起点就变了，那一轮作废）：
+
+1. 退出这一轮加入的 DND 群；
+2. 删除好友 `1098074562`；
+3. 取消该聊天置顶；若聊天记录已被删，先发一条消息把会话恢复出来。
+
+**脚本实际执行的命令**（本节与 `run_flash_tail.cmd` 逐条对应；**换 `-Output` 目录是铁律**，
+覆盖已有目录会毁掉那一轮数据）：
+
+```cmd
+rem [1] plus 反向序，补第 5 轮
+run_mbl.cmd -Model qwen3-vl-plus -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\qqvar4_reverse.csv -Output results\s3_B_5
+
+rem [2] flash 规范序，补第 3..14 轮
+for /l %r in (3,1,14) do run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\qqvar4_canonical.csv -Output results\s3_Af_%r
+
+rem [3] flash 反向序，补第 2..14 轮（s3_Bf_2 是空壳，必须重跑）
+for /l %r in (2,1,14) do run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\qqvar4_reverse.csv -Output results\s3_Bf_%r
+```
+
+> ⚠️ **不要手工粘上面这一段**（坑 #18：粘大段命令会回显但不执行）。真跑请用 `run_flash_tail.cmd`。
+> 只想补某一轮：单独粘一行，把 `-Output` 换成具体轮号，例如
+> `run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\qqvar4_canonical.csv -Output results\s3_Af_7`
+
+**跑完怎么看**（脚本自动做，也可手工核对）：
+
+| 看什么 | 期望 |
+|---|---|
+| `results\s3_Af_*` / `results\s3_Bf_*` | 各 14 个目录，每个里面 4 个任务子目录 + `episodes.jsonl` |
+| `results\victim_analysis\report.md` §2 | 两个模型都是 `canonical=...(n=80)`、`reverse=...(n=80)` |
+| §2b 的 ΔSR | plus 仍 ≈ 0、flash 仍为负 → 结论不变；flash 若明显缩水 → 是 n=6 挑出来的选择偏差，按 §3.7 口径改写成「检出代价」 |
+| §3 victim 表 | 可能仍为空 —— 那是门槛（ΔSR 绝对值 ≥ 0.2 且 q < 0.05）没达到，**不是零效应**，按 §3.2d 解释 |
+
+**中断了怎么办**：直接重新跑 `run_flash_tail.cmd`。每个运行目录各有 `result_list.txt`，
+已完成的任务会被跳过 —— 断点续跑。
+
+### （历史）`run_finish.cmd` 与 v3 的设计来历
+
+`run_finish.cmd` 的两件事：① 补 `baseflash_shuffle` 缺的 `qq_5` —— **已完成**（310/310）；
+② 4 任务预注册子集补 14 轮 —— **plus 侧已完成，flash 侧由 `run_flash_tail.cmd` 收尾**。
 
 **第 2 件为什么这么设计**：victim 表要求某任务 `|ΔSR| ≥ 0.2` **且** `q < 0.05`。而现有 8 任务 QQ 集里
 **大部分任务在两种顺序下成功率完全相同**（plus 只有 `qq_1` 有方差，flash 只有 `qq_1/qq_10/qq_13/qq_14`）——
@@ -668,7 +721,8 @@ git stash pop
 
 # F. 当前进度（诚实记录）
 
-> 更新的时间点：**2026-09-24**。**要跑的命令见上面的「★ 待跑清单」。**
+> ⚠️ 本节数据停在 **2026-09-24**，已被 [docs\初期实验.md](docs\初期实验.md) 取代（那份是 2026-10-02 的最新口径）。
+> **本轮要跑的命令见上面的「★ 本轮要跑的命令」。**
 
 ## F1 实验数据
 
@@ -710,7 +764,7 @@ flash 实测：**70.4 s**、**130,842 tokens / 任务**（`none` 条件）；带
 | **A 全** | 再补 base 310 × 2 顺序 | +620 | **≈ 12.1 h** | ≈ 81 M |
 | A 合计 | | 880 | **≈ 17.9 h** | ≈ 119 M |
 
-详细命令见「★ 待跑清单」**阶段 7**。★ 注意 **flash 比 plus 更快但更贵**（tokens 多 22%，
+详细命令见「B5 换模型 / 多 Agent 对比」。★ 注意 **flash 比 plus 更快但更贵**（tokens 多 22%，
 因为步数多、而每步 prompt 带历史截图 → token 随步数超线性增长），所以别指望用 flash 省 token。
 
 推荐 **B 档**：这样 §1 的四个对比每个都有两个 agent，才能回答"结论是否依赖 Agent"。
