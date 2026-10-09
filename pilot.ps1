@@ -34,7 +34,7 @@ $MBL  = $PSScriptRoot
 $RUN  = "$MBL\run_mbl.ps1"
 . "$MBL\mobile.env.ps1"                       # 载入 key / 路径 / 设备
 
-$S       = "$MBL\experiments\scripts"
+$S       = "$MBL\experiments\motivation_study\scripts"
 $outA    = "results/${Tag}_canonical"
 $outB    = "results/${Tag}_shuffle"
 $analysis= "results/${Tag}_analysis"

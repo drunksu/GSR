@@ -38,31 +38,36 @@ Deliberately **kept in place**: `pilot12_canonical.csv` / `pilot12_shuffle0.csv`
 12-task default of `pilot.ps1`; a bare `pilot.cmd` must remain a cheap safe dry run) and
 `smoke_2task.csv` (environment self-check input).
 
-### `experiments-results/` — side-line and exploration artifacts
+### `androidworld/` — the AndroidWorld emulator side line (code + artifacts)
+
+Scripts (`task_catalog.py`, `order_runner.py`, `make_sim_data.py`, `power_analysis.py`),
+the pilot task list, the dry-run `plan/`, and the regenerable gitignored `sim/` data.
+The real-device (emulator) path was never verified. See `androidworld/README.md` for usage
+and the verified/unverified list. The shared analyzer was **not** archived — it stays at
+`experiments/motivation_study/scripts/analyze_order_effects.py`.
+
+### `experiments-results/` — exploration artifacts
 
 | Item | Category |
 |---|---|
-| `plan/`, `sim/` | AndroidWorld side line: dry-run plan and regenerable synthetic data (`sim/` is gitignored; regenerate with `make_sim_data.py`) |
 | `mbl_audit/audit.json` | CSV audit covering only the extra longtail/top12/Explo/Long-Horizon sets |
-| `app_checklist_longtail.md` | install checklist for the extra longtail set; the base 12-app checklist stays in `experiments/results/` |
-
-### `experiments-data/`
-
-`pilot_tasks.txt` — AndroidWorld pilot task list (side line).
+| `app_checklist_longtail.md` | install checklist for the extra longtail set; the base 12-app checklist stays at `experiments/motivation_study/results/app_checklist_base.md` |
 
 ### `experiments-scripts/`
 
 `mbl_api_smoketest.py` — early endpoint smoke test (P0–P3 probes) from initial bring-up;
 superseded by `mbl_api_probe.py` + `mbl_coord_convention_check.py`, which stay in
-`experiments/scripts/`.
+`experiments/common/`.
 
 ## Notes
 
-- The AndroidWorld **scripts** (`task_catalog.py`, `order_runner.py`, `make_sim_data.py`,
-  `power_analysis.py`) intentionally stay in `experiments/scripts/` because `selftest.py`
-  imports and guards them; only their generated artifacts moved.
+- The in-house experiment code is organized per experiment: study code lives in
+  `experiments/motivation_study/`, reusable MobileBench-OL infrastructure in
+  `experiments/common/`; future experiments get sibling directories.
+- When the AndroidWorld scripts moved here, the A/B/C/E/F checks of `selftest.py` were
+  trimmed along with them (they imported these modules); `experiments/selftest.py` now
+  guards the analyzer statistics (D1–D3) and the repo encoding rules (G1–G2).
 - Vendored benchmark files in `third_party/mobilebench-ol-main/config/` and the raw upstream
   CSVs (`MobileBench-OL - *.csv`) were left untouched.
-- `run_all.cmd` predates this cleanup: its `master_analysis` line still references the moved
-  `reset_can` / `reset_shf` directories. It is a historical full-run entry point; trim or
-  update it before the next full rerun.
+- `run_all.cmd` was updated for the new layout, and its stale `master_analysis` line
+  (referencing the moved `reset_can` / `reset_shf` directories) was removed.

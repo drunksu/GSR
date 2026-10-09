@@ -19,8 +19,9 @@ agent's success rate (order-dependent / OD flaky tests)?**
   LLM API (`qwen3-vl-plus` / `qwen3-vl-flash`), running a 2×2 factorial study of
   **order (canonical/shuffle) × reset (official/none)**. Real conclusions have been produced.
 - **Side line (AndroidWorld):** an emulator-based route. Code and synthetic-data self-tests
-  pass, but the real-device path is unverified (`experiments/scripts/order_runner.py`,
-  `task_catalog.py`, etc.) — rarely touched.
+  passed historically, but the real-device path was never verified. The whole route
+  (`order_runner.py`, `task_catalog.py`, `make_sim_data.py`, `power_analysis.py` plus its
+  artifacts) is archived under `backup/androidworld/` with its own README — rarely touched.
 
 This is **scientific experiment code**: no change may silently shift the data pipeline or
 metric definitions. Fail loudly, never silently — pitfalls #10/#13/#19 in the README were all
@@ -40,7 +41,10 @@ state its cost first.
 | `pilot.cmd` / `pilot.ps1` | Two order passes + automatic analysis | Same |
 | `run_repeats.cmd` / `sync.cmd` | Repeated-runs scheduler / one-command add-verify-commit-push | Same |
 | `mobile.env.ps1` | **Environment config**: API key (plaintext), model→coordinate registry, device serial, paths | See §6 security |
-| `experiments/scripts/` | All in-house Python scripts (analyzer, patcher, diagnostics) | See §5 code rules |
+| `experiments/selftest.py` | Regression self-check (statistics + encoding guards); no phone/key needed | Must stay green; run after any edit |
+| `experiments/common/` | Cross-experiment MobileBench-OL infrastructure: key lookup, API patch, endpoint/coord probes, app checklist | Reusable for future experiments |
+| `experiments/motivation_study/` | Code/docs for the completed motivation study (`docs/motivation_study.md`): analyzer, episode converter, CSV/purge/audit/forensics scripts | New experiments get sibling dirs, e.g. `experiments/<name>/{scripts,docs,results}` |
+| `backup/` | Superseded/extra runs, CSVs, the AndroidWorld side line — never silently delete; see `backup/MANIFEST.md` | Archived evidence |
 | `third_party/mobilebench-ol-main/` | The **patched** benchmark: `run.py`, `config/`, `data/*.csv`, `results/` | See §4; never hand-edit generated patches |
 | `third_party/platform-tools/` | Bundled adb (3 committed files) | Do not touch |
 | `docs/` | Proposal, early-stage experiment notes (latest result conventions) | Documentation |
@@ -95,11 +99,11 @@ analyze_order_effects.py ──> results/<name>/report.md
 
 ## 5. Hard Rules for Code and Encoding (guarded by self-test)
 
-After editing any `.ps1`, `.cmd`, or Python file, **run the self-test first** (~10 seconds,
+After editing any `.ps1`, `.cmd`, or Python file, **run the self-test first** (~1 second,
 no phone or API key needed):
 
 ```powershell
-mobile\Scripts\python.exe experiments\scripts\selftest.py
+mobile\Scripts\python.exe experiments\selftest.py
 ```
 
 It guards both statistical correctness and this repository's own pitfalls (G1/G2). Required:
@@ -167,13 +171,13 @@ It guards both statistical correctness and this repository's own pitfalls (G1/G2
 
 ```powershell
 # Self-test (run after every code change)
-mobile\Scripts\python.exe experiments\scripts\selftest.py
+mobile\Scripts\python.exe experiments\selftest.py
 
 # Rehearse one run without touching the phone
 .\run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\_selftest -DryRun
 
 # Rebuild a report from episodes (CWD = third_party\mobilebench-ol-main)
-..\..\mobile\Scripts\python.exe ..\..\experiments\scripts\analyze_order_effects.py `
+..\..\mobile\Scripts\python.exe ..\..\experiments\motivation_study\scripts\analyze_order_effects.py `
   --input results\p1_none_can results\p1_off_can --out results\demo --official-condition official
 ```
 

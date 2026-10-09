@@ -19,7 +19,7 @@ $env:MBL_API_KEY = 'sk-ws-H.PIHIYHE.lnSR.MEUCIQC0sIGjFmTLj5RN2ZnhaGudioMy4ct5GIE
 #      qwen-vl-max    两次答 y=1489 / 1490 —— **>1000，归一化不可能超 1000** ⇒ **pixel**
 #      qwen-vl-plus   答 <point>641 y872</point>：距归一化 290 px、距像素 1269 px
 #                     ⇒ 倾向 norm，但**未坐实**；用前请自己跑一次：
-#                       experiments\scripts\mbl_coord_convention_check.py --model <模型> --repo <repo>
+#                       experiments\common\mbl_coord_convention_check.py --model <模型> --repo <repo>
 $MBL_MODELS = [ordered]@{
     # —— 主力梯队：Qwen3-VL 世代，全部 norm，定位精确（实测距目标 1–6 px）——
     'qwen3-vl-plus'              = 'norm'    # 已验证；已有 310 个任务的结果

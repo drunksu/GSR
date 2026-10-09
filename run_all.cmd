@@ -24,7 +24,8 @@ cd /d "%~dp0"
 set MBL=%~dp0
 if "%MBL:~-1%"=="\" set MBL=%MBL:~0,-1%
 set PY=%MBL%\mobile\Scripts\python.exe
-set S=%MBL%\experiments\scripts
+set SC=%MBL%\experiments\common
+set SS=%MBL%\experiments\motivation_study\scripts
 set REPO=%MBL%\third_party\mobilebench-ol-main
 set ADB=%MBL%\third_party\platform-tools\adb.exe
 set DEV=GAGU8HGYW8JF9TIJ
@@ -42,10 +43,10 @@ if not exist "%REPO%\run.py" (echo [FATAL] benchmark missing under REPO -- STOP 
 echo.
 echo ============ 1. self-test + flash coord check + wake phone (5 min) ============
 echo coord check exit code 3 = "norm convention" = EXPECTED, not a failure
-"%PY%" "%S%\selftest.py"
+"%PY%" "%MBL%\experiments\selftest.py"
 if errorlevel 1 (echo [FATAL] self-test FAILED -- STOP & goto :fail)
 "%ADB%" devices
-"%PY%" "%S%\mbl_coord_convention_check.py" --model qwen3-vl-flash --repo "%REPO%"
+"%PY%" "%SC%\mbl_coord_convention_check.py" --model qwen3-vl-flash --repo "%REPO%"
 "%ADB%" -s %DEV% shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
 cd /d "%REPO%"
 
@@ -56,7 +57,7 @@ call "%MBL%\run_mbl.cmd" -ConfigFile config\interact_API_qwen3vl_base.conf  -Tas
 call "%MBL%\run_mbl.cmd" -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\p1_off_can
 call "%MBL%\run_mbl.cmd" -ConfigFile config\interact_API_qwen3vl_base.conf  -TaskFile data\reset_shuffle0.csv  -Output results\p2_none_shf
 call "%MBL%\run_mbl.cmd" -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_shuffle0.csv  -Output results\p2_off_shf
-"%PY%" "%S%\mbl_purge_tasks.py" --run-dir results\base_shuffle --blank-failed-only --dry-run
+"%PY%" "%SS%\mbl_purge_tasks.py" --run-dir results\base_shuffle --blank-failed-only --dry-run
 
 echo.
 echo ============ 3. flash: 65-task 2x2 + 310x2 full scale (17.9 h) ============
@@ -106,10 +107,9 @@ for /l %%r in (1,1,6) do (
 
 echo.
 echo ============ 6. build all reports ============
-"%PY%" "%S%\analyze_order_effects.py" --input results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf --out results\twomodel_2x2 --official-condition official
-"%PY%" "%S%\analyze_order_effects.py" --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
-"%PY%" "%S%\analyze_order_effects.py" --input results\base_canonical results\base_shuffle results\reset_can results\reset_shf --out results\master_analysis --official-condition official
-"%PY%" "%S%\analyze_order_effects.py" --input results\q2_A_1 results\q2_A_2 results\q2_A_3 results\q2_A_4 results\q2_A_5 results\q2_A_6 results\q2_B_1 results\q2_B_2 results\q2_B_3 results\q2_B_4 results\q2_B_5 results\q2_B_6 results\q2_Af_1 results\q2_Af_2 results\q2_Af_3 results\q2_Af_4 results\q2_Af_5 results\q2_Af_6 results\q2_Bf_1 results\q2_Bf_2 results\q2_Bf_3 results\q2_Bf_4 results\q2_Bf_5 results\q2_Bf_6 --out results\repeat_analysis --official-condition none
+"%PY%" "%SS%\analyze_order_effects.py" --input results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf --out results\twomodel_2x2 --official-condition official
+"%PY%" "%SS%\analyze_order_effects.py" --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
+"%PY%" "%SS%\analyze_order_effects.py" --input results\q2_A_1 results\q2_A_2 results\q2_A_3 results\q2_A_4 results\q2_A_5 results\q2_A_6 results\q2_B_1 results\q2_B_2 results\q2_B_3 results\q2_B_4 results\q2_B_5 results\q2_B_6 results\q2_Af_1 results\q2_Af_2 results\q2_Af_3 results\q2_Af_4 results\q2_Af_5 results\q2_Af_6 results\q2_Bf_1 results\q2_Bf_2 results\q2_Bf_3 results\q2_Bf_4 results\q2_Bf_5 results\q2_Bf_6 --out results\repeat_analysis --official-condition none
 type results\twomodel_2x2\report.md
 type results\scale_analysis\report.md
 type results\repeat_analysis\report.md

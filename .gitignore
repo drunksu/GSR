@@ -15,9 +15,8 @@ step_*.xml
 *_som.png
 step_*.jpg
 
-# ---- 合成实验数据（可用 make_sim_data.py 重新生成，9 MB）----
-/experiments/results/sim/
-/backup/experiments-results/sim/
+# ---- 合成实验数据（AndroidWorld 支线，可用 backup/androidworld/make_sim_data.py 重新生成，9 MB）----
+/backup/androidworld/sim/
 
 # ---- platform-tools：只提交 adb 运行必需的 3 个文件（8.1 MB）----
 # 这样新机器 clone 完就有 adb，不用下载（Windows 自带 curl 常因
@@ -51,5 +50,5 @@ __pycache__/
 .pytest_cache/
 
 # ---- 零散产物 ----
-/experiments/scripts/coord_probe.png
+/experiments/common/coord_probe.png
 *.log

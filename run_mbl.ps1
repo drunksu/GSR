@@ -48,7 +48,7 @@ if ($Model) {
     if (-not $MBL_MODELS.Contains($Model)) {
         Write-Host "⚠️  $Model 不在模型注册表（$($MBL_MODELS.Keys -join ', ')）" -ForegroundColor Yellow
         if (-not $Coord) {
-            throw "❌ 未知模型的坐标约定未知。先跑：experiments\scripts\mbl_coord_convention_check.py --model $Model --repo `"$REPO`"  然后用 -Coord norm|pixel 指定"
+            throw "❌ 未知模型的坐标约定未知。先跑：experiments\common\mbl_coord_convention_check.py --model $Model --repo `"$REPO`"  然后用 -Coord norm|pixel 指定"
         }
     }
     $env:MBL_MODEL = $Model
@@ -178,7 +178,7 @@ if (Test-Path "$Output/result_list.txt") {
 # ---------------------------------------------------------------------------
 Write-Host ("-" * 70)
 Write-Host "转成分析格式: episodes.jsonl"
-& $PY "$PSScriptRoot\experiments\scripts\mbl_traj_to_episodes.py" --run-dir $Output
+& $PY "$PSScriptRoot\experiments\motivation_study\scripts\mbl_traj_to_episodes.py" --run-dir $Output
 Write-Host "退出码: $LASTEXITCODE"
 $ep = Join-Path $REPO "$Output/episodes.jsonl"
 if (Test-Path $ep) {

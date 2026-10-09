@@ -17,7 +17,7 @@
 查找顺序
 ========
 1. 环境变量 `MBL_API_KEY`（显式设置优先，便于临时换 key）
-2. 从本文件位置往上找 `mobile.env.ps1`（脚本在 <repo>/experiments/scripts/ 下）
+2. 从本文件位置往上找 `mobile.env.ps1`（脚本在 <repo>/experiments/common/ 下）
 3. 都没找到 → 返回 None，调用方自己给提示
 """
 

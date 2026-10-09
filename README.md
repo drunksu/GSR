@@ -63,28 +63,38 @@
 | `pilot.cmd` / `pilot.ps1` | **一条命令跑完两轮顺序 + 自动分析** |
 | `run_repeats.cmd` | 把**同一份任务集跑 N 遍**，每遍独立 `-Output`（重复实验用，见 B10） |
 | `sync.cmd` | 一键 `add → 校验有没有 results\ → commit → push`（见 C1） |
-| `experiments/docs/` | 01 数据集与 Agent 选型、02 实验方案（2×2 析因 / 指标 / 样本量） |
-| `experiments/scripts/` | 全部脚本（见下） |
+| `experiments/common/` | 跨实验复用的设施：key 查找、benchmark 补丁、端点/坐标探测、App 清单 |
+| `experiments/motivation_study/` | 第一阶段动机研究的脚本 / docs / 安装清单（见下；研究文档在 `docs/motivation_study.md`） |
+| `experiments/selftest.py` | 不依赖真机 / key 的回归自检（5 项：统计函数 + 编码守卫） |
+| `backup/androidworld/` | AndroidWorld 模拟器支线（代码 + 产物，真机路径未验证，附说明） |
 | `third_party/mobilebench-ol-main/` | **已打补丁**的 MobileBench-OL（源码 + 全套 CSV + 顺序任务集 + reset 配置） |
 | `third_party/mobilebench-ol-main/results/` | 运行产物。**小文件（episodes / manifest / trajectory / report）会入库**，只有截图与元素树被 `.gitignore` 排除 |
 
-**脚本清单**（都在 `experiments/scripts/`）
+**脚本清单**（按目录划分；以后新实验在 `experiments/` 下开同名目录）
+
+`experiments/common/`（跨实验复用的设施）：
+
+| 脚本 | 用途 |
+|---|---|
+| `mbl_apply_api_patch.py` | 给 MobileBench-OL 打补丁（幂等 / 自动备份 / `--revert`） |
+| `mbl_api_probe.py` | 零依赖探测端点（模型可用性、`--scan`、`--dump-models`） |
+| `mbl_coord_convention_check.py` | **判定模型坐标约定**（norm / pixel）—— 换模型必跑 |
+| `mbl_app_checklist.py` | 生成"要装哪些 App"清单（可查设备已装情况） |
+| `mbl_env.py` | 给直连 API 的脚本找 API key（不用手动 `set MBL_API_KEY`，见坑 #17） |
+
+`experiments/motivation_study/scripts/`（动机研究专用）：
 
 | 脚本 | 用途 |
 |---|---|
 | `mbl_make_task_csv.py` | **生成顺序任务集**：子集 + canonical / reverse / shuffle(seed) |
 | `mbl_traj_to_episodes.py` | 真机结果 → `episodes.jsonl`（分析器的输入）；含黑屏检测 |
 | `analyze_order_effects.py` | **核心分析**：2×2 析因、ΔSR / CTCI / PASR / victim / polluter / DiD；报告带「§0 空表诊断」 |
-| `mbl_apply_api_patch.py` | 给 MobileBench-OL 打补丁（幂等 / 自动备份 / `--revert`） |
-| `mbl_api_probe.py` | 零依赖探测端点（模型可用性、`--scan`、`--dump-models`） |
-| `mbl_coord_convention_check.py` | **判定模型坐标约定**（norm / pixel）—— 换模型必跑 |
-| `mbl_app_checklist.py` | 生成"要装哪些 App"清单（可查设备已装情况） |
 | `mbl_task_audit.py` | 任务集审计（编码 / 坏行 / App / Reset 标注 / reset 集重叠） |
 | `mbl_purge_tasks.py` | 长跑后摘掉**设备问题**造成的假失败以便补跑（用 `--blank-failed-only`，见 B7） |
 | `mbl_fix_condition_labels.py` | **修正 manifest / episodes 里写错的重置条件标签**（见坑 #13） |
-| `mbl_env.py` | 给直连 API 的脚本找 API key（不用手动 `set MBL_API_KEY`，见坑 #17） |
 | `mbl_find_actions.py` | **轨迹取证**：查"是哪个任务的哪一步改了什么" |
-| `task_catalog.py` / `order_runner.py` / `make_sim_data.py` / `power_analysis.py` / `selftest.py` | AndroidWorld 那条链路（另一条路线，已验证）；`selftest.py` 同时守卫本仓库自己的坑（G1/G2） |
+
+`task_catalog.py` / `order_runner.py` / `make_sim_data.py` / `power_analysis.py` 属 AndroidWorld 支线，已归档到 `backup/androidworld/`（附说明）。
 
 ---
 
@@ -206,22 +216,23 @@ git pull --rebase --autostash
 
 set MBL=D:\projects\GUI state recovery
 set PY=%MBL%\mobile\Scripts\python.exe
-set S=%MBL%\experiments\scripts
+set SC=%MBL%\experiments\common
+set SS=%MBL%\experiments\motivation_study\scripts
 set REPO=%MBL%\third_party\mobilebench-ol-main
 set PYTHONUTF8=1
 set PYTHONIOENCODING=utf-8
 cd /d %REPO%
 
 rem step 1. verify the condition/order/agent labels before trusting anything
-%PY% %S%\mbl_fix_condition_labels.py --run-dir results\p1_none_can results\p1_off_can results\f_none_can results\baseflash_canonical --dry-run
+%PY% %SS%\mbl_fix_condition_labels.py --run-dir results\p1_none_can results\p1_off_can results\f_none_can results\baseflash_canonical --dry-run
 
 rem step 2. verify flash really is the norm convention before comparing
-%PY% %S%\mbl_coord_convention_check.py --model qwen3-vl-flash --repo %REPO%
+%PY% %SC%\mbl_coord_convention_check.py --model qwen3-vl-flash --repo %REPO%
 
 rem step 3. rebuild every report from all episode files
-%PY% %S%\analyze_order_effects.py --input results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf --out results\twomodel_2x2 --official-condition official
-%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
-%PY% %S%\analyze_order_effects.py --input results\q2_A_1 results\q2_A_2 results\q2_A_3 results\q2_A_4 results\q2_A_5 results\q2_A_6 results\q2_B_1 results\q2_B_2 results\q2_B_3 results\q2_B_4 results\q2_B_5 results\q2_B_6 results\q2_Af_1 results\q2_Af_2 results\q2_Af_3 results\q2_Af_4 results\q2_Af_5 results\q2_Af_6 results\q2_Bf_1 results\q2_Bf_2 results\q2_Bf_3 results\q2_Bf_4 results\q2_Bf_5 results\q2_Bf_6 --out results\repeat_analysis --official-condition none
+%PY% %SS%\analyze_order_effects.py --input results\p1_none_can results\p1_off_can results\p2_none_shf results\p2_off_shf results\f_none_can results\f_off_can results\f_none_shf results\f_off_shf --out results\twomodel_2x2 --official-condition official
+%PY% %SS%\analyze_order_effects.py --input results\base_canonical results\base_shuffle results\baseflash_canonical results\baseflash_shuffle --out results\scale_analysis --official-condition official
+%PY% %SS%\analyze_order_effects.py --input results\q2_A_1 results\q2_A_2 results\q2_A_3 results\q2_A_4 results\q2_A_5 results\q2_A_6 results\q2_B_1 results\q2_B_2 results\q2_B_3 results\q2_B_4 results\q2_B_5 results\q2_B_6 results\q2_Af_1 results\q2_Af_2 results\q2_Af_3 results\q2_Af_4 results\q2_Af_5 results\q2_Af_6 results\q2_Bf_1 results\q2_Bf_2 results\q2_Bf_3 results\q2_Bf_4 results\q2_Bf_5 results\q2_Bf_6 --out results\repeat_analysis --official-condition none
 
 rem step 4. read the reports. ALWAYS read the first section (empty-table
 rem   diagnostics) before the tables: it states, per table, why it is empty
@@ -347,7 +358,8 @@ run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\_selftest -DryRun
 ```cmd
 set MBL=D:\GSR
 set PY=%MBL%\mobile\Scripts\python.exe
-set S=%MBL%\experiments\scripts
+set SC=%MBL%\experiments\common
+set SS=%MBL%\experiments\motivation_study\scripts
 set REPO=%MBL%\third_party\mobilebench-ol-main
 set ADB=%MBL%\third_party\platform-tools\adb.exe
 cd /d %REPO%
@@ -360,7 +372,7 @@ cd /d %REPO%
 > ⚠️ 若你的路径含空格，调用时加引号：`"%MBL%\run_mbl.cmd" ...`。
 
 **为什么要 `cd` 到 `%REPO%`**：benchmark 用相对路径 `data\...` 解析任务集，输出目录 `results\...` 也落在 benchmark 目录下（与官方一致）。
-`%PY%` / `%S%` / `%ADB%` 都是**绝对路径**，所以在哪个目录下都能用。
+`%PY%` / `%SC%` / `%SS%` / `%ADB%` 都是**绝对路径**（`%SC%` = `experiments\common`，`%SS%` = `experiments\motivation_study\scripts`），所以在哪个目录下都能用。
 
 ## B1 唤醒手机（**每次长跑前必做**）
 
@@ -411,7 +423,7 @@ cd /d %REPO%
 跑完 `run_mbl.cmd` 会**自动**在同目录生成 `episodes.jsonl`（转格式已内置，见坑 #10）。所以只有「用别的办法跑的轮次」才需要手动转：
 
 ```cmd
-%PY% %S%\mbl_traj_to_episodes.py --run-dir results\reset_r1
+%PY% %SS%\mbl_traj_to_episodes.py --run-dir results\reset_r1
 ```
 
 ⚠️ **reset 必须用独立的 `-Output`**：reset 集的 65 个 task_identifier 与主集**完全重叠**，共用目录会让主运行把它们当成"已完成"跳过。
@@ -453,11 +465,11 @@ qwen3.8-omni-flash[-realtime], qwen-omni-turbo
 `qwen-vl-max`，而且它是 **pixel** 约定。想要"强模型对照"的话这一点要在论文里写清楚。
 
 **加新模型**：先跑坐标检测。`--model` 用真实模型名替换下面的 `MODEL_NAME`；
-**不需要 `set MBL_API_KEY`** —— 脚本会用 `experiments/scripts/mbl_env.py` 自动去仓库根的 `mobile.env.ps1` 里读 key。
+**不需要 `set MBL_API_KEY`** —— 脚本会用 `experiments/common/mbl_env.py` 自动去仓库根的 `mobile.env.ps1` 里读 key。
 
 ```cmd
-%PY% %S%\mbl_coord_convention_check.py --model MODEL_NAME --repo %REPO%
-%PY% %S%\mbl_api_probe.py --scan MODEL_NAME,ANOTHER_MODEL_NAME
+%PY% %SC%\mbl_coord_convention_check.py --model MODEL_NAME --repo %REPO%
+%PY% %SC%\mbl_api_probe.py --scan MODEL_NAME,ANOTHER_MODEL_NAME
 ```
 
 > ⚠️ 换模型**必须**先跑坐标检测再开长跑：约定填错的表现是"任务全灭但看不出原因"（见坑 #1）。
@@ -472,9 +484,9 @@ qwen3.8-omni-flash[-realtime], qwen-omni-turbo
 ## B6 生成新的顺序任务集
 
 ```cmd
-%PY% %S%\mbl_make_task_csv.py --repo %REPO% --order reverse --out base_reverse.csv
-%PY% %S%\mbl_make_task_csv.py --repo %REPO% --order shuffle --seed 1 --out base_shuffle1.csv
-%PY% %S%\mbl_make_task_csv.py --repo %REPO% --limit 30 --order shuffle --seed 0 --out sub30_shuffle0.csv
+%PY% %SS%\mbl_make_task_csv.py --repo %REPO% --order reverse --out base_reverse.csv
+%PY% %SS%\mbl_make_task_csv.py --repo %REPO% --order shuffle --seed 1 --out base_shuffle1.csv
+%PY% %SS%\mbl_make_task_csv.py --repo %REPO% --limit 30 --order shuffle --seed 0 --out sub30_shuffle0.csv
 ```
 
 > `--out` 写成纯文件名时，输出落到 `%REPO%\data\` 下；文件名必须含 `shuffle<数字>` 才会被 manifest 识别为乱序并记录 seed。
@@ -483,8 +495,8 @@ qwen3.8-omni-flash[-realtime], qwen-omni-turbo
 
 ```cmd
 rem dry run first to see what would be dropped
-%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
-%PY% %S%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only
+%PY% %SS%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only --dry-run
+%PY% %SS%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only
 ```
 
 摘掉那些与顺序无关的失败（黑屏/熄屏这类**设备问题**）之后，重跑 B3 就会自动补跑它们。
@@ -498,7 +510,7 @@ rem dry run first to see what would be dropped
 ## B8 单独出报告
 
 ```cmd
-%PY% %S%\analyze_order_effects.py --input results\base_canonical results\base_shuffle --out results\base_analysis --official-condition official
+%PY% %SS%\analyze_order_effects.py --input results\base_canonical results\base_shuffle --out results\base_analysis --official-condition official
 type results\base_analysis\report.md
 ```
 
@@ -547,7 +559,7 @@ rem optional: same set with the second agent
 出报告时把**所有重复目录一起**喂进去（顺序模式靠各目录自己的 `run_manifest.json` 区分，不用手动分组）：
 
 ```cmd
-%PY% %S%\analyze_order_effects.py --input ^
+%PY% %SS%\analyze_order_effects.py --input ^
   results\qqset_A_r1 results\qqset_A_r2 results\qqset_A_r3 results\qqset_A_r4 results\qqset_A_r5 results\qqset_A_r6 ^
   results\qqset_B_r1 results\qqset_B_r2 results\qqset_B_r3 results\qqset_B_r4 results\qqset_B_r5 results\qqset_B_r6 ^
   --out results\qqset_analysis --official-condition official
@@ -597,7 +609,7 @@ git stash pop
 | `results\*\episodes.jsonl`（每任务一行，判定+步数） | `mobile\`（venv，245 MB） |
 | `results\*\run_manifest.json`（这个目录是哪种顺序/条件） | `third_party\platform-tools.zip` |
 | `results\*\*\trajectory.json`、`api_metrics.jsonl`、`step_timing.jsonl`、`result_list.txt` | `paper\`（参考论文 PDF） |
-| `results\*_analysis\report.md` 等分析产物 | `experiments\results\sim\`（合成数据，可重生成） |
+| `results\*_analysis\report.md` 等分析产物 | `backup\androidworld\sim\`（合成数据，可重生成） |
 | adb（`adb.exe` + 2 个 DLL，8.1 MB，见 A3） | |
 
 ---
@@ -618,11 +630,11 @@ git stash pop
 | 10 | **`run_mbl.ps1` 把 benchmark 跑两遍、且从不转格式** | 实测踩过：脚本末尾**又调用了一次 `& $PY @runArgs`**，而上面那行提示写的是"转成分析格式 `mbl_traj_to_episodes.py`"。三个后果：① 白跑一遍全量扫描（长跑时好几分钟）；② 第一遍崩了第二遍会**悄悄续跑**，退出码没法解读；③ 最要命 —— `run_mbl.cmd` 跑完**根本没有 `episodes.jsonl`**，直接接 B8 会报"没有读到任何 episode"。已修，并在结尾打印 episodes 行数 |
 | 11 | **含中文的 `.ps1` 丢了 UTF-8 BOM** | `run_mbl.cmd` 走的是 PowerShell **5.1**，它读**无 BOM** 的 `.ps1` 时按本地代码页 GBK 解码，轻则输出乱码、重则语法错误。实测踩过两次（编辑工具会把 BOM 吃掉）。对策：`selftest.py` 新增 **G1/G2 守卫**（含中文的 `.ps1` 必须有 BOM；`.cmd`/`.bat` 必须纯 ASCII），**改完 `.ps1` 就跑一次自检** |
 | 12 | **用 `Get-Content \| Set-Content` 回写含中文的文件会双重编码** | 实测踩过（代价：整份 README 变乱码 + 被推上远端）：本环境的 `Get-Content -Raw` 不带 `-Encoding` 时按 **GBK** 解码 UTF-8 文件，`Set-Content -Encoding UTF8` 再写回 → 全文中文字符串变成 `鈥斺€?` 之类，同时被加上 BOM、换行符也被改写。对策：**不要用 cmdlet 回写要保留的文本**；用编辑工具改，或用 `[System.IO.File]::ReadAllText($p, [System.Text.UTF8Encoding]::new($false))` / `WriteAllText`（显式指定 UTF-8 无 BOM）。改完用 `git diff --stat` 核对：**行数不该出现"整文件重写"那种规模** |
-| 13 | **`run_mbl.ps1` 的 reset 判定恒为真 → 所有轮次被标成 `official`** | 原代码 `((Get-Content $cfg \| Select-String '^reset=') -match 'true').Count -gt 0` **永远为真**：config 里实际写的是 `[reset=false]`（带方括号）→ `^reset=` 匹配不到 → 左边是 `$null` → `$null -match 'true'` 得到标量 `$false` → 而 **PowerShell 3+ 给标量也加了 `.Count`（恒为 1）** → `1 -gt 0` = `$true`。后果：用 `reset=false` 的 base.conf 跑出来的 6 个 manifest 全被写成 `reset=True / condition=official`，**把"没跑 cleaner"的轮次标成了官方重置**。拿这种标签做 2×2，两格合并成一格、**交互项静默消失**。已修（显式解析 `[reset=...]` 并跳过注释行），并用 `experiments\scripts\mbl_fix_condition_labels.py` 把已产生的 5 个目录标签改正 |
-| 14 | **改完 `.ps1` 一定要重跑自检** | 坑 #11（BOM 被吃掉）、#13（PowerShell 标量 `.Count` 陷阱）都属于"看着没问题、结果全错"的类型。`%PY% %S%\selftest.py` 不依赖手机与 API key，15 项检查约 10 秒，是唯一能在长跑前挡住这类错误的关卡 |
+| 13 | **`run_mbl.ps1` 的 reset 判定恒为真 → 所有轮次被标成 `official`** | 原代码 `((Get-Content $cfg \| Select-String '^reset=') -match 'true').Count -gt 0` **永远为真**：config 里实际写的是 `[reset=false]`（带方括号）→ `^reset=` 匹配不到 → 左边是 `$null` → `$null -match 'true'` 得到标量 `$false` → 而 **PowerShell 3+ 给标量也加了 `.Count`（恒为 1）** → `1 -gt 0` = `$true`。后果：用 `reset=false` 的 base.conf 跑出来的 6 个 manifest 全被写成 `reset=True / condition=official`，**把"没跑 cleaner"的轮次标成了官方重置**。拿这种标签做 2×2，两格合并成一格、**交互项静默消失**。已修（显式解析 `[reset=...]` 并跳过注释行），并用 `experiments\motivation_study\scripts\mbl_fix_condition_labels.py` 把已产生的 5 个目录标签改正 |
+| 14 | **改完 `.ps1` 一定要重跑自检** | 坑 #11（BOM 被吃掉）、#13（PowerShell 标量 `.Count` 陷阱）都属于"看着没问题、结果全错"的类型。`%PY% %MBL%\experiments\selftest.py` 不依赖手机与 API key，5 项检查约 1 秒，是唯一能在长跑前挡住这类错误的关卡 |
 | 15 | **`analyze_order_effects.py --input` 传目录会读进无关文件** | 原实现用 `os.walk` 收目录下**所有** `*.jsonl`，于是每个任务子目录里的 `api_metrics.jsonl` / `step_timing.jsonl`（完全不同的 schema）也被当成 episode 读入 → `KeyError: 'agent'`；若某些行恰好带同名字段，则会**静默**混进统计。而"传目录"恰恰是最自然的写法（B10 就是这么用的）。已修为**只认 `episodes.jsonl`**，找不到时给出明确报错 |
-| 16 | **在新开的 cmd 里直接 `%PY% 某脚本.py` 会崩在中文输出上** | `run_mbl.cmd` / `pilot.cmd` 没问题（`mobile.env.ps1` 里设了 `PYTHONUTF8=1` / `PYTHONIOENCODING=utf-8`），但**直接调 python 就没有这两个变量**，Python 会用控制台默认代码页 GBK。实测踩过：`%PY% %S%\selftest.py` 在新 cmd 里 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'` —— 因为它最后一行要打印 `✅ 全部通过`。**后果比崩掉更糟：看起来像"自检失败"，其实是输出编码问题。** 对策：① 块里已 `set PYTHONUTF8=1` + `set PYTHONIOENCODING=utf-8`；② `selftest.py` 自己也做了 `sys.stdout.reconfigure(encoding="utf-8")` 兜底 |
-| 17 | **诊断脚本"未设置 MBL_API_KEY"** | `mbl_api_probe.py` / `mbl_coord_convention_check.py` 是纯标准库直连 API、**不经过 PowerShell**，所以读不到 `mobile.env.ps1` 里设的 key，在新 cmd 里直接跑会报 `❌ 未设置 MBL_API_KEY`。实测踩过（正好卡在一键流程的第 0 段）。已新增 `experiments/scripts/mbl_env.py`：**先看环境变量，找不到就自动去仓库根的 `mobile.env.ps1` 里解析** —— 不用再手动 `set`，也不用把密钥抄到第二个地方 |
+| 16 | **在新开的 cmd 里直接 `%PY% 某脚本.py` 会崩在中文输出上** | `run_mbl.cmd` / `pilot.cmd` 没问题（`mobile.env.ps1` 里设了 `PYTHONUTF8=1` / `PYTHONIOENCODING=utf-8`），但**直接调 python 就没有这两个变量**，Python 会用控制台默认代码页 GBK。实测踩过：`%PY% %MBL%\experiments\selftest.py` 在新 cmd 里 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'` —— 因为它最后一行要打印 `✅ 全部通过`。**后果比崩掉更糟：看起来像"自检失败"，其实是输出编码问题。** 对策：① 块里已 `set PYTHONUTF8=1` + `set PYTHONIOENCODING=utf-8`；② `selftest.py` 自己也做了 `sys.stdout.reconfigure(encoding="utf-8")` 兜底 |
+| 17 | **诊断脚本"未设置 MBL_API_KEY"** | `mbl_api_probe.py` / `mbl_coord_convention_check.py` 是纯标准库直连 API、**不经过 PowerShell**，所以读不到 `mobile.env.ps1` 里设的 key，在新 cmd 里直接跑会报 `❌ 未设置 MBL_API_KEY`。实测踩过（正好卡在一键流程的第 0 段）。已新增 `experiments/common/mbl_env.py`：**先看环境变量，找不到就自动去仓库根的 `mobile.env.ps1` 里解析** —— 不用再手动 `set`，也不用把密钥抄到第二个地方 |
 | 18 | **手工往 cmd 粘贴大段命令 → 整块静默失效（两个独立原因）** | ★ **最容易让人误判"环境坏了"的坑，实测踩过两次。**<br>**原因 A（非 ASCII）**：cmd 用**当前代码页**（中文 Windows = GBK）解码粘贴进来的 UTF-8 字节，多出的半个字节会**吃掉下一行的开头** —— `set MBL=D:\projects\X` 变成 `jects\X` → 变量全空 → 后面每条命令瞬间报"不是内部或外部命令" → **28 小时的实验块 1 秒"跑完"**。更狠的是 `chcp 65001` 夹在粘贴流中间时，**后面整段输入被直接丢弃**（实测只剩前两行）。<br>**原因 B（输入缓冲）**：在一条命令（如 `adb shell`、`selftest.py`）**还在执行时**把后面几十行灌进去，控制台会先把它们**原样回显**（特征是**没有 `D:\...>` 提示符前缀**），cmd 要等当前命令结束才回到提示符去读 —— 看起来像"跑完了"，实际一条都没执行。<br>**对策（釜底抽薪）**：不要手工粘贴，**把命令写进一个纯 ASCII 的 `.cmd` 文件，跑那个文件** —— 见「一、」的 `run_all.cmd`。若必须粘贴：① 块保持纯 ASCII；② 先单独敲 `chcp 65001` 回车再粘；③ **等上一条命令跑完、提示符回来再粘下一段**；④ 块里放 `echo [CHECK]` 打印变量 + `if not exist ... echo [FATAL]` 兜底，粘完先看这几行 |
 | 19 | **PowerShell 数组 splat 把 `'-Model'` 当位置参数 → 参数整体错位一格** | ★ **实测毁掉了一整轮 12 小时的实验（2026-09-27）。** `pilot.ps1` 原来这么写：<br>`$modelArgs = @(); if ($Model) { $modelArgs += @('-Model', $Model) }`<br>`& $RUN -TaskFile $tf -Output $od @modelArgs`<br>**PowerShell 不把数组 splat 里的 `'-Model'` 当参数名**，而是当**位置参数**，于是整体右移一格：`$Subset` 收到 `'-Model'`、`$ConfigFile` 收到 `'qwen3-vl-flash'`。实际发给 `run.py` 的命令行变成 `run.py --subset -Model --config qwen3-vl-flash` → argparse 立刻退出 → **每轮 1 秒结束、0 个 episode**；而且 `$Model` 始终为空，manifest 里 `agent` 还是默认的 `qwen3-vl-plus`，**看起来像"模型参数没生效"，其实是"根本没跑"**。<br>**对策**：① 显式写参数名（空字符串在 `run_mbl.ps1` 里是 falsy，不用条件拼接）；② `run_mbl.ps1` 现在会拦 `$Subset` 以 `-` 开头、`$ConfigFile` 不以 `.conf` 结尾这两种错位；③ `pilot.ps1 -DryRun` **真的调用** `run_mbl.ps1 -DryRun` 而不是只回显一行字；④ 跑完核对 manifest 的 `agent` 是否等于请求的模型 |
 
@@ -642,7 +654,7 @@ git stash pop
 `mobilebench/utils/mbl_api_shim.py` 是新增模块；7 个文件共 50+ 处标记。全部幂等、自动备份、`--revert` 可回滚。
 
 ```cmd
-%PY% %S%\mbl_apply_api_patch.py --repo third_party\mobilebench-ol-main --with-retry --coord-norm --task-file-env --metrics --resilient
+%PY% %SC%\mbl_apply_api_patch.py --repo third_party\mobilebench-ol-main --with-retry --coord-norm --task-file-env --metrics --resilient
 ```
 
 | 补丁 | 解决什么 |

@@ -64,9 +64,9 @@ Repairing flaky tests in GUI agent evaluation
         - 顺序执行 vs. 乱序执行
         - 多个 Agent
     - 落地材料（2026-09-18，已跑通，见 `experiments/`）：
-        - `experiments/docs/01-数据集与Agent选型.md`：在线数据集与 Agent 选型（AndroidWorld 主实验 / MobileBench-OL 在线实证 / WebArena 负对照 / OpenApps 沙盒 / AndroidLab、A3 备选），含 AndroidWorld 代码级污染证据，以及"顶端模型在 AndroidWorld 已饱和（97%+）不能用作主实验 Agent"的提醒
-        - `experiments/docs/02-实验方案-顺序vs乱序.md`：2×2 析因方案（顺序 × 重置）、H1–H5 可证伪假设、ΔSR / OD-flaky 率 / CTCI / PASR / polluter lift / DiD 指标定义、样本量与算力预算、效度威胁
-        - `experiments/README.md`：可执行工作台（`python selftest.py` 13 项自检全绿，无需模拟器与 API key）
+        - `experiments/motivation_study/docs/01-数据集与Agent选型.md`：在线数据集与 Agent 选型（AndroidWorld 主实验 / MobileBench-OL 在线实证 / WebArena 负对照 / OpenApps 沙盒 / AndroidLab、A3 备选），含 AndroidWorld 代码级污染证据，以及"顶端模型在 AndroidWorld 已饱和（97%+）不能用作主实验 Agent"的提醒
+        - `experiments/motivation_study/docs/02-实验方案-顺序vs乱序.md`：2×2 析因方案（顺序 × 重置）、H1–H5 可证伪假设、ΔSR / OD-flaky 率 / CTCI / PASR / polluter lift / DiD 指标定义、样本量与算力预算、效度威胁
+        - `experiments/README.md`：可执行工作台（`python experiments/selftest.py` 自检全绿，无需模拟器与 API key；AndroidWorld 支线已归档至 `backup/androidworld/`）
 
 ## Related
 
