@@ -26,8 +26,6 @@ experiments/
 ├─ docs/
 │  ├─ 01-数据集与Agent选型.md      ← 在哪跑（在线数据集）、用谁跑（Agent），含决策矩阵与代码级证据
 │  └─ 02-实验方案-顺序vs乱序.md    ← 2×2 析因设计、假设、指标、样本量、预算、效度威胁
-├─ data/
-│  └─ pilot_tasks.txt             ← 试点用 6 个任务
 ├─ scripts/
 │  ├─ task_catalog.py             ← 33 任务 / 7 状态域的推荐实验集（含 writer/reader 标注）
 │  ├─ order_runner.py             ← 顺序 × 重置条件可控的调度器（AndroidWorld 后端 + dry-run）
@@ -76,7 +74,7 @@ python selftest.py
 
 python order_runner.py --backend androidworld `
   --agents t3a_gpt4 `
-  --tasks-file ..\data\pilot_tasks.txt `
+  --tasks-file ..\..\backup\experiments-data\pilot_tasks.txt `
   --order-modes canonical,adversarial `
   --clean-modes official,none `
   --repeats 10 `
