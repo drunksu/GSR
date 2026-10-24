@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_13",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站中搜索并打开‘西游记第二集’的视频页面，确保当前播放或展示的是该视频的主播放页",
+      "precondition": {
+        "target": "确认当前是否已处于‘西游记第二集’的视频播放页面",
+        "check_instruction": "进入B站首页或搜索页，查看顶部搜索栏或当前页面标题/视频标题区域是否显示‘西游记第二集’字样，并确认视频封面与标题匹配该实体名",
+        "clean_if_state": "当前页面已是‘西游记第二集’的视频播放页，且标题、封面、播放器均明确对应该实体名，无需额外操作"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前B站页面是否正在展示标题为‘西游记第二集’的视频播放页？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

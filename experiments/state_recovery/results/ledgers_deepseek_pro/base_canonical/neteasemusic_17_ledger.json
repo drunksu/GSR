@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "neteasemusic_17",
+  "run_id": "base_canonical",
+  "task_goal": "打开网易云发现博客广播电台",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "博客广播电台",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text='博客广播电台')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "博客广播电台"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": []
+}

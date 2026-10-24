@@ -1,0 +1,67 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_5",
+  "run_id": "base_canonical",
+  "task_goal": "在番茄里面看看明朝那些事儿的书评,并给第一条书评点赞",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "得道高仙的书评",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "第一条书评（作者“得道高仙”）下方的心形图标已经变成了红色，并且数字从212变成了213，这说明点赞操作已经成功完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "明朝那些事儿",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='明朝那些事儿')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "明朝那些事儿"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "m1: entity.name 非逐字出现但字组覆盖 0.83 → '得道高仙的书评'"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_14",
+  "run_id": "q2_A_1",
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "QQ中与绕堤沙的聊天记录已被不可逆删除",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "聊天记录已从设备本地永久删除，无备份或回收站机制可恢复，自动操作无法重建原始内容",
+      "suggested_manual_action": "如需确认删除结果：打开QQ，进入联系人列表找到‘绕堤沙’，点击进入聊天窗口，检查‘与绕堤沙的聊天记录’是否已清空（显示‘该聊天暂无消息’或历史消息为空）；若需补救，请联系对方重新发送相关内容"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": true,
+  "tasks": []
+}

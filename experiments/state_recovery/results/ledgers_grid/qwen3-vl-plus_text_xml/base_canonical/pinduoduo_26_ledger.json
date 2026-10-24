@@ -1,0 +1,160 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_26",
+  "run_id": "base_canonical",
+  "task_goal": "暂时关闭拼多多自动免拼",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "setting",
+        "name": "自动免拼",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5
+      ],
+      "evidence_quote": "Step 4: THOUGHT: 当前弹出一个操作菜单，提供“开启”、“暂时关闭”和“取消”三个选项。任务目标是“暂时关闭拼多多自动免拼”，因此应选择“暂时关闭”选项。该选项明确符合需求，点击后即可完成设置。\\nStep 5: THOUGHT: 从当前页面可见，“自动免拼”状态已显示为“暂时关闭，9月22日开启”，说明自动免拼功能已成功暂时关闭，符合任务要求。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "自行车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='自行车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_20",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "垂钓装备",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='垂钓装备')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_19",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "女鞋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='女鞋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_18",
+      "id": "c4"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "account",
+        "name": "禾简老人健步鞋",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Step 4: THOUGHT: 当前页面已进入该商品所属店铺“禾简老人健步鞋”的主页……右上角有红色的“+ 关注”按钮……ACTION: click([1087, 317])",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_18",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "橡皮泥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='橡皮泥')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_17",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "自行车",
+    "垂钓装备",
+    "女鞋",
+    "橡皮泥"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 5 条 carried_over（前序仍开放的残留）"
+  ]
+}

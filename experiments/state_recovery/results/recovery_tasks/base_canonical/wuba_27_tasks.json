@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_27",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中将我的性别恢复为女，确保个人信息页面中‘我是’一栏显示为‘女’且头像旁出现女性标识。",
+      "precondition": {
+        "target": "确认当前性别设置是否已为‘女’并持久化保存。",
+        "check_instruction": "进入58同城App的个人中心→点击‘编辑资料’，查看‘我是’字段对应的实体名‘性别’是否显示为‘女’，同时观察头像旁是否有女性标识。",
+        "clean_if_state": "‘我是’一栏已显示‘女’，且头像旁有女性标识，说明性别已正确设置并保存。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在58同城App的编辑资料页面中，实体名‘性别’对应的‘我是’一栏是否显示为‘女’且头像旁有女性标识？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

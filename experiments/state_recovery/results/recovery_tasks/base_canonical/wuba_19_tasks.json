@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_19",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中创建并打开简历，确保简历已成功生成并可查看",
+      "precondition": {
+        "target": "检查当前是否已存在可查看的简历",
+        "check_instruction": "进入58同城个人中心页面，查找‘简历’相关入口或提示信息，确认是否存在‘查看简历’或已填写内容的简历卡片",
+        "clean_if_state": "页面已显示‘简历’内容（如姓名、工作经历等字段已填充）或有‘查看简历’按钮且点击后能进入简历详情页"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "简历的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

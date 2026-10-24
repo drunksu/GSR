@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_13",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚App中，将界面恢复至能直接查看‘美柚健康养生馆’的最新发帖列表状态",
+      "precondition": {
+        "target": "确认当前页面是否已定位到‘美柚健康养生馆’的主页或帖子列表页",
+        "check_instruction": "进入美柚App后，在搜索结果页或社区页中查找标题为‘美柚健康养生馆’的入口或内容区域，确认该实体名清晰可见且处于可浏览状态",
+        "clean_if_state": "当前页面已显示‘美柚健康养生馆’的名称及最新发帖列表（含至少一条帖子）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前截图中是否明确显示‘美柚健康养生馆’的名称及其最新发帖列表？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_6",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中，确保搜索历史中已存在‘58官方搬家’的记录，并进入该搜索结果页面以查看58官方搬家的收费标准",
+      "precondition": {
+        "target": "确认当前搜索历史中包含‘58官方搬家’条目且可点击进入对应结果页",
+        "check_instruction": "进入58同城首页的搜索框，下拉查看搜索历史列表，检查是否存在‘58官方搬家’条目",
+        "clean_if_state": "搜索历史中已存在‘58官方搬家’条目，且点击后能正常跳转至相关服务页面（如搬家服务详情页或列表页）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在58同城App中，搜索历史列表里是否明确显示‘58官方搬家’条目，且点击该条目后能进入展示其收费标准的页面？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

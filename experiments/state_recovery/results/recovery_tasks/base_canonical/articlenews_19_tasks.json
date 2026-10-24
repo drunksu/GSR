@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_19",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中将‘一键防护开关’开启，使其处于绿色开启状态，确保3天内不接收陌生人的评论、转发和私信",
+      "precondition": {
+        "target": "确认‘一键防护开关’当前是否已开启（绿色）",
+        "check_instruction": "进入今日头条的隐私中心页面，查看‘一键防护开关’控件的颜色与状态",
+        "clean_if_state": "‘一键防护开关’已显示为绿色开启状态，且描述文字包含‘3天内将不接收陌生人的评论/转发/私信’"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条隐私中心页面中，‘一键防护开关’是否已处于绿色开启状态并明确提示‘3天内将不接收陌生人的评论/转发/私信’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_3",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中将搜索状态恢复为已输入‘天安门’并显示其搜索结果页面",
+      "precondition": {
+        "target": "确认当前搜索框中已输入‘天安门’且搜索结果列表已加载出天安门相关地点",
+        "check_instruction": "进入高德地图首页，查看顶部搜索框内容是否为‘天安门’，并确认下方列表中可见‘天安门’实体及其周边信息",
+        "clean_if_state": "搜索框中已显示‘天安门’且结果页已展示天安门实体及周边酒店等POI信息"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索框中是否显示‘天安门’，且当前页面已展示天安门实体及其周边酒店的搜索结果？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

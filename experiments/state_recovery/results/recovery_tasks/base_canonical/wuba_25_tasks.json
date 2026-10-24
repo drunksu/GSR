@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_25",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中，确保搜索历史中已存在‘58.com’这一条目，且该条目为最新创建的搜索记录。",
+      "precondition": {
+        "target": "检查58同城App的搜索历史中是否存在‘58.com’条目，并确认其为最近一次搜索行为产生的记录。",
+        "check_instruction": "进入58同城App首页，点击搜索框，查看下拉搜索历史列表，定位到‘58.com’条目并观察其位置与时间标识。",
+        "clean_if_state": "搜索历史中已存在‘58.com’条目，且位于历史列表最顶部（即最新搜索记录）。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在58同城App的搜索历史列表中，‘58.com’是否作为最新一条记录清晰可见？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

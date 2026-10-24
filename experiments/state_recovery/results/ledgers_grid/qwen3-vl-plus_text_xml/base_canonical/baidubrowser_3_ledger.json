@@ -1,0 +1,46 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_3",
+  "run_id": "base_canonical",
+  "task_goal": "在百度浏览器里打开百度热搜的民生榜",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "百度",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗 邮政编码",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='西二旗 邮政编码')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_2",
+      "id": "c1"
+    }
+  ],
+  "search_terms": [
+    "西二旗 邮政编码"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

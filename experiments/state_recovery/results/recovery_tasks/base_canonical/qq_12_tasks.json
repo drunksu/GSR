@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_12",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中将联系人‘绕堤沙’的名片发送给‘绕堤沙’本人",
+      "precondition": {
+        "target": "确认当前已进入QQ并能通过搜索定位到‘绕堤沙’联系人",
+        "check_instruction": "进入QQ主界面，点击顶部搜索框，输入‘绕堤沙’，查看搜索结果列表中是否出现名为‘绕堤沙’的联系人条目",
+        "clean_if_state": "已在QQ搜索结果中看到‘绕堤沙’联系人条目，且该条目可点击进入其个人资料页"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ中是否已成功将联系人‘绕堤沙’的名片发送给了‘绕堤沙’本人？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

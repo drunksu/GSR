@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_7",
+  "run_id": "base_canonical",
+  "tasks": [],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "QQ中已发送的消息“事已至此，先吃饭吧”的残留记录",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "消息一旦发送即永久存留于聊天记录中，系统无法自动撤回或删除已发出的消息内容，属于不可逆操作。",
+      "suggested_manual_action": "进入QQ应用，打开与‘绕堤沙’的聊天窗口，长按消息‘事已至此，先吃饭吧’，选择‘撤回’（若2分钟内）或‘删除’（仅限自己可见）进行人工处理。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

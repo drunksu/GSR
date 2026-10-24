@@ -1,0 +1,71 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_12",
+  "run_id": "base_canonical",
+  "task_goal": "去钉钉打开我的收藏",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "个人使用",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8
+      ],
+      "evidence_quote": "THOUGHT: 我已经选择了“个人使用”场景，现在需要点击“继续”按钮以完成初始化并进入钉钉主界面。这是进入后续操作（如查看待办）的必要步骤。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "rimet_0",
+      "id": "c1"
+    },
+    {
+      "type": "message_send",
+      "app": "QQ",
+      "entity": {
+        "kind": "message",
+        "name": "照片",
+        "identifier": "绕堤沙"
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "图片已经成功发送给“绕堤沙”，任务完成。从聊天记录中可以看到，最新的一条消息正是我刚刚发送的图片，显示在对话界面底部。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_9",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "c1"
+    ],
+    "halt": [
+      {
+        "id": "c2",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 2 条 carried_over（前序仍开放的残留）"
+  ]
+}

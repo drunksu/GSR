@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_8",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中将搜索历史恢复为包含‘三里屯 麦当劳’的记录状态，确保该搜索词明确存在于最近搜索历史列表中。",
+      "precondition": {
+        "target": "检查高德地图的搜索历史中是否已存在‘三里屯 麦当劳’条目。",
+        "check_instruction": "进入高德地图首页，点击搜索框，查看下拉搜索历史列表中是否存在‘三里屯 麦当劳’这一项。",
+        "clean_if_state": "当前搜索历史列表中已显示‘三里屯 麦当劳’条目，且位置在最近搜索项中（无需额外操作）。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否明确显示‘三里屯 麦当劳’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

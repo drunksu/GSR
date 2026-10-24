@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_7",
+  "run_id": "base_canonical",
+  "task_goal": "打开QQ给绕堤沙发送“事已至此，先吃饭吧”",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "QQ",
+      "entity": {
+        "kind": "friend",
+        "name": "事已至此，先吃饭吧",
+        "identifier": "绕堤沙"
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "消息“事已至此，先吃饭吧”已经成功发送给绕堤沙，聊天界面中可见该消息已显示在对话记录中，任务已完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "_warnings": []
+}

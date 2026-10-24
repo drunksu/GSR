@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_25",
+  "run_id": "base_canonical",
+  "tasks": [],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "番茄小说App中‘字体大小’设置项残留为‘大’但未生效",
+      "gate_reason": "confidence<0.7",
+      "reason": "系统多次点击‘确定’按钮仍无法保存设置，置信度低于0.7，表明该操作可能受界面状态、权限或后台逻辑限制，无法通过自动化方式可靠回退或重试。",
+      "suggested_manual_action": "进入番茄小说App的设置页面，找到‘字体大小’选项，手动切换为‘标准’或‘小’，然后点击右上角‘确定’按钮保存；若仍无效，可尝试退出App后重新进入设置页重试。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

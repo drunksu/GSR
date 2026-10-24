@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_11",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说App中，将搜索框内容恢复为‘美食 种田 系统’，确保该文本完整显示在搜索输入框内并可用于筛选小说。",
+      "precondition": {
+        "target": "搜索框中是否已正确显示‘美食 种田 系统’文本。",
+        "check_instruction": "进入番茄小说首页，查看顶部搜索栏的输入框内容是否为‘美食 种田 系统’。",
+        "clean_if_state": "搜索框中已完整显示‘美食 种田 系统’且未被清空或覆盖。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "番茄小说App的搜索框中是否精确显示‘美食 种田 系统’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

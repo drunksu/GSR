@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_22",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说App中，将番茄免费小说的权限状态恢复为已授予‘获取已安装的应用信息’权限（即弹窗已消失且权限已允许）",
+      "precondition": {
+        "target": "确认番茄免费小说是否已获得‘获取已安装的应用信息’权限",
+        "check_instruction": "进入番茄小说App的设置或权限管理页面，查找‘番茄免费小说’对应的应用权限条目，观察其‘获取已安装的应用信息’权限状态是否为已授权或无相关弹窗提示",
+        "clean_if_state": "当前无权限弹窗出现，且系统中番茄免费小说的‘获取已安装的应用信息’权限已标记为允许"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "番茄免费小说的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_3",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺App中，将美的集团的K线图恢复为月K线显示状态",
+      "precondition": {
+        "target": "确认当前K线周期是否为月K线",
+        "check_instruction": "进入同花顺App，搜索并打开‘美的集团’个股页面，在K线图区域查看周期选择按钮（如‘日K’‘周K’‘月K’等）当前选中项是否为‘月K’",
+        "clean_if_state": "当前K线图已显示为月K线，且页面标题或图表标识明确包含‘美的集团’和‘月K’字样"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "同花顺App中美的集团的K线图当前是否为月K线显示状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

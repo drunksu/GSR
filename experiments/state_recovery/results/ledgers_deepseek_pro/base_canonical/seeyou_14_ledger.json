@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "seeyou_14",
+  "run_id": "base_canonical",
+  "task_goal": "在美柚上打开我的任务中心",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "other",
+      "app": "美柚",
+      "entity": {
+        "kind": "account",
+        "name": "签到",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "右上角有一个带红点的“签”字图标，这通常是任务或奖励相关的入口。我应该先点击这个“签”字图标试试。... 我现在看到的是美柚的签到成功弹窗，显示“签到成功！+100金豆”",
+      "confidence": 0.9,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": true,
+  "_warnings": []
+}

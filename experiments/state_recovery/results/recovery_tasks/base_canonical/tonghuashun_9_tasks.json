@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_9",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺App中，确保‘燕京啤酒’已出现在搜索历史记录中，且可被直接点击回看其历史行情",
+      "precondition": {
+        "target": "检查‘燕京啤酒’是否已存在于同花顺的搜索历史列表中",
+        "check_instruction": "进入同花顺App首页，点击搜索框，查看下方‘搜索历史’区域中是否存在‘燕京啤酒’条目",
+        "clean_if_state": "当前搜索历史中已显示‘燕京啤酒’条目，且该条目可点击进入其详情页"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺App的搜索历史列表中，能否看到‘燕京啤酒’这一条目并确认其为可点击状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

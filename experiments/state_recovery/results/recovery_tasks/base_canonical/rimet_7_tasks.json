@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_7",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将‘新消息通知’开关开启，确保系统能接收并显示特别关注的消息",
+      "precondition": {
+        "target": "确认‘新消息通知’开关当前处于关闭状态",
+        "check_instruction": "进入钉钉【设置】→【新消息通知】页面，查看‘新消息通知’开关的当前状态（即实体名‘新消息通知’对应的开关控件）",
+        "clean_if_state": "‘新消息通知’开关已处于开启状态，且下方说明文字中提及的‘特别关注’等通知类型可正常生效"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在钉钉的‘新消息通知’设置页面中，‘新消息通知’开关是否已开启，从而允许接收特别关注的消息？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在钉钉中将‘特别关注人的消息’的开关状态恢复为开启（即已勾选）",
+      "precondition": {
+        "target": "确认‘特别关注人的消息’设置项当前是否已开启",
+        "check_instruction": "进入钉钉的‘允许通知的消息’设置页面，查看‘特别关注人的消息’选项右侧是否有蓝色对勾标识",
+        "clean_if_state": "‘特别关注人的消息’选项右侧已有蓝色对勾，表示已开启"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在钉钉的‘允许通知的消息’页面中，‘特别关注人的消息’选项是否已显示为开启状态（右侧有蓝色对勾）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

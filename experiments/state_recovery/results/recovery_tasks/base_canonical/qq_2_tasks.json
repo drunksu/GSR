@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_2",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中打开搜索界面，输入并确保搜索框中显示‘吓死我了’，且该关键词出现在搜索历史或搜索结果中",
+      "precondition": {
+        "target": "确认QQ搜索界面中已存在‘吓死我了’的搜索记录或当前搜索词为‘吓死我了’",
+        "check_instruction": "进入QQ主界面→点击顶部搜索框→查看搜索历史列表或搜索框内文本，确认其中包含实体名‘吓死我了’",
+        "clean_if_state": "搜索框中已显示‘吓死我了’，或搜索历史中已存在‘吓死我了’条目，且可被点击或高亮选中"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ搜索界面中是否已显示‘吓死我了’作为当前搜索词或可点击的搜索历史条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

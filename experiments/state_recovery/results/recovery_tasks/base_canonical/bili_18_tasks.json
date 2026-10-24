@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_18",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站会员购中搜索哆啦A梦，确保搜索框中已输入‘哆啦A梦’且搜索结果页已正确展示与哆啦A梦相关的商品列表",
+      "precondition": {
+        "target": "确认当前是否已在B站会员购的搜索结果页中显示哆啦A梦相关商品",
+        "check_instruction": "进入B站App→点击“会员购”入口→查看搜索框内容及下方商品列表，确认其中包含实体名‘哆啦A梦’对应的条目",
+        "clean_if_state": "搜索框中已显示‘哆啦A梦’，且商品列表中可见至少一个标注为‘哆啦A梦’的商品条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在B站会员购页面中，搜索框内是否已输入‘哆啦A梦’且下方商品列表中存在明确标注为‘哆啦A梦’的商品条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

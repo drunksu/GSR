@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_12",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条App中将头像恢复为默认头像（即非艺术类蓝色波浪形图案的原始默认样式）",
+      "precondition": {
+        "target": "确认当前头像是否已为默认头像",
+        "check_instruction": "进入今日头条个人主页，查看头像区域显示的图像是否为系统默认头像（非艺术类蓝色波浪形图案）",
+        "clean_if_state": "头像已显示为系统默认样式（非艺术类蓝色波浪形图案）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "今日头条个人主页中的头像是否已恢复为系统默认头像（而非艺术类蓝色波浪形图案）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

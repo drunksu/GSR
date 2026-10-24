@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_5",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中搜索并播放‘林肯公园 Numb’，确保该歌曲处于正在播放状态，并成功进入其评论区页面",
+      "precondition": {
+        "target": "确认当前是否已播放‘林肯公园 Numb’且评论区已打开",
+        "check_instruction": "进入网易云音乐首页，点击搜索框输入‘林肯公园 Numb’，查看搜索结果列表中是否存在该歌曲条目，并确认其播放状态及评论入口是否可见",
+        "clean_if_state": "当前已播放‘林肯公园 Numb’且评论区界面已显示（即歌曲标题栏显示‘林肯公园 Numb’、播放按钮为暂停态、下方评论列表可滚动）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前界面是否正显示‘林肯公园 Numb’的播放界面且评论区已展开？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

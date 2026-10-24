@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_17",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，将搜索框内容恢复为“橡皮泥”，确保能进入橡皮泥商品列表页",
+      "precondition": {
+        "target": "搜索框当前输入内容是否为‘橡皮泥’",
+        "check_instruction": "进入拼多多首页，查看顶部搜索框中的文字内容是否为‘橡皮泥’",
+        "clean_if_state": "搜索框中已显示‘橡皮泥’且未触发搜索（即尚未进入结果页）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "拼多多App的搜索框中是否已准确显示‘橡皮泥’字样？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_27",
+  "run_id": "base_canonical",
+  "task_goal": "打开番茄小说中一键清理缓存",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字号",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "evidence_quote": "当前字号显示为 25，旁边有\"A⁻\"和\"A⁺\"按钮，我可以点击\"A⁻\"按钮逐步减小字号，直到变为 22。... 当前字号为 23，我需要再点击一次\"A⁻\"按钮将其调整为 22。... 字号已经成功设置为 22",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c1"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "翻页方式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "接下来需要将翻页方式从“覆盖”改为“上下”。... 翻页方式也已成功切换为“上下”，所有设置均符合任务要求。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 2 条 carried_over（前序仍开放的残留）"
+  ]
+}

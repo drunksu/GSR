@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_16",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚App中打开名为“娱乐大爆炸”的圈子页面，确保当前界面为该圈子的主展示页（含圈子名称、简介及内容流）",
+      "precondition": {
+        "target": "确认当前是否已处于‘娱乐大爆炸’圈子页面",
+        "check_instruction": "进入美柚首页或圈子入口后，查看顶部标题栏或页面主体区域是否明确显示‘娱乐大爆炸’字样及其圈子标识",
+        "clean_if_state": "当前页面已清晰显示‘娱乐大爆炸’圈子名称、头像/封面及圈子内容流，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前美柚App界面是否正显示‘娱乐大爆炸’圈子的主页面？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

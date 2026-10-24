@@ -1,0 +1,285 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_7",
+  "run_id": "base_canonical",
+  "task_goal": "查看今日头条图片频道第一条新闻并点赞",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "泰山上的轿夫既给游客便利，自己又得到了...",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "右侧有心形图标（点赞），显示“1.3万”，说明是点赞按钮。... 点赞按钮（心形图标）已变为红色，显示“1.3万”，说明点赞操作已完成。",
+      "confidence": 0.9,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "五粮液 股价",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='五粮液 股价')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_4",
+      "id": "c2"
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "搜索历史",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "我已经进入了今日头条的搜索历史界面，看到了“全部删除”按钮。点击这个按钮应该会触发清空搜索历史的操作。... 系统已经弹出了确认清空搜索历史的对话框，询问“是否清空搜索历史”。此时我需要点击“确定”按钮来完成清空操作。... 我已经成功清空了今日头条的搜索历史，因为现在搜索历史区域已经消失，只显示“猜你想搜”等推荐内容，说明之前的搜索记录已被清除。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_3",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "今天北京的穿衣指数",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='今天北京的穿衣指数')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_2",
+      "id": "c4"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "一键防护开关",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "确认“一键防护开关”处于开启状态（绿色），说明陌生人消息防护已生效。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_19",
+      "id": "c5"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "自动开启阅读模式",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "“自动开启阅读模式”的开关目前是绿色的，表示该功能处于开启状态。为了完成任务，我需要将其关闭，即点击开关按钮使其变为灰色。... 我已经成功将“自动开启阅读模式”的开关关闭（当前为灰色），这符合用户的要求。任务已完成，可以提交结果。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_16",
+      "id": "c6"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "深色模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3,
+        4
+      ],
+      "evidence_quote": "在设置页面中，我找到了“深色模式”选项，当前状态显示为“已关闭”。... 当前页面显示的是“浅色模式”设置界面，其中“浅色模式”已被选中（红色圆点），而“深色模式”未被选中。为了开启夜间模式，需要点击“深色模式”选项。这是完成任务的关键步骤。... 夜间模式（深色模式）已经成功开启，因为当前界面显示为深色背景，并且“深色模式”选项已被选中（红色圆点）。任务目标已达成。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_15",
+      "id": "c7"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "性别",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        5
+      ],
+      "evidence_quote": "我已经进入了性别选择界面，看到了“男”和“女”两个选项。根据任务要求，我需要将性别设置为“女”，所以现在应该点击“女”选项。... 我已经成功将性别设置为“女”，在编辑资料页面可以看到“性别”一栏已经显示为“女”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_13",
+      "id": "c8"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "头像",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "我已经成功更换了头像，现在个人主页的头像已经变成了艺术类的蓝色波浪形图案，与任务要求一致。整个流程已完成：进入“我的”页面 → 点击头像 → 选择“更换头像” → 选择“从默认头像选择” → 进入“艺术”分类 → 选中第一个艺术头像 → 点击“选取并发布”。头像已更新，任务完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_12",
+      "id": "c9"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "哪吒 票房",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "现在我决定放弃反复尝试清除，直接在当前输入框中**手动输入“哪吒 票房**”——因为多数搜索框支持覆盖输入（即新输入会自动替换旧内容），或者至少能追加后通过删除键清理。为提高效率，我直接输入目标关键词“哪吒 票房”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_1",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "黄金今日的价格",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "type(text='黄金今日的价格')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_0",
+      "id": "c11"
+    }
+  ],
+  "search_terms": [
+    "五粮液 股价",
+    "今天北京的穿衣指数",
+    "哪吒 票房",
+    "黄金今日的价格"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c11"
+    ],
+    "halt": [
+      {
+        "id": "c3",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c4",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c10",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 10 条 carried_over（前序仍开放的残留）"
+  ]
+}

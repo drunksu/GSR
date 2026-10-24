@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_10",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中搜索并确保‘麦当劳’作为当前搜索目标已正确输入并显示在搜索框中，且未处于历史记录选择界面或错误输入状态",
+      "precondition": {
+        "target": "确认当前搜索框内容为‘麦当劳’且未处于历史记录列表选择状态",
+        "check_instruction": "进入高德地图首页，查看顶部搜索框中的文本内容是否为‘麦当劳’，并确认下方未弹出历史搜索项列表（特别是未高亮选中‘麦当劳’的历史条目）",
+        "clean_if_state": "搜索框中已显示‘麦当劳’且无历史记录弹窗遮挡，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索框中是否明确显示‘麦当劳’且未处于历史搜索条目选择界面？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

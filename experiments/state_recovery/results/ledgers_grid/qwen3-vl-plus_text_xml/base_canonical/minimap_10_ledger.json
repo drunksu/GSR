@@ -1,0 +1,356 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_10",
+  "run_id": "base_canonical",
+  "task_goal": "高德查一下到最近的麦当劳的步行路线",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "麦当劳",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text='麦当劳')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "上海外地小客车限行政策",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='上海外地小客车限行政策')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_1",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "上海外牌限行",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='上海外牌限行')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_1",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "烤肉店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='烤肉店')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_0",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "无女主",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text=' 无女主')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_9",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "阴间神探",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='阴间神探')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_6",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "明朝那些事儿",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='明朝那些事儿')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c7"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "得道高仙",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "Thought: 我注意到在书评详情页面，第一条书评（作者“得道高仙”）下方的心形图标已经变成了红色，并且数字从212变成了213，这说明点赞操作已经成功完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "红楼梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='红楼梦')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_4",
+      "id": "c9"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "接收消息通知",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "当前页面是“推送设置”，其中“接收消息通知”开关已处于开启状态（橙色），说明消息通知功能已经启用。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_28",
+      "id": "c10"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "清理缓存",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5,
+        6
+      ],
+      "evidence_quote": "Step 4: THOUGHT: 我已经成功进入设置页面，第一项就是“清理缓存”，这正是我要找的功能。点击它应该就能进入清理缓存的具体操作界面，完成任务。... Step 5: THOUGHT: 我已经找到了“清理缓存”页面，并且看到了明确的“一键清理”按钮，它位于817.86 MB可清理缓存的右侧。点击这个按钮即可执行清理操作，这正是用户要求的“一键清理缓存”功能。... Step 6: THOUGHT: 我注意到“可清理的缓存”部分显示为0 MB，且“一键清理”按钮呈灰色不可点击状态，说明当前没有可清理的临时缓存数据。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_27",
+      "id": "c11"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字号",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "evidence_quote": "Thought: 当前字号显示为25，旁边有“A⁻”和“A⁺”按钮，我可以点击“A⁻”按钮逐步减小字号，直到变为22。... Thought: 当前字号为24，我需要将其调整为22。... Thought: 当前字号为23，我需要再点击一次“A⁻”按钮将其调整为22。... Thought: 字号已经成功设置为22，接下来需要将翻页方式从“覆盖”改为“上下”。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c12"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "翻页方式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "Thought: 字号已经成功设置为22，接下来需要将翻页方式从“覆盖”改为“上下”。在“翻页”选项区域中，“上下”按钮清晰可见，位于“平移”右侧。我只需点击“上下”按钮即可完成翻页方式的设置。Thought: 字号已设为22，翻页方式也已成功切换为“上下”，所有设置均符合任务要求。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c13"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字体大小",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        12
+      ],
+      "evidence_quote": "Step 4: THOUGHT: 我已经进入了字体大小设置界面，当前“大”字体选项已被选中。为了完成任务，我需要确认这个选择，点击右上角的“确定”按钮来保存设置。\\nStep 5: THOUGHT: 我已经选择了“大”字体选项，现在需要点击右上角的“确定”按钮来确认并应用这个设置。这样就能完成番茄切换成大字体的任务了。\\nStep 6: THOUGHT: 我已经选择了“大”字体选项，现在需要点击右上角的“确定”按钮来确认并应用这个设置。这样就能完成番茄切换成大字体的任务了。\\nStep 7: THOUGHT: 我已经选择了“大”字体选项，现在需要点击右上角的“确定”按钮来确认并应用这个设置。这样就能完成番茄切换成大字体的任务了。\\nStep 8: THOUGHT: 我已经成功选择了“大”字体选项，当前界面显示“大”已被选中。为了完成任务，我需要点击右上角的“确定”按钮来保存并应用该设置。这是最后一步操作。\\nStep 12: THOUGHT: 当前界面显示“大”字体选项已被选中，但之前的多次点击“确定”未生效，可能是因为操作未被系统识别或需要更明确的确认动作。",
+      "confidence": 0.6,
+      "attribution": "carried_over",
+      "carried_over_from_task": "null",
+      "id": "c14"
+    }
+  ],
+  "search_terms": [
+    "麦当劳",
+    "上海外地小客车限行政策",
+    "上海外牌限行",
+    "烤肉店",
+    "无女主",
+    "阴间神探",
+    "明朝那些事儿",
+    "红楼梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13"
+    ],
+    "halt": [
+      {
+        "id": "c14",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 13 条 carried_over（前序仍开放的残留）"
+  ]
+}

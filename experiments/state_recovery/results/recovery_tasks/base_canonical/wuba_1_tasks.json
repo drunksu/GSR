@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_1",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中，将搜索历史恢复为包含‘上地 合租’的记录状态，确保该搜索词已明确存在于搜索历史列表中。",
+      "precondition": {
+        "target": "检查‘上地 合租’是否已存在于58同城的搜索历史中。",
+        "check_instruction": "进入58同城首页，点击搜索框，查看搜索历史列表中是否存在‘上地 合租’这一条目。",
+        "clean_if_state": "当前搜索历史列表中已存在‘上地 合租’条目，且显示完整无误。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在58同城App的搜索历史列表中，能否清晰看到‘上地 合租’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

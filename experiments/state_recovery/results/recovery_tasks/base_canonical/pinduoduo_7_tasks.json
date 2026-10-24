@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_7",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中打开‘婴儿湿巾’的店铺首页，确保当前页面是该商品对应的官方或认证店铺的首页",
+      "precondition": {
+        "target": "确认当前页面是否已是‘婴儿湿巾’对应店铺的首页",
+        "check_instruction": "进入拼多多App，搜索‘婴儿湿巾’，点击搜索结果中带‘店铺’标识的条目，查看页面顶部是否显示店铺名称及‘首页’标签，并确认实体名‘婴儿湿巾’出现在页面显著位置（如标题或面包屑）",
+        "clean_if_state": "当前页面已明确显示为‘婴儿湿巾’所属店铺的首页，且页面标题或导航栏包含‘首页’字样及‘婴儿湿巾’关键词"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前页面是否为拼多多中‘婴儿湿巾’对应店铺的首页，且页面显著位置显示有‘婴儿湿巾’字样？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

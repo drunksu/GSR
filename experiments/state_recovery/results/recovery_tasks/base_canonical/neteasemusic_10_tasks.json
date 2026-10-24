@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_10",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中将相机权限恢复为开启状态，确保扫一扫功能可正常使用",
+      "precondition": {
+        "target": "确认相机权限当前是否已开启",
+        "check_instruction": "进入网易云音乐的「设置」→「应用管理」→「权限管理」，查看「相机权限」的开关状态是否为开启",
+        "clean_if_state": "相机权限已处于开启状态（如显示‘允许’或开关为蓝色/绿色）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "相机权限的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

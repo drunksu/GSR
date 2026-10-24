@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_25",
+  "run_id": "base_canonical",
+  "task_goal": "去 58 同城看一下它的资质协议",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "Edge",
+      "entity": {
+        "kind": "search",
+        "name": "58.com",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "搜索框已激活，键盘弹出，现在需要输入 58 同城的域名“58.com”来查询",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "58.com"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": true,
+  "_warnings": []
+}

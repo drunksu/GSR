@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_28",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说中将接收消息通知开关开启，确保消息通知功能处于启用状态",
+      "precondition": {
+        "target": "检查接收消息通知开关是否已开启",
+        "check_instruction": "进入番茄小说的推送设置页面，查看‘接收消息通知’开关的颜色与状态",
+        "clean_if_state": "接收消息通知开关为橙色（开启）状态，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说的推送设置页面中，接收消息通知开关是否为橙色开启状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

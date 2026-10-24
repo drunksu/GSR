@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_5",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城中将页面恢复至能查看小米SU7二手车具体参数配置的状态",
+      "precondition": {
+        "target": "当前是否已显示小米SU7的二手车详情页并包含参数配置区域",
+        "check_instruction": "进入58同城App，找到并点击搜索结果中的‘小米SU7’二手车条目，观察页面是否展示车辆参数配置模块",
+        "clean_if_state": "已打开小米SU7二手车详情页且页面中明确显示‘参数配置’或类似标题下的具体配置信息（如电池、续航、电机等）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在58同城App中，当前页面是否为小米SU7二手车的详情页，并且其中包含明确标有‘参数配置’或同类字段的具体技术参数列表？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

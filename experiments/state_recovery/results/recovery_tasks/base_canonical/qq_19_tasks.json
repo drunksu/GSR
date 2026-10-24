@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_19",
+  "run_id": "base_canonical",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ应用中，将‘关怀模式’设置为关闭状态，恢复为普通模式",
+      "precondition": {
+        "target": "QQ当前是否处于关怀模式",
+        "check_instruction": "进入QQ的‘设置’→‘通用’→‘模式选择’页面, 查看‘关怀模式’选项是否被选中",
+        "clean_if_state": "当前已处于普通模式（即‘关怀模式’未被选中）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ的‘模式选择’页面中，‘关怀模式’选项是否未被选中，且界面显示为普通模式的字体与布局？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 15
+    }
+  ]
+}

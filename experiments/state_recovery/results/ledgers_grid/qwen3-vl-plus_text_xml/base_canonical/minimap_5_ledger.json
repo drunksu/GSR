@@ -1,0 +1,274 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_5",
+  "run_id": "base_canonical",
+  "task_goal": "高德查一下天坛公园到天安门广场的驾车路线",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "天坛公园到天安门广场",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "ACTION: type(text='天坛公园到天安门广场')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "天安门",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='天安门')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_3",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "医院",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='医院')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_18",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='4S店')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S店 洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "ACTION: type(text='4S店 洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c6"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "高德地图",
+      "entity": {
+        "kind": "content",
+        "name": "北京大学(东门)",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "我已成功将“家”的地址设置为“北京大学(东门)”，在常去地点管理页面清晰可见该条目。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_16",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京大学东门",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='北京大学东门')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_16",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='小米科技园B栋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_15",
+      "id": "c9"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "高德地图",
+      "entity": {
+        "kind": "content",
+        "name": "小米移动互联网产业园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "公司地址已成功设置为“小米移动互联网产业园B栋”，这与任务要求的“小米科技园B栋”一致（实际为同一地点的不同称呼）。当前页面清晰显示该地址已保存在“公司”项下，说明设置已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_15",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗地铁站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='西二旗地铁站')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_13",
+      "id": "c11"
+    }
+  ],
+  "search_terms": [
+    "天坛公园到天安门广场",
+    "天安门",
+    "医院",
+    "4S店",
+    "洗车",
+    "4S店 洗车",
+    "北京大学东门",
+    "小米科技园B栋",
+    "西二旗地铁站"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10",
+      "c11"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 10 条 carried_over（前序仍开放的残留）"
+  ]
+}

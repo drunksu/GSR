@@ -1,0 +1,345 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_7",
+  "run_id": "base_canonical",
+  "task_goal": "去拼多多打开婴儿湿巾的店铺首页",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "婴儿湿巾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='婴儿湿巾')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "卡通小狗 马克杯",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='卡通小狗 马克杯')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c2"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "卡通小狗马克杯卡通带盖陶",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "ACTION: click([261, 2571])\n...因为底部的“收藏”按钮显示为红色心形并标注“已收藏”，说明收藏操作已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "无线鼠标",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='无线鼠标')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_5",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "白色Type-C数据线",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='白色Type-C数据线')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_4",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "黑色垃圾袋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='黑色垃圾袋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_3",
+      "id": "c6"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "LTL",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "头像已成功更换为相册第一张照片（LTL图标），界面显示“头像设置成功”提示，说明任务已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_28",
+      "id": "c7"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "setting",
+        "name": "字体大小设置",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        14
+      ],
+      "evidence_quote": "ACTION: click([1009, 1272])",
+      "confidence": 0.5,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_27",
+      "id": "c8"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "setting",
+        "name": "自动免拼",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "当前弹出一个操作菜单，提供“开启”、“暂时关闭”和“取消”三个选项。任务目标是“暂时关闭拼多多自动免拼”，因此应选择“暂时关闭”选项。该选项明确符合需求，点击后即可完成设置。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_26",
+      "id": "c9"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "自行车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "THOUGHT: 我需要在搜索框中输入“自行车”来查找相关商品。当前搜索框中显示的是“垂钓装备”，我需要清空它并输入新的关键词。键盘已经打开，可以直接输入。\nACTION: type(text='自行车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_20",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "垂钓装备",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='垂钓装备')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_19",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "女鞋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='女鞋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_18",
+      "id": "c12"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "account",
+        "name": "禾简老人健步鞋",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "THOUGHT: 右上角有红色的“+ 关注”按钮，这是完成“关注店铺”任务的关键操作点。根据任务要求，需点击该按钮进行关注。 ACTION: click([1087, 317])",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_18",
+      "id": "c13"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "橡皮泥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='橡皮泥')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_17",
+      "id": "c14"
+    }
+  ],
+  "search_terms": [
+    "婴儿湿巾",
+    "卡通小狗 马克杯",
+    "无线鼠标",
+    "白色Type-C数据线",
+    "黑色垃圾袋",
+    "自行车",
+    "垂钓装备",
+    "女鞋",
+    "橡皮泥"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13",
+      "c14"
+    ],
+    "halt": [
+      {
+        "id": "c8",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 13 条 carried_over（前序仍开放的残留）"
+  ]
+}

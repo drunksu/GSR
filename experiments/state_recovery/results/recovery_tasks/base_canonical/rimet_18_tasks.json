@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_18",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将‘回车键发送消息’功能开启，使其处于启用状态（开关显示为蓝色）",
+      "precondition": {
+        "target": "确认‘回车键发送消息’开关当前是否已开启",
+        "check_instruction": "进入钉钉【设置】→【聊天】页面，查看‘回车键发送消息’选项对应的开关控件状态",
+        "clean_if_state": "‘回车键发送消息’开关已为蓝色开启状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "回车键发送消息的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

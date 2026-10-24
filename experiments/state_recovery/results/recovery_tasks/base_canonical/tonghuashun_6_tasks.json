@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_6",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺App中，将搜索框内容恢复为‘青岛啤酒’，确保能通过该关键词查到青岛啤酒的图解财报页面",
+      "precondition": {
+        "target": "搜索框当前内容是否为‘青岛啤酒’",
+        "check_instruction": "进入同花顺首页，查看顶部搜索框中显示的文本内容是否为‘青岛啤酒’",
+        "clean_if_state": "搜索框中已显示‘青岛啤酒’且未被其他文字干扰（如无残留字符或提示语）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "同花顺App的搜索框中是否精确显示‘青岛啤酒’四个字？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

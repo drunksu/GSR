@@ -1,0 +1,350 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_6",
+  "run_id": "base_canonical",
+  "task_goal": "在58同城中查看58官方搬家的收费标准",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "58官方搬家",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='58官方搬家')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "小米SU7",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='小米SU7')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_5",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "智学苑",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6,
+        16
+      ],
+      "evidence_quote": "ACTION: type(text='智学苑')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_4",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "智学",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "ACTION: type(text='智学')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_4",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "苑",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10,
+        11,
+        15
+      ],
+      "evidence_quote": "ACTION: click([926, 201])",
+      "confidence": 0.8,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_4",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "合租",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='合租')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_3",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "任务中心",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "ACTION: type(text='任务中心')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_29",
+      "id": "c7"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "绑定国家网络身份认证",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "Step 6: THOUGHT: ...该行右侧有一个灰色开关按钮，通常这类开关点击后会引导至认证页面。因此，我应尝试点击该开关按钮，以启动身份认证流程。",
+      "confidence": 0.3,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_28",
+      "id": "c8"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "性别",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "我已经成功将性别修改为“女”，在个人信息页面中，“我是”一栏已经显示为“女”，并且头像旁边也出现了女性标识。这表明修改已经生效并保存成功。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_27",
+      "id": "c9"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "58.com",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "搜索框已激活，键盘弹出，现在需要输入58同城的域名“58.com”来查询其ICP备案信息。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_25",
+      "id": "c10"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "长辈模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3,
+        4
+      ],
+      "evidence_quote": "在设置页面中，我找到了“长辈模式”选项，当前状态为“未开启”。要完成任务，只需点击该选项进入开启界面即可。... 当前页面明确显示了“开启长辈模式”的按钮，这是完成任务的最后一步。点击该按钮即可启用长辈模式，符合用户需求。... 从当前界面顶部的“返回普通版”按钮和整体UI风格来看，长辈模式已经成功开启（字体变大、布局简化、顶部有切换按钮）。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_23",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "房贷计算器",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "ACTION: type(text='房贷计算器')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_20",
+      "id": "c12"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "空调上门安装",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "ACTION: type(text='空调上门安装')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_2",
+      "id": "c13"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "58同城",
+      "entity": {
+        "kind": "content",
+        "name": "简历",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "页面底部有“开启求职之旅”按钮，点击后应能完成简历创建并进入求职流程。由于任务目标是“打开我在58同城中的简历”，而简历尚未真正保存完成，需点击该按钮以提交信息、生成简历。这是创建流程的最后一步，完成后即可返回查看已创建的简历。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_19",
+      "id": "c14"
+    }
+  ],
+  "search_terms": [
+    "58官方搬家",
+    "小米SU7",
+    "智学苑",
+    "智学",
+    "苑",
+    "合租",
+    "任务中心",
+    "58.com",
+    "房贷计算器",
+    "空调上门安装"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13",
+      "c14"
+    ],
+    "halt": [
+      {
+        "id": "c8",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 13 条 carried_over（前序仍开放的残留）"
+  ]
+}

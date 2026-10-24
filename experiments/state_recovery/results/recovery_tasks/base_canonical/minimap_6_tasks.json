@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_6",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中，将搜索框内容恢复为‘颐和园’，确保当前搜索目标明确为颐和园",
+      "precondition": {
+        "target": "搜索框中是否已输入‘颐和园’且未被覆盖或清空",
+        "check_instruction": "进入高德地图首页，查看顶部搜索框中的文本内容是否为‘颐和园’",
+        "clean_if_state": "搜索框中已显示‘颐和园’且处于可编辑状态，未被其他地点覆盖"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图首页的搜索框中是否准确显示‘颐和园’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中将搜索目标恢复为北京大学，确保搜索框内显示‘北京大学’且未被其他历史记录干扰",
+      "precondition": {
+        "target": "搜索框当前内容是否为‘北京大学’",
+        "check_instruction": "进入高德地图首页，查看搜索框中的文本内容是否包含实体名‘北京大学’",
+        "clean_if_state": "搜索框中已显示‘北京大学’且无多余字符或自动补全干扰项"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索框中是否精确显示‘北京大学’且未被其他搜索历史覆盖？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

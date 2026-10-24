@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_12",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城中将当前城市恢复为合肥",
+      "precondition": {
+        "target": "确认当前城市是否已显示为合肥",
+        "check_instruction": "进入58同城首页，查看顶部导航栏中‘当前城市’的显示文字是否为‘合肥’",
+        "clean_if_state": "当前城市已显示为‘合肥’"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "58同城首页顶部导航栏中的当前城市是否显示为合肥？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在58同城App中将当前城市设置为合肥，确保城市选择器或定位显示明确为合肥",
+      "precondition": {
+        "target": "确认当前城市是否已为合肥",
+        "check_instruction": "进入58同城首页，查看顶部城市栏或定位标签中是否显示‘合肥’字样",
+        "clean_if_state": "当前城市已显示为合肥，无需操作"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "58同城首页顶部城市栏或定位标签是否明确显示‘合肥’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

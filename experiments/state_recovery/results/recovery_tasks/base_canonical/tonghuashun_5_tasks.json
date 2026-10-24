@@ -1,0 +1,36 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_5",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺中将光大证券（601788）加入自选股，确保其右侧按钮显示为“−”表示已成功添加。",
+      "precondition": {
+        "target": "光大证券（601788）是否已在自选股列表中且右侧按钮为“−”。",
+        "check_instruction": "进入同花顺的自选股页面，查找光大证券（601788）条目，观察其右侧按钮样式。",
+        "clean_if_state": "光大证券（601788）已在自选股列表中，且右侧按钮显示为“−”。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺自选股列表中，光大证券（601788）右侧按钮是否为“−”？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [
+    {
+      "mutation_id": "m2",
+      "title": "同花顺App中搜索“光大证券”后未成功加入自选股的残留搜索记录",
+      "gate_reason": "reversible=unknown → human gate",
+      "reason": "系统无法确认用户是否已实际完成添加操作（如点击‘+’按钮），仅检测到搜索行为，且无明确界面反馈表明自选股已更新，因此不能自动回滚或补全操作。",
+      "suggested_manual_action": "进入同花顺App首页，点击右下角‘自选’，检查‘自选股’列表中是否存在‘光大证券’；若不存在，返回首页搜索框重新输入‘光大证券’，在搜索结果中找到对应股票/证券条目，点击右侧‘+’按钮手动添加。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_4",
+  "run_id": "base_canonical",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中取消对好友‘绕堤沙(1098074562)’的待处理好友请求（若已通过则需删除该好友关系）",
+      "precondition": {
+        "target": "QQ中‘绕堤沙(1098074562)’的好友请求状态",
+        "check_instruction": "进入QQ联系人列表，找到名称为‘绕堤沙’、QQ号为1098074562的联系人，查看其右侧状态标签",
+        "clean_if_state": "当前状态为‘未添加好友’或联系人列表中无该用户"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ联系人列表中是否已不存在名为‘绕堤沙’、QQ号为1098074562的联系人，且无待处理好友请求？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 18
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在QQ中清除搜索历史中的‘1098074562’条目",
+      "precondition": {
+        "target": "QQ搜索历史记录",
+        "check_instruction": "打开QQ主界面，点击右上角搜索图标，进入搜索页面，查看‘最近搜索’列表中是否存在‘1098074562’",
+        "clean_if_state": "‘最近搜索’列表中不包含‘1098074562’"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ搜索页面的‘最近搜索’列表中是否已不存在‘1098074562’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 12
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_9",
+  "run_id": "base_canonical",
+  "tasks": [],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "QQ中已发送的“照片”残留消息无法撤回",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "QQ不支持已发送图片消息的自动撤回或删除，且该消息已进入对方收件箱，系统无法逆向操作",
+      "suggested_manual_action": "进入QQ与绕堤沙的聊天界面，长按该‘照片’消息，选择‘撤回’（若2分钟内）或‘删除’（仅本地），如超时则需手动告知对方忽略该消息。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

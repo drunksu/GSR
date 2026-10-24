@@ -1,0 +1,359 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_4",
+  "run_id": "base_canonical",
+  "task_goal": "在今日头条上搜一下今天五粮液的股价",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "五粮液 股价",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框已激活，键盘已弹出，可以直接输入“五粮液 股价”进行搜索。……仍手动输入更稳妥。  type(text='五粮液 股价')",
+      "confidence": 0.9,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "other",
+        "name": "搜索历史",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "我已经进入了今日头条的搜索历史界面，看到了“全部删除”按钮。……系统已经弹出了确认清空搜索历史的对话框，询问“是否清空搜索历史”。……我已经成功清空了今日头条的搜索历史，因为现在搜索历史区域已经消失，只显示“猜你想搜”等推荐内容，说明之前的搜索记录已被清除。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_3",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "今天北京的穿衣指数",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        0,
+        1
+      ],
+      "evidence_quote": "我需要搜索“今天北京的穿衣指数”，因此接下来应输入该关键词。",
+      "confidence": 0.8,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_2",
+      "id": "c3"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "一键防护开关",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "server",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "刚才点击“一键防护开关”时，系统弹出了一个举报确认弹窗，这说明我误触了举报功能而非直接开启防护。",
+      "confidence": 0.3,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_19",
+      "id": "c4"
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "other",
+        "name": "互动消息",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        2,
+        3,
+        8
+      ],
+      "evidence_quote": "之前有4条互动消息、1条创作邀请、1条作者成长助手的未读标识现在都不见了，说明系统已经将所有消息标记为已读",
+      "confidence": 0.7,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_18",
+      "id": "c5"
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "other",
+        "name": "创作邀请",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        4,
+        5,
+        8
+      ],
+      "evidence_quote": "之前有4条互动消息、1条创作邀请、1条作者成长助手的未读标识现在都不见了，说明系统已经将所有消息标记为已读",
+      "confidence": 0.7,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_18",
+      "id": "c6"
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "other",
+        "name": "作者成长助手",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        6,
+        7,
+        8
+      ],
+      "evidence_quote": "之前有4条互动消息、1条创作邀请、1条作者成长助手的未读标识现在都不见了，说明系统已经将所有消息标记为已读",
+      "confidence": 0.7,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_18",
+      "id": "c7"
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "other",
+        "name": "缓存",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        2,
+        3,
+        4
+      ],
+      "evidence_quote": "我已经进入“清理缓存”页面，看到缓存文件大小为522.4MB，右侧有一个红色的“清理”按钮。点击该按钮即可清除缓存……缓存清理已完成，页面显示“清理完成”提示，缓存文件大小已变为0.0B，说明操作成功。",
+      "confidence": 0.85,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_17",
+      "id": "c8"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "深色模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3,
+        4
+      ],
+      "evidence_quote": "夜间模式（深色模式）已经成功开启，因为当前界面显示为深色背景，并且“深色模式”选项已被选中（红色圆点）。",
+      "confidence": 0.55,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_15",
+      "id": "c9"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "性别",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "根据任务要求，我需要将性别设置为“女”，所以现在应该点击“女”选项。…我已经选择了“女”选项，现在需要点击右上角的“确认”按钮来保存设置。…我已经成功将性别设置为“女”，在编辑资料页面可以看到“性别”一栏已经显示为“女”。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_13",
+      "id": "c10"
+    },
+    {
+      "type": "other",
+      "app": "今日头条",
+      "entity": {
+        "kind": "account",
+        "name": "艺术类的蓝色波浪形图案",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5,
+        6
+      ],
+      "evidence_quote": "我已经成功更换了头像，现在个人主页的头像已经变成了艺术类的蓝色波浪形图案，与任务要求一致。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_12",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "哪吒 票房",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "type(text='哪吒 票房')",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_1",
+      "id": "c12"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "黄金今日的价格",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "我将直接在搜索框中输入目标关键词。 ACTION: type(text='黄金今日的价格')",
+      "confidence": 0.65,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_0",
+      "id": "c13"
+    }
+  ],
+  "search_terms": [
+    "五粮液 股价",
+    "今天北京的穿衣指数",
+    "哪吒 票房",
+    "黄金今日的价格"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c3",
+      "c10",
+      "c11",
+      "c12"
+    ],
+    "halt": [
+      {
+        "id": "c2",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c4",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c5",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c6",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c7",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c8",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c9",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c13",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4.1-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 12 条 carried_over（前序仍开放的残留）"
+  ]
+}

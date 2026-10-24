@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_20",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中打开房贷计算器页面，确保当前界面为房贷计算器功能主界面",
+      "precondition": {
+        "target": "确认当前页面是否已正确显示房贷计算器功能界面",
+        "check_instruction": "进入58同城首页后，查找并确认页面中是否存在标题为‘房贷计算器’的模块或入口，且已进入其功能页面",
+        "clean_if_state": "当前页面已显示‘房贷计算器’标题及对应的输入框、计算按钮等核心交互元素，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前58同城App界面是否已成功显示房贷计算器功能主界面？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

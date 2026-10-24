@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_28",
+  "run_id": "base_canonical",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中将‘深色模式’设置为关闭状态",
+      "precondition": {
+        "target": "网易云音乐深色模式开关当前状态",
+        "check_instruction": "进入‘我的’→右上角设置图标→‘通用’，查看‘深色模式’开关位置",
+        "clean_if_state": "开关处于左侧（关闭）位置，即滑块为灰色且在左"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "网易云音乐‘通用’设置中的‘深色模式’开关是否已处于关闭状态（滑块在左侧）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 10
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_9",
+  "run_id": "base_canonical",
+  "task_goal": "去关注今日头条体育频道第一条新闻的作者",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "account",
+        "name": "安信德小店",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 我现在处于作者“安信德小店”的主页，页面上清晰显示了一个红色的“关注”按钮，说明当前尚未关注该作者（若已关注应为“已关注”或灰色状态）。任务要求是关注今日头条体育频道第一条新闻的作者，而这条新闻正是由“安信德小店”发布的，因此我需要点击这个红色“关注”按钮来完成关注操作。\\nStep 6: THOUGHT: 从当前界面可见，作者“安信德小店”的关注数已从3477变为3478，说明刚才的点击操作已成功完成关注。同时，“关注”按钮已消失，取而代之的是“私信”和“打招呼”按钮，这是已关注状态的典型表现。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "重庆奇人刘星，天生两套生殖系统……",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "Step 8: THOUGHT: 我已成功进入健康频道第一条新闻的详情页，当前页面底部可见收藏按钮（星形图标，显示“26”），这是任务的关键操作点。根据要求，我需要点击该收藏按钮完成收藏操作。 ACTION: click([1037, 2582])\nStep 9: THOUGHT: 任务已完成：已成功进入今日头条健康频道，打开第一条新闻，并点击收藏按钮，页面显示“收藏成功”，且收藏数从26变为27，说明收藏操作已生效。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_8",
+      "id": "c2"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "泰山上的轿夫既给游客便利，自己又得到了...",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "右侧有心形图标（点赞），显示“1.3万”，说明是点赞按钮。……我已成功进入今日头条“发现”频道的第一条图片新闻详情页，并观察到右侧的点赞按钮（心形图标）已变为红色，显示“1.3万”，说明点赞操作已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_7",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "五粮液 股价",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='五粮液 股价')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_4",
+      "id": "c4"
+    }
+  ],
+  "search_terms": [
+    "五粮液 股价"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 3 条 carried_over（前序仍开放的残留）"
+  ]
+}

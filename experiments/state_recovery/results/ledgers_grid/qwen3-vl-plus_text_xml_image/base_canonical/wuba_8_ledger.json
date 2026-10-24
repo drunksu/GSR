@@ -1,0 +1,92 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_8",
+  "run_id": "base_canonical",
+  "task_goal": "在58同城中查看全部服务频道",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "58官方 日常保洁",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='58官方 日常保洁')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_7",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "58官方搬家",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='58官方搬家')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_6",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "小米SU7",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='小米SU7')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_5",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [
+    "58官方 日常保洁",
+    "58官方搬家",
+    "小米SU7"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 3 条 carried_over（前序仍开放的残留）"
+  ]
+}

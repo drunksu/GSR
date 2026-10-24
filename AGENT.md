@@ -18,6 +18,12 @@ agent's success rate (order-dependent / OD flaky tests)?**
 - **Main line (MobileBench-OL):** a real Android phone + 12 real Chinese apps + a hosted
   LLM API (`qwen3-vl-plus` / `qwen3-vl-flash`), running a 2×2 factorial study of
   **order (canonical/shuffle) × reset (official/none)**. Real conclusions have been produced.
+- **Phase 2 (state recovery, current focus):** `experiments/state_recovery/` builds the
+  **Execute → Audit → Planner → Execute** closed loop that detects persistent state
+  pollution from an execution trajectory (contamination list), generates grounded recovery
+  tasks, and (Stage B, phone) executes them under a pre-check / verify / hard-gate state
+  machine. Stage A (offline inference + recovery-task generation) is complete; Stage B/C
+  require the phone.
 - **Side line (AndroidWorld):** an emulator-based route. Code and synthetic-data self-tests
   passed historically, but the real-device path was never verified. The whole route
   (`order_runner.py`, `task_catalog.py`, `make_sim_data.py`, `power_analysis.py` plus its
@@ -44,6 +50,7 @@ state its cost first.
 | `experiments/selftest.py` | Regression self-check (statistics + encoding guards); no phone/key needed | Must stay green; run after any edit |
 | `experiments/common/` | Cross-experiment MobileBench-OL infrastructure: key lookup, API patch, endpoint/coord probes, app checklist | Reusable for future experiments |
 | `experiments/motivation_study/` | Code/docs for the completed motivation study (`docs/motivation_study.md`): analyzer, episode converter, CSV/purge/audit/forensics scripts | New experiments get sibling dirs, e.g. `experiments/<name>/{scripts,docs,results}` |
+| `experiments/state_recovery/` | **Phase 2 (current)**. `scripts/`: `infer_mutations.py` (trajectory → contamination list), `mutation_taxonomy.py` (schema/gate), `audit_grounding.py` (grounding + deterministic conservatism), `recovery_task.py` (recovery-task schema/validation), `generate_tasks.py` / `score_tasks.py`; `docs/design.md` is the authoritative design log, `docs/method.md` its Chinese narrative; `eval/` holds three files: `annotation_metadata.jsonl` (labeler working file), `golden_labels.json` (final human gold, 310 base_canonical cases, feeds `score_inference.py`), `ai_contamination_list.json` (AI inference output, for review comparison); `results/ledgers/` (lists on disk) and `results/recovery_tasks/` are evidence | Bump schema strings + versions when changing formats; rerun `score_inference.py` / `score_tasks.py` after prompt/validator changes; never hand-edit `results/` JSON to make scores pass — fix the generator |
 | `backup/` | Superseded/extra runs, CSVs, the AndroidWorld side line — never silently delete; see `backup/MANIFEST.md` | Archived evidence |
 | `third_party/mobilebench-ol-main/` | The **patched** benchmark: `run.py`, `config/`, `data/*.csv`, `results/` | See §4; never hand-edit generated patches |
 | `third_party/platform-tools/` | Bundled adb (3 committed files) | Do not touch |
@@ -148,6 +155,12 @@ It guards both statistical correctness and this repository's own pitfalls (G1/G2
   `pilot.cmd` / adb commands): they need a physical phone, ~28 hours, millions of tokens, and
   12 manual `pause` points where a human restores QQ state. Do so only when the user
   explicitly asks. Phone-free rehearsal uses `-DryRun`.
+- State-recovery **Stage A scripts are phone-free** and may be run freely (they do call the
+  text LLM API, so they cost tokens): `infer_mutations.py`, `generate_tasks.py`,
+  `score_inference.py`, `score_tasks.py`, `audit_grounding.py`; `--dry-run` prints prompts
+  without any API call. **Stage B/C recovery execution on the phone falls under the same
+  phone-experiment ban** — wait for an explicit request and state the expected task count
+  and pause points first.
 - **Do not delete, reorder, or rename directories under `results/` or the CSV task sets** —
   they are experimental evidence, and directory names are the analyzer's grouping inputs.
   Cleaning is only allowed via `mbl_purge_tasks.py --blank-failed-only` (**not**
@@ -179,6 +192,11 @@ mobile\Scripts\python.exe experiments\selftest.py
 # Rebuild a report from episodes (CWD = third_party\mobilebench-ol-main)
 ..\..\mobile\Scripts\python.exe ..\..\experiments\motivation_study\scripts\analyze_order_effects.py `
   --input results\p1_none_can results\p1_off_can --out results\demo --official-condition official
+
+# Phase 2, Stage A — all phone-free (CWD = experiments\state_recovery\scripts)
+..\..\..\mobile\Scripts\python.exe score_inference.py --golden ..\eval\golden_labels.json
+..\..\..\mobile\Scripts\python.exe score_tasks.py --out ..\results\recovery_task_report_v0.json
+..\..\..\mobile\Scripts\python.exe generate_tasks.py --run base_canonical --task articlenews_16 --dry-run
 ```
 
 For the full command set (deployment, B1–B10, backfills, sync), see the corresponding README
@@ -191,3 +209,21 @@ order changes) · polluter (a preceding task that dirties state and causes later
 CTCI (success-rate range across orders) · PASR (success rate under the worst order — a
 trustworthy lower bound) · DiD (order × reset interaction) · C1 pollution main effect /
 C2 order main effect / C3 combined effect.
+
+Phase 2 (state recovery) terms:
+
+- Agents: **Audit Agent** (offline inference) → **Planner Agent** (recovery-task generation)
+  → **Execute Agent** (the reused benchmark executor; also runs recovery). No other names
+  (Detector/Restorer/Packet) may appear in docs or user-facing strings.
+- **Contamination list** = the Audit Agent's structured output, schema
+  `contamination-list/v0.1`, one entry per persistent state change with evidence + gate.
+  **Recovery task** = the Planner Agent's output, schema `recovery-task-set/v0.1`
+  (`recovery-task/v0.1` per item; the set key is `tasks`), equivalent to a benchmark goal
+  plus safety shell (precondition / expected_end_state / risk_level / idempotent).
+- **Implementation aliases (intentional, do not "fix"):** internal Python variables keep the
+  name `ledger`, lists are written as `results/ledgers/<run>/*_ledger.json`, and cross-task
+  carry-over is referred to as "结转" in Chinese prompts. These are internal storage names;
+  all product/documentation language says contamination list / recovery task.
+- Gate: `autonomous` (high-confidence, UI-reversible → auto recovery task) vs `halt`
+  (irreversible / uncertain → human_gate list, never auto-executed). The golden rule stays
+  "generation may be free, execution must be gated" — wrong recovery is new pollution.

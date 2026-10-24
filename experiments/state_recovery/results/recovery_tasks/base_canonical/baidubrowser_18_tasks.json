@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_18",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度浏览器中，将‘安装’相关设置恢复为‘应用安装后删除安装包’功能已启用的状态",
+      "precondition": {
+        "target": "确认‘应用安装后删除安装包’功能当前是否已开启",
+        "check_instruction": "进入百度浏览器的‘设置’页面，找到并点击‘安装’相关选项（如‘安装管理’或‘安装设置’），查看‘应用安装后删除安装包’开关是否处于开启状态",
+        "clean_if_state": "当前‘安装’设置页中‘应用安装后删除安装包’开关已显示为开启（蓝色/绿色等激活状态）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在百度浏览器的‘安装’设置页面中，‘应用安装后删除安装包’功能是否已开启？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

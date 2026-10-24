@@ -1,0 +1,69 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_2",
+  "run_id": "base_canonical",
+  "task_goal": "在今日头条上搜一下今天北京的穿衣指数",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "今天北京的穿衣指数",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='今天北京的穿衣指数')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "一键防护开关",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        5
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 我现在在“隐私中心”页面，看到“互动”部分有一个“一键防护开关”，描述中提到“3天内将不接收陌生人的评论/转发/私信”，这正是我要找的“不接受陌生人消息”功能。虽然它是一个临时开关（3天），但符合任务要求。点击该开关即可启用防护，从而实现不接收陌生人消息的目的。... Step 5: THOUGHT: 我已回到隐私中心页面，确认“一键防护开关”处于开启状态（绿色），说明陌生人消息防护已生效。根据描述，“开启后，3天内将不接收陌生人的评论/转发/私信”，这完全满足“设置不接受陌生人消息”的任务要求。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_19",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [
+    "今天北京的穿衣指数"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

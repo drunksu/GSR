@@ -1,0 +1,114 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_29",
+  "run_id": "base_canonical",
+  "task_goal": "打开B站扫一扫",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "setting",
+        "name": "定时停止播放",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        15,
+        16
+      ],
+      "evidence_quote": "THOUGHT: 太好了！我终于找到了定时关闭功能！在播放设置菜单中，我看到了\"定时停止播放\"选项，下面有\"不开启\"、\"15分钟\"、\"30分钟\"、\"60分钟\"和\"自定义\"几个选项。这正是用户要找的B站定时关闭功能。现在我需要选择一个时间选项来启用定时关闭，比如选择\"15分钟\"作为示例。... THOUGHT: 我已经成功找到了B站的定时关闭功能，并且已经设置了15分钟的定时停止播放。从界面上可以看到\"定时停止播放 将于18:53:38暂停\"的提示，说明定时关闭功能已经生效。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_28",
+      "id": "c1"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "content",
+        "name": "头像",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "头像已经成功更换为随机头像（现在显示的是一个蓝发动漫角色），任务已完成。从界面看，头像区域已更新为新的随机图片，说明之前的“随机”选项操作生效了。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_21",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "王者荣耀官方赛事",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='王者荣耀官方赛事')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_2",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "哆啦A梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='哆啦A梦')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_18",
+      "id": "c4"
+    }
+  ],
+  "search_terms": [
+    "王者荣耀官方赛事",
+    "哆啦A梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3",
+      "c4"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 4 条 carried_over（前序仍开放的残留）"
+  ]
+}

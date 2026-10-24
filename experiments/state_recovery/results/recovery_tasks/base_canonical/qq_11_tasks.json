@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_11",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "打开QQ，确保‘绕堤沙’出现在最近搜索记录中，并能通过搜索框直接输入‘绕堤沙’精准定位该联系人",
+      "precondition": {
+        "target": "确认‘绕堤沙’已存在于QQ的最近搜索记录中且搜索框可正常输入",
+        "check_instruction": "进入QQ主界面，点击顶部搜索框，查看最近搜索列表中是否包含‘绕堤沙’",
+        "clean_if_state": "搜索框已激活，且‘绕堤沙’明确显示在最近搜索记录列表中，无需额外操作即可直接点击或输入该名称进行搜索"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ的搜索界面中，‘绕堤沙’是否已作为最近搜索项清晰显示在列表中，且可被直接选中或输入以定位该联系人？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

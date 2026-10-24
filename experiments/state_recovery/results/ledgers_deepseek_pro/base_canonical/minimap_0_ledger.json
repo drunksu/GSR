@@ -1,0 +1,92 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_0",
+  "run_id": "base_canonical",
+  "task_goal": "在高德地图中查找前往一家附近的烤肉店的路线",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "烤肉店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "为了找到附近的烤肉店，我需要在搜索框中输入“烤肉店”这个关键词。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "无女主",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "ACTION: type(text=' 无女主')……当前搜索关键词是“无女主”",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_9",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "阴间神探",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "直接输入“阴间神探”更高效。ACTION: type(text='阴间神探')",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_6",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [
+    "烤肉店",
+    "无女主",
+    "阴间神探"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 2 条 carried_over（前序仍开放的残留）"
+  ]
+}

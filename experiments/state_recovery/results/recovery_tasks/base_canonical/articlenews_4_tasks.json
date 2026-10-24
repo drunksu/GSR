@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_4",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条App中，确保搜索历史里存在‘五粮液 股价’这一条目，且该条目为最新一次搜索记录。",
+      "precondition": {
+        "target": "检查‘五粮液 股价’是否已存在于今日头条的搜索历史中，并确认其为最近一次搜索项。",
+        "check_instruction": "进入今日头条首页，点击顶部搜索框，查看搜索历史列表中是否存在‘五粮液 股价’条目，重点观察其是否位于历史列表最上方。",
+        "clean_if_state": "搜索历史列表中已存在‘五粮液 股价’且位于最顶部（即最新搜索项）时，视为已恢复。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条的搜索历史列表中，‘五粮液 股价’是否作为最新一条搜索记录出现在最上方？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

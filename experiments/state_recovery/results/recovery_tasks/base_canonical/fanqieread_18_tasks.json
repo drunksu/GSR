@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_18",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说App中，将阅读偏好设置为‘男频’，确保用户偏好明确指向男生小说类别",
+      "precondition": {
+        "target": "确认当前阅读偏好是否已设为‘男频’",
+        "check_instruction": "进入番茄小说App的‘我的’页面，找到并点击‘阅读偏好’或类似设置入口，查看当前选中的偏好标签是否为‘男频’",
+        "clean_if_state": "当前阅读偏好已显示为‘男频’，且无其他冲突选项被选中"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "番茄小说App中用户的阅读偏好是否已明确设置为‘男频’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在番茄小说App中，将阅读偏好设置为包含‘男频衍生’分类，确保该选项处于选中状态并已保存生效。",
+      "precondition": {
+        "target": "确认‘男频衍生’是否已在阅读偏好中被选中并保存。",
+        "check_instruction": "进入番茄小说App的‘我的’→‘设置’→‘阅读偏好’页面，查看‘男频衍生’选项是否显示为橙色高亮且底部‘确定’按钮显示已选数量（如‘确定 (1)’）。",
+        "clean_if_state": "‘男频衍生’选项已高亮显示，且底部确认按钮显示包含该选项的计数（例如‘确定 (1)’），表示偏好已成功设置并保存。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说App的阅读偏好设置页面中，‘男频衍生’选项是否处于高亮选中状态且底部确认按钮显示已选中该分类（例如‘确定 (1)’）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 3
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_11",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中将搜索起点恢复为北京丰台站，并确保路线规划界面已正确显示该起点",
+      "precondition": {
+        "target": "确认当前搜索起点是否为北京丰台站",
+        "check_instruction": "进入高德地图首页的路线规划界面，查看起点输入框中显示的文本是否为‘北京丰台站’",
+        "clean_if_state": "起点输入框中已显示‘北京丰台站’且未处于编辑状态，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图路线规划界面的起点输入框中是否明确显示‘北京丰台站’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中，将搜索目标恢复为‘上海南站’作为终点的路线规划状态，确保当前搜索框或路线界面明确显示‘上海南站’为目的地实体。",
+      "precondition": {
+        "target": "确认当前路线规划界面中终点是否为‘上海南站’。",
+        "check_instruction": "进入高德地图主界面或路线规划页，查看目的地输入框或路线摘要中是否显示‘上海南站’。",
+        "clean_if_state": "当前路线规划的目的地已明确显示为‘上海南站’，且未处于编辑或模糊匹配状态。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图当前路线规划的目的地是否准确且唯一地显示为‘上海南站’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 3
+}

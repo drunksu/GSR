@@ -1,0 +1,579 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_17",
+  "run_id": "base_canonical",
+  "task_goal": "在哔哩哔哩，找到我关注的人的动态，并给里面的动态点赞",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "content",
+        "name": "第七翼刀",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "当前显示的动态来自用户“第七翼刀”，内容包含文字和视频，并且下方有点赞按钮（显示305个赞）...从截图中可以看到，点赞按钮已经变为红色，显示点赞数为306，说明点赞已生效。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "西游记第二集",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='西游记第二集')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_13",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "牧神记第一集",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='牧神记第一集')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_12",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "每周必看",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "ACTION: type(text='每周必看')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_10",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "沈腾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='沈腾')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_1",
+      "id": "c5"
+    },
+    {
+      "type": "message_send",
+      "app": "百度",
+      "entity": {
+        "kind": "message",
+        "name": "泰酷辣",
+        "identifier": null
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "评论“泰酷辣”已成功发布，出现在评论列表中（显示“刚刚 上海 回复”）",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_8",
+      "id": "c6"
+    },
+    {
+      "type": "social_reaction",
+      "app": "百度",
+      "entity": {
+        "kind": "content",
+        "name": "剑来",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "已成功加入书架",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_7",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "百度",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗 邮政编码",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='西二旗 邮政编码')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_2",
+      "id": "c8"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "清理缓存",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "现在进入了百度APP的“我的”页面，看到“清理缓存”功能明确显示“检测到211MB缓存垃圾”，并有一个蓝色的“清理”按钮。……从当前界面看，“清理缓存”项已显示“已清理211MB 缓存垃圾”，说明缓存清理操作已经成功执行。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_19",
+      "id": "c9"
+    },
+    {
+      "type": "search_history",
+      "app": "百度",
+      "entity": {
+        "kind": "search",
+        "name": "安装",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='安装')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_18",
+      "id": "c10"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "动态内容视频模式播放",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "在“播放设置”页面中，我找到了与图片自动播放最相关的选项：“动态内容视频模式播放”，其描述明确提到“动态内容支持视频模式播放，图片轮播”。当前该开关是关闭状态（灰色）...而“动态内容视频模式播放”是唯一提及图片轮播的选项，因此可以认为关闭此选项即满足需求.",
+      "confidence": 0.4,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_17",
+      "id": "c11"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "通知栏消息",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "在“通知栏消息”设置页面中，顶部的“通知栏消息”总开关已经处于关闭状态（灰色），这意味着所有通知栏消息已被禁用。其他子项如新闻热点、兴趣推送等也均为关闭状态，说明通知栏消息已完全关闭。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_16",
+      "id": "c12"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "新闻热点",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "在“通知栏消息”设置页面中，顶部的“通知栏消息”总开关已经处于关闭状态（灰色），这意味着所有通知栏消息已被禁用。其他子项如新闻热点、兴趣推送等也均为关闭状态，说明通知栏消息已完全关闭。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_16",
+      "id": "c13"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "兴趣推送",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "在“通知栏消息”设置页面中，顶部的“通知栏消息”总开关已经处于关闭状态（灰色），这意味着所有通知栏消息已被禁用。其他子项如新闻热点、兴趣推送等也均为关闭状态，说明通知栏消息已完全关闭。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_16",
+      "id": "c14"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "百度",
+      "entity": {
+        "kind": "content",
+        "name": "新建地址",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        19
+      ],
+      "evidence_quote": "收货人输入框已激活，键盘弹出，当前可直接输入姓名“张三”。这是地址填写的第一步，完成后需依次填写电话、地区和详细地址。先确保姓名正确输入。",
+      "confidence": 0.5,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_15",
+      "id": "c15"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "夜间模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "当前界面已进入夜间模式设置页面，右侧“夜间”选项已被选中（蓝色对勾），说明夜间模式已经成功启用。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_14",
+      "id": "c16"
+    },
+    {
+      "type": "session_state",
+      "app": "百度",
+      "entity": {
+        "kind": "other",
+        "name": "无痕浏览中",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "session",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "我注意到屏幕顶部有一个“无痕浏览中”的提示，旁边还有一个面具图标，这说明当前已经处于无痕浏览模式了。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_13",
+      "id": "c17"
+    },
+    {
+      "type": "search_history",
+      "app": "百度",
+      "entity": {
+        "kind": "search",
+        "name": "用“快乐最重要”生成个性签名",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='用“快乐最重要”生成个性签名')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_12",
+      "id": "c18"
+    },
+    {
+      "type": "search_history",
+      "app": "百度",
+      "entity": {
+        "kind": "search",
+        "name": "快乐最重要",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "ACTION: type(text='快乐最重要')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_12",
+      "id": "c19"
+    },
+    {
+      "type": "search_history",
+      "app": "百度",
+      "entity": {
+        "kind": "search",
+        "name": "北京今日的天气",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 当前已成功激活搜索框，键盘已弹出，可以输入搜索内容。任务是查询“北京今日的天气”，因此下一步应直接在搜索框中输入该关键词。\nACTION: type(text='北京今日的天气')\nStep 6: THOUGHT: 搜索已完成，当前页面已显示北京今日天气的详细信息，包括实时温度、天气状况、风力等，任务目标已达成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_0",
+      "id": "c20"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "account",
+        "name": "安信德小店",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 我现在处于作者“安信德小店”的主页，页面上清晰显示了一个红色的“关注”按钮，说明当前尚未关注该作者（若已关注应为“已关注”或灰色状态）。任务要求是关注今日头条体育频道第一条新闻的作者，而这条新闻正是由“安信德小店”发布的，因此我需要点击这个红色“关注”按钮来完成关注操作。\\nACTION: click([327, 1055])\\nStep 6: THOUGHT: 从当前界面可见，作者“安信德小店”的关注数已从3477变为3478，说明刚才的点击操作已成功完成关注。同时，“关注”按钮已消失，取而代之的是“私信”和“打招呼”按钮，这是已关注状态的典型表现。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_9",
+      "id": "c21"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "重庆奇人刘星，天生两套生殖系统。",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8,
+        9
+      ],
+      "evidence_quote": "Step 7: THOUGHT: 成功进入健康频道，第一条新闻标题为“重庆奇人刘星，天生两套生殖系统……”，配有图片和作者信息。\\nStep 8: THOUGHT: 我已成功进入健康频道第一条新闻的详情页，当前页面底部可见收藏按钮（星形图标，显示“26”）……\\nStep 9: THOUGHT: 任务已完成：已成功进入今日头条健康频道，打开第一条新闻，并点击收藏按钮，页面显示“收藏成功”，且收藏数从26变为27，说明收藏操作已生效。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_8",
+      "id": "c22"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "泰山上的轿夫既给游客便利，自己又得到了...",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 我已成功进入图片新闻详情页，当前界面显示了新闻内容和互动按钮。右侧有心形图标（点赞），显示“1.3万”，说明是点赞按钮。根据任务要求，我需要为这条新闻点赞。现在只需点击该心形图标即可完成点赞操作。 ACTION: click([1116, 1427])\nStep 6: THOUGHT: 我已成功进入今日头条“发现”频道的第一条图片新闻详情页，并观察到右侧的点赞按钮（心形图标）已变为红色，显示“1.3万”，说明点赞操作已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_7",
+      "id": "c23"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "五粮液 股价",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='五粮液 股价')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_4",
+      "id": "c24"
+    }
+  ],
+  "search_terms": [
+    "西游记第二集",
+    "牧神记第一集",
+    "每周必看",
+    "沈腾",
+    "西二旗 邮政编码",
+    "安装",
+    "用“快乐最重要”生成个性签名",
+    "快乐最重要",
+    "北京今日的天气",
+    "五粮液 股价"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c7",
+      "c8",
+      "c9",
+      "c10",
+      "c12",
+      "c13",
+      "c14",
+      "c16",
+      "c18",
+      "c19",
+      "c20",
+      "c21",
+      "c22",
+      "c23",
+      "c24"
+    ],
+    "halt": [
+      {
+        "id": "c6",
+        "reason": "reversible=irreversible → human gate"
+      },
+      {
+        "id": "c11",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c15",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml_image",
+  "_repair_used": true,
+  "_warnings": [
+    "确定性结转补录 23 条 carried_over（前序仍开放的残留）"
+  ]
+}

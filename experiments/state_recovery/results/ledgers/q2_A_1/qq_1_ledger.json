@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_1",
+  "run_id": "q2_A_1",
+  "task_goal": "查看QQ搜索找DND群组",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "DND",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='DND')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "DND"
+  ],
+  "needs_recovery": true,
+  "overall_assessment": "本任务在QQ中输入搜索词'DND'，生成了账号级搜索历史；未执行加群、申请等操作，无其他持久化变更。",
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "_warnings": []
+}

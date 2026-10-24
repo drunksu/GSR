@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="720" viewBox="0 0 1920 720" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, Segoe UI, sans-serif">
+<desc>研究思路框架图：左侧为研究问题与核心矛盾（恢复错误等于新污染，因此生成可自由、执行必受控）；中部为检测—生成—执行三阶段状态恢复闭环，并含恢复轨迹再检测的反馈回路；右侧为验证目标——恢复后任务成功率回到独立执行口径，以 ΔSR、CTCI、PASR 评价。</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2c5282"/></marker><marker id="ar_o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#dd6b20"/></marker><marker id="ar_g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
+<rect x="0" y="0" width="1920" height="720" fill="#ffffff" stroke="none"/>
+<g id="problem"><title>研究问题与核心矛盾</title>
+<text x="40" y="70" font-size="21" fill="#1a365d" font-weight="bold">研究问题</text>
+<rect x="40" y="82" width="54" height="4" fill="#dd6b20" stroke="none" rx="2"/>
+<rect x="52" y="142" width="96" height="150" fill="#ffffff" stroke="#cbd5e0" stroke-width="2" rx="12"/>
+<rect x="60" y="158" width="80" height="120" fill="#f7fafc" stroke="none" rx="4"/>
+<circle cx="100" cy="283" r="3.5" fill="#cbd5e0"/>
+<rect x="74" y="186" width="44" height="20" fill="#ffffff" stroke="#dd6b20" stroke-width="2" rx="10"/>
+<circle cx="106" cy="196" r="8" fill="#dd6b20"/>
+<text x="100" y="230" font-size="12.5" fill="#dd6b20" font-weight="bold" text-anchor="middle">状态被改</text>
+<rect x="292" y="142" width="96" height="150" fill="#ffffff" stroke="#cbd5e0" stroke-width="2" rx="12"/>
+<rect x="300" y="158" width="80" height="120" fill="#f7fafc" stroke="none" rx="4"/>
+<circle cx="340" cy="283" r="3.5" fill="#cbd5e0"/>
+<circle cx="340" cy="194" r="13" fill="#dd6b20"/>
+<polygon points="334,194 348,194 338,206" fill="#ffffff"/>
+<text x="340" y="230" font-size="12.5" fill="#dd6b20" font-weight="bold" text-anchor="middle">起始条件失真</text>
+<line x1="160" y1="216" x2="282" y2="216" stroke="#2c5282" stroke-width="2.2" marker-end="url(#ar)"/>
+<path d="M 166 206 C 200 178, 244 178, 276 206" stroke="#dd6b20" stroke-width="2" fill="none" stroke-dasharray="6 5" stroke-linecap="round" marker-end="url(#ar_o)"/>
+<text x="221" y="170" font-size="13.5" fill="#dd6b20" font-weight="bold" text-anchor="middle">状态残留</text>
+<text x="100" y="322" font-size="14" fill="#4a5568" font-weight="bold" text-anchor="middle">任务 A</text>
+<text x="340" y="322" font-size="14" fill="#4a5568" font-weight="bold" text-anchor="middle">任务 B</text>
+<rect x="40" y="358" width="400" height="150" fill="#fffaf0" stroke="#dd6b20" stroke-width="1.5" rx="10"/>
+<rect x="40" y="370" width="5" height="126" fill="#dd6b20" stroke="none" rx="2"/>
+<text x="62" y="396" font-size="17" fill="#4a5568">恢复动作本身也是设备操作，</text>
+<text x="62" y="424" font-size="17" fill="#dd6b20" font-weight="bold">执行错误 = 制造新的污染</text>
+<text x="62" y="466" font-size="16" fill="#1a365d" font-weight="bold">→ 生成可以自由，执行必须受控</text>
+<circle cx="47" cy="562" r="3.4" fill="#3182ce"/>
+<text x="60" y="568" font-size="15" fill="#4a5568">检测只依据轨迹证据，不依赖 success 判定</text>
+<circle cx="47" cy="600" r="3.4" fill="#3182ce"/>
+<text x="60" y="606" font-size="15" fill="#4a5568">前序残留由代码结转，不靠模型记忆</text>
+</g>
+<g id="loop"><title>状态恢复闭环</title>
+<rect x="500" y="40" width="910" height="640" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1.5" rx="14"/>
+<text x="528" y="76" font-size="21" fill="#1a365d" font-weight="bold">状态恢复闭环</text>
+<text x="528" y="100" font-size="13.5" fill="#718096">语义级检测 · 门控式执行 · 恢复者自审计</text>
+<rect x="545" y="130" width="320" height="200" fill="#ffffff" stroke="#cbd5e0" stroke-width="1.6" rx="12"/>
+<rect x="545" y="130" width="320" height="5" fill="#1a365d" stroke="none" rx="2"/>
+<circle cx="575" cy="168" r="16" fill="#1a365d"/>
+<text x="575" y="174" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">①</text>
+<text x="603" y="166" font-size="20" fill="#1a365d" font-weight="bold">推断</text>
+<text x="603" y="188" font-size="13" fill="#718096">Audit Agent · 离线</text>
+<rect x="811" y="158" width="34" height="36" fill="#ffffff" stroke="#1a365d" stroke-width="2" rx="4"/>
+<rect x="820" y="152" width="16" height="8" fill="#1a365d" stroke="none" rx="3"/>
+<line x1="818" y1="172" x2="840" y2="172" stroke="#1a365d" stroke-width="2" stroke-linecap="round"/>
+<line x1="818" y1="181" x2="836" y2="181" stroke="#1a365d" stroke-width="2" stroke-linecap="round"/>
+<line x1="818" y1="190" x2="844" y2="190" stroke="#1a365d" stroke-width="2" stroke-linecap="round"/>
+<line x1="563" y1="208" x2="847" y2="208" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="563" y="238" font-size="15.5" fill="#4a5568">读轨迹 → 结构化污染清单</text>
+<text x="563" y="266" font-size="15.5" fill="#4a5568">污染只依据轨迹证据</text>
+<text x="563" y="304" font-size="14.5" fill="#1a365d" font-weight="bold">链式结转：代码管归因</text>
+<rect x="1045" y="130" width="320" height="200" fill="#ffffff" stroke="#cbd5e0" stroke-width="1.6" rx="12"/>
+<rect x="1045" y="130" width="320" height="5" fill="#2c5282" stroke="none" rx="2"/>
+<circle cx="1075" cy="168" r="16" fill="#2c5282"/>
+<text x="1075" y="174" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">②</text>
+<text x="1103" y="166" font-size="20" fill="#1a365d" font-weight="bold">生成</text>
+<text x="1103" y="188" font-size="13" fill="#718096">Planner Agent · 离线</text>
+<path d="M 1343 173.0 A 18.0 18.0 0 1 0 1313 173.0" stroke="#2c5282" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+<polygon points="1309,166 1319,168 1312,176" fill="#2c5282"/>
+<line x1="1063" y1="208" x2="1347" y2="208" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="1063" y="238" font-size="15.5" fill="#4a5568">污染清单 → 恢复任务</text>
+<text x="1063" y="266" font-size="15.5" fill="#4a5568">目标自由撰写，限证据实体</text>
+<text x="1063" y="304" font-size="14.5" fill="#2c5282" font-weight="bold">前置检查保证幂等</text>
+<rect x="795" y="430" width="320" height="200" fill="#ffffff" stroke="#cbd5e0" stroke-width="1.6" rx="12"/>
+<rect x="795" y="430" width="320" height="5" fill="#dd6b20" stroke="none" rx="2"/>
+<circle cx="825" cy="468" r="16" fill="#dd6b20"/>
+<text x="825" y="474" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">③</text>
+<text x="853" y="466" font-size="20" fill="#1a365d" font-weight="bold">执行</text>
+<text x="853" y="488" font-size="13" fill="#718096">Execute Agent · 真机</text>
+<line x1="1078" y1="454" x2="1078" y2="463" stroke="#dd6b20" stroke-width="2.4" stroke-linecap="round"/>
+<polygon points="1073,462 1083,462 1078,470" fill="#dd6b20"/>
+<rect x="1060" y="471" width="36" height="8" fill="#dd6b20" stroke="none" rx="3"/>
+<line x1="1067" y1="479" x2="1067" y2="492" stroke="#dd6b20" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="1089" y1="479" x2="1089" y2="492" stroke="#dd6b20" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="813" y1="508" x2="1097" y2="508" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="813" y="538" font-size="15.5" fill="#4a5568">硬门控状态机</text>
+<text x="813" y="566" font-size="15.5" fill="#4a5568">PRECHECK → EXECUTE → VERIFY</text>
+<text x="813" y="604" font-size="14.5" fill="#dd6b20" font-weight="bold">不可逆 / 不确定 → 人工挂起</text>
+<line x1="865" y1="230" x2="1035" y2="230" stroke="#2c5282" stroke-width="2.4" marker-end="url(#ar)"/>
+<text x="950" y="218" font-size="13.5" fill="#718096" text-anchor="middle">污染清单</text>
+<line x1="1075" y1="330" x2="1075" y2="420" stroke="#2c5282" stroke-width="2.4" marker-end="url(#ar)"/>
+<text x="1090" y="378" font-size="13.5" fill="#718096">恢复任务</text>
+<path d="M 870 630 L 870 645 L 700 645 L 700 340" stroke="#718096" stroke-width="2" fill="none" stroke-dasharray="7 6" stroke-linecap="round" marker-end="url(#ar_g)"/>
+<text x="785" y="668" font-size="14" fill="#718096" text-anchor="middle">反馈：恢复轨迹再检测（自审计）</text>
+<line x1="470" y1="230" x2="537" y2="230" stroke="#2c5282" stroke-width="2.4" marker-end="url(#ar)"/>
+<text x="503" y="218" font-size="13.5" fill="#718096" text-anchor="middle">任务轨迹</text>
+</g>
+<g id="goal"><title>验证目标</title>
+<rect x="1456" y="40" width="432" height="606" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" rx="14"/>
+<text x="1478" y="76" font-size="21" fill="#1a365d" font-weight="bold">验证目标</text>
+<rect x="1478" y="88" width="54" height="4" fill="#dd6b20" stroke="none" rx="2"/>
+<text x="1478" y="144" font-size="13.5" fill="#4a5568" font-weight="bold">独立执行</text>
+<text x="1478" y="162" font-size="12" fill="#718096">任务成功率基准</text>
+<rect x="1590" y="132" width="240" height="24" fill="#2c5282" stroke="none" rx="3"/>
+<text x="1478" y="208" font-size="13.5" fill="#4a5568" font-weight="bold">有前置污染</text>
+<text x="1478" y="226" font-size="12" fill="#718096">状态污染后</text>
+<rect x="1590" y="196" width="110" height="24" fill="#dd6b20" stroke="none" rx="3"/>
+<text x="1478" y="272" font-size="13.5" fill="#4a5568" font-weight="bold">本方法恢复后</text>
+<text x="1478" y="290" font-size="12" fill="#718096">恢复到基准口径</text>
+<rect x="1590" y="260" width="240" height="24" fill="#3182ce" stroke="none" rx="3"/>
+<text x="1846" y="214" font-size="26" fill="#2c5282" font-weight="bold" text-anchor="middle">≈</text>
+<line x1="1830" y1="156" x2="1830" y2="260" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="4 4"/>
+<rect x="1478" y="336" width="388" height="34" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1.2" rx="17"/>
+<text x="1672" y="358" font-size="14" fill="#4a5568" text-anchor="middle">ΔSR 污染前后成功率差</text>
+<rect x="1478" y="382" width="388" height="34" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1.2" rx="17"/>
+<text x="1672" y="404" font-size="14" fill="#4a5568" text-anchor="middle">CTCI 任务跨顺序波动</text>
+<rect x="1478" y="428" width="388" height="34" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1.2" rx="17"/>
+<text x="1672" y="450" font-size="14" fill="#4a5568" text-anchor="middle">PASR 最差顺序成功率</text>
+<text x="1478" y="512" font-size="14" fill="#718096">对照条件：none / ours / official</text>
+<text x="1478" y="550" font-size="14" fill="#718096">人工干预率（人工挂起占比）</text>
+</g>
+<line x1="1115" y1="470" x2="1448" y2="470" stroke="#2c5282" stroke-width="2.4" marker-end="url(#ar)"/>
+<text x="1281" y="458" font-size="13.5" fill="#718096" text-anchor="middle">恢复后的状态</text>
+</svg>

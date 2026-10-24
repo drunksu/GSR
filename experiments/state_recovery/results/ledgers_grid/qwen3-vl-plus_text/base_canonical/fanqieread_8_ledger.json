@@ -1,0 +1,355 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_8",
+  "run_id": "base_canonical",
+  "task_goal": "打开番茄小说玄幻类的阅读榜",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "阴间神探",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='阴间神探')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_6",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "明朝那些事儿",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='明朝那些事儿')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c2"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "得道高仙",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "THOUGHT: 我注意到在书评详情页面，第一条书评（作者“得道高仙”）下方的心形图标已经变成了红色，并且数字从212变成了213，这说明点赞操作已经成功完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "红楼梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='红楼梦')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_4",
+      "id": "c4"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "接收消息通知",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "当前页面是“推送设置”，其中“接收消息通知”开关已处于开启状态（橙色），说明消息通知功能已经启用。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_28",
+      "id": "c5"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字号",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "evidence_quote": "当前字号显示为25，旁边有“A⁻”和“A⁺”按钮，我可以点击“A⁻”按钮逐步减小字号，直到变为22。……当前字号为24，我需要将其调整为22。……当前字号为23，我需要再点击一次“A⁻”按钮将其调整为22。……字号已经成功设置为22",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c6"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "翻页方式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        8,
+        9
+      ],
+      "evidence_quote": "翻页方式目前是“覆盖”，我需要点击“上下”选项来切换。……将翻页方式从“覆盖”改为“上下”。……翻页方式也已成功切换为“上下”",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c7"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字体大小",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        8,
+        12
+      ],
+      "evidence_quote": "当前“大”字体选项已被选中。为了完成任务，我需要点击右上角的“确定”按钮来保存设置。……当前界面显示“大”已被选中。……当前界面显示“大”字体选项已被选中，但之前的多次点击“确定”未生效……推测可能是该应用的字体设置逻辑为“选择即生效”，无需额外确认。",
+      "confidence": 0.6,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_25",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "男频",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "ACTION: type(text='男频')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_18",
+      "id": "c9"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "男频衍生",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10,
+        11,
+        12
+      ],
+      "evidence_quote": "THOUGHT: 已成功选中“男频衍生”选项（橙色高亮），底部“确定 (1)”按钮可用。……当前页面已成功添加“男频衍生”到“喜欢的分类”",
+      "confidence": 0.7,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_18",
+      "id": "c10"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "穿越",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 我已经成功进入了“穿越圈”页面，页面右上角有一个明显的“+ 订阅”按钮... Step 6: THOUGHT: 我已经成功进入了“穿越圈”页面，并且注意到右上角的按钮显示为“已订阅”，这表明订阅操作已经完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_17",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "番茄漫画",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='番茄漫画')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_13",
+      "id": "c12"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "美食 种田 系统",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "ACTION: type(text='美食 种田 系统')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_11",
+      "id": "c13"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "三体",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='三体')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_0",
+      "id": "c14"
+    }
+  ],
+  "search_terms": [
+    "阴间神探",
+    "明朝那些事儿",
+    "红楼梦",
+    "男频",
+    "番茄漫画",
+    "美食 种田 系统",
+    "三体"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c9",
+      "c11",
+      "c12",
+      "c13",
+      "c14"
+    ],
+    "halt": [
+      {
+        "id": "c8",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c10",
+        "reason": "status attempted_unknown"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 14 条 carried_over（前序仍开放的残留）"
+  ]
+}

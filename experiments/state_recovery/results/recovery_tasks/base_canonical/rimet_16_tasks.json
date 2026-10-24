@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_16",
+  "run_id": "base_canonical",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": true,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将‘我的状态’恢复为关闭（即不显示下班状态）",
+      "precondition": {
+        "target": "钉钉‘我的状态’当前是否为开启（显示下班图标）",
+        "check_instruction": "进入钉钉个人主页，查看‘我的状态’设置项对应的状态图标是否为戴帽子的emoji（对应‘下班了’）",
+        "clean_if_state": "‘我的状态’未显示戴帽子的emoji，即处于非下班状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "钉钉中‘我的状态’是否已恢复为非下班状态（即未显示戴帽子的emoji）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 15
+    }
+  ]
+}

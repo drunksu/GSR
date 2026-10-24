@@ -1,0 +1,151 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_13",
+  "run_id": "s3_A_1",
+  "task_goal": "打开QQ，将和绕堤沙的聊天设为置顶",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "绕堤沙",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "在搜索框中输入“绕堤沙”可以快速定位到该联系人。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "DND",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        6,
+        7,
+        9
+      ],
+      "evidence_quote": "我需要在搜索框中输入关键词“DND”……现在屏幕上显示了搜索结果……为了更精准地找到DND群组，我应该使用中文全称“龙与地下城”进行搜索……现在我将输入“跑团”……现在我将输入“DND 群”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "龙与地下城",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        6,
+        7,
+        9
+      ],
+      "evidence_quote": "我需要在搜索框中输入关键词“DND”……现在屏幕上显示了搜索结果……为了更精准地找到DND群组，我应该使用中文全称“龙与地下城”进行搜索……现在我将输入“跑团”……现在我将输入“DND 群”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "跑团",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        6,
+        7,
+        9
+      ],
+      "evidence_quote": "我需要在搜索框中输入关键词“DND”……现在屏幕上显示了搜索结果……为了更精准地找到DND群组，我应该使用中文全称“龙与地下城”进行搜索……现在我将输入“跑团”……现在我将输入“DND 群”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "DND 群",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        6,
+        7,
+        9
+      ],
+      "evidence_quote": "我需要在搜索框中输入关键词“DND”……现在屏幕上显示了搜索结果……为了更精准地找到DND群组，我应该使用中文全称“龙与地下城”进行搜索……现在我将输入“跑团”……现在我将输入“DND 群”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c5"
+    }
+  ],
+  "search_terms": [
+    "绕堤沙",
+    "DND",
+    "龙与地下城",
+    "跑团",
+    "DND 群"
+  ],
+  "needs_recovery": true,
+  "overall_assessment": "本任务未成功置顶聊天（因始终未能进入与绕堤沙的个人聊天界面），但确实在QQ搜索框中输入了‘绕堤沙’，留下了账号级搜索历史，需恢复。",
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性过账补录 4 条 carried_over（前序仍开放的残留）"
+  ]
+}

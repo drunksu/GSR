@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_13",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条App中将我的性别设置为女，确保‘性别’字段明确显示为‘女’",
+      "precondition": {
+        "target": "检查当前账号的性别设置是否已为‘女’",
+        "check_instruction": "进入今日头条App的个人主页→点击‘编辑资料’→查看‘性别’字段的当前值",
+        "clean_if_state": "‘性别’字段已显示为‘女’，无需任何操作"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条App的编辑资料页面中，‘性别’字段是否已明确显示为‘女’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

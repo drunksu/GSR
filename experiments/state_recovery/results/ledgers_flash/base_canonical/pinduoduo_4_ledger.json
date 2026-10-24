@@ -1,0 +1,74 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_4",
+  "run_id": "base_canonical",
+  "task_goal": "在拼多多里复制一个白色Type-C数据线的商品链接",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "白色 Type-C 数据线",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要搜索“白色 Type-C 数据线”来找到目标商品。当前搜索框中显示的是“垃圾袋黑色”，这与我的目标无关，因此我需要先清空搜索框内容，然后输入正确的关键词进行搜索。\n        ACTION: type(text='白色 Type-C 数据线')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "黑色垃圾袋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "输入“黑色垃圾袋”进行搜索... type(text='黑色垃圾袋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_3",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [
+    "白色 Type-C 数据线",
+    "黑色垃圾袋"
+  ],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c2",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

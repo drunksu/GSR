@@ -1,0 +1,114 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_16",
+  "run_id": "base_canonical",
+  "task_goal": "去番茄小说我的书架追剧",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "content",
+        "name": "真千金她是学霸",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "在“我的”页面中，我注意到有一个“真千金她是学霸”的条目，显示“看到第1集”，旁边有“继续追剧 >”按钮。这正是任务要求的“去我的书架追剧”的目标内容——它属于已观看/收藏的剧集",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "番茄漫画",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='番茄漫画')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_13",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "美食 种田 系统",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "ACTION: type(text='美食 种田 系统')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_11",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "三体",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='三体')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_0",
+      "id": "c4"
+    }
+  ],
+  "search_terms": [
+    "番茄漫画",
+    "美食 种田 系统",
+    "三体"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 3 条 carried_over（前序仍开放的残留）"
+  ]
+}

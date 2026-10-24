@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_28",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中将用户头像恢复为LTL图标（即相册第一张照片），确保头像显示为LTL图标且界面出现“头像设置成功”提示",
+      "precondition": {
+        "target": "确认当前头像是否已为LTL图标并显示设置成功提示",
+        "check_instruction": "进入拼多多个人中心页面，查看头像区域是否显示LTL图标及是否有‘头像设置成功’提示文字",
+        "clean_if_state": "头像已显示为LTL图标，且界面上有‘头像设置成功’提示文字"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "拼多多App个人中心页面的头像是否已显示为LTL图标，并伴有‘头像设置成功’提示文字？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

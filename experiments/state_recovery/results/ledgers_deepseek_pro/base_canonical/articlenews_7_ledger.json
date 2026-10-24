@@ -1,0 +1,67 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_7",
+  "run_id": "base_canonical",
+  "task_goal": "查看今日头条图片频道第一条新闻并点赞",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "泰山上的轿夫既给游客便利，自己又得到了...",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "我已成功进入今日头条“发现”频道的第一条图片新闻详情页，并观察到右侧的点赞按钮（心形图标）已变为红色，显示“1.3万”，说明点赞操作已完成。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "五粮液 股价",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框已激活，键盘已弹出，可以直接输入“五粮液 股价”进行搜索。考虑到搜索历史中已有“五粮液 股价”（置顶），但为确保获取最新信息，仍手动输入更稳妥。\n        ACTION: type(text='五粮液 股价')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_4",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [
+    "五粮液 股价"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_2",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺App中，确保云南白药的搜索历史已存在，并进入其个股页面查看周K线图",
+      "precondition": {
+        "target": "确认云南白药是否已在同花顺的搜索历史中存在",
+        "check_instruction": "进入同花顺首页，点击搜索框，查看搜索历史列表中是否包含‘云南白药’条目",
+        "clean_if_state": "搜索历史中已存在‘云南白药’条目，且可点击进入其个股页面"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "同花顺App的搜索历史中是否明确显示‘云南白药’条目，且当前页面为云南白药的个股详情页并展示周K线图？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

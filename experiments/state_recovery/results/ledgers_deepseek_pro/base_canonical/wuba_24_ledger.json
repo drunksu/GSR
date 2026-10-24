@@ -1,0 +1,161 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_24",
+  "run_id": "base_canonical",
+  "task_goal": "去58同城关闭首页视频自动播放",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "长辈模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "从当前界面顶部的“返回普通版”按钮和整体UI风格来看，长辈模式已经成功开启",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_23",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "房贷计算器",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "THOUGHT: 搜索关键词“房贷计算器”后，页面仍显示新房列表结果",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_20",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "空调上门安装",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "考虑到任务目标是搜索空调上门安装服务，我应该完整输入“空调上门安装”这个关键词，然后点击搜索按钮。ACTION: type(text='空调上门安装') …… 我已经成功在58同城中搜索到了“空调上门安装”的相关服务信息。页面显示了多个空调安装服务的商家……",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_2",
+      "id": "c3"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "58同城",
+      "entity": {
+        "kind": "content",
+        "name": "我的简历",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2,
+        4,
+        8
+      ],
+      "evidence_quote": "页面显示“您还没有简历，请先创建简历~”...点击“创建简历”按钮开始创建流程...输入姓名...点击“开启求职之旅”按钮，点击该按钮以提交信息、生成简历。这是创建流程的最后一步，完成后即可返回查看已创建的简历。",
+      "confidence": 0.85,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_19",
+      "id": "c4"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "当前城市",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8
+      ],
+      "evidence_quote": "Step 7 Thought: 终于在列表中找到了“合肥 安徽”这一项，这正是我要选择的目标城市。现在只需点击该选项即可将当前城市切换为合肥。 Step 8 Thought: 从截图顶部可以看到城市已显示为“合肥”，说明当前城市已成功切换为合肥。",
+      "confidence": 0.8,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_12",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "合肥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "Step 2 Thought: 为了快速找到合肥，我应该在搜索框中输入“合肥”二字，这样系统会筛选出相关城市选项，便于后续选择。 Action: type(text='合肥')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_12",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "房贷计算器",
+    "空调上门安装",
+    "合肥"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 6 条 carried_over（前序仍开放的残留）"
+  ]
+}

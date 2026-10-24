@@ -1,0 +1,243 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_3",
+  "run_id": "base_canonical",
+  "task_goal": "用番茄搜索三体的作者是谁",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字号",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "evidence_quote": "当前字号为24，我需要将其调整为22。... 字号已经成功设置为22",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c1"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "翻页方式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        8,
+        9
+      ],
+      "evidence_quote": "翻页方式目前是“覆盖”，我需要点击“上下”选项来切换。... 翻页方式也已成功切换为“上下”",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c2"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "获取已安装应用信息",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "弹窗提示是否允许“番茄免费小说”获取已安装的应用信息，这是系统权限请求。为了继续签到操作，需要先处理此弹窗。通常选择“始终允许”可避免后续重复请求，且不影响签到功能。点击“始终允许”后，弹窗会消失，回到福利中心页面...",
+      "confidence": 0.8,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_22",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "男频",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        9,
+        10
+      ],
+      "evidence_quote": "type(text='男频') ... 搜索“男频”后出现了“男频衍生”选项 ... 点击该搜索结果",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_18",
+      "id": "c4"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "兴趣偏好",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5,
+        6,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "evidence_quote": "点击“兴趣偏好”... 点击“+ 点击添加”... 点击“男频衍生”... 点击“确定 (1)”... 多次点击“保存”按钮",
+      "confidence": 0.5,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_18",
+      "id": "c5"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "account",
+        "name": "穿越圈",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "我已经成功进入了“穿越圈”页面，页面右上角有一个明显的“+ 订阅”按钮，这正是我需要点击来完成订阅操作的目标。……右上角的按钮显示为“已订阅”，这表明订阅操作已经完成。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_17",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "番茄漫画",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "THOUGHT: 当前处于搜索界面，输入框中已有“撒野”字样，但任务目标是“番茄漫画”。我需要清空当前输入内容，然后输入“番茄漫画”进行搜索，以找到相关入口或应用。\nACTION: type(text='番茄漫画')",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_13",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "美食 种田 系统",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "type(text='美食 种田 系统')",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_11",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "三体",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "我将直接输入“三体”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_0",
+      "id": "c9"
+    }
+  ],
+  "search_terms": [
+    "男频",
+    "番茄漫画",
+    "美食 种田 系统",
+    "三体"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c6",
+      "c7",
+      "c8",
+      "c9"
+    ],
+    "halt": [
+      {
+        "id": "c5",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 9 条 carried_over（前序仍开放的残留）"
+  ]
+}

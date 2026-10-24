@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_7",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城中打开并进入‘58官方 日常保洁’的服务详情页，确保当前页面为该服务的用户评价列表页",
+      "precondition": {
+        "target": "确认当前页面是否已正确显示‘58官方 日常保洁’的用户评价列表",
+        "check_instruction": "进入58同城App，搜索‘58官方 日常保洁’，点击进入其服务详情页，查看页面顶部标题或服务名称区域是否明确显示‘58官方 日常保洁’且下方展示用户评价内容区域",
+        "clean_if_state": "当前页面已显示‘58官方 日常保洁’的服务详情，并且用户评价列表可见（含至少一条评价）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前页面是否为58同城中‘58官方 日常保洁’服务的用户评价列表页？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

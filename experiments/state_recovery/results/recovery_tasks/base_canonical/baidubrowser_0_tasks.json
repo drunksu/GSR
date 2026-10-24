@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_0",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度浏览器中确保搜索历史里存在‘北京今日的天气’这一条目，且该条目为最新一次搜索记录",
+      "precondition": {
+        "target": "检查百度浏览器的搜索历史中是否已包含‘北京今日的天气’且为最近一条",
+        "check_instruction": "进入百度浏览器首页或搜索框历史下拉列表，查看搜索历史条目中是否存在‘北京今日的天气’且位于最顶部",
+        "clean_if_state": "搜索历史中已存在‘北京今日的天气’且为最新一条（即最近一次搜索）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在百度浏览器的搜索历史列表中，‘北京今日的天气’是否作为最新一条记录存在？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_26",
+  "run_id": "base_canonical",
+  "task_goal": "在番茄小说中随便打开一本小说，设置字号为22，翻页方式为上下",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字号",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        8
+      ],
+      "evidence_quote": "当前字号显示为25，旁边有“A⁻”和“A⁺”按钮……字号已经成功设置为22",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "翻页方式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        8,
+        9
+      ],
+      "evidence_quote": "翻页方式目前是“覆盖”，我需要点击“上下”选项来切换……翻页方式也已成功切换为“上下”",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字体大小",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        8,
+        12
+      ],
+      "evidence_quote": "当前“大”字体选项已被选中。为了完成任务，我需要点击右上角的“确定”按钮来保存设置。...我已经成功选择了“大”字体选项，当前界面显示“大”已被选中。...当前界面显示“大”字体选项已被选中，但之前的多次点击“确定”未生效",
+      "confidence": 0.6,
+      "attribution": "carried_over",
+      "carried_over_from_task": "null",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [
+      {
+        "id": "c3",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_repair_used": true,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

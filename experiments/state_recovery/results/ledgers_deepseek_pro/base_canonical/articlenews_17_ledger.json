@@ -1,0 +1,92 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_17",
+  "run_id": "base_canonical",
+  "task_goal": "去今日头条清除缓存",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "自动开启阅读模式",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "在设置页面中，“自动开启阅读模式”的开关目前是绿色的，表示该功能处于开启状态。为了完成任务，我需要将其关闭...“自动开启阅读模式”的开关关闭（当前为灰色）",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_16",
+      "id": "c1"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "深色模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3,
+        4
+      ],
+      "evidence_quote": "在设置页面中，我找到了“深色模式”选项，当前状态显示为“已关闭”。...点击“深色模式”。...需要点击“深色模式”选项。...夜间模式（深色模式）已经成功开启，因为当前界面显示为深色背景，并且“深色模式”选项已被选中（红色圆点）。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_15",
+      "id": "c2"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "setting",
+        "name": "性别",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "THOUGHT: 我已经进入了性别选择界面，看到了“男”和“女”两个选项。根据任务要求，我需要将性别设置为“女”，所以现在应该点击“女”选项。... THOUGHT: 我已经选择了“女”选项，现在需要点击右上角的“确认”按钮来保存设置。... THOUGHT: 我已经成功将性别设置为“女”，在编辑资料页面可以看到“性别”一栏已经显示为“女”。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_13",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 3 条 carried_over（前序仍开放的残留）"
+  ]
+}

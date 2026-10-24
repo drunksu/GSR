@@ -1,0 +1,6561 @@
+{
+  "schema": "golden-labels/v1",
+  "note": "人工盲审金标：标注者只看轨迹/截图/XML 证据，提交后才与 AI 草稿对答案。",
+  "n_cases": 310,
+  "n_rework": 0,
+  "cases": [
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_0",
+      "task_goal": "今日头条上搜一下黄金今日的价格",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "黄金今日的价格",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "5"
+        }
+      ],
+      "search_terms_any": [
+        "黄金今日的价格"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:51:37.964Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_1",
+      "task_goal": "去今日头条看看哪吒现在多少票房了",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "哪吒 票房",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "10"
+        }
+      ],
+      "search_terms_any": [
+        "哪吒 票房"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot",
+        "action"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:14:56.538Z",
+      "human_notes": "该任务要求搜哪吒票房，但是在搜索框中出现了“五粮液”的推荐搜索。我们都知道这种情况下不需要管他，直接搜索我们的要求即可，但是Agent纠结于如何把“五粮液”删除，导致步数加长。"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_10",
+      "task_goal": "打开一下今日头条的浏览历史",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:33:51.492Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_11",
+      "task_goal": "查查今日头条里我的收藏有哪些",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:34:28.587Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_12",
+      "task_goal": "去今日头条更换头像，从默认头像的艺术类中选一个",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "account",
+          "name_contains": "更换头像",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:07:40.222Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_13",
+      "task_goal": "去今日头条将我的性别设置为女",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "女",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "5"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:44:14.003Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_14",
+      "task_goal": "打开今日头条里面我的书架",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:34:34.745Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_15",
+      "task_goal": "打开今日头条的夜间模式",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "深色模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-11T15:55:06.902Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_16",
+      "task_goal": "去今日头条把自动开启阅读模式关掉",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "自动开启阅读模式",
+          "direction": "off",
+          "attribution": "this_task",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T16:20:12.072Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_17",
+      "task_goal": "去今日头条清除缓存",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:35:05.788Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_18",
+      "task_goal": "去今日头条已读所有消息",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "session_state",
+          "entity_kind": "other",
+          "name_contains": "消息",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:03:57.909Z",
+      "human_notes": "已读消息，不能恢复消息未读的状态"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_19",
+      "task_goal": "去今日头条设置不接受陌生人消息",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "一键防护开关",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,6"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:45:06.719Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_2",
+      "task_goal": "在今日头条上搜一下今天北京的穿衣指数",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "今天北京的穿衣指数",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "今天北京的穿衣指数"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:15:42.821Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_3",
+      "task_goal": "去今日头条清空搜索历史",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:16:09.596Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_4",
+      "task_goal": "在今日头条上搜一下今天五粮液的股价",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "五粮液 股价",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3"
+        }
+      ],
+      "search_terms_any": [
+        "五粮液 股价"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:36:44.549Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_5",
+      "task_goal": "查看今日头条热榜第一条新闻",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:46:29.020Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_6",
+      "task_goal": "查看今日头条小说频道完结榜第一本书",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:46:40.907Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_7",
+      "task_goal": "查看今日头条图片频道第一条新闻并点赞",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "拍同款 · 跟拍同款视频",
+          "direction": "liked",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:03.954Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_8",
+      "task_goal": "查看今日头条健康频道第一条新闻并收藏",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "钱塘江大潮卷人事件，真的太可怕了，观潮需谨慎",
+          "direction": "collected",
+          "attribution": "this_task",
+          "evidence_steps": "9,10"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:54:07.896Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "articlenews_9",
+      "task_goal": "去关注今日头条体育频道第一条新闻的作者",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "account",
+          "name_contains": "安信德小店",
+          "direction": "followed",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:06.940Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_0",
+      "task_goal": "在百度浏览器里搜索北京今日的天气",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "北京今日的天气",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [
+        "北京今日的天气"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:47:55.609Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_1",
+      "task_goal": "在百度浏览器里搜索今日大盘点数",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:48:19.887Z",
+      "human_notes": "依旧被推荐搜索困扰"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_10",
+      "task_goal": "在百度浏览器中查看我的收藏",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:54:17.684Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_11",
+      "task_goal": "打开百度浏览器看看我最近下载的图片",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:45:17.887Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_12",
+      "task_goal": "在百度浏览器中，用“快乐最重要”让AI帮我生成个性签名",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:48:50.187Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_13",
+      "task_goal": "在百度浏览器打开无痕浏览模式",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "无痕浏览中",
+          "direction": "on",
+          "attribution": "preexisting",
+          "expect_gate": "autonomous"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-12T03:02:24.948Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_14",
+      "task_goal": "设置百度浏览器为夜间模式",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "夜间模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:54:26.436Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_15",
+      "task_goal": "在百度浏览器中添加一个收货地址，姓名是张三，电话是13810069493，地区是北京海淀区清河街道，详细地址是小米科技园",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:49:11.397Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_16",
+      "task_goal": "关闭百度浏览器的通知栏消息",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "通知栏消息",
+          "direction": "off",
+          "attribution": "this_task",
+          "evidence_steps": "6"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:49:38.698Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_17",
+      "task_goal": "在百度浏览器关闭图片自动播放",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "动态内容视频模式播放",
+          "direction": "off",
+          "attribution": "preexisting"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:50:48.824Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_18",
+      "task_goal": "在百度浏览器设置应用安装后删除安装包",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:51:12.644Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_19",
+      "task_goal": "在百度浏览器中清理缓存",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:54:24.287Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_2",
+      "task_goal": "在百度浏览器里查查西二旗的邮政编码",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "西二旗 邮政编码",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [
+        "西二旗 邮政编码"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:54:46.690Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_3",
+      "task_goal": "在百度浏览器里打开百度热搜的民生榜",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:55:00.760Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_4",
+      "task_goal": "在百度浏览器里打开百度热搜的体育榜的第一条新闻",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:55:06.347Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_5",
+      "task_goal": "在百度浏览器里打开百度热搜的文娱榜的第一条新闻",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:55:12.550Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_6",
+      "task_goal": "查看百度浏览器的购物优惠券",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:55:29.359Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_7",
+      "task_goal": "把百度浏览器小说频道的完结榜的第一本书加入书架",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "加书架",
+          "direction": "collected",
+          "attribution": "this_task",
+          "evidence_steps": "5,6"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:54:31.676Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_8",
+      "task_goal": "在百度浏览器推荐的第一个视频评论泰酷辣",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "content",
+          "name_contains": "泰酷辣",
+          "direction": "sent",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "6,8"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:55:45.289Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "baidubrowser_9",
+      "task_goal": "在百度浏览器中打开我的书架",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:07:50.385Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_0",
+      "task_goal": "打开B站搜索喜羊羊与灰太狼",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "喜羊羊和灰太狼",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "喜羊羊和灰太狼"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:17:36.253Z",
+      "human_notes": "搜索框内有推荐搜索，正好是“喜羊羊与灰太狼”，Agent能够直接点击右侧的搜索来进行搜索而不是重新输入"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_1",
+      "task_goal": "打开B站搜索演员沈腾",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "沈腾",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "沈腾"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:19:10.005Z",
+      "human_notes": "Agent在思考过程中提及“为输入新内容通常会自动覆盖或替换原有文本（取决于App行为）”，居然又知道了推荐搜索这一知识点"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_10",
+      "task_goal": "B站的每周必看有哪些",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "每周必看",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [
+        "每周必看"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:56:52.062Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_11",
+      "task_goal": "打开哔哩哔哩的动画频道，看看有哪些少儿动画",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:57:05.861Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_12",
+      "task_goal": "我想在哔哩哔哩看一下牧神记第一集",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "牧神记第一集",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "牧神记第一集"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:20:18.735Z",
+      "human_notes": "Agent还挺聪明的，知道是大会员内容，没有给我付费"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_13",
+      "task_goal": "在B站打开西游记第二集",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "西游记第二集",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3"
+        }
+      ],
+      "search_terms_any": [
+        "西游记第二集"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:33:39.184Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_14",
+      "task_goal": "在B站的影视频道中，看看有什么好的纪录片",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:57:13.197Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_15",
+      "task_goal": "打开B站分区，选择游戏频道",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:57:19.647Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_16",
+      "task_goal": "查看B站我关注的人的动态",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:57:26.254Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_17",
+      "task_goal": "在哔哩哔哩，找到我关注的人的动态，并给里面的动态点赞",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "第七翼刀",
+          "direction": "liked",
+          "attribution": "this_task",
+          "evidence_steps": "3"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:03:49.329Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_18",
+      "task_goal": "在B站会员购中搜索哆啦A梦",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "哆啦A梦",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "4"
+        }
+      ],
+      "search_terms_any": [
+        "哆啦A梦"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:34:01.842Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_19",
+      "task_goal": "B站会员购查看我的待支付订单",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:54:31.087Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_2",
+      "task_goal": "打开B站搜索王者荣耀官方赛事",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "王者荣耀官方赛事",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3"
+        }
+      ],
+      "search_terms_any": [
+        "王者荣耀官方赛事"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:34:32.629Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_20",
+      "task_goal": "打开B站会员购查看我的优惠券有哪些",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:57:31.850Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_21",
+      "task_goal": "打开哔哩哔哩，帮我更换一个随机头像",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "content_lifecycle",
+          "entity_kind": "content",
+          "name_contains": "头像",
+          "direction": "created",
+          "attribution": "this_task",
+          "expect_gate": "halt"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:58:23.030Z",
+      "human_notes": "更改了账号头像"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_22",
+      "task_goal": "打开B站查看我的粉丝",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:58:34.221Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_23",
+      "task_goal": "看一下我最近在哔哩哔哩看什么了？",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:58:49.393Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_24",
+      "task_goal": "打开B站查看离线缓存",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:58:54.239Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_25",
+      "task_goal": "我要联系B站客服",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:59:16.131Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_26",
+      "task_goal": "进入B站的创作中心",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:59:48.389Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_27",
+      "task_goal": "打开B站私信智能拦截",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:36:41.387Z",
+      "human_notes": "Agent误认为B站的设置需要点击右上角，经验错误"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_28",
+      "task_goal": "打开B站定时关闭",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:37:39.318Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_29",
+      "task_goal": "打开B站扫一扫",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:00:10.274Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_3",
+      "task_goal": "打开B站搜索李健，看看图文栏下有哪些图片",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "李健",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3"
+        }
+      ],
+      "search_terms_any": [
+        "李健"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:34:56.945Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_4",
+      "task_goal": "打开bilibili热搜榜单",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:00:29.182Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_5",
+      "task_goal": "打开B站查看回复我的消息",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:00:55.417Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_6",
+      "task_goal": "打开B站消息查看收到的赞",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:01:00.699Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_7",
+      "task_goal": "打开B站消息,一键已读所有消息",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "other",
+          "entity_kind": "other",
+          "name_contains": "一键已读",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:08.499Z",
+      "human_notes": "还是一键已读了消息"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_8",
+      "task_goal": "打开一个英雄联盟的哔哩哔哩直播间",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:35:07.122Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "bili_9",
+      "task_goal": "查看B站热门的排行榜",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:01:43.508Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_0",
+      "task_goal": "在番茄小说里面打开刘慈欣的三体",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "三体",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "6"
+        }
+      ],
+      "search_terms_any": [
+        "三体"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:35:50.871Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_1",
+      "task_goal": "在番茄小说里面打开我在精神病院学斩神",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:36:09.343Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_10",
+      "task_goal": "在番茄里面筛选历史、搞笑轻松小说",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:01:51.001Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_11",
+      "task_goal": "在番茄里面筛选包含美食、种田、系统等标签的小说",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "美食 种田 系统",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "10,11"
+        }
+      ],
+      "search_terms_any": [
+        "美食 种田 系统"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:03:03.204Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_12",
+      "task_goal": "在番茄女生频道里面筛选包含天灾、末世、无CP等标签的小说",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:03:15.497Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_13",
+      "task_goal": "我要看番茄漫画",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "番茄漫画",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "番茄漫画"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:03:39.813Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_14",
+      "task_goal": "前往番茄听书功能模块",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:03:45.265Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_15",
+      "task_goal": "在番茄书架中查阅浏览历史",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:03:53.260Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_16",
+      "task_goal": "去番茄小说我的书架追剧",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:04:13.105Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_17",
+      "task_goal": "进入番茄小说的“穿越”圈子并订阅它",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "group",
+          "name_contains": "订阅",
+          "direction": "followed",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot",
+        "action"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:05:33.828Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_18",
+      "task_goal": "把番茄的阅读偏好设置成男生小说",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:06:33.215Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_19",
+      "task_goal": "去番茄小说查看我的消息",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:06:40.670Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_2",
+      "task_goal": "在番茄小说里面打开三体的听书",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "三体",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "4"
+        }
+      ],
+      "search_terms_any": [
+        "三体"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T06:36:27.891Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_20",
+      "task_goal": "打开番茄我的关注",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:06:58.002Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_21",
+      "task_goal": "查看番茄我下载的记录",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:07:41.938Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_22",
+      "task_goal": "在番茄小说签到",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:08:20.459Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_23",
+      "task_goal": "进入番茄小说的笔记页面",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:08:31.454Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_24",
+      "task_goal": "查阅番茄小说的历史浏览记录",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:08:36.801Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_25",
+      "task_goal": "番茄切换成大字体",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:38:21.671Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_26",
+      "task_goal": "在番茄小说中随便打开一本小说，设置字号为22，翻页方式为上下",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "字号",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "9"
+        },
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "上下",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:39:52.213Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_27",
+      "task_goal": "打开番茄小说中一键清理缓存",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:08:43.671Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_28",
+      "task_goal": "在番茄小说中启用消息通知功能",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:08:49.941Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_29",
+      "task_goal": "查看番茄小说客服电话",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:09:03.104Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_3",
+      "task_goal": "用番茄搜索三体的作者是谁",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:27:25.199Z",
+      "human_notes": "这是一个搜索任务，但是在搜索之前，Agent就已经在主页获得了相关信息，且答案正确，但是系统判断任务失败。"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_4",
+      "task_goal": "在番茄里面搜索红楼梦",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "红楼梦",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "红楼梦"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:09:24.044Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_5",
+      "task_goal": "在番茄里面看看明朝那些事儿的书评,并给第一条书评点赞",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "明朝那些事儿",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "5,6"
+        },
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "得道高仙",
+          "direction": "liked",
+          "attribution": "this_task",
+          "evidence_steps": "8,9"
+        }
+      ],
+      "search_terms_any": [
+        "明朝那些事儿"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:10.780Z",
+      "human_notes": "依旧被推荐搜索困扰"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_6",
+      "task_goal": "通过番茄小说搜索框搜索“阴间神探\"",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "阴间神探",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "阴间神探"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:25:07.502Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_7",
+      "task_goal": "打开番茄小说完本榜",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:25:21.467Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_8",
+      "task_goal": "打开番茄小说玄幻类的阅读榜",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:25:43.458Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "fanqieread_9",
+      "task_goal": "在番茄里面筛选玄幻、无女主小说",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "玄幻",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "无女主",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "玄幻",
+        "无女主"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:27:09.949Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_0",
+      "task_goal": "在高德地图中查找前往一家附近的烤肉店的路线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "烤肉店",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "烤肉店"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:27:51.327Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_1",
+      "task_goal": "在高德地图中查一下上海市外地小客车的限行政策",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "上海外地小客车限行政策",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "上海外地限行",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "上海外地小客车限行政策",
+        "上海外地限行"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:29:26.924Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_10",
+      "task_goal": "高德查一下到最近的麦当劳的步行路线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "麦当劳",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "麦当劳"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:30:09.187Z",
+      "human_notes": "依旧被推荐搜索困扰"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_11",
+      "task_goal": "高德查一下北京丰台站到上海南站的路线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "北京丰台站",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "上海南站",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "北京丰台站",
+        "上海南站"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:30:52.365Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_12",
+      "task_goal": "在高德看看我的收藏夹",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "login_session",
+          "entity_kind": "account",
+          "name_contains": "本机号码一键登录",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:31:41.040Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_13",
+      "task_goal": "查看高德地图回西二旗地铁站的公交",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "西二旗地铁站",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "西二旗地铁站"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:32:20.791Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_14",
+      "task_goal": "打开高德地图实时公交服务",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:32:29.258Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_15",
+      "task_goal": "高德设置一下公司的地址为小米科技园B栋",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "添加公司地点",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "5,9"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:33:07.876Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_16",
+      "task_goal": "高德设置一下家的地址为北京大学东门",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "添加家庭地点",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "4,7"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:33:40.562Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_17",
+      "task_goal": "打开高德地图附近页，看看附近有没有洗车的4s店",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "4S店",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "洗车",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "4S店 洗车",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "4S店",
+        "洗车",
+        "4S店 洗车"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot",
+        "action"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:35:54.926Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_18",
+      "task_goal": "进入高德地图附近页，查看周边有哪些医院",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "医院",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "医院"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:36:24.425Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_19",
+      "task_goal": "打开高德地图的消息",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:36:33.852Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_2",
+      "task_goal": "在高德地图中查看一下北京8号线的地铁图",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:36:56.959Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_3",
+      "task_goal": "在高德地图中查看天安门附近的的酒店",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "天安门",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "天安门"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:37:16.529Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_4",
+      "task_goal": "在高德地图中查看附近特惠油站",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "加油站",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "加油站"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:37:44.113Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_5",
+      "task_goal": "高德查一下天坛公园到天安门广场的驾车路线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "天坛公园到天安门广场",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "天坛公园到天安门广场"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot",
+        "action"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:38:43.679Z",
+      "human_notes": "依旧被推荐搜索困扰"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_6",
+      "task_goal": "高德查一下颐和园到北京大学的步行路线",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "复旦大学邯郸校区",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "颐和园",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "北京大学",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "复旦大学邯郸校区",
+        "颐和园",
+        "北京大学"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:40:21.840Z",
+      "human_notes": "依旧被推荐搜索困扰"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_7",
+      "task_goal": "高德查一下北京南站到北京丰台站的地铁路线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "北京南站",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "北京丰台站",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "北京南站",
+        "北京丰台站"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:40:51.091Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_8",
+      "task_goal": "高德搜索三里屯附近的麦当劳",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "三里屯 麦当劳",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "三里屯 麦当劳"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:41:13.546Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "minimap_9",
+      "task_goal": "打开高德地图扫一扫",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:42:24.235Z",
+      "human_notes": "在涉及一些我之前没有审批过的应用权限弹窗时，比如高德地图想要访问我的相机权限，Agent会优先为了完成任务而允许"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_0",
+      "task_goal": "网易云搜索歌曲《唯一》",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "唯一",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "唯一"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:27:45.705Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_1",
+      "task_goal": "网易云搜索邓紫棋的歌单",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "邓紫棋",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "邓紫棋"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:28:34.605Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_10",
+      "task_goal": "打开网易云推荐扫一扫",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:42:33.752Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_11",
+      "task_goal": "网易云查看为我推荐的专属博客",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:42:45.047Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_12",
+      "task_goal": "打开网易云的\"网络热歌榜\"",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:42:49.854Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_13",
+      "task_goal": "打开网易云的有声书排行榜",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:42:54.482Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_14",
+      "task_goal": "打开网易云频道里的国风频道",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:43:05.778Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_15",
+      "task_goal": "打开网易云发现音乐的精选",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:43:21.940Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_16",
+      "task_goal": "打开网易云发现的歌单",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:43:31.578Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_17",
+      "task_goal": "打开网易云发现博客广播电台",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:43:39.565Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_18",
+      "task_goal": "打开网易云笔记推荐",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:43:51.888Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_19",
+      "task_goal": "打开网易云发布笔记“逢考必过”",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "content_lifecycle",
+          "entity_kind": "content",
+          "name_contains": "逢考必过",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "5,6"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-12T03:04:45.095Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_2",
+      "task_goal": "网易云播放林俊杰的豆浆油条",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "林俊杰 豆浆油条",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "林俊杰 豆浆油条"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:28:59.445Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_20",
+      "task_goal": "打开网易云，删除我之前发布的笔记",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "content_lifecycle",
+          "entity_kind": "content",
+          "name_contains": "逢考必过",
+          "direction": "deleted",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "7,8"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:54:39.097Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_21",
+      "task_goal": "打开网易云编辑我的资料，设置性别为女",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "女",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:40:16.168Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_22",
+      "task_goal": "打开网易云编辑我的资料，设置简介为“事已至此，先睡觉吧”",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "content_lifecycle",
+          "entity_kind": "content",
+          "name_contains": "简介",
+          "direction": "created",
+          "attribution": "this_task",
+          "expect_gate": "autonomous"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:57:51.966Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_23",
+      "task_goal": "打开网易云我喜欢的音乐",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:43:57.805Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_24",
+      "task_goal": "打开网易云我的听歌排行",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:44:15.281Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_25",
+      "task_goal": "打开网易云查看我的本地音乐",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:44:26.816Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_26",
+      "task_goal": "在网易云音乐中把我的状态设置为许个愿",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "account",
+          "name_contains": "添加状态",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T02:59:05.107Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_27",
+      "task_goal": "打开网易云查看提到我的消息",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:44:36.312Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_28",
+      "task_goal": "打开网易云深色模式",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "深色模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "7"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:54:51.044Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_29",
+      "task_goal": "打开网易云音乐的客服",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:44:43.998Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_3",
+      "task_goal": "网易云播放宝宝巴士的拔萝卜",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "宝宝巴士 拔萝卜",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "宝宝巴士 拔萝卜"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:29:21.436Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_4",
+      "task_goal": "网易云播放我是一个粉刷匠",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "我是一个粉刷匠",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "我是一个粉刷匠"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:30:16.959Z",
+      "human_notes": "又开始因为推荐搜索而浪费步数了"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_5",
+      "task_goal": "网易云播放林肯公园的Numb，并查看评论",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "林肯公园 Numb",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "林肯公园 Numb"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:30:50.215Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_6",
+      "task_goal": "网易云播放孤勇者，并展示歌词",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "孤勇者",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "孤勇者"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:31:55.428Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_7",
+      "task_goal": "网易云查查包含七里香的歌单有哪些",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "七里香",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "七里香"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:32:18.416Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_8",
+      "task_goal": "在网易云里找到歌手周杰伦的个人主页并关注他",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "account",
+          "name_contains": "周杰伦",
+          "direction": "followed",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "6"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "周杰伦",
+          "direction": "created",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [
+        "周杰伦"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:55:14.287Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "neteasemusic_9",
+      "task_goal": "在网易云查看我的历史播放列表",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:44:51.319Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_0",
+      "task_goal": "拼多多搜索iPhone 16 promax ",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "iphone 16 promax",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "iphone 16 promax"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:45:16.677Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_1",
+      "task_goal": "拼多多搜索冰箱贴",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "冰箱贴",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "冰箱贴"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:45:31.047Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_10",
+      "task_goal": "查看拼多多百亿补贴手机类商品",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:45:40.827Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_11",
+      "task_goal": "查看拼多多多多买菜蔬菜类的第一个商品",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:46:47.975Z",
+      "human_notes": "Agent没有通过安全验证，没有办法拖动滑块完成拼图"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_12",
+      "task_goal": "查看拼多多休闲零食板块的豆干辣条商品列表",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:46:54.703Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_13",
+      "task_goal": "查看拼多多男装板块的上衣外套第一个商品的详情",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:47:01.902Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_14",
+      "task_goal": "复制拼多多频道的水杯餐具类目第一款商品链接",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "other",
+          "entity_kind": "other",
+          "name_contains": "复制链接",
+          "attribution": "this_task",
+          "expect_gate": "halt",
+          "evidence_steps": "7,8"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:12.653Z",
+      "human_notes": "复制链接到剪贴板了"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_15",
+      "task_goal": "查看拼多多手机小米类目第一款商品评价",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:47:43.011Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_16",
+      "task_goal": "收藏拼多多袜子第一款商品",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "袜子",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        },
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "收藏",
+          "direction": "collected",
+          "attribution": "this_task",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [
+        "袜子"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:48:14.669Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_17",
+      "task_goal": "查看拼多多橡皮泥第三款商品的评价",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "橡皮泥",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "橡皮泥"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:48:35.984Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_18",
+      "task_goal": "查看并关注拼多多女鞋第一款商品的所属店铺",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "女鞋",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "女鞋"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:57:21.675Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_19",
+      "task_goal": "打开拼多多查看垂钓装备第一款商品的发货说明详情",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "垂钓装备",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "垂钓装备"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:57:42.263Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_2",
+      "task_goal": "打开拼多多拍照搜索",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:57:56.228Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_20",
+      "task_goal": "打开拼多多查看自行车第一款商品的店铺详情",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "自行车",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "自行车"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:01:55.338Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_21",
+      "task_goal": "在拼多多查看我待付款的订单",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:55:34.357Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_22",
+      "task_goal": "拼多多查看我的评价",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:58:04.193Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_23",
+      "task_goal": "打开拼多多，查看多多钱包余额",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:59:19.741Z",
+      "human_notes": "任务要求查看多多钱包，我因为之前没有认证过，Agent点击多多钱包时会弹出实名认证的界面，不过任务被认定成功了"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_24",
+      "task_goal": "拼多多看我有哪些优惠券",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:59:31.427Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_25",
+      "task_goal": "查看拼多多店铺浏览历史",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T08:59:43.090Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_26",
+      "task_goal": "暂时关闭拼多多自动免拼",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "自动免拼",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T03:02:36.843Z",
+      "human_notes": "该任务要求暂时关闭拼多多的自动免拼功能，选择该功能之后会显示暂时关闭，9月22日开启，如果在9月22日之后使用的话，就不需要恢复；反之还是需要恢复"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_27",
+      "task_goal": "开启拼多多长辈模式",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot",
+        "action"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:56:21.682Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_28",
+      "task_goal": "把拼多多头像更换为相册第一张照片",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "account",
+          "name_contains": "头像",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T03:03:07.744Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_29",
+      "task_goal": "去拼多多看看我收藏的商品",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:56:28.095Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_3",
+      "task_goal": "在拼多多里面查看黑色垃圾袋的商品页",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "黑色垃圾袋",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "黑色垃圾袋"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:00:00.144Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_4",
+      "task_goal": "在拼多多里复制一个白色Type-C数据线的商品链接",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "白色Type-C数据线",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        },
+        {
+          "type": "other",
+          "entity_kind": "other",
+          "name_contains": "复制链接",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "白色Type-C数据线"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:14.184Z",
+      "human_notes": "剪贴板复制了商品链接"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_5",
+      "task_goal": "在拼多多里面查看一个无线鼠标商品的评价",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "无线鼠标",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "无线鼠标"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:01:29.763Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_6",
+      "task_goal": "去拼多多收藏1个马克杯，要有卡通小狗图案的",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "马克杯",
+          "direction": "collected",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,5"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "卡通小狗 马克杯",
+          "direction": "created",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "卡通小狗 马克杯"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:56:42.240Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_7",
+      "task_goal": "去拼多多打开婴儿湿巾的店铺首页",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "婴儿湿巾",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "婴儿湿巾"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:02:15.012Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_8",
+      "task_goal": "查看拼多多限时秒杀第一个商品详情",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:02:22.166Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "pinduoduo_9",
+      "task_goal": "打开拼多多充值中心",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:02:28.594Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_0",
+      "task_goal": "打开qq搜索中国矿业大学",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "中国矿业大学",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "中国矿业大学"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:03:25.993Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_1",
+      "task_goal": "查看QQ搜索找DND群组",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "DND",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "dnd 跑团",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "5"
+        },
+        {
+          "type": "membership_change",
+          "entity_kind": "group",
+          "name_contains": "龙与地下城",
+          "direction": "joined",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [
+        "DND",
+        "dnd 跑团"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:57:08.692Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_10",
+      "task_goal": "打开QQ给绕堤沙发送一个微笑的emoji",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "绕堤沙",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "绕堤沙"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:57:21.428Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_11",
+      "task_goal": "打开QQ，对绕堤沙戳一戳",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "绕堤沙",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "绕堤沙"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:03:45.552Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_12",
+      "task_goal": "打开QQ,将绕堤沙的名片发送给绕堤沙",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "绕堤沙",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "绕堤沙"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:04:07.505Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_13",
+      "task_goal": "打开QQ，将和绕堤沙的聊天设为置顶",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "绕堤沙",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "绕堤沙"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:04:32.923Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_14",
+      "task_goal": "打开QQ，删除和绕堤沙的聊天记录",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "绕堤沙",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "绕堤沙"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:07:12.930Z",
+      "human_notes": "绕堤沙是在之前的任务中通过搜索QQ号添加的，但由于两个序列任务之间不连续，导致这一批任务在完成过程中，绕堤沙已经被删除，导致这一长串任务失败"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_15",
+      "task_goal": "设置QQ状态为听歌中",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "account",
+          "name_contains": "状态",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "8"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T03:04:33.605Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_16",
+      "task_goal": "打开我的qq二维码",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:05:06.209Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_17",
+      "task_goal": "查看一下我的QQ钱包",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:57:36.780Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_18",
+      "task_goal": "打开QQ我的相册",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:07:24.173Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_19",
+      "task_goal": "我要更换QQ模式到关怀模式",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "关怀模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:59:21.233Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_2",
+      "task_goal": "打开QQ搜索找“吓死我了”表情",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "吓死我了",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "吓死我了"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:07:47.071Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_20",
+      "task_goal": "打开QQ的夜间模式",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "夜间",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:59:26.206Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_21",
+      "task_goal": "在QQ中查看当地天气",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:07:58.794Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_22",
+      "task_goal": "看看QQ频道的知识中有哪些内容",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:08:29.477Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_23",
+      "task_goal": "打开QQ频道的勋章墙看看。",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:09:21.595Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_24",
+      "task_goal": "我想看看qq频道的个性档案。",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:09:34.757Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_25",
+      "task_goal": "查看QQ我加入的群聊",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:09:41.913Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_26",
+      "task_goal": "打开QQ联系人查看群通知",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:09:49.855Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_27",
+      "task_goal": "打开QQ动态给最新的一条动态点赞",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "social_reaction",
+          "entity_kind": "content",
+          "name_contains": "曹翔",
+          "direction": "liked",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:59:43.359Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_28",
+      "task_goal": "打开QQ运动查看我的运动勋章",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:10:02.267Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_29",
+      "task_goal": "我想去qq看看朋友们的说说",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:10:07.871Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_3",
+      "task_goal": "打开QQ扫一扫",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:10:13.375Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_4",
+      "task_goal": "打开QQ添加1098074562为好友",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "relationship_request",
+          "entity_kind": "friend",
+          "name_contains": "绕堤沙",
+          "direction": "request_sent",
+          "attribution": "this_task",
+          "evidence_steps": "6"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "1098074562",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [
+        "1098074562"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:59:52.283Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_5",
+      "task_goal": "打开QQ给绕堤沙发送“早上好”",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "早上好",
+          "direction": "sent",
+          "attribution": "this_task",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:10:38.756Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_6",
+      "task_goal": "打开QQ给绕堤沙发送看30s广告即可复活1次",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "看30s广告即可复活一次",
+          "direction": "sent",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:11:01.519Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_7",
+      "task_goal": "打开QQ给绕堤沙发送“事已至此，先吃饭吧”",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "事已至此，先吃饭吧",
+          "direction": "sent",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:11:18.251Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_8",
+      "task_goal": "打开QQ给绕堤沙发送“恭喜发财”的表情包",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "恭喜发财",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "恭喜发财"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:11:39.851Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "qq_9",
+      "task_goal": "打开QQ给绕堤沙发送相册里的第一张图片",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "照片",
+          "direction": "sent",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:12:44.232Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_0",
+      "task_goal": "去钉钉查看我的待办",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:13:31.731Z",
+      "human_notes": "又点到弹出来的信息了"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_1",
+      "task_goal": "去钉钉查看未读消息",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:13:44.279Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_10",
+      "task_goal": "查看一下钉钉里最近的文档",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:13:54.472Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_11",
+      "task_goal": "帮我查看一下我的钉钉好友动态",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:14:59.301Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_12",
+      "task_goal": "去钉钉打开我的收藏",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:16:43.726Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_13",
+      "task_goal": "在钉钉遇到问题，帮我找一下客服",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:16:54.393Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_14",
+      "task_goal": "去钉钉打开个人空间",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T03:04:49.888Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_15",
+      "task_goal": "去钉钉打开扫一扫",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:17:01.921Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_16",
+      "task_goal": "去钉钉添加我的状态为下班了",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "content_lifecycle",
+          "entity_kind": "account",
+          "name_contains": "下班了",
+          "direction": "created",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "10,11"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:30:03.339Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_17",
+      "task_goal": "在钉钉开启语音和视频通话邀请通知",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:17:17.274Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_18",
+      "task_goal": "我想在钉钉设置回车键发送消息",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "回车键发送消息",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "12,13"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T03:12:44.180Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_19",
+      "task_goal": "我想在钉钉设置消息免打扰",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "勿扰模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T03:14:37.402Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_2",
+      "task_goal": "去钉钉向钉钉小秘书发送“早上中午和晚上好”",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "早上中午和晚上好",
+          "direction": "sent",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:17:41.470Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_3",
+      "task_goal": "去钉钉向钉钉小秘书发送微笑的emoji",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "微笑Emoji",
+          "direction": "sent",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:18:13.877Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_4",
+      "task_goal": "在钉钉里将钉钉小秘书设为置顶",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "friend",
+          "name_contains": "置顶",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:24:08.178Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_5",
+      "task_goal": "在钉钉里将相册里的第一张图片发送给钉钉小秘书",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "message_send",
+          "entity_kind": "message",
+          "name_contains": "照片",
+          "direction": "sent",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:18:35.845Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_6",
+      "task_goal": "去钉钉添加15010284323为我的好友",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "15010284323",
+          "direction": "created",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4,11,12"
+        },
+        {
+          "type": "relationship_request",
+          "entity_kind": "friend",
+          "name_contains": "倬",
+          "direction": "request_sent",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "6"
+        }
+      ],
+      "search_terms_any": [
+        "15010284323"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T11:59:59.026Z",
+      "human_notes": "应该在钉钉里面操作，中途有QQ消息弹窗，导致跳转到了QQ并搜索了“15010284323”"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_7",
+      "task_goal": "去钉钉将查看特别关注的消息",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "新消息通知",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:19:36.191Z",
+      "human_notes": "跳转到设置把我的设置里面的消息权限全开了"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_8",
+      "task_goal": "在钉钉打开邮件收件箱",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:19:44.486Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "rimet_9",
+      "task_goal": "帮我查看一下钉钉今天的待办事项",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:19:52.039Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_0",
+      "task_goal": "在美柚里搜索祛湿方法",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "祛湿方法",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "祛湿方法"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:20:26.479Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_1",
+      "task_goal": "在美柚里搜索化痰止咳的帖子",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "止咳化痰方法",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "7,8"
+        }
+      ],
+      "search_terms_any": [
+        "止咳化痰方法"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:21:04.047Z",
+      "human_notes": "依旧被推荐搜索困扰"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_10",
+      "task_goal": "在美柚上查看我的消息界面",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:21:10.272Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_11",
+      "task_goal": "帮我在美柚问医生里上问一下医生经期腹痛应该怎么缓解？",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "content_lifecycle",
+          "entity_kind": "content",
+          "name_contains": "求助",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T07:33:35.248Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_12",
+      "task_goal": "打开美柚上的柚子街",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:21:31.243Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_13",
+      "task_goal": "帮我查看美柚健康养生馆的最新发帖",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "美柚健康养生馆",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "4,5"
+        }
+      ],
+      "search_terms_any": [
+        "美柚健康养生馆"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:22:14.480Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_14",
+      "task_goal": "在美柚上打开我的任务中心",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:22:26.151Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_15",
+      "task_goal": "在美柚上打开我的挂件墙",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:22:40.139Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_16",
+      "task_goal": "在美柚打开“娱乐大爆炸”圈子",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "娱乐大爆炸",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "娱乐大爆炸"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:23:01.814Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_17",
+      "task_goal": "查看美柚里我的订单",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:00:04.148Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_18",
+      "task_goal": "看一下美柚上我的金豆有多少",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:23:56.122Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_19",
+      "task_goal": "在美柚中设置不使用美柚专属字体",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "使用美柚专属字体",
+          "direction": "off",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "12,13"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:25:12.874Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_2",
+      "task_goal": "在美柚里搜索夏季饮食的知识",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "夏季饮食",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "夏季饮食"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:24:41.969Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_3",
+      "task_goal": "在美柚里面打开运动减肥的健康百科",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "运动减肥",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "5,6"
+        }
+      ],
+      "search_terms_any": [
+        "运动减肥"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:25:57.894Z",
+      "human_notes": "又被QQ消息弹窗跳转到QQ了"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_4",
+      "task_goal": "在美柚里面填写我今天的经期症状为腹痛、便秘",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "月经来了",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "8"
+        },
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "痛经",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "10,11"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:49:16.211Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_5",
+      "task_goal": "在美柚里面填写我今天的症状为头痛",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:50:15.605Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_6",
+      "task_goal": "在美柚里面添加我今天的体重为55公斤",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:02:52.862Z",
+      "human_notes": "又因为QQ消息跳转到了QQ，导致步数过多，任务没有完成"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_7",
+      "task_goal": "在美柚里面添加计划“下周一要早起”",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:56:51.746Z",
+      "human_notes": "又因为跳转到QQ浪费步数而失败"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_8",
+      "task_goal": "帮我查看美柚的经期分析",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:26:03.609Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "seeyou_9",
+      "task_goal": "帮我在美柚上开启备孕模式",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "备孕模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:02:59.582Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_0",
+      "task_goal": "在同花顺看一下小米集团的当前股价",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot",
+        "action"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:27:39.625Z",
+      "human_notes": "因为QQ消息弹窗而浪费完了所有步数"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_1",
+      "task_goal": "在同花顺看一下贵州茅台的当前股价",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:28:27.281Z",
+      "human_notes": "又因为QQ消息浪费了所有步数"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_10",
+      "task_goal": "在同花顺看一下有哪些学投资的电子书",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:28:37.145Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_11",
+      "task_goal": "在同花顺看一下A股的个股行情",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:28:52.436Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_12",
+      "task_goal": "在同花顺看一下港股的经纪商排行",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:29:06.798Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_13",
+      "task_goal": "在同花顺看一下A股热门的行业板块",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:29:24.754Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_14",
+      "task_goal": "在同花顺看一下美股近一月的涨跌统计",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:29:38.704Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_15",
+      "task_goal": "在同花顺看一下黄金行情",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:29:44.127Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_16",
+      "task_goal": "在同花顺看一下期货行情",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:29:51.064Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_17",
+      "task_goal": "在同花顺播放自选股资讯的全部新闻",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:30:19.610Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_18",
+      "task_goal": "在同花顺看一下自选分析里的早报",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:31:49.476Z",
+      "human_notes": "被QQ弹窗遮挡了“早报”选项，导致任务失败"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_19",
+      "task_goal": "在同花顺订阅自选分析里的晚报",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:32:22.926Z",
+      "human_notes": "再次掉入QQ消息循环"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_2",
+      "task_goal": "在同花顺看一下云南白药的周K线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "云南白药",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "云南白药"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:32:43.551Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_20",
+      "task_goal": "我想看一下同花顺的基金涨幅榜",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:32:54.712Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_21",
+      "task_goal": "在同花顺看一下有哪些新发基金",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:33:17.849Z",
+      "human_notes": "再次被QQ循环"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_22",
+      "task_goal": "在同花顺查一下基金的稳健榜",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:33:31.829Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_23",
+      "task_goal": "打开同花顺模拟炒股的卖出页面",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:33:39.442Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_24",
+      "task_goal": "在同花顺看一下模拟大赛",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:33:45.802Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_25",
+      "task_goal": "在同花顺看一下我的收藏",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:33:53.310Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_26",
+      "task_goal": "在同花顺看一下我的消息",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:50:26.368Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_27",
+      "task_goal": "在同花顺开启长辈版",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:50:46.169Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_28",
+      "task_goal": "在同花顺开启屏幕常亮",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T04:51:07.183Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_29",
+      "task_goal": "在同花顺设置主题为黑色",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "主题换肤",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:34:11.595Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_3",
+      "task_goal": "在同花顺看一下美的集团的月K线",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "美的集团",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "3,4"
+        }
+      ],
+      "search_terms_any": [
+        "美的集团"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:34:31.418Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_4",
+      "task_goal": "在同花顺将江淮汽车加入自选股",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "600418",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "江淮汽车",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "600418"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:15.820Z",
+      "human_notes": "将江淮汽车加入了自选股\n本来应该搜索江淮汽车，但是根据AI的知识自动搜索了600418"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_5",
+      "task_goal": "在同花顺将光大证券加入自选股",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "光大证券",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "光大证券",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "光大证券"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:17.184Z",
+      "human_notes": "将光大证券加入了自选股"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_6",
+      "task_goal": "在同花顺看一下青岛啤酒的图解财报",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "青岛啤酒",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "2,3"
+        }
+      ],
+      "search_terms_any": [
+        "青岛啤酒"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:38:14.373Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_7",
+      "task_goal": "在同花顺看一下古井贡酒的大事提醒详情",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:38:54.169Z",
+      "human_notes": "再次被QQ循环"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_8",
+      "task_goal": "在同花顺看一下青岛啤酒的综合诊断",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:40:04.776Z",
+      "human_notes": "直接点击了搜索历史中的青岛啤酒"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "tonghuashun_9",
+      "task_goal": "在同花顺看一下燕京啤酒的历史回看",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "燕京啤酒",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "燕京啤酒"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:39:43.827Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_0",
+      "task_goal": "在58同城中搜索“文员”工作",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:41:08.729Z",
+      "human_notes": "由于我的账户信息没有填写完整，开局就被要求填写个人简历，耗尽了步数"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_1",
+      "task_goal": "在58同城中搜索上地附近的合租房屋",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "上地 合租",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "上地 合租"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:41:48.216Z",
+      "human_notes": "再次被QQ循环"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_10",
+      "task_goal": "在58同城中的家具回收服务中选择2~3件桌椅",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:42:04.657Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_11",
+      "task_goal": "在58同城的租房频道筛选合租、主卧的个人房源",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:42:19.522Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_12",
+      "task_goal": "帮我在58同城中把当前城市改为合肥",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "合肥",
+          "direction": "on",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T12:04:21.520Z",
+      "human_notes": "把我所在地从当前定位更改到了合肥"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_13",
+      "task_goal": "查看58同城中社区广场话题榜",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:42:48.981Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_14",
+      "task_goal": "关注58同城中社区广场第一条帖子",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:42:58.537Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_15",
+      "task_goal": "查看58同城中的未读消息",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:43:07.199Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_16",
+      "task_goal": "清除58同城中的未读消息",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:43:28.950Z",
+      "human_notes": "没有未读消息导致没有完成任务"
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_17",
+      "task_goal": "看一下58同城中我的粉丝",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:43:35.220Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_18",
+      "task_goal": "看一下58同城中我的钱包",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:43:40.695Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_19",
+      "task_goal": "打开我在58同城中的简历",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:43:47.895Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_2",
+      "task_goal": "在58同城中搜索空调上门安装",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "空调上门安装",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "6,7"
+        }
+      ],
+      "search_terms_any": [
+        "空调上门安装"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:44:12.795Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_20",
+      "task_goal": "去58同城打开房贷计算器",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:44:31.352Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_21",
+      "task_goal": "查看我在58同城中最新的浏览记录",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:44:39.038Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_22",
+      "task_goal": "联系一下58同城的客服",
+      "judged_success": true,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:45:00.526Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_23",
+      "task_goal": "去58同城打开长辈模式",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "开启长辈模式",
+          "direction": "on",
+          "attribution": "this_task",
+          "expect_gate": "autonomous",
+          "evidence_steps": "4"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-13T14:58:09.492Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_24",
+      "task_goal": "去58同城关闭首页视频自动播放",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:47:31.234Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_25",
+      "task_goal": "去58同城看一下它的资质协议",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:47:44.158Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_26",
+      "task_goal": "去58同城将我目前的状态更换为随便看看",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:47:58.730Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_27",
+      "task_goal": "去58同城将我的性别修改为女",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "settings_toggle",
+          "entity_kind": "setting",
+          "name_contains": "女",
+          "direction": "on",
+          "attribution": "this_task",
+          "evidence_steps": "5,6"
+        }
+      ],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:48:16.528Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_28",
+      "task_goal": "去58同城打开我的认证",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:48:25.543Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_29",
+      "task_goal": "去58同城打开任务中心",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:48:45.343Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_3",
+      "task_goal": "在58同城中去租房频道看看合租房源",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "合租",
+          "direction": "created",
+          "attribution": "this_task",
+          "evidence_steps": "5,6"
+        }
+      ],
+      "search_terms_any": [
+        "合租"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:49:06.291Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_4",
+      "task_goal": "在58同城的二手房频道看看智学苑小区的绿化率",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "智学苑",
+          "direction": "created",
+          "attribution": "this_task"
+        },
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "苑",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "智学苑",
+        "苑"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:49:43.957Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_5",
+      "task_goal": "在58同城中查看二手车小米SU7的具体参数配置",
+      "judged_success": false,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "小米SU7",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "小米SU7"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:50:02.558Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_6",
+      "task_goal": "在58同城中查看58官方搬家的收费标准",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "58官方搬家",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "58官方搬家"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:50:38.542Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_7",
+      "task_goal": "在58同城中查看58官方的日常保洁的具体用户评价",
+      "judged_success": true,
+      "mutations": [
+        {
+          "type": "search_history",
+          "entity_kind": "search",
+          "name_contains": "58官方 日常保洁",
+          "direction": "created",
+          "attribution": "this_task"
+        }
+      ],
+      "search_terms_any": [
+        "58官方 日常保洁"
+      ],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:51:26.783Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_8",
+      "task_goal": "在58同城中查看全部服务频道",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:51:16.186Z",
+      "human_notes": ""
+    },
+    {
+      "run_id": "base_canonical",
+      "task_id": "wuba_9",
+      "task_goal": "打开58同城中租房推荐信息的第一条",
+      "judged_success": false,
+      "mutations": [],
+      "search_terms_any": [],
+      "human_verified": true,
+      "certainty": "sure",
+      "evidence_basis": [
+        "shot"
+      ],
+      "labeler": "human",
+      "labeled_at": "2026-10-14T09:51:38.648Z",
+      "human_notes": ""
+    }
+  ]
+}

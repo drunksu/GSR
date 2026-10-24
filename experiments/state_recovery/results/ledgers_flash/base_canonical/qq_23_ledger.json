@@ -1,0 +1,420 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_23",
+  "run_id": "base_canonical",
+  "task_goal": "打开 QQ 频道的勋章墙看看。",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "天气",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "为了查看当地天气，我需要在搜索框中输入“天气”以查找相关功能或小程序。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_21",
+      "id": "c1"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "夜间",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "在个人资料页面底部，我看到了“设置”、“夜间”和“当地天气”三个选项。其中，“夜间”选项很可能是用来开启夜间模式的。根据任务目标，我需要打开 QQ 的夜间模式，因此应该点击“夜间”选项。...从当前界面来看，QQ 已经成功切换到了夜间模式，因为整个界面背景变成了黑色，文字和图标也适配了深色主题。这说明之前的点击“夜间”选项操作已经生效，任务目标已经达成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_20",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "吓死我了",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "我需要在搜索框中输入“吓死我了”来查找相关表情。... type(text='吓死我了')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_2",
+      "id": "c3"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "关怀模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        7
+      ],
+      "evidence_quote": "当前页面明确显示“关怀模式”的介绍，并提供了一个蓝色按钮“开启关怀模式”，这说明系统需要我确认启用该模式。点击此按钮即可完成切换。...QQ 已成功重启，当前界面为消息列表，字体和布局看起来更简洁清晰，符合关怀模式的特征（字体更大、设计更简明）。结合之前操作流程：进入设置 → 模式选择 → 选择关怀模式 → 确认 → 重启 QQ，现已回到主界面，说明关怀模式已生效。任务完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_19",
+      "id": "c4"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "状态",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7
+      ],
+      "evidence_quote": "在这个界面中，我看到了各种状态选项，其中\"听歌中\"状态位于第二行第一个位置... 系统弹出了确认对话框，询问是否要切换为\"听歌中\"状态。... 我已经成功将 QQ 状态设置为\"听歌中\"",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_15",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "254126895",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        13
+      ],
+      "evidence_quote": "THOUGHT: 现在我应尝试在搜索框中输入完整 QQ 号“254126895”... ACTION: type(text='254126895')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_13",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "绕堤沙",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "在搜索框中输入“绕堤沙”可以快速定位到该联系人，这是完成任务的关键步骤。... type(text='绕堤沙')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_12",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "DND",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='DND')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c8"
+    },
+    {
+      "type": "membership_change",
+      "app": "QQ",
+      "entity": {
+        "kind": "group",
+        "name": "DND5 版萌新跑团冒险指南",
+        "identifier": null
+      },
+      "direction": "request_sent",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "cancel_pending",
+      "evidence_steps": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "evidence_quote": "THOUGHT: 我已经成功提交了加入\"DND5 版萌新跑团冒险指南\"群组的申请，当前状态显示为“等待验证”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c9"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "中国矿业大学",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索栏已经激活，键盘已弹出，现在需要输入“中国矿业大学”进行搜索。这是完成任务的关键步骤。\n        ACTION: type(text='中国矿业大学')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_0",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "婴儿湿巾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "根据任务目标，我需要找到婴儿湿巾相关的店铺首页，因此下一步是输入关键词“婴儿湿巾”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_7",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "卡通小狗 马克杯",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='卡通小狗 马克杯')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c12"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "卡通小狗马克杯卡通带盖陶",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "底部的“收藏”按钮显示为红色心形并标注“已收藏”",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c13"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "无线鼠标",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "当前搜索栏中输入的是“白色数据线 type c”，与目标“无线鼠标”无关。我需要清空当前输入内容，然后输入“无线鼠标”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_5",
+      "id": "c14"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "白色 Type-C 数据线",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要搜索“白色 Type-C 数据线”来找到目标商品。当前搜索框中显示的是“垃圾袋黑色”，这与我的目标无关，因此我需要先清空搜索框内容，然后输入正确的关键词进行搜索。\n        ACTION: type(text='白色 Type-C 数据线')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_4",
+      "id": "c15"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "黑色垃圾袋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "输入“黑色垃圾袋”进行搜索... type(text='黑色垃圾袋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_3",
+      "id": "c16"
+    }
+  ],
+  "search_terms": [
+    "天气",
+    "吓死我了",
+    "绕堤沙",
+    "254126895",
+    "DND",
+    "中国矿业大学",
+    "婴儿湿巾",
+    "卡通小狗 马克杯",
+    "无线鼠标",
+    "白色 Type-C 数据线",
+    "黑色垃圾袋"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c9",
+      "c13"
+    ],
+    "halt": [
+      {
+        "id": "c1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c7",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c8",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c10",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c11",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c12",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c14",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c15",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c16",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 16 条 carried_over（前序仍开放的残留）"
+  ]
+}

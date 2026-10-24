@@ -1,0 +1,372 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_2",
+  "run_id": "base_canonical",
+  "task_goal": "打开QQ搜索找“吓死我了”表情",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "吓死我了",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        5
+      ],
+      "evidence_quote": "ACTION: type(text='吓死我了')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "关怀模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5,
+        7
+      ],
+      "evidence_quote": "当前页面明确显示“关怀模式”的介绍，并提供了一个蓝色按钮“开启关怀模式”...系统提示需要重启QQ才能使关怀模式生效...QQ已成功重启，当前界面为消息列表，字体和布局看起来更简洁清晰，符合关怀模式的特征（字体更大、设计更简明）。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_19",
+      "id": "c2"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "状态",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7
+      ],
+      "evidence_quote": "我终于找到了状态设置界面！在这个界面中，我看到了各种状态选项，其中\"听歌中\"状态位于第二行第一个位置，图标是一个戴着耳机的笑脸。这正是我要设置的状态。现在我只需要点击这个\"听歌中\"选项即可完成任务。...系统弹出了确认对话框，询问是否要切换为\"听歌中\"状态。这是一个正常的确认步骤，需要我点击\"确定\"按钮来完成状态设置。确认后，QQ状态就会成功设置为\"听歌中\"。...我已经成功将QQ状态设置为\"听歌中\"，从界面可以看到\"听歌中\"选项已经被选中并高亮显示（蓝色背景），这表明状态设置已经完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_15",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "绕堤沙",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        0,
+        6,
+        8,
+        11
+      ],
+      "evidence_quote": "在搜索框中已经显示了“绕堤沙”这个联系人，位于最近搜索列表的第一项。... 当前“最近搜索”中明确显示了“绕堤沙”，这说明系统已记录该关键词。... 我将重新在搜索框中输入“绕堤沙”并执行搜索。... 点击“绕堤沙”这一最近搜索项",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_13",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "254126895",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        13
+      ],
+      "evidence_quote": "现在我应尝试在搜索框中输入完整QQ号“254126895”，以精准定位目标联系人。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_13",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "DND",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='DND')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c6"
+    },
+    {
+      "type": "membership_change",
+      "app": "QQ",
+      "entity": {
+        "kind": "group",
+        "name": "DND5版萌新跑团冒险指南",
+        "identifier": null
+      },
+      "direction": "request_sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "cancel_pending",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "THOUGHT: 我已经成功提交了加入“DND5版萌新跑团冒险指南”群组的申请，当前状态显示为“等待验证”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_1",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "中国矿业大学",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='中国矿业大学')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "qq_0",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "婴儿湿巾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='婴儿湿巾')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_7",
+      "id": "c9"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "卡通小狗马克杯卡通带盖陶",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 我已经找到了一个带有卡通小狗图案的马克杯商品，现在需要将其收藏。在商品详情页底部，有一个“收藏”按钮（心形图标），点击它即可完成收藏操作。\\nStep 4: THOUGHT: 我已经成功收藏了这个带有卡通小狗图案的马克杯，因为底部的“收藏”按钮显示为红色心形并标注“已收藏”，说明收藏操作已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "卡通小狗 马克杯",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "Step 1: THOUGHT: 我需要搜索带有卡通小狗图案的马克杯，当前搜索框中显示的是“无线鼠标”，我需要清空它并输入新的关键词。根据任务要求，我应该输入“卡通小狗 马克杯”来找到相关商品。\\nACTION: type(text='卡通小狗 马克杯')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "无线鼠标",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='无线鼠标')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_5",
+      "id": "c12"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "白色Type-C数据线",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='白色Type-C数据线')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_4",
+      "id": "c13"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "黑色垃圾袋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='黑色垃圾袋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_3",
+      "id": "c14"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "头像",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "头像已成功更换为相册第一张照片（LTL图标），界面显示“头像设置成功”提示，说明任务已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_28",
+      "id": "c15"
+    }
+  ],
+  "search_terms": [
+    "吓死我了",
+    "绕堤沙",
+    "254126895",
+    "DND",
+    "中国矿业大学",
+    "婴儿湿巾",
+    "卡通小狗 马克杯",
+    "无线鼠标",
+    "白色Type-C数据线",
+    "黑色垃圾袋"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13",
+      "c14",
+      "c15"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 14 条 carried_over（前序仍开放的残留）"
+  ]
+}

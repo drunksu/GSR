@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "neteasemusic_18",
+  "run_id": "base_canonical",
+  "task_goal": "打开网易云笔记推荐",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "博客广播电台",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text='博客广播电台')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_17",
+      "id": "c1"
+    }
+  ],
+  "search_terms": [
+    "博客广播电台"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

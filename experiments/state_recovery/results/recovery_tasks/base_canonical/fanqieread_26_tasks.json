@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_26",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说中将字号恢复为22，并将翻页方式设置为上下",
+      "precondition": {
+        "target": "确认当前字号是否为22且翻页方式为上下",
+        "check_instruction": "进入番茄小说阅读页面，查看顶部或侧边栏的字号显示值（标注为‘字号’）及翻页方式设置项",
+        "clean_if_state": "当前字号已显示为22，且翻页方式已设为上下"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "番茄小说中当前小说的字号是否已恢复为22且翻页方式为上下？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在番茄小说中将翻页方式恢复为上下模式",
+      "precondition": {
+        "target": "确认当前翻页方式是否已为‘上下’",
+        "check_instruction": "进入小说阅读页面，查看底部或设置弹窗中‘翻页方式’选项当前选中的值是否为‘上下’",
+        "clean_if_state": "当前翻页方式已显示为‘上下’"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "番茄小说中该小说的翻页方式是否已设置为‘上下’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

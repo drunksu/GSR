@@ -1,0 +1,195 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "seeyou_18",
+  "run_id": "base_canonical",
+  "task_goal": "看一下美柚上我的金豆有多少",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "娱乐大爆炸",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='娱乐大爆炸')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_16",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "美柚健康养生馆",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "搜索框已激活，当前输入内容为“止咳祛痰”，与目标“美柚健康养生馆”无关。我需要清空或替换该输入，改为搜索“美柚健康养生馆”以定位其最新发帖。... ACTION: type(text='美柚健康养生馆')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_13",
+      "id": "c2"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "美柚",
+      "entity": {
+        "kind": "content",
+        "name": "经期腹痛应该怎么缓解？",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "问题已成功发布为求助帖（显示“内容发布成功”）",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_11",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "问医生",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "type(text='问医生')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_11",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "祛湿方法",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "需要清除或替换为“祛湿方法”。根据任务目标，我应直接输入“祛湿方法”进行搜索。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_0",
+      "id": "c5"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "新消息通知",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "在“新消息通知”页面中，我注意到“新消息通知”开关下方的说明文字明确提到“可配置单聊，@我的，特别关注，DING 消息”。这表明“特别关注”是通知配置的一部分，但当前开关是关闭状态。为了能够接收到“特别关注”的消息，首先需要开启通知开关，这样系统才能接收并显示相关消息。因此，下一步应点击开关按钮以启用新消息通知。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "rimet_7",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "钉钉",
+      "entity": {
+        "kind": "search",
+        "name": "15010284323",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        3,
+        10
+      ],
+      "evidence_quote": "搜索框已激活，键盘弹出，现在需要输入目标手机号 15010284323 进行搜索。这是添加好友的关键步骤，输入正确号码后才能找到对应用户并发送好友请求。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "rimet_6",
+      "id": "c7"
+    }
+  ],
+  "search_terms": [
+    "娱乐大爆炸",
+    "美柚健康养生馆",
+    "问医生",
+    "祛湿方法",
+    "15010284323"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c3",
+      "c4",
+      "c6"
+    ],
+    "halt": [
+      {
+        "id": "c1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c2",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c5",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c7",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 7 条 carried_over（前序仍开放的残留）"
+  ]
+}

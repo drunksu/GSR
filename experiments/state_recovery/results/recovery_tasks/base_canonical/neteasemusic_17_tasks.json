@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_17",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中打开博客广播电台的播放页面，确保当前正在播放或已进入该电台的专属界面",
+      "precondition": {
+        "target": "确认是否已成功进入博客广播电台的播放界面",
+        "check_instruction": "进入网易云音乐首页，点击搜索框输入‘博客广播电台’，查看搜索结果列表中是否存在标题为‘博客广播电台’的电台条目并已进入其详情页",
+        "clean_if_state": "当前界面已显示博客广播电台的封面、名称、主播信息及播放控制按钮，且播放状态为暂停或正在播放"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前界面是否已成功显示博客广播电台的专属播放页面（含电台名称、封面与播放控件）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

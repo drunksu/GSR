@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>污染金标标注台</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --panel:#fff; --line:#e3e6ea; --ink:#1f2329; --sub:#6b7280;
+    --blue:#2b6cf6; --blue-bg:#eef3ff; --green:#16a34a; --green-bg:#e9f8ef;
+    --red:#dc2626; --red-bg:#fdeeee; --amber:#b45309; --amber-bg:#fdf3e3;
+    --purple:#7c3aed; --tag:#eef0f3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.55 "Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink)}
+  button{font:inherit;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 10px;color:var(--ink)}
+  button:hover{border-color:var(--blue);color:var(--blue)}
+  button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+  button.primary:hover{background:#1e5ce0;color:#fff}
+  button.danger{color:var(--red)}
+  input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:#fff;color:var(--ink);width:100%}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue)}
+  /* ---------- 顶栏 ---------- */
+  header{display:flex;align-items:center;gap:14px;padding:8px 16px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+  header h1{font-size:15px;margin:0;white-space:nowrap}
+  .prog{font-size:12px;color:var(--sub);white-space:nowrap}
+  .bar{width:160px;height:6px;background:var(--tag);border-radius:3px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--green);width:0}
+  .spacer{flex:1}
+  /* ---------- 布局 ---------- */
+  .layout{display:grid;grid-template-columns:282px minmax(430px,1fr) 372px;height:calc(100vh - 49px)}
+  .col{overflow-y:auto}
+  .queue{border-right:1px solid var(--line);background:var(--panel)}
+  .form{border-left:1px solid var(--line);background:var(--panel)}
+  /* ---------- 队列 ---------- */
+  .qfilters{padding:10px 12px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;background:var(--panel);z-index:5;border-bottom:1px solid var(--line)}
+  .seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .seg button{border:0;border-radius:0;border-right:1px solid var(--line);padding:4px 0;font-size:12px;flex:1}
+  .seg button:last-child{border-right:0}
+  .seg button.on{background:var(--blue);color:#fff}
+  .qitem{padding:8px 12px;border-bottom:1px solid #f0f1f3;cursor:pointer;display:flex;gap:8px;align-items:flex-start}
+  .qitem:hover{background:#f8faff}
+  .qitem.cur{background:var(--blue-bg)}
+  .qitem .dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none;background:#c9ced6}
+  .qitem.done .dot{background:var(--green)}
+  .qitem .dot.rework{background:var(--amber)}
+  .badge.rework{background:var(--amber-bg);color:var(--amber)}
+  .qitem .mid{flex:1;min-width:0}
+  .qitem .tid{font-weight:600;font-size:12.5px}
+  .qitem .goal{font-size:12px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .badge{display:inline-block;font-size:11px;padding:0 6px;border-radius:4px;background:var(--tag);color:#444;line-height:17px;height:18px;margin-right:4px}
+  .badge.need{background:var(--red-bg);color:var(--red)}
+  .badge.search{background:var(--amber-bg);color:var(--amber)}
+  .badge.unable{background:#f3e8ff;color:var(--purple)}
+  .badge.review{background:var(--blue-bg);color:var(--blue)}
+  .badge.empty{background:#eef8f0;color:var(--green)}
+  /* ---------- 证据区 ---------- */
+  .evidence{padding:14px 18px 60px}
+  .case-head{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+  .case-head h2{margin:0 0 6px;font-size:16px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+  .toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .stepstrip{display:flex;gap:5px;flex-wrap:wrap}
+  .stepstrip button{min-width:38px;padding:3px 0;font-size:12.5px}
+  .stepstrip button.cur{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .stepstrip button.nomedia{border-style:dashed;color:var(--amber);border-color:#e8c98f}
+  .stepstrip button.nomedia.cur{background:var(--amber);border-color:var(--amber);color:#fff}
+  .media-warn{font-size:12.5px;color:var(--amber);background:var(--amber-bg);border:1px solid #f0d9ae;
+    border-radius:6px;padding:7px 10px;margin-top:8px;line-height:1.6}
+  .noshot{flex:1 1 0;min-height:300px;border:2px dashed var(--line);border-radius:8px;background:#fafbfc;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    color:var(--sub);font-size:13px;text-align:center;padding:20px;margin:8px}
+  .noshot-ic{font-size:34px}
+  .noshot-sub{font-size:12px;color:#9aa0a8;margin-top:4px;max-width:320px;line-height:1.5}
+  .viewer{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .viewer.single{grid-template-columns:1fr}
+  .pane{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .pane-h{padding:7px 12px;font-size:12.5px;font-weight:600;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fafbfc}
+  .shot{flex:1 1 0;min-width:0;display:block;height:calc(100vh - 260px);width:auto;object-fit:contain;background:#111;margin:0 auto}
+  .resp{padding:10px 12px;font-size:13px}
+  .resp .th{color:#374151}
+  .resp .ac{margin-top:8px;padding:6px 9px;background:#f6f8fa;border-radius:6px;font-family:Consolas,monospace;font-size:12.5px;color:var(--blue);word-break:break-all}
+  .xmlwrap{max-height:420px;overflow:auto}
+  table.nodes{border-collapse:collapse;width:100%;font-size:12px}
+  table.nodes td,table.nodes th{border-bottom:1px solid #f0f1f3;padding:4px 8px;text-align:left;vertical-align:top}
+  table.nodes th{position:sticky;top:0;background:#fafbfc;color:var(--sub);font-weight:600}
+  tr.chg{background:var(--amber-bg)}
+  tr.chg td{font-weight:600}
+  .ck-on{color:var(--green);font-weight:700}.ck-off{color:var(--sub)}
+  details.raw{margin-top:8px}
+  details.raw pre{max-height:300px;overflow:auto;font-size:11px;background:#fafbfc;border:1px solid var(--line);border-radius:6px;padding:8px;white-space:pre-wrap;word-break:break-all}
+  .toolline{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--sub);flex-wrap:wrap;margin-bottom:10px}
+  .toolline label{display:flex;gap:4px;align-items:center;cursor:pointer}
+  .toolline input[type=checkbox]{width:auto}
+  /* ---------- 表单 ---------- */
+  .form{padding:14px 16px 80px}
+  .field{margin-bottom:11px}
+  .field>label{display:block;font-size:12.5px;font-weight:600;margin-bottom:4px}
+  .field .hint{font-size:11.5px;color:var(--sub);font-weight:400}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .checkline{display:flex;gap:14px;flex-wrap:wrap}
+  .checkline label{display:flex;gap:5px;align-items:center;font-size:13px;cursor:pointer}
+  .checkline input{width:auto}
+  .mutcard{border:1px solid var(--line);border-radius:8px;padding:9px 10px;margin-bottom:9px;background:#fcfcfd}
+  .mutcard .mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+  .mutcard .mhead b{font-size:12.5px;color:var(--blue)}
+  .mutcard .row2{margin-bottom:6px}
+  .mutcard .mini{font-size:11.5px;color:var(--sub);margin-top:4px}
+  .stickybar{position:fixed;bottom:0;right:0;width:372px;background:var(--panel);border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:8px;z-index:20}
+  .stickybar button{flex:1;padding:8px 0}
+  .empty-hint{border:1px dashed var(--line);border-radius:8px;padding:18px;text-align:center;color:var(--sub);font-size:12.5px;background:#fcfcfd}
+  .autohint{font-size:11.5px;margin-top:3px}
+  .autohint.yes{color:var(--red)}.autohint.no{color:var(--green)}
+  .autohint.err{color:var(--red);font-size:12.5px;margin-top:5px}
+  .field-error{background:var(--red-bg);border-radius:8px;padding:6px 8px;margin:-6px -8px;
+    box-shadow:0 0 0 2px var(--red) inset;animation:shake .25s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  /* ---------- 保存成功轻提示 ---------- */
+  #saveToast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);z-index:60;
+    background:#222831;color:#fff;padding:10px 18px;border-radius:22px;font-size:13.5px;
+    box-shadow:0 6px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+    display:flex;align-items:center;gap:12px;max-width:80vw}
+  #saveToast.show{opacity:1;transform:translate(-50%,0)}
+  #saveToast button{pointer-events:auto;background:rgba(255,255,255,.16);border:none;color:#fff;
+    border-radius:14px;padding:3px 12px;font-size:12.5px;cursor:pointer}
+  #saveToast button:hover{background:rgba(255,255,255,.28)}
+  /* ---------- 弹窗 ---------- */
+  .modal-bg{position:fixed;inset:0;background:rgba(20,24,31,.45);z-index:50;display:none;align-items:center;justify-content:center}
+  .modal-bg.show{display:flex}
+  .modal{background:#fff;border-radius:12px;max-width:86vw;max-height:86vh;overflow:auto;padding:20px 24px}
+  .modal.guide{width:820px}
+  .modal h3{margin:0 0 10px}
+  .modal h4{margin:16px 0 5px;font-size:13.5px}
+  .modal table{border-collapse:collapse;font-size:12.5px;margin:6px 0}
+  .modal th,.modal td{border:1px solid var(--line);padding:4px 9px;text-align:left;vertical-align:top}
+  .modal th{background:#fafbfc}
+  .modal .closebtn{float:right}
+  .cmp{width:700px}
+  .cmp .verdict{font-size:15px;font-weight:700;margin-bottom:8px}
+  .ok-text{color:var(--green)}.diff-text{color:var(--amber)}
+  .keymove{font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 污染金标标注台</h1>
+  <div class="bar"><i id="progbar"></i></div>
+  <span class="prog" id="progtext"></span>
+  <span class="spacer"></span>
+  <button onclick="openGuide()">📖 标注规范</button>
+  <button onclick="doExport()">⬇ 导出金标 JSON</button>
+</header>
+
+<div class="layout">
+  <!-- 左：队列 -->
+  <aside class="col queue">
+    <div class="qfilters">
+      <div class="seg" id="grpSeg">
+        <button data-g="all" class="on">全部 <span id="cntAll"></span></button>
+        <button data-g="review">复审组 <span id="cntReview"></span></button>
+        <button data-g="fresh">新标组 <span id="cntFresh"></span></button>
+      </div>
+      <div class="seg" id="stSeg">
+        <button data-s="todo" class="on">待标</button>
+        <button data-s="done">已标</button>
+        <button data-s="all">全部</button>
+      </div>
+      <input id="qsearch" placeholder="搜索任务号 / 目标…" oninput="renderQueue()"/>
+    </div>
+    <div id="qlist"></div>
+  </aside>
+
+  <!-- 中：证据 -->
+  <main class="col evidence" id="evidence">
+    <div class="empty-hint" style="margin-top:40px">← 从左侧选择一个任务开始标注。<br/>第一次使用请先点右上角「📖 标注规范」。</div>
+  </main>
+
+  <!-- 右：表单 -->
+  <aside class="col form" id="formpane"></aside>
+</div>
+
+<!-- 对答案弹窗 -->
+<div class="modal-bg" id="cmpModal"><div class="modal cmp" id="cmpBox"></div></div>
+<!-- 保存成功轻提示（无 AI 草稿的新标任务） -->
+<div id="saveToast"></div>
+<!-- 规范弹窗 -->
+<div class="modal-bg" id="guideModal"><div class="modal guide">
+  <button class="closebtn" onclick="closeModal('guideModal')">关闭</button>
+  <div id="guideBody"></div>
+</div></div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const TYPES=[["settings_toggle","开关 / 设置项"],["relationship_request","好友申请"],
+ ["membership_change","加群 / 退群"],["content_lifecycle","内容增删（帖子/日程/笔记）"],
+ ["message_send","发消息"],["social_reaction","点赞 / 收藏 / 关注"],
+ ["session_state","会话态（无痕/播放进度/页面栈）"],
+ ["search_history","搜索历史"],["login_session","登录态"],["other","其他"]];
+const KINDS=[["setting","设置项"],["friend","好友"],["group","群"],["content","内容"],
+ ["search","搜索"],["account","账号"],["message","消息"],["other","其他"]];
+const DIRS=[["","（无方向）"],["on","on 开启"],["off","off 关闭"],["created","created 新增"],
+ ["deleted","deleted 删除"],["sent","sent 已发送"],["joined","joined 加入"],
+ ["followed","followed 关注"],["liked","liked 点赞"],
+ ["collected","collected 收藏"],
+ ["request_sent","request_sent 申请已发"]];
+const ATTR=[["this_task","this_task 本任务造成"],["carried_over","carried_over 前序残留（链式）"],
+ ["preexisting","preexisting 进来时就有"]];
+const GATES=[["","（按风险规则自动判）"],["autonomous","autonomous 可自动恢复"],["halt","halt 必须人工"]];
+const BASIS=[["xml","设备 XML 状态翻转"],["shot","截图可见状态"],["action","动作/输入原文"],["thought","仅 Thought 陈述"]];
+const REWORK_TXT={missing_evidence_basis:"旧记录缺「判断依据」（旧版前端未强制必填）",
+ empty_entity:"有变更条目的界面逐字名称/唯一 ID 为空（旧版前端未强制）"};
+// 选类型后带出的默认配置（方向/种类），都可在条目里再改
+const TYPE_DEFAULTS={
+  settings_toggle:   {entity_kind:"setting", direction:"on"},
+  relationship_request:{entity_kind:"friend",direction:"request_sent"},
+  membership_change: {entity_kind:"group",   direction:"joined"},
+  content_lifecycle: {entity_kind:"content", direction:"created"},
+  message_send:      {entity_kind:"message", direction:"sent"},
+  social_reaction:   {entity_kind:"content", direction:"collected"},
+  session_state:     {entity_kind:"other",   direction:""},
+  search_history:    {entity_kind:"search",  direction:"created"},
+  login_session:     {entity_kind:"account", direction:"created"},
+  other:             {entity_kind:"other",   direction:""},
+};
+
+let QUEUE=[], CASE=null, curStep=0, xmlCache={}, shotsTogether=false, diffOn=false;
+let label={mutations:[],search_terms_any:[],certainty:"sure",
+  evidence_basis:[],notes:""}, aiDraft=null;
+const filter={g:"all",s:"todo",q:""};
+
+/* ========== 队列 ========== */
+async function loadQueue(){
+  QUEUE=await fetch("/api/queue").then(r=>r.json());
+  const nAll=QUEUE.length, nRev=QUEUE.filter(q=>q.group==="review").length;
+  $("#cntAll").textContent=`(${nAll})`;
+  $("#cntReview").textContent=`(${nRev})`;
+  $("#cntFresh").textContent=`(${nAll-nRev})`;
+  renderQueue(); refreshProg();
+}
+function refreshProg(){
+  const done=QUEUE.filter(q=>q.labeled).length;
+  const rework=QUEUE.filter(q=>q.needs_rework).length;
+  $("#progbar").style.width=(done/QUEUE.length*100)+"%";
+  const rv=QUEUE.filter(q=>q.group==="review");
+  $("#progtext").textContent=`已标 ${done}/${QUEUE.length}（复审组 ${rv.filter(q=>q.labeled).length}/${rv.length}）${rework?` · 待修改 ${rework}`:""}`;
+}
+function resetBadge(r){
+  if(r==="Need")return'<span class="badge need">Need</span>';
+  if(r==="Search")return'<span class="badge search">Search</span>';
+  if(r==="Unable")return'<span class="badge unable">Unable</span>';
+  return '<span class="badge empty">无Reset</span>';
+}
+function renderQueue(){
+  const kw=filter.q.trim().toLowerCase();
+  const list=QUEUE.filter(q=>{
+    if(filter.g!=="all"&&q.group!==filter.g)return false;
+    if(filter.s==="done"&&!q.labeled)return false;
+    if(filter.s==="todo"&&q.labeled)return false;
+    if(kw&&!(q.task_id.toLowerCase().includes(kw)||(q.goal||"").toLowerCase().includes(kw)))return false;
+    return true;
+  });
+  $("#qlist").innerHTML=list.map(q=>{
+    const gtag=q.group==="review"?'<span class="badge review">复审</span>':'';
+    const rtag=q.needs_rework?'<span class="badge rework">待修改</span>':'';
+    const ntag=q.labeled?`<span class="badge">${q.n_mut}条</span>`
+      :(q.needs_rework?`<span class="badge">旧${q.n_mut}条</span>`:'');
+    const mtag=q.has_png?'':'<span class="badge" style="background:var(--amber-bg);color:var(--amber)">无截图</span>';
+    return `<div class="qitem ${q.labeled?'done':''} ${CASE&&CASE.run_id===q.run_id&&CASE.task_id===q.task_id?'cur':''}"
+      onclick="openCase('${q.run_id}','${q.task_id}')">
+      <span class="dot${q.needs_rework?' rework':''}"></span>
+      <span class="mid"><div class="tid">${esc(q.task_id)} ${gtag}${rtag}${ntag}${mtag}</div>
+      <div class="goal">${resetBadge(q.reset)}${esc(q.app)} ${esc(q.goal)}</div></span></div>`;
+  }).join("")||'<div class="empty-hint">没有符合条件的任务</div>';
+}
+$$("#grpSeg button").forEach(b=>b.onclick=()=>{filter.g=b.dataset.g;setSeg("#grpSeg",b);renderQueue()});
+$$("#stSeg button").forEach(b=>b.onclick=()=>{filter.s=b.dataset.s;setSeg("#stSeg",b);renderQueue()});
+function setSeg(sel,b){$$(sel+" button").forEach(x=>x.classList.remove("on"));b.classList.add("on")}
+
+/* ========== 装载 case ========== */
+async function openCase(run,id){
+  CASE=await fetch(`/api/case?run=${run}&id=${id}`).then(r=>r.json());
+  if(!CASE||!CASE.task_id)return;
+  aiDraft=null; xmlCache={}; curStep=0; shotsTogether=false; diffOn=false;
+  // 默认表单；若本人已标过则载入自己的标签（AI 草稿仍然不可见）
+  // 判断依据默认勾“截图可见状态”；无截图的链式任务默认勾“动作/输入原文”
+  label={run_id:run,task_id:id,task_goal:CASE.goal,judged_success:CASE.success,
+    mutations:[],search_terms_any:[],certainty:"sure",
+    evidence_basis:CASE.has_any_png?["shot"]:["action"],notes:""};
+  const saved=QUEUE.find(q=>q.run_id===run&&q.task_id===id);
+  // 待修改 case 虽不计入已标，也要载入旧草稿供就地修正
+  if(saved&&(saved.labeled||saved.needs_rework)) await hydrateOwn(run,id);
+  renderEvidence(); renderForm(); renderQueue();
+  $("#formpane").scrollTop=0;
+}
+async function hydrateOwn(run,id){
+  // 已存的人工标签在 progress/queue 之外，通过 jsonl 无独立接口；用导出前本地不可见——
+  // 改为提交后才可比对。这里从 window 预取：服务端 /api/aidraft 仅给 AI 草稿，
+  // 故已标任务的复标表单从 annotation_metadata 读：新增 /api/human 接口。
+  const h=await fetch(`/api/human?run=${run}&id=${id}`).then(r=>r.json());
+  if(h&&h.task_id){
+    label=Object.assign(label,h);
+    // 旧版记录的搜索词可能只存在于顶层 search_terms_any，回填成搜索历史条目，
+    // 使“逐字名称”成为搜索词的唯一录入口（仅内存合并，提交时落盘）
+    const names=new Set(label.mutations.filter(m=>m.type==="search_history").map(m=>(m.name||"").trim()));
+    for(const t of label.search_terms_any||[]){
+      if(t&&!names.has(t))label.mutations.push({type:"search_history",entity_kind:"search",name:t,
+        identifier:"",direction:"created",
+        attribution:"this_task",evidence_steps:"",expect_gate:""});
+    }
+  }
+}
+
+/* ========== 证据渲染 ========== */
+const stepInfo=n=>CASE.steps[n]||{n,has_png:false,has_xml:false};
+function renderEvidence(){
+  const c=CASE;
+  const maxStep=c.steps.length-1;
+  const strip=c.steps.map(s=>{
+    return `<button data-n="${s.n}" class="${s.n===curStep?'cur':''}${s.has_png?'':' nomedia'}"
+     onclick="goStep(${s.n})">${s.n===0?'启动':s.n}${s.has_png?'':'·'}</button>`;
+  }).join("");
+  const mediaBanner=!c.has_any_png?`<div class="media-warn">📷 本任务执行时<b>未保存截图与 UI 层级（XML）</b>（${esc(c.run_id)} 链式 run 的原始数据缺失，无法补取）。
+     请依据右侧/下方的 <b>Action 参数原文</b>（如 type 输入的文本是硬证据）与 Thought 陈述标注；判断依据只勾“动作/输入原文”或“仅 Thought”，条目拿不准时留空清单并在备注说明。</div>`:"";
+  const reworkBanner=label.needs_rework?`<div class="media-warn">✏️ <b>本条是待修改的旧版草稿</b>（${(label.rework_reasons||[]).map(r=>esc(REWORK_TXT[r]||r)).join("；")}）。
+     右侧已载入旧条目，请对照证据逐条核对、补齐后重新提交；提交后自动移出“待修改”。</div>`:"";
+  $("#evidence").innerHTML=`
+   <div class="case-head">
+     <h2>${esc(c.task_id)} <span style="font-weight:400;font-size:13px;color:var(--sub)">${esc(c.run_id)}</span></h2>
+     <div class="meta">
+       <span class="badge">${esc(c.csv.app)}</span><span class="badge">${esc(c.csv.feature)}</span>
+       <span class="badge">${esc(c.csv.level)}</span><span class="badge">golden ${esc(c.csv.golden_steps)}步</span>
+       ${resetBadge(c.csv.reset)}
+       <span class="badge" style="background:${c.success?'var(--green-bg)':'var(--red-bg)'};color:${c.success?'var(--green)':'var(--red)'}">
+         官方判定 ${c.success?"成功":"失败"}</span>
+     </div>
+     <div style="font-size:14px"><b>任务目标：</b>${esc(c.goal)}</div>
+     ${mediaBanner}
+     ${reworkBanner}
+   </div>
+   <div class="toolline">
+     <span>步 ${curStep}/${maxStep}</span>
+     <button onclick="goStep(curStep-1)">← 上一步</button>
+     <button onclick="goStep(curStep+1)">下一步 →</button>
+     ${c.has_any_png?`<label><input type="checkbox" ${shotsTogether?'checked':''} onchange="shotsTogether=this.checked;renderShot()"/>并排看相邻截图</label>`:""}
+     ${c.has_any_xml?`<label><input type="checkbox" ${diffOn?'checked':''} onchange="diffOn=this.checked;renderXml()"/>XML 与上一步对比（高亮翻转）</label>`:""}
+     <span class="keymove">键盘 ← → 切换步骤；带 · 的步骤无截图</span>
+   </div>
+   <div class="stepstrip">${strip}</div>
+   <div style="height:10px"></div>
+   <div class="viewer ${shotsTogether&&c.has_any_png?'':'single'}">
+     <div class="pane"><div class="pane-h"><span id="shotTitle">截图 step_${curStep}</span><span id="shotTitle2"></span></div>
+       <div id="shotBox" style="display:flex"></div></div>
+     <div class="pane" id="respPane"></div>
+   </div>
+   ${c.has_any_xml?`<div style="height:12px"></div>
+   <div class="pane"><div class="pane-h">设备 UI 层级（step_${curStep}.xml）
+     <span style="font-weight:40;color:var(--sub)">只显示可勾选/可点/有文字的关键节点</span></div>
+     <div class="xmlwrap" id="xmlPane"><div class="resp">加载中…</div></div></div>`:""}`;
+  renderShot(); renderResp();
+  if(c.has_any_xml)renderXml();
+}
+function goStep(n){
+  if(!CASE)return;
+  const max=CASE.steps.length-1;
+  if(n<0||n>max)return;
+  curStep=n; renderEvidence();
+}
+function shotUrl(s){return `/img?run=${CASE.run_id}&id=${CASE.task_id}&file=step_${s}.png`}
+function noShotHtml(s){
+  return `<div class="noshot"><div class="noshot-ic">📷</div>
+    <div><b>step_${s} 无截图</b></div>
+    <div>该链式 run 执行时未保存本步画面</div>
+    <div class="noshot-sub">请看右侧 Action 参数与 Thought（type 输入文本等仍为硬证据）</div></div>`;
+}
+function renderShot(){
+  const box=$("#shotBox");
+  if(!box)return;
+  const info=stepInfo(curStep), prev=curStep>0?stepInfo(curStep-1):null;
+  const showB=shotsTogether&&curStep>0&&CASE.has_any_png;
+  box.innerHTML="";
+  const mk=(s,has,id)=>{
+    if(has){const im=document.createElement("img");im.className="shot";im.id=id;
+      im.src=shotUrl(s);
+      im.onerror=()=>{im.outerHTML=noShotHtml(s)};
+      box.appendChild(im);}
+    else box.insertAdjacentHTML("beforeend",noShotHtml(s));
+  };
+  mk(curStep,info.has_png,"shotA");
+  if(showB&&prev&&prev.has_png)mk(curStep-1,true,"shotB");
+  $("#shotTitle").textContent=`截图 step_${curStep}${info.has_png?"":"（缺失）"}`;
+  $("#shotTitle2").textContent=showB?`← 对比 step_${curStep-1}`:"";
+  requestAnimationFrame(fitShots);
+}
+function fitShots(){
+  // 以图片在视口中的实际位置精确限高，保证整屏截图无需滚动即可完整看到
+  for(const id of ["shotA","shotB"]){
+    const el=$("#"+id); if(!el||el.style.display==="none")continue;
+    const top=el.getBoundingClientRect().top;
+    el.style.height=Math.max(180,window.innerHeight-top-14)+"px";
+  }
+}
+window.addEventListener("resize",fitShots);
+function renderResp(){
+  const i=curStep-1;
+  const pane=$("#respPane");
+  if(i<0){pane.innerHTML=`<div class="pane-h">启动首页（执行任何动作之前）</div>
+    <div class="resp" style="color:var(--sub)">${CASE.has_any_png
+      ?'这是 App 刚被拉起的初始画面，可用于判断“进来时就有”的初始状态。'
+      :'该 run 未保存启动画面，无法直接观察初始状态；判断“进来时就有”请谨慎，归因不明时选 preexisting 并在备注说明。'}</div>`;return}
+  const a=CASE.actions[i], r=CASE.responses[i]||"";
+  const [th,acPart]=r.split(/\nAction: ?/);
+  pane.innerHTML=`<div class="pane-h">第 ${curStep} 步 · ${esc(a.action)}
+    <span style="font-weight:400;color:var(--sub)">${esc(JSON.stringify(a.params))}</span></div>
+    <div class="resp"><div class="th">${esc(th.replace(/^Thought: ?/,""))}</div>
+    ${acPart?`<div class="ac">Action: ${esc(acPart)}</div>`:""}</div>`;
+}
+async function getXml(s){
+  const k=CASE.run_id+"/"+CASE.task_id+"/"+s;
+  if(!xmlCache[k])xmlCache[k]=await fetch(`/api/xml?run=${CASE.run_id}&id=${CASE.task_id}&step=${s}`).then(r=>r.json());
+  return xmlCache[k];
+}
+async function renderXml(){
+  const pane=$("#xmlPane");if(!pane)return;
+  const cur=await getXml(curStep), prev=curStep>0?await getXml(curStep-1):null;
+  if(!cur.nodes||!cur.nodes.length){pane.innerHTML='<div class="resp">该步无 XML（或解析失败），请看截图。</div>';return}
+  const pm=new Map();
+  if(diffOn&&prev&&prev.nodes)for(const n of prev.nodes)pm.set((n.resource_id||"|")+"\x01"+(n.class||"")+"\x01"+n.bounds,n);
+  const rows=cur.nodes.map(n=>{
+    const key=(n.resource_id||"|")+"\x01"+(n.class||"")+"\x01"+n.bounds, p=pm.get(key);
+    let chg=false,why="";
+    if(p){
+      if(p.checked!==n.checked&&n.checked!==null){chg=true;why=`checked ${p.checked} → ${n.checked}`}
+      else if(p.selected!==n.selected&&n.selected!==null){chg=true;why=`selected ${p.selected} → ${n.selected}`}
+      else if(p.text!==n.text){chg=true;why=`text 变化`}
+    }
+    const ck=n.checked===null?(n.selected===null?"":`sel:${n.selected}`):`<span class="${n.checked==='true'?'ck-on':'ck-off'}">checked=${n.checked}</span>`;
+    return `<tr class="${chg?'chg':''}"><td>${esc(n.text)||'<span style=color:#bbb>（无文字）</span>'}</td>
+      <td style="font-size:11px;color:var(--sub)">${esc((n.resource_id||"").split("/").pop())}</td>
+      <td>${ck}</td><td style="font-size:11px">${chg?'⚡ '+esc(why):esc(n.bounds)}</td></tr>`;
+  }).join("");
+  pane.innerHTML=`<table class="nodes"><thead><tr><th>文字</th><th>resource-id 尾段</th><th>勾选态</th><th>${diffOn?'翻转/位置':'位置'}</th></tr></thead><tbody>${rows}</tbody></table>
+   <details class="raw"><summary>原始 XML</summary><pre>${esc(cur.raw)}</pre></details>`;
+}
+
+/* ========== 表单 ========== */
+function opt(list,val){return list.map(([v,t])=>`<option value="${v}" ${v===val?'selected':''}>${t}</option>`).join("")}
+function curGroup(){
+  if(!CASE)return "fresh";
+  const q=QUEUE.find(x=>x.run_id===CASE.run_id&&x.task_id===CASE.task_id);
+  return q?q.group:"fresh";
+}
+function renderForm(){
+  if(!CASE){$("#formpane").innerHTML="";return}
+  const mcards=label.mutations.map((m,i)=>mutCard(m,i)).join("");
+  $("#formpane").innerHTML=`
+   <div style="font-weight:700;margin-bottom:9px">我的标注（只依据证据，不参考官方判定）</div>
+   <div class="field"><label>把握度</label>
+     <div class="checkline">
+       <label><input type="radio" name="cert" value="sure" ${label.certainty==='sure'?'checked':''} onchange="label.certainty=this.value"/>确定</label>
+       <label><input type="radio" name="cert" value="unsure" ${label.certainty==='unsure'?'checked':''} onchange="label.certainty=this.value"/>存疑（提交时备注疑问）</label>
+     </div></div>
+   <div class="field" id="basisField"><label><span style="color:var(--red)">*</span> 本 case 的判断依据
+     <span class="hint">（必选，至少勾一项你实际用到的证据级）</span></label>
+     <div class="checkline" id="basisLine">${BASIS.map(([v,t])=>`<label><input type="checkbox" ${label.evidence_basis.includes(v)?'checked':''}
+       onchange="toggleBasis('${v}',this.checked)"/>${t}</label>`).join("")}</div>
+     <div class="autohint" id="basisHint" style="display:none"></div></div>
+
+   <div class="field"><label>状态变更条目 <span class="hint">（任务造成的、包括它本来就想做的效果；纯浏览=0 条；搜索词请直接添加“搜索历史”条目，填在“界面逐字名称”里）</span></label>
+     ${mcards||'<div class="empty-hint">无条目（确为纯浏览/无持久变更时直接留空）</div>'}
+     <button onclick="addMut()">＋ 添加一条变更</button></div>
+
+   <div class="field"><label>备注 / 疑问</label><textarea rows="2" oninput="label.notes=this.value">${esc(label.notes)}</textarea></div>
+
+   <div class="stickybar">
+     <button onclick="saveLabel(true)" class="primary">${curGroup()==="review"?"提交并对答案 →":"提交并进入下一个 →"}</button>
+   </div>`;
+}
+function mutCard(m,i){
+  const isSearch=m.type==="search_history";
+  const chainExtra=m.attribution==="carried_over"?`<div class="row2"><div></div><div>
+     <label class="mini">来源任务（最早残留处）</label>
+     <input value="${esc(m.carried_over_from_task||'')}" oninput="label.mutations[${i}].carried_over_from_task=this.value"/></div></div>`:"";
+  return `<div class="mutcard">
+   <div class="mhead"><b>变更 #${i+1} · ${TYPES.find(t=>t[0]===m.type)?.[1]||m.type}</b>
+     <button class="danger" onclick="delMut(${i})">删除</button></div>
+   <div class="row2">
+     <div><label class="mini">类型</label><select onchange="chgMut(${i},'type',this.value);renderForm()">${opt(TYPES,m.type)}</select></div>
+     <div><label class="mini">实体种类</label><select onchange="chgMut(${i},'entity_kind',this.value)">${opt(KINDS,m.entity_kind||"other")}</select></div>
+   </div>
+   <div class="row2">
+     <div><label class="mini">界面逐字名称 ${isSearch?'<span style="color:var(--blue)">（搜索类就填搜索词原文）</span>':''}</label>
+       <input value="${esc(m.name||'')}" oninput="chgMut(${i},'name',this.value)" placeholder="${isSearch?'如：DND（即输入进搜索框的词）':'如：自动开启阅读模式'}"/></div>
+     <div><label class="mini">唯一 ID（QQ号/群号，可空）</label><input value="${esc(m.identifier||'')}" oninput="chgMut(${i},'identifier',this.value)"/></div>
+   </div>
+   <div class="row2">
+     <div><label class="mini">方向 ${isSearch?'<span style="color:var(--sub)">（搜索固定 created）</span>':''}</label>
+       <select ${isSearch?'disabled':''} onchange="chgMut(${i},'direction',this.value)">${isSearch?opt(DIRS,"created"):opt(DIRS,m.direction||"")}</select></div>
+     <div><label class="mini">归因</label><select onchange="chgMut(${i},'attribution',this.value);renderForm()">${opt(ATTR,m.attribution||"this_task")}</select></div>
+   </div>
+   ${chainExtra}
+   <div class="row2">
+     <div><label class="mini">证据步号（逗号分隔，可空）</label><input value="${esc(m.evidence_steps||'')}" oninput="chgMut(${i},'evidence_steps',this.value)" placeholder="如：3,4"/></div>
+     <div><label class="mini">期望门控（可空）</label><select onchange="chgMut(${i},'expect_gate',this.value)">${opt(GATES,m.expect_gate||"")}</select></div>
+   </div>
+ </div>`;
+}
+function newMut(type){
+  const d=TYPE_DEFAULTS[type]||TYPE_DEFAULTS.other;
+  return {type,entity_kind:d.entity_kind,name:"",identifier:"",
+    direction:d.direction,
+    attribution:"this_task",evidence_steps:"",expect_gate:""};
+}
+function addMut(){label.mutations.push(newMut("settings_toggle"));renderForm()}
+function delMut(i){label.mutations.splice(i,1);renderForm()}
+function chgMut(i,k,v){
+  const old=label.mutations[i];
+  old[k]=v;
+  // 切换类型：带出该类型的默认 实体种类/方向（条目里都可再手动改）
+  if(k==="type"){
+    const d=TYPE_DEFAULTS[v]||TYPE_DEFAULTS.other;
+    old.entity_kind=d.entity_kind;old.direction=d.direction;
+  }
+}
+function toggleBasis(v,on){
+  const s=new Set(label.evidence_basis);on?s.add(v):s.delete(v);label.evidence_basis=[...s];
+  // 勾选后立即清除必填提示
+  if(label.evidence_basis.length){
+    $("#basisField")?.classList.remove("field-error");
+    const h=$("#basisHint");if(h)h.style.display="none";
+  }
+}
+
+/* ========== 保存 + 对答案 ========== */
+async function saveLabel(showCmp){
+  // 0) 必填校验：判断依据至少勾一项
+  if(!label.evidence_basis.length){
+    const f=$("#basisField");f&&f.classList.add("field-error");
+    let h=$("#basisHint");
+    if(!h){h=document.createElement("div");h.className="autohint err";h.id="basisHint";
+      f&&f.appendChild(h);}
+    h.className="autohint err";
+    h.style.display="";h.textContent="⚠ 请先勾选本 case 的判断依据（至少一项），再提交";
+    f&&f.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  // 搜索历史口径归一：direction=created / entity_kind=search；
+  // 搜索词（search_terms_any）从搜索条目的“逐字名称”单向派生，不再单独录入
+  for(const m of label.mutations){
+    if(m.type==="search_history"){
+      m.direction="created";m.entity_kind="search";
+      if(m.name)m.name=m.name.trim();
+    }
+  }
+  label.search_terms_any=[...new Set(
+    label.mutations.filter(m=>m.type==="search_history"&&m.name).map(m=>m.name))];
+  label.labeled_at=new Date().toISOString();label.labeler="human";
+  const res=await fetch("/api/save",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(label)}).then(r=>r.json());
+  if(!res.ok){alert("保存失败："+(res.error||""));return}
+  const savedName=CASE.task_id;
+  await loadQueue();
+  if(!showCmp)return;
+  // 有 AI 草稿（复审组）→ 弹对答案；新标组无草稿 → 轻提示后直接跳下一个，不做无意义对比
+  aiDraft=await fetch(`/api/aidraft?run=${CASE.run_id}&id=${CASE.task_id}`).then(r=>r.json());
+  if(aiDraft&&aiDraft.task_id){
+    renderCompare();
+  }else{
+    const nxt=nextTodoOf(CASE.run_id,CASE.task_id);
+    showToast(`✅ ${esc(savedName)} 已保存${nxt?"，即将进入 "+nxt.task_id:"（本批已标完）"}`);
+    if(nxt)setTimeout(()=>openCase(nxt.run_id,nxt.task_id),650);
+  }
+}
+function showToast(html){
+  const t=$("#saveToast");
+  t.innerHTML=`<span>${html}</span><button onclick="stayHere()">留在此任务</button>`;
+  t.classList.add("show");
+  clearTimeout(showToast._tm);
+  showToast._tm=setTimeout(()=>t.classList.remove("show"),2600);
+}
+function stayHere(){clearTimeout(showToast._tm);$("#saveToast").classList.remove("show")}
+function nextTodoOf(runId,taskId){
+  const cur=QUEUE.findIndex(q=>q.run_id===runId&&q.task_id===taskId);
+  return QUEUE.find((q,idx)=>idx>cur&&!q.labeled&&(filter.g==="all"||q.group===filter.g))
+    ||QUEUE.find(q=>!q.labeled&&(filter.g==="all"||q.group===filter.g));
+}
+function renderCompare(){
+  const mine=label.mutations, draft=aiDraft?aiDraft.mutations:[];
+  const matchOne=(m,o)=>m.type===o.type
+    &&(!o.entity_kind||m.entity_kind===o.entity_kind||o.entity_kind==="other")
+    &&(!o.name_contains||(m.name||"").toLowerCase().replace(/\s/g,"").includes(o.name_contains.toLowerCase().replace(/\s/g,"")))
+    &&(!o.direction||m.direction===o.direction)
+    &&(!o.attribution||m.attribution===o.attribution);
+  const matchedDraft=new Set();
+  const mineHit=mine.map(m=>{const i=draft.findIndex((o,oi)=>!matchedDraft.has(oi)&&matchOne(m,o));if(i>=0)matchedDraft.add(i);return i>=0});
+  const draftMiss=draft.map((o,i)=>matchedDraft.has(i)?null:o).filter(Boolean);
+  const mineMiss=mine.filter((_,i)=>!mineHit[i]);
+  const termsDiff=JSON.stringify([...label.search_terms_any].sort())!==JSON.stringify([...(aiDraft?.search_terms_any||[])].sort());
+  const perfect=draftMiss.length===0&&mineMiss.length===0&&!termsDiff;
+  $("#cmpBox").innerHTML=`
+   <div class="verdict ${perfect?'ok-text':'diff-text'}">${perfect?"✅ 与 AI 草稿一致":"🟡 与 AI 草稿有分歧（以你的判断为准，分歧正是我们要收集的）"}</div>
+   <div style="color:var(--sub);font-size:12.5px;margin-bottom:8px">${esc(CASE.run_id)} / ${esc(CASE.task_id)} — AI 草稿仅在此刻揭晓，用于校准；你可以返回修改，也可以坚持自己的判断。</div>
+   <table><thead><tr><th>维度</th><th>你的人工标注</th><th>AI 草稿（v0.3）</th></tr></thead><tbody>
+    <tr><td>变更条数</td><td>${mine.length}</td><td>${draft.length}</td></tr>
+    <tr><td>搜索词</td><td>${esc(label.search_terms_any.join("，")||"—")}</td><td>${esc((aiDraft?.search_terms_any||[]).join("，")||"—")}</td></tr>
+   </tbody></table>
+   ${mineMiss.length?`<h4>你标了、AI 草稿没有（潜在漏登）</h4><table><tbody>${mineMiss.map(m=>`<tr><td><b>${m.type}</b></td><td>${esc(m.name)}</td><td>${esc(m.direction)}</td></tr>`).join("")}</tbody></table>`:""}
+   ${draftMiss.length?`<h4>AI 草稿有、你没标（潜在误登/证据不足）</h4><table><tbody>${draftMiss.map(o=>`<tr><td><b>${o.type}</b></td><td>${esc(o.name_contains||"")}</td><td>${esc(o.direction||"")}</td></tr>`).join("")}</tbody></table>`:""}
+   <div style="margin-top:14px;display:flex;gap:8px">
+     <button class="primary" onclick="closeModal('cmpModal');gotoNextTodo()">下一个待标 →</button>
+     <button onclick="closeModal('cmpModal')">返回修改</button>
+   </div>`;
+  $("#cmpModal").classList.add("show");
+}
+function gotoNextTodo(){
+  const nxt=nextTodoOf(CASE.run_id,CASE.task_id);
+  if(nxt)openCase(nxt.run_id,nxt.task_id);
+}
+
+/* ========== 导出 / 规范 / 键盘 ========== */
+async function doExport(){
+  const r=await fetch("/api/export",{method:"POST"}).then(r=>r.json());
+  if(r.ok)alert(`已导出 ${r.n} 条人工金标：\n${r.path}`);else alert("导出失败");
+}
+function closeModal(id){$("#"+id).classList.remove("show")}
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"||e.target.tagName==="SELECT")return;
+  if(e.key==="ArrowLeft")goStep(curStep-1);
+  if(e.key==="ArrowRight")goStep(curStep+1);
+});
+$("#qsearch").addEventListener("input",e=>filter.q=e.target.value);
+
+$("#guideBody").innerHTML=`
+<h3>📖 污染金标标注规范</h3>
+<p><b>标注什么：</b>一次任务执行在 <b>设备/账号/云端</b> 留下的<b>持久化状态变更</b>。任务<b>本来就想要的效果也要标</b>
+（例：目标是“关掉阅读模式”，开关被关掉就是要恢复的污染 #1）。纯浏览、查看、导航 = 空清单。</p>
+
+<h4>证据等级（从强到弱，每个 case 必勾至少一项）</h4>
+<table><thead><tr><th>级</th><th>证据</th><th>怎么用</th></tr></thead><tbody>
+<tr><td>1 最强</td><td>设备 XML 状态翻转</td><td>同一 resource-id 的节点 checked/selected/text 在相邻步变化；页面提供“XML 对比”自动高亮 ⚡</td></tr>
+<tr><td>2</td><td>截图可见状态</td><td>开关绿/灰、按钮变“已添加/已关注”、toast、消息气泡、申请已发送页</td></tr>
+<tr><td>3</td><td>动作 / 输入原文</td><td>type 进搜索框的词 = 搜索历史（硬证据）；点击坐标落在某控件 bounds 内</td></tr>
+<tr><td>4 最弱</td><td>Thought 陈述</td><td>可能说错（开关颜色前后矛盾、点了没反馈却说成功）。<b>只有 Thought 支撑时请谨慎标注并在备注说明</b></td></tr>
+</tbody></table>
+
+<h4>逐字段怎么填</h4>
+<table><thead><tr><th>字段</th><th>判定规则</th></tr></thead><tbody>
+<tr><td>类型</td><td>开关=settings_toggle；好友申请=relationship_request；加退群=membership_change；发帖/删内容/建日程=content_lifecycle；
+发消息=message_send；赞/藏/关注=social_reaction；无痕模式/播放进度/页面栈=session_state；搜索框留词=search_history；登录=login_session。
+选定类型后系统自动带出该类型的默认种类/方向（如好友申请默认 request_sent+friend、搜索默认 created+search），不符合本 case 时再手动改</td></tr>
+<tr><td>实体名称</td><td>抄界面上的逐字文字（XML 文字列），不要自己概括。<b>搜索历史类就填“搜索词原文”</b>（如搜了 DND 就填 DND；多个词就加多条搜索历史），
+提交时自动汇总成搜索词列表，不用另外填。唯一 ID（QQ号/群号）能在 XML/截图确认才填</td></tr>
+<tr><td>方向</td><td>开关 on/off；关注收藏 liked/collected 及其反向；申请 request_sent；消息 sent；
+<b>搜索历史固定填 created</b>（系统强制）；拿不准留空（无方向）并备注</td></tr>
+<tr><td>归因</td><td><b>this_task</b> 本任务造成；<b>preexisting</b> 启动页里就有、分不清先后；<b>carried_over</b> 仅 q2/s3 链式 run：前序任务的残留，并填最早来源任务</td></tr>
+<tr><td>搜索词</td><td>没有单独的搜索词框：凡是 type 进“搜索框”的词，<b>添加一条“搜索历史”变更，逐字名称就填该搜索词</b>（提交时自动汇总为搜索词列表）。
+输入到聊天框、登录框、问答框的<b>不算</b>搜索历史</td></tr>
+<tr><td>是否需要恢复</td><td>不用单独勾选：<b>清单里有变更条目即需要恢复，留空清单（0 条）即不需要</b>。
+被对方持有、不可单方面撤回的（已发消息、已支付）仍要登记为变更——它们走人工门控，不是不恢复</td></tr>
+</tbody></table>
+
+<h4>特别提醒</h4>
+<ul>
+<li><b>success 与污染无关：</b>失败任务也可能已留污染（搜了词、发了申请后失败）；成功任务也可能是纯浏览。标注全程不要看右上 success 标签。</li>
+<li><b>初始状态：</b>step_0（启动首页）是执行前画面，用来判断“进来时就是这样”→ preexisting。</li>
+<li><b>截图相邻并排</b>开关适合看开关颜色、按钮态变化；<b>XML 对比</b>适合看 checked 翻转，两者结合用。</li>
+<li><b>诚实优先：</b>证据矛盾（如 Thought 前后打架）就标“存疑”+备注，不要替 App 脑补结果。存疑 case 对我们同样有价值。</li>
+<li><b>盲审协议：</b>提交前看不到 AI 草稿和模型清单；提交后才“对答案”。有分歧以证据为准并坚持你的判断，分歧列表会被单独收集分析。</li>
+</ul>
+<p style="color:var(--sub);font-size:12.5px">结果实时写入 eval/annotation_metadata.jsonl（刷新/关闭不丢失）；点右上"导出"生成可直接跑 score_inference.py 的 golden_labels.json。</p>`;
+
+loadQueue();
+</script>
+</body>
+</html>

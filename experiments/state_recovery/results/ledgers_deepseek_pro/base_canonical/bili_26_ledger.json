@@ -1,0 +1,94 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_26",
+  "run_id": "base_canonical",
+  "task_goal": "进入B站的创作中心",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "other",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "account",
+        "name": "头像",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "evidence_quote": "用户要求更换一个随机头像，因此我应该选择“随机”选项。... 头像已经成功更换为随机头像（现在显示的是一个蓝发动漫角色），任务已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_21",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "王者荣耀官方赛事",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "现在需要输入关键词“王者荣耀官方赛事”以进行搜索...type(text='王者荣耀官方赛事')",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_2",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "哆啦A梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "type(text='哆啦A梦') … 搜索已完成，页面成功显示了“哆啦A梦”相关的商品列表",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_18",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [
+    "王者荣耀官方赛事",
+    "哆啦A梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 3 条 carried_over（前序仍开放的残留）"
+  ]
+}

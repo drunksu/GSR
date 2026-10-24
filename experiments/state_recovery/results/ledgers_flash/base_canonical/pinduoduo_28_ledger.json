@@ -1,0 +1,295 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_28",
+  "run_id": "base_canonical",
+  "task_goal": "把拼多多头像更换为相册第一张照片",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "other",
+      "app": "拼多多",
+      "entity": {
+        "kind": "account",
+        "name": "头像",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "头像设置成功",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "settings_toggle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "setting",
+        "name": "字体大小",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        14
+      ],
+      "evidence_quote": "我进入了“字体大小”设置页面，这里提供标准、大号、超大号三档调节，而长辈模式的核心特征之一就是“超大字体+简化界面”，因此该页面很可能是开启长辈模式的前置步骤",
+      "confidence": 0.35,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_27",
+      "id": "c2"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "拼多多",
+      "entity": {
+        "kind": "setting",
+        "name": "自动免拼",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "在“免拼设置”页面中，我找到了“自动免拼”选项...当前弹出一个操作菜单，提供“开启”、“暂时关闭”和“取消”三个选项。任务目标是“暂时关闭拼多多自动免拼”，因此应选择“暂时关闭”选项。...从当前页面可见，“自动免拼”状态已显示为“暂时关闭，9 月 22 日开启”，说明自动免拼功能已成功暂时关闭，符合任务要求。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_26",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "自行车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要在搜索框中输入“自行车”来查找相关商品。当前搜索框中显示的是“垂钓装备”，我需要清空它并输入新的关键词。键盘已经打开，可以直接输入。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_20",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "垂钓装备",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "THOUGHT: 当前搜索框中输入的是“运动鞋女鞋”，与任务目标“垂钓装备”无关。我需要清空当前输入，然后输入“垂钓装备”进行搜索，才能找到相关商品。因此，下一步是先清除已有文本，再输入正确关键词。ACTION: type(text='垂钓装备')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_19",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "女鞋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='女鞋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_18",
+      "id": "c6"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "account",
+        "name": "禾简老人健步鞋",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "右上角有红色的“+ 关注”按钮，这是完成“关注店铺”任务的关键操作点。根据任务要求，需点击该按钮进行关注。ACTION: click([1087, 317])",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_18",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "橡皮泥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "当前搜索框中输入的是“男士袜子”，而任务目标是查找“橡皮泥”相关商品。因此，我需要先清空当前输入内容，然后输入“橡皮泥”进行搜索... type(text='橡皮泥')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_17",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "袜子",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要清空并输入“袜子”。键盘已弹出，可以直接输入。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_16",
+      "id": "c9"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "“猫人”品牌的 10A 级抗菌防臭袜",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "我已经进入了第一款袜子商品的详情页，页面底部有“收藏”按钮（心形图标），这是完成收藏操作的关键目标。根据任务要求，我需要点击该按钮来收藏商品。现在就执行点击收藏的操作。...我已经成功点击了“收藏”按钮，底部导航栏中的心形图标已变为红色，并显示“已收藏”，说明该商品已被成功收藏。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_16",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "冰箱贴",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "然后输入“冰箱贴”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_1",
+      "id": "c11"
+    }
+  ],
+  "search_terms": [
+    "自行车",
+    "垂钓装备",
+    "女鞋",
+    "橡皮泥",
+    "袜子",
+    "冰箱贴"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c3",
+      "c6",
+      "c7",
+      "c10"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c2",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c4",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c5",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c8",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c9",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c11",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 10 条 carried_over（前序仍开放的残留）"
+  ]
+}

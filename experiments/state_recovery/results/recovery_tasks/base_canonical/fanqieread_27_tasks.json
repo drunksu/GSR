@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_27",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说中将‘清理缓存’功能恢复为可点击状态，确保用户能进入‘清理缓存’页面并看到‘一键清理’按钮及817.86 MB可清理缓存信息",
+      "precondition": {
+        "target": "确认当前是否已处于‘清理缓存’页面且‘一键清理’按钮可见并可操作",
+        "check_instruction": "进入番茄小说的设置页面，查找并确认‘清理缓存’条目是否存在且可点击；点击后进入的页面中应显示‘一键清理’按钮及‘817.86 MB可清理缓存’文字",
+        "clean_if_state": "已位于‘清理缓存’页面，且屏幕上清晰显示‘一键清理’按钮与‘817.86 MB可清理缓存’字样，按钮未置灰、可响应点击"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说中，‘清理缓存’页面是否已正确显示‘一键清理’按钮及‘817.86 MB可清理缓存’信息？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,207 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "neteasemusic_20",
+  "run_id": "base_canonical",
+  "task_goal": "打开网易云，删除我之前发布的笔记",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "content_lifecycle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "content",
+        "name": "逢考必过",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "系统弹出了最终确认删除的提示框，询问“确定要删除此动态？”，并提供了“取消”和“删除”两个选项。为了完成任务，我需要点击“删除”按钮来确认删除操作。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "林俊杰 豆浆油条",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='林俊杰 豆浆油条')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_2",
+      "id": "c2"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "content",
+        "name": "逢考必过",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "笔记“逢考必过”已经成功发布，页面顶部显示“发布成功”的提示，且笔记内容已出现在动态中。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_19",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "博客广播电台",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text='博客广播电台')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_17",
+      "id": "c4"
+    },
+    {
+      "type": "social_reaction",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "content",
+        "name": "对我画风的第一印象是？",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "THOUGHT: 我当前在“笔记”页面的“推荐”标签下，看到多条图文内容，其中第一条标题为“对我画风的第一印象是？”，由用户“莫佐 esper”发布，有5597赞和热评... ACTION: click([311, 1155])",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_11",
+      "id": "c5"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "setting",
+        "name": "相机权限",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "系统弹出了相机权限请求对话框，提示需要授权才能使用扫一扫功能。为了完成“打开网易云推荐扫一扫”的任务，必须授予相机权限。在提供的选项中，“仅在使用中允许”是最合适的选择……因此, 我应该点击“仅在使用中允许”按钮。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_10",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "邓紫棋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='邓紫棋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_1",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "唯一",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='唯一')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_0",
+      "id": "c8"
+    }
+  ],
+  "search_terms": [
+    "林俊杰 豆浆油条",
+    "博客广播电台",
+    "邓紫棋",
+    "唯一"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 7 条 carried_over（前序仍开放的残留）"
+  ]
+}

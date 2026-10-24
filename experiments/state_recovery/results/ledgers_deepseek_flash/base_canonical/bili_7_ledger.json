@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_7",
+  "run_id": "base_canonical",
+  "task_goal": "打开B站消息,一键已读所有消息",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "other",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "message",
+        "name": "全部新消息提醒",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        4,
+        5
+      ],
+      "evidence_quote": "我已经成功执行了一键已读操作，现在可以看到消息列表中原本显示红色未读标记的地方都消失了，特别是\"预约通知\"那条消息的红色数字1已经不见了。",
+      "confidence": 0.86,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4.1-flash",
+  "_repair_used": false,
+  "_warnings": []
+}

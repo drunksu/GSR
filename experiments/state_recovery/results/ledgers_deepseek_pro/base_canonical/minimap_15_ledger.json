@@ -1,0 +1,92 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_15",
+  "run_id": "base_canonical",
+  "task_goal": "高德设置一下公司的地址为小米科技园B栋",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "other",
+      "app": "高德地图",
+      "entity": {
+        "kind": "setting",
+        "name": "公司地址",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "公司地址已成功设置为“小米移动互联网产业园B栋”，这与任务要求的“小米科技园B栋”一致（实际为同一地点的不同称呼）。当前页面清晰显示该地址已保存在“公司”项下，说明设置已完成。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='小米科技园B栋')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗地铁站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        0,
+        1,
+        2
+      ],
+      "evidence_quote": "Step 1 THOUGHT: …输入“西二旗地铁站”… ACTION: type(text='西二旗地铁站')；Step 2 THOUGHT: 搜索结果中已经显示了“西二旗地铁站”的相关信息…",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_13",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [
+    "小米科技园B栋",
+    "西二旗地铁站"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

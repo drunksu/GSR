@@ -1,0 +1,850 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_12",
+  "run_id": "base_canonical",
+  "task_goal": "查看拼多多休闲零食板块的豆干辣条商品列表",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "冰箱贴",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='冰箱贴')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_1",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "iPhone 16 promax",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='iPhone 16 promax')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_0",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "周杰伦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='周杰伦')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_8",
+      "id": "c3"
+    },
+    {
+      "type": "social_reaction",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "account",
+        "name": "周杰伦",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "Thought: 已成功进入周杰伦的个人主页，页面显示“已关注”按钮，说明当前用户已经关注了周杰伦。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_8",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "七里香",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='七里香')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_7",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "孤勇者",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='孤勇者')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_6",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "林肯公园 Numb",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='林肯公园 Numb')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_5",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "我是一个粉刷匠",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "ACTION: type(text='我是一个粉刷匠')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_4",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "宝宝巴士 拔萝卜",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='宝宝巴士 拔萝卜')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_3",
+      "id": "c9"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "setting",
+        "name": "深色模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "在“通用”设置中，已找到“深色模式”开关，且当前状态为开启（红色滑块在右）。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_28",
+      "id": "c10"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "setting",
+        "name": "状态",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "状态已成功设置为“许个愿”，顶部显示“🙏 许个愿”，且下方也展示了该状态的互动信息，说明操作已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_26",
+      "id": "c11"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "setting",
+        "name": "文件访问权限",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        6,
+        7
+      ],
+      "evidence_quote": "当前弹出权限申请对话框，提供了“拒绝”和“始终允许”两个选项。……点击“始终允许”按钮。……底部的“使用此文件夹”按钮是完成授权的关键操作。……当前弹出一个权限确认对话框，询问是否允许网易云音乐访问“cloudmusic”文件夹。……点击“允许”按钮是必要的操作。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_25",
+      "id": "c12"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "setting",
+        "name": "简介",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 我现在处于编辑简介的界面，输入框为空，光标已激活，可以输入文本。任务要求将简介设置为“事已至此，先睡觉吧”，因此我需要直接输入这段文字。 ACTION: type(text='事已至此，先睡觉吧')\nStep 6: THOUGHT: 简介内容已正确输入为“事已至此，先睡觉吧”，现在需要点击右上角的“完成”按钮来保存修改。\nStep 7: THOUGHT: 我已成功将简介修改为“事已至此，先睡觉吧”，并在资料页面确认显示正确。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_22",
+      "id": "c13"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "setting",
+        "name": "性别",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "当前界面弹出了性别选择框，包含“男”和“女”两个选项。任务目标是将性别设置为“女”，因此需要点击“女”选项来完成设置。... 性别已成功设置为“女”，任务目标已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_21",
+      "id": "c14"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "content",
+        "name": "逢考必过",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "系统弹出了最终确认删除的提示框，询问“确定要删除此动态？”，并提供了“取消”和“删除”两个选项。为了完成任务，我需要点击“删除”按钮来确认删除操作。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_20",
+      "id": "c15"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "林俊杰 豆浆油条",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "搜索框中当前内容是“我怀念的 孙燕姿”，需要清空后输入“林俊杰 豆浆油条”。键盘已弹出，可以直接输入新内容。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_2",
+      "id": "c16"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "content",
+        "name": "逢考必过",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "页面顶部显示“发布成功”的提示，且笔记内容已出现在动态中。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_19",
+      "id": "c17"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "博客广播电台",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text='博客广播电台')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_17",
+      "id": "c18"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "邓紫棋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='邓紫棋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_1",
+      "id": "c19"
+    },
+    {
+      "type": "search_history",
+      "app": "网易云音乐",
+      "entity": {
+        "kind": "search",
+        "name": "唯一",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='唯一')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "neteasemusic_0",
+      "id": "c20"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "三里屯 麦当劳",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='三里屯 麦当劳')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_8",
+      "id": "c21"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京南站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='北京南站')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_7",
+      "id": "c22"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京丰台站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "ACTION: type(text='北京丰台站')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_7",
+      "id": "c23"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "颐和园",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='颐和园')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_6",
+      "id": "c24"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京大学",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "ACTION: type(text='北京大学')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_6",
+      "id": "c25"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "天坛公园到天安门广场",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "ACTION: type(text='天坛公园到天安门广场')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_5",
+      "id": "c26"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "天安门",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='天安门')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_3",
+      "id": "c27"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "医院",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='医院')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_18",
+      "id": "c28"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='4S店')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c29"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c30"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S店 洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "ACTION: type(text='4S店 洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c31"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "高德地图",
+      "entity": {
+        "kind": "content",
+        "name": "北京大学(东门)",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "我已成功将“家”的地址设置为“北京大学(东门)”，在常去地点管理页面清晰可见该条目。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_16",
+      "id": "c32"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京大学东门",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='北京大学东门')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_16",
+      "id": "c33"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='小米科技园B栋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_15",
+      "id": "c34"
+    },
+    {
+      "type": "content_lifecycle",
+      "app": "高德地图",
+      "entity": {
+        "kind": "content",
+        "name": "小米移动互联网产业园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "公司地址已成功设置为“小米移动互联网产业园B栋”，这与任务要求的“小米科技园B栋”一致（实际为同一地点的不同称呼）。当前页面清晰显示该地址已保存在“公司”项下，说明设置已完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_15",
+      "id": "c35"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗地铁站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='西二旗地铁站')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_13",
+      "id": "c36"
+    }
+  ],
+  "search_terms": [
+    "冰箱贴",
+    "iPhone 16 promax",
+    "周杰伦",
+    "七里香",
+    "孤勇者",
+    "林肯公园 Numb",
+    "我是一个粉刷匠",
+    "宝宝巴士 拔萝卜",
+    "林俊杰 豆浆油条",
+    "博客广播电台",
+    "邓紫棋",
+    "唯一",
+    "三里屯 麦当劳",
+    "北京南站",
+    "北京丰台站",
+    "颐和园",
+    "北京大学",
+    "天坛公园到天安门广场",
+    "天安门",
+    "医院",
+    "4S店",
+    "洗车",
+    "4S店 洗车",
+    "北京大学东门",
+    "小米科技园B栋",
+    "西二旗地铁站"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13",
+      "c14",
+      "c16",
+      "c17",
+      "c18",
+      "c19",
+      "c20",
+      "c21",
+      "c22",
+      "c23",
+      "c24",
+      "c25",
+      "c26",
+      "c27",
+      "c28",
+      "c29",
+      "c30",
+      "c31",
+      "c32",
+      "c33",
+      "c34",
+      "c35",
+      "c36"
+    ],
+    "halt": [
+      {
+        "id": "c15",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 36 条 carried_over（前序仍开放的残留）"
+  ]
+}

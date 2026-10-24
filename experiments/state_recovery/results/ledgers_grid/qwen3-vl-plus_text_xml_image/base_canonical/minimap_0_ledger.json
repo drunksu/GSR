@@ -1,0 +1,163 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_0",
+  "run_id": "base_canonical",
+  "task_goal": "在高德地图中查找前往一家附近的烤肉店的路线",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "烤肉店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='烤肉店')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "无女主",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text=' 无女主')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_9",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "阴间神探",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "THOUGHT: 搜索框中当前显示的是“红楼梦”，我需要将其清空，然后输入“阴间神探”进行搜索。根据界面，我可以先点击搜索框右侧的清除按钮（X图标）来清空内容，或者直接使用键盘输入覆盖。这里选择直接输入“阴间神探”更高效。\nACTION: type(text='阴间神探')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_6",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "明朝那些事儿",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='明朝那些事儿')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c4"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "content",
+        "name": "明朝那些事儿",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6,
+        7,
+        8
+      ],
+      "evidence_quote": "Thought: 我已经找到了《明朝那些事儿》的书评页面，第一条书评显示有212个点赞。... Thought: 我现在在书评详情页面，看到了第一条书评，作者是“得道高仙”，内容是对《明朝那些事儿》的高度评价。... Thought: 我注意到在书评详情页面，第一条书评（作者“得道高仙”）下方的心形图标已经变成了红色，并且数字从212变成了213，这说明点赞操作已经成功完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄免费小说",
+      "entity": {
+        "kind": "search",
+        "name": "红楼梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='红楼梦')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_4",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "烤肉店",
+    "无女主",
+    "阴间神探",
+    "明朝那些事儿",
+    "红楼梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 5 条 carried_over（前序仍开放的残留）"
+  ]
+}

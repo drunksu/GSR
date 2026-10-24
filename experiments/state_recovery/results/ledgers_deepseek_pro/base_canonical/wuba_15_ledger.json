@@ -1,0 +1,68 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_15",
+  "run_id": "base_canonical",
+  "task_goal": "查看58同城中的未读消息",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "当前城市",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8
+      ],
+      "evidence_quote": "Step 7 Thought: 终于在列表中找到了“合肥 安徽”这一项，这正是我要选择的目标城市。现在只需点击该选项即可将当前城市切换为合肥。 Step 8 Thought: 从截图顶部可以看到城市已显示为“合肥”，说明当前城市已成功切换为合肥。",
+      "confidence": 0.8,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_12",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "合肥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "Step 2 Thought: 为了快速找到合肥，我应该在搜索框中输入“合肥”二字，这样系统会筛选出相关城市选项，便于后续选择。 Action: type(text='合肥')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "wuba_12",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [
+    "合肥"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 2 条 carried_over（前序仍开放的残留）"
+  ]
+}

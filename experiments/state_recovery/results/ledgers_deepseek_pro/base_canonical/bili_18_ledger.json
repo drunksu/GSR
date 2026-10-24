@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_18",
+  "run_id": "base_canonical",
+  "task_goal": "在B站会员购中搜索哆啦A梦",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "哆啦A梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "type(text='哆啦A梦') … 搜索已完成，页面成功显示了“哆啦A梦”相关的商品列表",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "哆啦A梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_2",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度浏览器中确保搜索框内已输入‘西二旗 邮政编码’并完成搜索，使页面显示该查询结果",
+      "precondition": {
+        "target": "搜索框内容是否为‘西二旗 邮政编码’且已触发搜索",
+        "check_instruction": "进入百度浏览器首页或搜索页，查看搜索框中的文本内容是否为‘西二旗 邮政编码’",
+        "clean_if_state": "搜索框中已显示‘西二旗 邮政编码’且页面已展示对应搜索结果（如邮政编码100193等）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "百度浏览器当前页面是否已显示‘西二旗 邮政编码’的搜索结果？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

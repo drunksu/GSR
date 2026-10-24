@@ -1,0 +1,90 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_11",
+  "run_id": "base_canonical",
+  "task_goal": "查查今日头条里我的收藏有哪些",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "收藏",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        12
+      ],
+      "evidence_quote": "当前页面已显示“收藏”标签被选中（文字加粗），且下方内容区明确提示“暂无内容”，说明系统已成功切换至收藏页面，并确认用户在今日头条中没有收藏任何内容。",
+      "confidence": 0.95,
+      "attribution": "this_task"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "哪吒 票房",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "ACTION: type(text='哪吒 票房')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_1",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "黄金今日的价格",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='黄金今日的价格')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_0",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [
+    "哪吒 票房",
+    "黄金今日的价格"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 2 条 carried_over（前序仍开放的残留）"
+  ]
+}

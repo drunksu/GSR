@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_1",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条App中搜索并确保‘哪吒 票房’的搜索结果页面已正确加载，显示最新票房信息",
+      "precondition": {
+        "target": "确认当前页面是否为‘哪吒 票房’的搜索结果页且内容已加载完成",
+        "check_instruction": "进入今日头条App的搜索页面，查看搜索框中是否输入了‘哪吒 票房’，并确认下方搜索结果列表已展示相关票房资讯",
+        "clean_if_state": "当前页面已显示‘哪吒 票房’的搜索结果，且首条结果包含明确的票房数字或更新时间信息"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "哪吒 票房的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

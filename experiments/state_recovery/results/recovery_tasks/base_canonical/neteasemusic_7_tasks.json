@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_7",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐App中，将搜索框内容恢复为‘七里香’，确保搜索关键词准确为七里香",
+      "precondition": {
+        "target": "搜索框当前输入内容是否为‘七里香’",
+        "check_instruction": "进入网易云音乐首页，查看顶部搜索框中的文本内容是否显示为‘七里香’",
+        "clean_if_state": "搜索框中已显示‘七里香’且未被清空或替换为其他文字"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "网易云音乐App的搜索框中是否完整显示‘七里香’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

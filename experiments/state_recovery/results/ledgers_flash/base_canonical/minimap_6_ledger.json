@@ -1,0 +1,222 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_6",
+  "run_id": "base_canonical",
+  "task_goal": "高德查一下颐和园到北京大学的步行路线",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "颐和园",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='颐和园')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京大学",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "ACTION: type(text='北京大学')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "天坛公园到天安门广场",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "ACTION: type(text='天坛公园到天安门广场')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_5",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "天安门",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='天安门')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_3",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "医院",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "为了查找周边医院，我需要在搜索框中输入“医院”二字",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_18",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S 店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='4S 店')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S 店 洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "ACTION: type(text='4S 店 洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c8"
+    }
+  ],
+  "search_terms": [
+    "颐和园",
+    "北京大学",
+    "天坛公园到天安门广场",
+    "天安门",
+    "医院",
+    "4S 店",
+    "洗车",
+    "4S 店 洗车"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c6",
+      "c7",
+      "c8"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "m2",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c3",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c4",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c5",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 6 条 carried_over（前序仍开放的残留）"
+  ]
+}

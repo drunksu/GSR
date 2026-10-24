@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_2",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城App中确保搜索历史里存在‘空调上门安装’这一条目，且该条目为最新一次搜索记录。",
+      "precondition": {
+        "target": "检查58同城App的搜索历史中是否已存在‘空调上门安装’条目且位于顶部位置。",
+        "check_instruction": "进入58同城App首页，点击搜索框，查看搜索历史列表，确认‘空调上门安装’是否出现在历史记录中且为第一条。",
+        "clean_if_state": "搜索历史列表中已存在‘空调上门安装’且位于最上方（即最新搜索记录）。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在58同城App的搜索历史列表中，‘空调上门安装’是否作为最新一条记录存在？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

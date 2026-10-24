@@ -1,0 +1,36 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_2",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在钉钉中打开与钉钉小秘书的聊天窗口，确保当前处于可输入消息的状态",
+      "precondition": {
+        "target": "确认已进入钉钉小秘书的聊天界面",
+        "check_instruction": "进入钉钉首页后，点击底部“消息”标签，查找并点击名为“钉钉小秘书”的会话条目，观察顶部标题栏是否显示‘钉钉小秘书’且下方输入框可见",
+        "clean_if_state": "当前已显示钉钉小秘书的聊天窗口，输入框可正常编辑文字"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前界面是否为钉钉小秘书的聊天窗口，且输入框处于可输入状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "钉钉中已发送的消息“早上中午和晚上好”的残留记录",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "消息一旦发出即不可撤回，系统无法自动删除或修改已送达的聊天记录，且钉钉未提供批量清理历史消息的API接口，因此不能自动恢复至变更前状态。",
+      "suggested_manual_action": "打开钉钉App，进入与‘钉钉小秘书’的聊天窗口，长按消息‘早上中午和晚上好’，选择‘删除’以手动清除该条消息。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

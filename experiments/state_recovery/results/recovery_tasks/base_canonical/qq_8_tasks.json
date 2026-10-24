@@ -1,0 +1,36 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_8",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在QQ中找到并选中名为“恭喜发财”的表情包，确保其处于可发送状态",
+      "precondition": {
+        "target": "确认“恭喜发财”表情包当前是否已存在于QQ表情面板中且可被选中",
+        "check_instruction": "进入QQ聊天界面，点击表情按钮打开表情面板，查找是否存在名为“恭喜发财”的表情包",
+        "clean_if_state": "已在表情面板中看到名为“恭喜发财”的表情包且可点击选中"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ表情面板中是否已存在名为“恭喜发财”的表情包且处于可点击选中状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "QQ中已发送的“恭喜发财”表情包残留",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "该操作为单向消息发送，表情包已成功发出并进入对方聊天记录，系统无法撤回或删除已送达的消息内容，属于不可逆操作。",
+      "suggested_manual_action": "进入QQ与绕堤沙的聊天窗口，长按已发送的“恭喜发财”表情包，选择‘撤回’（若2分钟内）或‘删除’（仅限自己可见），如超时则无法处理，需人工确认是否影响后续任务。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

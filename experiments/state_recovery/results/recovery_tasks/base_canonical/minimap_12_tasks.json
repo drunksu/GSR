@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_12",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中确保本机号码已登录并处于可用状态，使收藏夹功能可正常访问",
+      "precondition": {
+        "target": "确认当前高德地图已使用本机号码完成登录且账号状态有效",
+        "check_instruction": "进入高德地图个人中心页面，查看顶部头像区域是否显示‘本机号码’或绑定该号码的账号信息",
+        "clean_if_state": "当前已显示本机号码登录态，且收藏夹入口可见并可点击"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "本机号码的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

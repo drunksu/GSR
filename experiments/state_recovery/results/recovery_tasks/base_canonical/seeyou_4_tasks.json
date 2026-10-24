@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_4",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚中将经期症状状态恢复为已记录‘痛经：轻微痛’，即确保该症状明确显示在症状列表中且处于已选状态。",
+      "precondition": {
+        "target": "检查当前经期症状是否已包含‘痛经：轻微痛’且为已选状态。",
+        "check_instruction": "进入美柚的经期记录页面，查看症状选择区域中是否显示‘痛经：轻微痛’并处于高亮或勾选状态。",
+        "clean_if_state": "当前症状列表中已明确显示‘痛经：轻微痛’且为已选状态（如带勾选标记或背景高亮），无需任何操作。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在美柚的经期症状记录界面中，是否已明确显示‘痛经：轻微痛’且处于已选状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

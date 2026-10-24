@@ -1,0 +1,117 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "seeyou_3",
+  "run_id": "base_canonical",
+  "task_goal": "在美柚里面打开运动减肥的健康百科",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "运动减肥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "搜索框已激活，键盘弹出，可以输入关键词。任务目标是找到“运动减肥”的健康百科，因此需要在搜索框中输入相关关键词。考虑到“运动减肥”是核心需求，直接输入“运动减肥”即可精准定位相关内容。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "夏季饮食",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框已激活，键盘已弹出，可以输入关键词。根据任务要求，我需要搜索“夏季饮食”的知识，因此接下来应输入“夏季饮食”。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_2",
+      "id": "c2"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "美柚",
+      "entity": {
+        "kind": "setting",
+        "name": "使用美柚专属字体",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        13
+      ],
+      "evidence_quote": "之前已成功关闭“使用美柚专属字体”开关，并确认了提示框，系统明确提示“字体变更将在重启后生效”。当前界面显示该选项已处于关闭状态（无粉色高亮），说明设置已完成。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_19",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "娱乐大爆炸",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "Thought: 我需要清空当前输入，然后输入“娱乐大爆炸”进行搜索... Action: type(text='娱乐大爆炸')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_16",
+      "id": "c4"
+    }
+  ],
+  "search_terms": [
+    "运动减肥",
+    "夏季饮食",
+    "娱乐大爆炸"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c2",
+      "c3",
+      "c4"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 3 条 carried_over（前序仍开放的残留）"
+  ]
+}

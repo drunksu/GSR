@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_0",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条App中，确保搜索历史里存在‘黄金今日的价格’这一条目，且其为最新一次搜索记录。",
+      "precondition": {
+        "target": "检查‘黄金今日的价格’是否已存在于今日头条的搜索历史中，并为最近一次搜索项。",
+        "check_instruction": "进入今日头条App首页，点击搜索框，查看搜索历史列表，确认‘黄金今日的价格’是否出现在历史记录顶部位置。",
+        "clean_if_state": "搜索历史中已存在‘黄金今日的价格’且位于最上方（即最新搜索项）时，视为已恢复。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条App的搜索历史列表中，‘黄金今日的价格’是否作为最新一条记录存在？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

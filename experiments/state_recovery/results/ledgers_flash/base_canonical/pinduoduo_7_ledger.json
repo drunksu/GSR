@@ -1,0 +1,175 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_7",
+  "run_id": "base_canonical",
+  "task_goal": "去拼多多打开婴儿湿巾的店铺首页",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "婴儿湿巾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "根据任务目标，我需要找到婴儿湿巾相关的店铺首页，因此下一步是输入关键词“婴儿湿巾”。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "卡通小狗 马克杯",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='卡通小狗 马克杯')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c2"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "卡通小狗马克杯卡通带盖陶",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "底部的“收藏”按钮显示为红色心形并标注“已收藏”",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "无线鼠标",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "当前搜索栏中输入的是“白色数据线 type c”，与目标“无线鼠标”无关。我需要清空当前输入内容，然后输入“无线鼠标”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_5",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "白色 Type-C 数据线",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要搜索“白色 Type-C 数据线”来找到目标商品。当前搜索框中显示的是“垃圾袋黑色”，这与我的目标无关，因此我需要先清空搜索框内容，然后输入正确的关键词进行搜索。\n        ACTION: type(text='白色 Type-C 数据线')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_4",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "黑色垃圾袋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "输入“黑色垃圾袋”进行搜索... type(text='黑色垃圾袋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_3",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "婴儿湿巾",
+    "卡通小狗 马克杯",
+    "无线鼠标",
+    "白色 Type-C 数据线",
+    "黑色垃圾袋"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c3"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c2",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c4",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c5",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c6",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 5 条 carried_over（前序仍开放的残留）"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_19",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚中将‘使用美柚专属字体’设置为关闭状态，确保该选项开关处于关闭（非粉色高亮）状态，并完成重启前的确认提示操作。",
+      "precondition": {
+        "target": "检查‘使用美柚专属字体’开关是否已关闭且无提示待处理。",
+        "check_instruction": "进入美柚的‘通用’设置页面，查看‘使用美柚专属字体’选项对应的开关控件状态及是否有弹窗提示。",
+        "clean_if_state": "‘使用美柚专属字体’开关为灰色（关闭状态），且无任何弹窗提示需要确认。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在美柚的通用设置页面中，‘使用美柚专属字体’选项的开关是否已明确处于关闭状态（无粉色高亮）且无弹窗提示？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

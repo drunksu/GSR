@@ -1,0 +1,91 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_18",
+  "run_id": "base_canonical",
+  "task_goal": "查看并关注拼多多女鞋第一款商品的所属店铺",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "女鞋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='女鞋')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "account",
+        "name": "禾简老人健步鞋",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "THOUGHT: 右上角有红色的“+ 关注”按钮，这是完成“关注店铺”任务的关键操作点。根据任务要求，需点击该按钮进行关注。 ACTION: click([1087, 317])",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "橡皮泥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='橡皮泥')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_17",
+      "id": "c3"
+    }
+  ],
+  "search_terms": [
+    "女鞋",
+    "橡皮泥"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2",
+      "c3"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_image",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

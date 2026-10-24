@@ -1,0 +1,193 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_25",
+  "run_id": "base_canonical",
+  "task_goal": "番茄切换成大字体",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "获取已安装的应用信息",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "弹窗提示是否允许“番茄免费小说”获取已安装的应用信息，这是系统权限请求。……点击“始终允许”后，弹窗会消失",
+      "confidence": 0.6,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_22",
+      "id": "c1"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "男频衍生",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "evidence_quote": "页面显示“男频衍生”已添加至“喜欢的分类”，且右上角“保存”按钮仍可见，说明设置尚未提交。",
+      "confidence": 0.45,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_18",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "男频",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "搜索框已激活，键盘弹出...尝试搜索“男频”，看是否出现相关选项。",
+      "confidence": 0.7,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_18",
+      "id": "c3"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "group",
+        "name": "穿越",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "我已经成功进入了“穿越圈”页面，并且注意到右上角的按钮显示为“已订阅”，这表明订阅操作已经完成。",
+      "confidence": 0.85,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_17",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "番茄漫画",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "我需要清空当前输入内容，然后输入“番茄漫画”进行搜索，以找到相关入口或应用。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_13",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "美食 种田 系统",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "type(text='美食 种田 系统')",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_11",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "三体",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5
+      ],
+      "evidence_quote": "由于输入法处于中文状态，我将直接输入“三体”。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_0",
+      "id": "c7"
+    }
+  ],
+  "search_terms": [
+    "男频",
+    "番茄漫画",
+    "美食 种田 系统",
+    "三体"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7"
+    ],
+    "halt": [
+      {
+        "id": "c1",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c2",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4.1-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 7 条 carried_over（前序仍开放的残留）"
+  ]
+}

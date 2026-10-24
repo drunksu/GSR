@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_16",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中将‘家’的地址设置为北京大学(东门)，确保该地址已保存并显示在常去地点列表中。",
+      "precondition": {
+        "target": "确认‘家’的地址当前是否已正确设为北京大学(东门)。",
+        "check_instruction": "进入高德地图‘我的’→‘常去地点’页面，查看‘家’条目右侧显示的地址文本是否为‘北京大学(东门)’。",
+        "clean_if_state": "‘家’条目右侧地址已明确显示为‘北京大学(东门)’，且无编辑或修改提示。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在高德地图常去地点列表中，‘家’对应的地址是否已稳定显示为北京大学(东门)？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中将‘家’的地址设置为北京大学东门",
+      "precondition": {
+        "target": "确认‘家’的地址当前是否已设为北京大学东门",
+        "check_instruction": "进入高德地图‘我的’页面，点击‘设置’→‘地址管理’，查看‘家’对应的地址文本是否为‘北京大学东门’",
+        "clean_if_state": "‘家’的地址已显示为‘北京大学东门’"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在高德地图地址管理中，‘家’的地址是否已明确显示为北京大学东门？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

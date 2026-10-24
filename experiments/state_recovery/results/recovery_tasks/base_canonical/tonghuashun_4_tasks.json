@@ -1,0 +1,36 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_4",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺中将江淮汽车（600418）加入自选股，确保其右侧显示灰色减号按钮，表示已成功添加。",
+      "precondition": {
+        "target": "检查江淮汽车（600418）是否已加入自选股列表，即其右侧按钮是否为灰色减号。",
+        "check_instruction": "进入同花顺搜索页面，输入‘江淮汽车’或‘600418’，在搜索结果列表中查看江淮汽车（600418）右侧的按钮状态。",
+        "clean_if_state": "江淮汽车（600418）右侧按钮为灰色减号，表示已加入自选股，无需操作。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺搜索结果中，江淮汽车（600418）右侧是否显示灰色减号按钮，表明其已成功加入自选股？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [
+    {
+      "mutation_id": "m2",
+      "title": "同花顺App中残留的股票代码600418搜索记录",
+      "gate_reason": "reversible=unknown → human gate",
+      "reason": "系统无法确定该搜索记录是否属于用户主动意图（如临时查询）还是误操作，且搜索历史条目未关联明确的自选股添加动作，自动恢复可能误删有效记录或保留无效痕迹。",
+      "suggested_manual_action": "打开同花顺App，进入「我的」→「搜索历史」，找到股票代码600418的记录，根据实际需求手动删除或忽略；若需确保加入自选股，请前往行情页输入600418后点击「+」号添加至自选。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

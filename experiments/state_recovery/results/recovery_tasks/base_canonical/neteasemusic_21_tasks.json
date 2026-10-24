@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_21",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中编辑我的资料，将性别设置为女",
+      "precondition": {
+        "target": "性别是否已设置为女",
+        "check_instruction": "进入‘我的’页面，点击头像进入个人资料页，查看‘性别’字段的当前值",
+        "clean_if_state": "性别已显示为‘女’"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐个人资料页中，性别字段是否明确显示为‘女’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

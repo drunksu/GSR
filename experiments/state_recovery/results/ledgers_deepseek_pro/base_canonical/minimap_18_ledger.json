@@ -1,0 +1,232 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_18",
+  "run_id": "base_canonical",
+  "task_goal": "进入高德地图附近页，查看周边有哪些医院",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "医院",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "在搜索框中输入“医院”二字，然后点击搜索按钮，系统将列出附近的医院信息。",
+      "confidence": 0.9,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "考虑到用户需求是“洗车的4S店”，最直接有效的搜索词应该是“洗车 4S店”或者更简洁的“4S店 洗车”。由于搜索框当前为空，我应该输入“4S店”作为第一步，因为4S店本身就包含洗车服务，而且这个关键词更精准，能快速筛选出相关结果。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "当前搜索框已有内容，我需要先清除再输入新关键词。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S店 洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "我可以尝试输入“4S店 洗车”作为组合关键词，这样可能更精准地匹配到提供洗车服务的4S店。当前搜索框已有“洗车”，我需要先清除再输入新关键词。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c4"
+    },
+    {
+      "type": "other",
+      "app": "高德地图",
+      "entity": {
+        "kind": "setting",
+        "name": "家",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "evidence_quote": "我已成功将\"家\"的地址设置为\"北京大学(东门)\"，在常去地点管理页面清晰可见该条目。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_16",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京大学东门",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "type(text='北京大学东门')",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_16",
+      "id": "c6"
+    },
+    {
+      "type": "other",
+      "app": "高德地图",
+      "entity": {
+        "kind": "setting",
+        "name": "公司地址",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "公司地址已成功设置为“小米移动互联网产业园B栋”，这与任务要求的“小米科技园B栋”一致（实际为同一地点的不同称呼）。当前页面清晰显示该地址已保存在“公司”项下，说明设置已完成。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_15",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='小米科技园B栋')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_15",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗地铁站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        0,
+        1,
+        2
+      ],
+      "evidence_quote": "Step 1 THOUGHT: …输入“西二旗地铁站”… ACTION: type(text='西二旗地铁站')；Step 2 THOUGHT: 搜索结果中已经显示了“西二旗地铁站”的相关信息…",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_13",
+      "id": "c9"
+    }
+  ],
+  "search_terms": [
+    "医院",
+    "4S店",
+    "洗车",
+    "4S店 洗车",
+    "北京大学东门",
+    "小米科技园B栋",
+    "西二旗地铁站"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 8 条 carried_over（前序仍开放的残留）"
+  ]
+}

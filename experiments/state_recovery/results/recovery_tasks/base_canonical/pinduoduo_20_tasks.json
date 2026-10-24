@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_20",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，通过搜索“自行车”进入搜索结果页，点击第一款商品，进入其店铺详情页，确保当前页面为该商品所属店铺的详情页（含店铺名称、评分、商品列表等核心信息）",
+      "precondition": {
+        "target": "当前是否已处于‘自行车’搜索结果中第一款商品的店铺详情页",
+        "check_instruction": "进入拼多多App，搜索‘自行车’，查看搜索结果页第一款商品，点击进入其商品详情页，再点击店铺名称或‘进店逛逛’按钮进入店铺页；检查页面顶部是否显示店铺名称且包含‘自行车’相关商品信息",
+        "clean_if_state": "当前页面已是‘自行车’搜索结果中第一款商品对应的店铺详情页，且页面中可见店铺名称、店铺评分、主营类目（含自行车）及至少3个商品缩略图"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前页面是否为拼多多中搜索‘自行车’后第一款商品所归属的店铺详情页，且页面明确显示该店铺经营自行车类商品？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

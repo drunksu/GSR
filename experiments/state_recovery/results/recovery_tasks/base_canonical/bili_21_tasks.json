@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_21",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站中将头像恢复为更换前的原始头像状态，确保头像区域显示的是用户初始设置的头像而非随机生成的蓝发动漫角色头像",
+      "precondition": {
+        "target": "当前头像是否仍为随机更换后的蓝发动漫角色图像",
+        "check_instruction": "进入B站个人主页，查看头像区域显示的图像是否为蓝发动漫角色",
+        "clean_if_state": "头像已显示为用户原始设置的头像（非蓝发动漫角色）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "B站个人主页中的头像是否已恢复为用户原始设置的头像，而非随机更换的蓝发动漫角色头像？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

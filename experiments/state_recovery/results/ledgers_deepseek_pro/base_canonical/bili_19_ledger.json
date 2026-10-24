@@ -1,0 +1,46 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_19",
+  "run_id": "base_canonical",
+  "task_goal": "B站会员购查看我的待支付订单",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "哆啦A梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "type(text='哆啦A梦') … 搜索已完成，页面成功显示了“哆啦A梦”相关的商品列表",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_18",
+      "id": "c1"
+    }
+  ],
+  "search_terms": [
+    "哆啦A梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

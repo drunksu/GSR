@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "seeyou_16",
+  "run_id": "base_canonical",
+  "task_goal": "在美柚打开“娱乐大爆炸”圈子",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "娱乐大爆炸",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='娱乐大爆炸')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "娱乐大爆炸"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text_xml",
+  "_repair_used": false,
+  "_warnings": []
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_13",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中将与联系人绕堤沙的聊天会话设置为置顶状态",
+      "precondition": {
+        "target": "确认与绕堤沙的聊天会话当前未被置顶",
+        "check_instruction": "进入QQ主界面的聊天列表页，找到名为“绕堤沙”的聊天条目，观察其右侧是否有‘置顶’标识或图标",
+        "clean_if_state": "若绕堤沙的聊天条目右侧已显示置顶标识（如图钉图标），则视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ聊天列表中，与绕堤沙的聊天条目右侧是否已显示置顶标识？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "打开QQ，将与联系人254126895的聊天会话设为置顶状态",
+      "precondition": {
+        "target": "检查与254126895的聊天会话是否已处于置顶状态",
+        "check_instruction": "进入QQ主界面的聊天列表页，查找联系人254126895对应的聊天条目，观察其是否显示置顶标识（如顶部固定位置或‘置顶’标签）",
+        "clean_if_state": "该聊天条目已在聊天列表顶部固定显示，且带有置顶视觉标识（例如‘置顶’字样或特殊图标）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ聊天列表中，联系人254126895的聊天条目是否位于顶部并明确显示为置顶状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

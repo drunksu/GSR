@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_1",
+  "run_id": "base_canonical",
+  "task_goal": "打开 B 站搜索演员沈腾",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "B 站",
+      "entity": {
+        "kind": "search",
+        "name": "沈腾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='沈腾')... THOUGHT: 搜索“沈腾”已完成",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "沈腾"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": []
+}

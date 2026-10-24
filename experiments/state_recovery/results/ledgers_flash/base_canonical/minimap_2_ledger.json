@@ -1,0 +1,118 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_2",
+  "run_id": "base_canonical",
+  "task_goal": "在高德地图中查看一下北京 8 号线的地铁图",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "医院",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "为了查找周边医院，我需要在搜索框中输入“医院”二字",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_18",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S 店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='4S 店')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "4S 店 洗车",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "ACTION: type(text='4S 店 洗车')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_17",
+      "id": "c4"
+    }
+  ],
+  "search_terms": [
+    "医院",
+    "4S 店",
+    "洗车",
+    "4S 店 洗车"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c2",
+      "c3",
+      "c4"
+    ],
+    "halt": [
+      {
+        "id": "c1",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 4 条 carried_over（前序仍开放的残留）"
+  ]
+}

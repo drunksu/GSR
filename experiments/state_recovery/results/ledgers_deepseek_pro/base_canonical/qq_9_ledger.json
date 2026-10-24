@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_9",
+  "run_id": "base_canonical",
+  "task_goal": "打开QQ给绕堤沙发送相册里的第一张图片",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "QQ",
+      "entity": {
+        "kind": "friend",
+        "name": "绕堤沙",
+        "identifier": null
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "图片已经成功发送给“绕堤沙”，任务完成。从聊天记录中可以看到，最新的一条消息正是我刚刚发送的图片",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": true,
+  "_warnings": []
+}

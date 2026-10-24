@@ -1,0 +1,434 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_15",
+  "run_id": "base_canonical",
+  "task_goal": "高德设置一下公司的地址为小米科技园 B 栋",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "content_lifecycle",
+      "app": "高德地图",
+      "entity": {
+        "kind": "content",
+        "name": "小米科技园 B 栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        6,
+        8
+      ],
+      "evidence_quote": "直接在输入框中键入这个地址...公司地址已成功设置为“小米移动互联网产业园 B 栋”",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园 B 栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "直接在输入框中键入这个地址，以便系统进行搜索和定位。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "西二旗地铁站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "THOUGHT: 当前搜索框中显示的是“上海南站”，而我的目标是查询到“西二旗地铁站”的公交路线。因此，我需要先清除搜索框中的内容，然后输入“西二旗地铁站”。 ACTION: type(text='西二旗地铁站')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_13",
+      "id": "c3"
+    },
+    {
+      "type": "login_session",
+      "app": "高德地图",
+      "entity": {
+        "kind": "account",
+        "name": "本机号码一键登录",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "现在我已经勾选了协议复选框，接下来应该点击“本机号码一键登录”按钮来完成登录。... 登录成功后，系统弹出了一个设置专属昵称的提示框",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_12",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "北京丰台站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "当前搜索框中显示的是“烤肉店”，我需要先清空它，然后输入起点“北京丰台站”。由于键盘已弹出，我可以直接使用删除键清除当前内容，或者点击搜索框重新输入。为确保准确，我将先清空搜索框内容，再输入“北京丰台站”。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_11",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "上海南站",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "现在已成功回到搜索界面，起点“北京丰台站”已输入，输入框处于激活状态，键盘弹出。下一步应直接输入终点“上海南站”，然后点击搜索按钮完成查询。这是最直接且准确的方式。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_11",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "麦当劳",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "我决定直接输入“麦当劳”，覆盖原有内容。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_10",
+      "id": "c7"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "上海外地小客车限行政策",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "ACTION: type(text='上海外地小客车限行政策')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_1",
+      "id": "c8"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "上海外牌限行",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='上海外牌限行')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_1",
+      "id": "c9"
+    },
+    {
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "烤肉店",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "为了找到附近的烤肉店，我需要在搜索框中输入“烤肉店”这个关键词。... type(text='烤肉店')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "minimap_0",
+      "id": "c10"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "无女主",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "ACTION: type(text=' 无女主')\nTHOUGHT: 当前搜索关键词是“无女主”，已列出多部含“无女主”标签的小说",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_9",
+      "id": "c11"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "阴间神探",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "输入“阴间神探”进行搜索",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_6",
+      "id": "c12"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "明朝那些事儿",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "我也可以尝试直接输入“明朝那些事儿”，看看系统是否会自动替换掉原有内容。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c13"
+    },
+    {
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "《明朝那些事儿》书评",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "心形图标已经变成了红色，并且数字从 212 变成了 213，这说明点赞操作已经成功完成。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_5",
+      "id": "c14"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "红楼梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框中当前显示的是“天气之子”，我需要将其清空，然后输入“红楼梦”进行搜索。... type(text='红楼梦')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_4",
+      "id": "c15"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字号",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "evidence_quote": "当前字号显示为 25，旁边有\"A⁻\"和\"A⁺\"按钮，我可以点击\"A⁻\"按钮逐步减小字号，直到变为 22。... 当前字号为 23，我需要再点击一次\"A⁻\"按钮将其调整为 22。... 字号已经成功设置为 22",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c16"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "翻页方式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8,
+        9
+      ],
+      "evidence_quote": "接下来需要将翻页方式从“覆盖”改为“上下”。... 翻页方式也已成功切换为“上下”，所有设置均符合任务要求。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_26",
+      "id": "c17"
+    }
+  ],
+  "search_terms": [
+    "小米科技园 B 栋",
+    "西二旗地铁站",
+    "北京丰台站",
+    "上海南站",
+    "麦当劳",
+    "上海外地小客车限行政策",
+    "上海外牌限行",
+    "烤肉店",
+    "无女主",
+    "阴间神探",
+    "明朝那些事儿",
+    "红楼梦"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10",
+      "c14",
+      "c16",
+      "c17"
+    ],
+    "halt": [
+      {
+        "id": "m2",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c3",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c11",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c12",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c13",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c15",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 15 条 carried_over（前序仍开放的残留）"
+  ]
+}

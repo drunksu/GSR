@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_8",
+  "run_id": "base_canonical",
+  "tasks": [],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "百度浏览器中已发布的评论‘泰酷辣’残留",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "评论内容已公开发布并显示在评论列表中，属于不可逆的用户生成内容，系统无法自动撤回或删除该评论。",
+      "suggested_manual_action": "打开百度浏览器，进入该视频详情页，找到评论区中显示‘刚刚 上海 回复’的‘泰酷辣’评论，长按该评论，选择‘删除’选项进行手动清除。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

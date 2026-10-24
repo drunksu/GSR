@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_28",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站中将‘定时停止播放’功能开启并设置为‘不开启’状态，确保定时关闭功能完全关闭。",
+      "precondition": {
+        "target": "确认‘定时停止播放’当前是否已处于‘不开启’状态。",
+        "check_instruction": "进入B站个人中心→设置→播放设置页面，查看‘定时停止播放’选项下方当前选中的子项是否为‘不开启’。",
+        "clean_if_state": "‘定时停止播放’选项下方明确显示‘不开启’且无任何倒计时提示（如‘将于XX:XX:XX暂停’）。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在B站播放设置中，‘定时停止播放’是否已明确显示为‘不开启’且无任何倒计时提示？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

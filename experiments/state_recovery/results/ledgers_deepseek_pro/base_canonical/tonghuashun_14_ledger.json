@@ -1,0 +1,191 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "tonghuashun_14",
+  "run_id": "base_canonical",
+  "task_goal": "在同花顺看一下美股近一月的涨跌统计",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "美柚",
+      "entity": {
+        "kind": "setting",
+        "name": "备孕模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "evidence_quote": "我可以看到“备孕模式”的选项...点击“备孕模式”...当前界面是美柚的“备孕模式”介绍页面，底部有一个醒目的粉色按钮“开启备孕模式”...点击底部的“确定”按钮...我似乎已经进入了“宝宝”模块，这表明备孕模式可能已经成功开启",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_9",
+      "id": "c1"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "美柚",
+      "entity": {
+        "kind": "setting",
+        "name": "经期模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        12,
+        13,
+        14
+      ],
+      "evidence_quote": "当前页面是“经期模式”的引导页，提示需点击“开启经期模式”才能进入后续记录功能。……点击“开启经期模式”按钮是必要步骤……点击“确定”按钮以推进流程。……现在页面显示“经期第1天”，且顶部有“查看详情”按钮……这表明已成功进入经期记录主界面。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_5",
+      "id": "c2"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "美柚",
+      "entity": {
+        "kind": "setting",
+        "name": "痛经",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        10
+      ],
+      "evidence_quote": "当前界面已返回经期记录主列表，显示“痛经：轻微痛”，说明腹痛已记录。",
+      "confidence": 0.4,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_4",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "运动减肥",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "搜索框已激活，键盘弹出，可以输入关键词。任务目标是找到“运动减肥”的健康百科，因此需要在搜索框中输入相关关键词。考虑到“运动减肥”是核心需求，直接输入“运动减肥”即可精准定位相关内容。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_3",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "夏季饮食",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框已激活，键盘已弹出，可以输入关键词。根据任务要求，我需要搜索“夏季饮食”的知识，因此接下来应输入“夏季饮食”。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_2",
+      "id": "c5"
+    },
+    {
+      "type": "settings_toggle",
+      "app": "美柚",
+      "entity": {
+        "kind": "setting",
+        "name": "使用美柚专属字体",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        13
+      ],
+      "evidence_quote": "之前已成功关闭“使用美柚专属字体”开关，并确认了提示框，系统明确提示“字体变更将在重启后生效”。当前界面显示该选项已处于关闭状态（无粉色高亮），说明设置已完成。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_19",
+      "id": "c6"
+    },
+    {
+      "type": "search_history",
+      "app": "美柚",
+      "entity": {
+        "kind": "search",
+        "name": "娱乐大爆炸",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "Thought: 我需要清空当前输入，然后输入“娱乐大爆炸”进行搜索... Action: type(text='娱乐大爆炸')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "seeyou_16",
+      "id": "c7"
+    }
+  ],
+  "search_terms": [
+    "运动减肥",
+    "夏季饮食",
+    "娱乐大爆炸"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2",
+      "c5",
+      "c6",
+      "c7"
+    ],
+    "halt": [
+      {
+        "id": "c3",
+        "reason": "confidence<0.7"
+      },
+      {
+        "id": "c4",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 7 条 carried_over（前序仍开放的残留）"
+  ]
+}

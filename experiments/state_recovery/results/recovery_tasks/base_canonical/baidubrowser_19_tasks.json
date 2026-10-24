@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_19",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度浏览器中将缓存恢复为已清理状态，即确保缓存数据已被清除且界面显示‘已清理’相关提示",
+      "precondition": {
+        "target": "确认缓存是否已处于清理完成状态",
+        "check_instruction": "进入百度浏览器的‘我的’页面，查看‘清理缓存’功能项的当前文本描述是否包含‘已清理’字样及具体清理量（如‘已清理211MB缓存垃圾’）",
+        "clean_if_state": "‘清理缓存’项已显示‘已清理XXXMB缓存垃圾’，表明缓存已成功清除"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在百度浏览器‘我的’页面中，‘清理缓存’功能项是否明确显示‘已清理’字样及对应缓存清理量（例如‘已清理211MB缓存垃圾’）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

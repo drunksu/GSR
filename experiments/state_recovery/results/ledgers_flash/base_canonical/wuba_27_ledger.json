@@ -1,0 +1,42 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_27",
+  "run_id": "base_canonical",
+  "task_goal": "去 58 同城将我的性别修改为女",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "58 同城",
+      "entity": {
+        "kind": "setting",
+        "name": "性别",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        6
+      ],
+      "evidence_quote": "根据任务要求，我需要将性别修改为“女”，因此我应该点击“女”这个选项。... 我已经成功将性别修改为“女”，在个人信息页面中，“我是”一栏已经显示为“女”，并且头像旁边也出现了女性标识。这表明修改已经生效并保存成功。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": []
+}

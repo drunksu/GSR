@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_13",
+  "run_id": "q2_A_1",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中，将与‘绕堤沙’的聊天设置中的‘设为置顶’开关恢复为关闭状态",
+      "precondition": {
+        "target": "QQ中与‘绕堤沙’聊天的置顶开关状态",
+        "check_instruction": "进入与‘绕堤沙’的聊天界面，点击右上角更多（⋮），进入聊天设置页面, 查看‘设为置顶’开关是否为蓝色开启状态",
+        "clean_if_state": "当前‘设为置顶’开关为灰色关闭状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ中与‘绕堤沙’的聊天设置页面里，‘设为置顶’开关是否已恢复为灰色关闭状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 15
+    }
+  ]
+}

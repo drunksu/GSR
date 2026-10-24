@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_29",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺中将主题换肤设置为始终显示黑色，确保界面呈现深色主题效果",
+      "precondition": {
+        "target": "确认当前主题换肤设置是否已为‘始终显示黑色’",
+        "check_instruction": "进入同花顺的‘主题换肤’设置页面，查看三个选项中‘始终显示黑色’是否被选中（即右侧有红色对勾）",
+        "clean_if_state": "‘始终显示黑色’选项已被选中且预览图显示为深色主题，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺的主题换肤设置中，‘始终显示黑色’选项是否已被选中且界面预览为深色主题？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

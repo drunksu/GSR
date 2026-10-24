@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_25",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中将文件访问权限恢复为已开启状态，确保应用能正常访问本地音乐文件夹",
+      "precondition": {
+        "target": "确认网易云音乐的文件访问权限是否已开启",
+        "check_instruction": "进入网易云音乐的‘我的’页面，点击右上角设置图标，进入‘设置’→‘隐私与安全’→‘文件访问权限’，查看对应权限开关是否为开启状态或是否有已授权的文件夹列表（含cloudmusic）",
+        "clean_if_state": "当前已显示‘文件访问权限’为开启状态，或已列出已授权的‘cloudmusic’文件夹，无需额外操作"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "文件访问权限的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在网易云音乐中确保本地音乐列表里存在且正确显示歌曲‘夜空中最亮的星’，即该歌曲已成功被识别并加入本地音乐库。",
+      "precondition": {
+        "target": "确认‘夜空中最亮的星’是否已在网易云音乐的本地音乐列表中可见并可播放。",
+        "check_instruction": "进入网易云音乐App，点击底部导航栏‘我的’→‘本地音乐’，查看列表中是否存在标题为‘夜空中最亮的星’的歌曲条目。",
+        "clean_if_state": "当前本地音乐列表中已明确显示歌曲‘夜空中最亮的星’（含歌名、歌手等基本信息），且无‘扫描中’或‘未识别’等异常状态。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐的本地音乐页面中，能否看到歌曲‘夜空中最亮的星’的完整条目（含歌名、歌手信息）并处于可播放状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

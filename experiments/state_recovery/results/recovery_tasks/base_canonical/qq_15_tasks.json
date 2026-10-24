@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_15",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中将状态设置为听歌中",
+      "precondition": {
+        "target": "QQ当前状态是否已为听歌中",
+        "check_instruction": "进入QQ个人资料页或状态设置界面，查看状态选项中‘听歌中’是否被选中并高亮显示（如蓝色背景）",
+        "clean_if_state": "QQ的状态已显示为听歌中（例如状态图标为戴耳机的笑脸且对应选项高亮）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ的状态是否已成功恢复为听歌中？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

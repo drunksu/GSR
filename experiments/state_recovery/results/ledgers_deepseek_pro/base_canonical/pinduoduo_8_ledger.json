@@ -1,0 +1,164 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_8",
+  "run_id": "base_canonical",
+  "task_goal": "查看拼多多限时秒杀第一个商品详情",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "婴儿湿巾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='婴儿湿巾')",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_7",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "卡通小狗 马克杯",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要搜索带有卡通小狗图案的马克杯，当前搜索框中显示的是“无线鼠标”，我需要清空它并输入新的关键词。根据任务要求，我应该输入“卡通小狗 马克杯”来找到相关商品。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c2"
+    },
+    {
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "卡通小狗马克杯卡通带盖陶",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "我已经成功收藏了这个带有卡通小狗图案的马克杯，因为底部的“收藏”按钮显示为红色心形并标注“已收藏”，说明收藏操作已完成。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_6",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "无线鼠标",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "type(text='无线鼠标')",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_5",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "白色Type-C数据线",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "我需要搜索“白色Type-C数据线”来找到目标商品。……ACTION: type(text='白色Type-C数据线')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_4",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "黑色垃圾袋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "THOUGHT: 搜索框中当前显示的是“男士袜子”，我需要清空它并输入“黑色垃圾袋”进行搜索。…ACTION: type(text='黑色垃圾袋')",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "pinduoduo_3",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "婴儿湿巾",
+    "卡通小狗 马克杯",
+    "无线鼠标",
+    "白色Type-C数据线",
+    "黑色垃圾袋"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c3",
+      "c4",
+      "c5",
+      "c6"
+    ],
+    "halt": [
+      {
+        "id": "c2",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 6 条 carried_over（前序仍开放的残留）"
+  ]
+}

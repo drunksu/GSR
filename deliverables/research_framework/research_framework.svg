@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="720" viewBox="0 0 1920 720" role="img" xml:lang="zh-CN">
+  <title>状态污染检测与恢复的研究逻辑</title>
+  <desc>独立科研插图。顺序执行留下持久残留，后继任务起始条件失真。恢复本身也是设备操作，故生成可自由、执行受控、不确定则挂起。推断、生成、受控执行三步闭环，恢复轨迹再送推断。收束于待验证性质，不含实验结果。</desc>
+  <style>
+    text { font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; }
+  </style>
+  <rect width="1920" height="720" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1E3A5F"/>
+    </marker>
+    <marker id="arr-hot" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#C2410C"/>
+    </marker>
+    <marker id="arr-back" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#78716C"/>
+    </marker>
+  </defs>
+
+  <g id="problem">
+    <text x="48" y="58" font-size="34" font-weight="700" fill="#1C1917">顺序执行</text>
+    <text x="48" y="94" font-size="24" fill="#57534E">真实应用上连续运行</text>
+
+    <line x1="292" y1="48" x2="392" y2="48" stroke="#C2410C" stroke-width="2.25"/>
+    <text x="454" y="48" text-anchor="middle" dominant-baseline="central" font-size="22" fill="#9A3412">留下</text>
+    <line x1="516" y1="48" x2="608" y2="48" stroke="#C2410C" stroke-width="2.25" marker-end="url(#arr-hot)"/>
+
+    <text x="632" y="58" font-size="34" font-weight="700" fill="#9A3412">持久残留</text>
+    <text x="632" y="94" font-size="24" fill="#57534E">设备与服务器上仍保留</text>
+
+    <line x1="920" y1="48" x2="1024" y2="48" stroke="#C2410C" stroke-width="2.25"/>
+    <text x="1088" y="48" text-anchor="middle" dominant-baseline="central" font-size="22" fill="#9A3412">改写</text>
+    <line x1="1152" y1="48" x2="1248" y2="48" stroke="#C2410C" stroke-width="2.25" marker-end="url(#arr-hot)"/>
+
+    <text x="1272" y="58" font-size="34" font-weight="700" fill="#1C1917">起始失真</text>
+    <text x="1272" y="94" font-size="24" fill="#57534E">后继任务的成败随前序改变</text>
+
+    <text x="48" y="142" font-size="24" fill="#57534E">既有清理覆盖不全，执行后不核对，失败与成功无法区分；快照和重启也清不掉服务器侧残留。</text>
+  </g>
+
+  <g id="constraint">
+    <line x1="48" y1="172" x2="48" y2="204" stroke="#C2410C" stroke-width="3"/>
+    <text x="64" y="196" font-size="28" fill="#1C1917">
+      <tspan fill="#9A3412" font-weight="700">核心约束</tspan>
+      <tspan dx="16">恢复本身也是设备操作。</tspan>
+      <tspan fill="#9A3412" font-weight="700">错恢复即新污染</tspan>
+      <tspan>，故生成可自由，执行必受控；不确定与不可逆则挂起，不猜测。</tspan>
+    </text>
+  </g>
+
+  <g id="method">
+    <line x1="96" y1="236" x2="96" y2="276" stroke="#1E3A5F" stroke-width="2.25" marker-end="url(#arr)"/>
+    <text x="114" y="254" dominant-baseline="central" font-size="24" fill="#57534E">任务描述与轨迹</text>
+
+    <circle cx="96" cy="304" r="22" fill="#1E3A5F"/>
+    <text x="96" y="304" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="#FFFFFF">1</text>
+    <text x="132" y="304" dominant-baseline="central" font-size="32" font-weight="700" fill="#1E3A5F">推断</text>
+
+    <line x1="210" y1="304" x2="318" y2="304" stroke="#1E3A5F" stroke-width="2.25"/>
+    <text x="478" y="304" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#1E3A5F">污染清单 · 空则跳过</text>
+    <line x1="638" y1="304" x2="734" y2="304" stroke="#1E3A5F" stroke-width="2.25" marker-end="url(#arr)"/>
+
+    <circle cx="760" cy="304" r="22" fill="#1E3A5F"/>
+    <text x="760" y="304" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="#FFFFFF">2</text>
+    <text x="796" y="304" dominant-baseline="central" font-size="32" font-weight="700" fill="#1E3A5F">生成</text>
+
+    <line x1="874" y1="304" x2="1048" y2="304" stroke="#1E3A5F" stroke-width="2.25"/>
+    <text x="1148" y="304" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#1E3A5F">恢复任务</text>
+    <line x1="1248" y1="304" x2="1394" y2="304" stroke="#1E3A5F" stroke-width="2.25" marker-end="url(#arr)"/>
+
+    <circle cx="1420" cy="304" r="22" fill="#1E3A5F"/>
+    <text x="1420" y="304" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="700" fill="#FFFFFF">3</text>
+    <text x="1456" y="304" dominant-baseline="central" font-size="32" font-weight="700" fill="#1E3A5F">执行与验证</text>
+
+    <path d="M1420 336 V378 H96 V348" fill="none" stroke="#78716C" stroke-width="1.75" stroke-linejoin="miter" stroke-dasharray="2 7" marker-end="url(#arr-back)"/>
+    <rect x="508" y="364" width="500" height="28" fill="#FFFFFF"/>
+    <text x="758" y="378" text-anchor="middle" dominant-baseline="central" font-size="24" fill="#57534E">恢复轨迹再送推断，检查是否引入新副作用</text>
+
+    <g fill="#44403C" font-size="26">
+      <line x1="132" y1="444" x2="146" y2="444" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="156" y="452">模型只判断本任务造成的变更</text>
+      <line x1="132" y1="484" x2="146" y2="484" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="156" y="492">未清残留由代码结转，链断不传</text>
+      <line x1="132" y1="524" x2="146" y2="524" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="156" y="532">接地不通过则不产出，不以成功标志为据</text>
+
+      <line x1="796" y1="444" x2="810" y2="444" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="820" y="452">目标自由撰写，实体须有轨迹证据</text>
+      <line x1="796" y1="484" x2="810" y2="484" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="820" y="492">分开写前置检查与预期终态</text>
+      <line x1="796" y1="524" x2="810" y2="524" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="820" y="532">不可逆只生成，结转项不重复处置</text>
+
+      <line x1="1456" y1="444" x2="1470" y2="444" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="1480" y="452">在设备上执行，已干净则零动作</text>
+      <line x1="1456" y1="484" x2="1470" y2="484" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="1480" y="492">独立模型验证，执行者不自评</text>
+      <line x1="1456" y1="524" x2="1470" y2="524" stroke="#1E3A5F" stroke-width="2"/>
+      <text x="1480" y="532">不符则再试一次，仍不符则挂起</text>
+    </g>
+  </g>
+
+  <g id="goal">
+    <line x1="48" y1="582" x2="1872" y2="582" stroke="#E7E5E4" stroke-width="1.25"/>
+    <text x="48" y="626" font-size="26" fill="#57534E">要验证的性质</text>
+    <text x="230" y="626" font-size="26" fill="#1C1917">恢复正确　·　幂等　·　无新副作用　·　不确定与不可逆被挂起，而不是被猜完</text>
+    <text x="48" y="674" font-size="30" font-weight="700" fill="#1C1917">
+      <tspan fill="#1E3A5F">目标</tspan>
+      <tspan dx="14">后继任务的起始状态不再依赖前序残留</tspan>
+    </text>
+  </g>
+</svg>

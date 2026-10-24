@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_10",
+  "run_id": "base_canonical",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中清除搜索历史里名为‘绕堤沙’的记录",
+      "precondition": {
+        "target": "QQ搜索历史中是否存在‘绕堤沙’条目",
+        "check_instruction": "打开QQ，点击左上角头像进入个人主页，下拉找到‘搜索历史’区域，查看是否有‘绕堤沙’条目",
+        "clean_if_state": "当前搜索历史中已无‘绕堤沙’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ搜索历史中是否已不存在名为‘绕堤沙’的记录？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 10
+    }
+  ]
+}

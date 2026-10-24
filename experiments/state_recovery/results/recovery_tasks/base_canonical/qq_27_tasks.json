@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_27",
+  "run_id": "base_canonical",
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中找到动态内容为“西单华威 😄😅（没钱买18pro）肥鸡牛逼！？”的那条动态，将其点赞状态恢复为未点赞（即点击该动态下方的蓝色实心拇指图标使其变为空心）",
+      "precondition": {
+        "target": "该动态的点赞按钮当前是否为蓝色实心拇指图标",
+        "check_instruction": "进入QQ动态首页，找到内容为“西单华威 😄😅（没钱买18pro）肥鸡牛逼！？”的最新动态，观察其下方点赞按钮样式",
+        "clean_if_state": "点赞按钮为空心拇指图标（即未点赞状态）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ中内容为“西单华威 😄😅（没钱买18pro）肥鸡牛逼！？”的动态下方的点赞按钮是否已恢复为空心拇指图标？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 15
+    }
+  ]
+}

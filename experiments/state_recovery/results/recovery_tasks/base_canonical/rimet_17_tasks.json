@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_17",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将语音和视频通话邀请通知的开关状态恢复为开启（蓝色）",
+      "precondition": {
+        "target": "语音和视频通话邀请通知的开关是否已处于开启状态",
+        "check_instruction": "进入钉钉「设置」→「新消息通知」→「通话通知」页面，查看「语音和视频通话邀请通知」右侧的开关颜色是否为蓝色",
+        "clean_if_state": "语音和视频通话邀请通知的开关已显示为蓝色（开启状态）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "语音和视频通话邀请通知的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

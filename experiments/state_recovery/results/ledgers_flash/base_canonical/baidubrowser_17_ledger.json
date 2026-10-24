@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_17",
+  "run_id": "base_canonical",
+  "task_goal": "在百度浏览器关闭图片自动播放",
+  "judged_success": false,
+  "mutations": [
+    {
+      "type": "settings_toggle",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "夜间模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "在设置弹窗中，我清晰地看到了“夜间模式”选项...点击它应该可以直接开启或切换夜间模式。因此，下一步操作就是点击“夜间模式”按钮。...当前界面已进入夜间模式设置页面，右侧“夜间”选项已被选中（蓝色对勾），说明夜间模式已经成功启用。",
+      "confidence": 0.9,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_14",
+      "id": "c1"
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "c1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+  ]
+}

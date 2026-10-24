@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_20",
+  "run_id": "base_canonical",
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "网易云音乐中已删除的笔记“逢考必过”残留确认",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "该笔记已在服务端被不可逆删除，系统无法自动恢复其内容；需人工确认是否确需恢复，且恢复操作必须通过客服或后台介入，GUI 自动化无法执行。",
+      "suggested_manual_action": "打开网易云音乐App，进入「我的」→「笔记」页面，确认当前显示为‘笔记为空，分享你的音乐生活吧’；如需恢复，请联系网易云音乐客服并提供笔记标题‘逢考必过’及账号信息。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_repair_used": false,
+  "tasks": []
+}

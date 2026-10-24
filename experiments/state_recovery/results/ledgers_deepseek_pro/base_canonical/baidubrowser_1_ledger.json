@@ -1,0 +1,161 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_1",
+  "run_id": "base_canonical",
+  "task_goal": "在百度浏览器里搜索今日大盘点数",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "百度浏览器",
+      "entity": {
+        "kind": "setting",
+        "name": "麦克风权限",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "弹出了麦克风权限请求对话框，需要先授权才能继续语音输入。为了顺利完成“今日大盘点数”的搜索，我应选择“仅在使用中允许”…… ACTION: click([609, 2083])",
+      "confidence": 0.9,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "search_history",
+      "app": "百度浏览器",
+      "entity": {
+        "kind": "search",
+        "name": "北京今日的天气",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5
+      ],
+      "evidence_quote": "THOUGHT: 考虑到多次点击未生效...尝试直接点击顶部搜索框... ACTION: click([451, 212]) ... THOUGHT: 当前已成功激活搜索框...下一步应直接在搜索框中输入该关键词。 ACTION: type(text='北京今日的天气')",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "baidubrowser_0",
+      "id": "c2"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "account",
+        "name": "安信德小店",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        5,
+        6
+      ],
+      "evidence_quote": "我已找到作者“@安信德小店”的头像和名称，其右侧有一个红色的“+关注”按钮。...因此，下一步应点击该“+关注”按钮完成关注操作。...我现在处于作者“安信德小店”的主页，页面上清晰显示了一个红色的“关注”按钮，说明当前尚未关注该作者...因此我需要点击这个红色“关注”按钮来完成关注操作。...从当前界面可见，作者“安信德小店”的关注数已从3477变为3478，说明刚才的点击操作已成功完成关注。同时，“关注”按钮已消失，取而代之的是“私信”和“打招呼”按钮，这是已关注状态的典型表现。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_9",
+      "id": "c3"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "重庆奇人刘星，天生两套生殖系统……",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8,
+        9
+      ],
+      "evidence_quote": "第一条新闻标题为“重庆奇人刘星，天生两套生殖系统……”……点击收藏按钮，页面显示“收藏成功”，且收藏数从26变为27",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_8",
+      "id": "c4"
+    },
+    {
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "泰山上的轿夫既给游客便利，自己又得到了...",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "我已成功进入今日头条“发现”频道的第一条图片新闻详情页，并观察到右侧的点赞按钮（心形图标）已变为红色，显示“1.3万”，说明点赞操作已完成。",
+      "confidence": 0.95,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_7",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "五粮液 股价",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框已激活，键盘已弹出，可以直接输入“五粮液 股价”进行搜索。考虑到搜索历史中已有“五粮液 股价”（置顶），但为确保获取最新信息，仍手动输入更稳妥。\n        ACTION: type(text='五粮液 股价')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "articlenews_4",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "北京今日的天气",
+    "五粮液 股价"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "deepseek-v4-pro",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 5 条 carried_over（前序仍开放的残留）"
+  ]
+}

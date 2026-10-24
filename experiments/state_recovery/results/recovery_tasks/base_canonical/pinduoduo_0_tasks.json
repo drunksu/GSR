@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_0",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，确保搜索历史里存在‘iPhone 16 promax’这一条目，且该条目为最新一次搜索记录。",
+      "precondition": {
+        "target": "检查拼多多App的搜索历史中是否已包含‘iPhone 16 promax’且为最近一条。",
+        "check_instruction": "进入拼多多首页，点击搜索框，查看搜索历史列表中的条目，确认是否存在‘iPhone 16 promax’且位于列表最上方。",
+        "clean_if_state": "搜索历史中已存在‘iPhone 16 promax’且位于列表顶部（即最新搜索记录）。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多App的搜索历史列表中，‘iPhone 16 promax’是否作为最新一条记录存在？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

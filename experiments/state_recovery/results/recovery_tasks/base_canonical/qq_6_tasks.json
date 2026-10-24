@@ -1,0 +1,17 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_6",
+  "run_id": "base_canonical",
+  "tasks": [],
+  "human_gate": [
+    {
+      "mutation_id": "m1",
+      "title": "QQ中向绕堤沙发送的“看30s广告即可复活1次”消息残留",
+      "gate_reason": "reversible=irreversible → human gate",
+      "reason": "该消息已成功发送并不可逆，系统无法撤回或修改已发出的消息内容，且该消息可能已被对方查看或触发后续逻辑，自动恢复会引发状态不一致风险。",
+      "suggested_manual_action": "进入QQ聊天界面，找到与‘绕堤沙’的对话记录，定位到已发送的‘看30s广告即可复活1次’消息，根据实际需求手动长按该消息选择‘撤回’（若仍在2分钟内）或通过私聊澄清说明。"
+    }
+  ],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

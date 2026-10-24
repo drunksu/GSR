@@ -1,0 +1,168 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_18",
+  "run_id": "base_canonical",
+  "task_goal": "在 B 站会员购中搜索哆啦 A 梦",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "哆啦 A 梦",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        2
+      ],
+      "evidence_quote": "当前输入内容为“初音未来”，需要将其清空后输入“哆啦 A 梦”。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "type": "social_reaction",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "content",
+        "name": "动态",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "当前显示的动态来自用户“第七翼刀”，内容包含文字和视频，并且下方有点赞按钮（显示 305 个赞）。... 从截图中可以看到，点赞按钮已经变为红色，显示点赞数为 306，说明点赞已生效。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_17",
+      "id": "c2"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "西游记第二集",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框中当前显示的是“牧神记第二季”，我需要清空它，然后输入“西游记第二集”进行搜索。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_13",
+      "id": "c3"
+    },
+    {
+      "type": "search_history",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "search",
+        "name": "牧神记第一集",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "unknown",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "搜索框中当前显示的是“喜羊羊和灰太狼”，我需要清空它并输入“牧神记第一集”。键盘已经弹出，我可以直接使用键盘输入新的搜索内容。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_12",
+      "id": "c4"
+    },
+    {
+      "type": "search_history",
+      "app": "B 站",
+      "entity": {
+        "kind": "search",
+        "name": "每周必看",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "为了找到“每周必看”相关内容，我需要在搜索框中输入“每周必看”进行搜索，这是最直接有效的方式。",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_10",
+      "id": "c5"
+    },
+    {
+      "type": "search_history",
+      "app": "B 站",
+      "entity": {
+        "kind": "search",
+        "name": "沈腾",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "ACTION: type(text='沈腾')... THOUGHT: 搜索“沈腾”已完成",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "bili_1",
+      "id": "c6"
+    }
+  ],
+  "search_terms": [
+    "哆啦 A 梦",
+    "西游记第二集",
+    "牧神记第一集",
+    "每周必看",
+    "沈腾"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c2",
+      "c3",
+      "c5",
+      "c6"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=unknown → human gate"
+      },
+      {
+        "id": "c4",
+        "reason": "reversible=unknown → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3.5-flash",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性结转补录 5 条 carried_over（前序仍开放的残留）"
+  ]
+}

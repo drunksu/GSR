@@ -1,0 +1,70 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_12",
+  "run_id": "base_canonical",
+  "task_goal": "在番茄女生频道里面筛选包含天灾、末世、无CP等标签的小说",
+  "judged_success": true,
+  "mutations": [
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "美食 种田 系统",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "ACTION: type(text='美食 种田 系统')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_11",
+      "id": "c1"
+    },
+    {
+      "type": "search_history",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "search",
+        "name": "三体",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='三体')",
+      "confidence": 1.0,
+      "attribution": "carried_over",
+      "carried_over_from_task": "fanqieread_0",
+      "id": "c2"
+    }
+  ],
+  "search_terms": [
+    "美食 种田 系统",
+    "三体"
+  ],
+  "_gate": {
+    "autonomous": [
+      "c1",
+      "c2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": [
+    "确定性剔除无 type 输入支撑的搜索词 ['天灾']",
+    "确定性结转补录 2 条 carried_over（前序仍开放的残留）"
+  ]
+}

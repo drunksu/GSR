@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_19",
+  "run_id": "base_canonical",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将勿扰模式开启，使其处于启用状态（开关显示为蓝色）",
+      "precondition": {
+        "target": "勿扰模式当前是否已开启",
+        "check_instruction": "进入钉钉的‘勿扰模式’设置页面，查看勿扰模式对应的开关按钮颜色状态",
+        "clean_if_state": "勿扰模式开关已显示为蓝色（即已开启）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "钉钉中勿扰模式的开关是否已变为蓝色并处于开启状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}
