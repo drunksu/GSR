@@ -38,6 +38,28 @@ sys.path.insert(0, str(MBL_ROOT / "mobilebench"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
 import mbl_env  # noqa: E402
 
+# 自动注入环境变量：MobileBench 只读 os.environ，不读 mobile.env.ps1 文件
+_key = mbl_env.api_key()
+if _key and not os.environ.get("MBL_API_KEY"):
+    os.environ["MBL_API_KEY"] = _key
+if not os.environ.get("MBL_MODEL"):
+    os.environ["MBL_MODEL"] = "qwen3-vl-plus"
+if not os.environ.get("MBL_COORD"):
+    os.environ["MBL_COORD"] = "norm"
+if not os.environ.get("MBL_API_LOG"):
+    os.environ["MBL_API_LOG"] = "results/api_errors.jsonl"
+if not os.environ.get("MBL_API_RETRIES"):
+    os.environ["MBL_API_RETRIES"] = "2"
+# ADB 路径
+_adb = str(REPO_ROOT / "third_party" / "platform-tools")
+if _adb not in os.environ.get("PATH", ""):
+    os.environ["PATH"] = _adb + os.pathsep + os.environ.get("PATH", "")
+if not os.environ.get("ADBUTILS_ADB_PATH"):
+    os.environ["ADBUTILS_ADB_PATH"] = str(Path(_adb) / "adb.exe")
+# 编码
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import infer_mutations as infer  # noqa: E402
 import generate_tasks as gen  # noqa: E402
