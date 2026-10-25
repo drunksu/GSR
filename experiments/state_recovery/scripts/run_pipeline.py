@@ -17,6 +17,9 @@
 
 跳过已有结果的步骤（如已有 ledger/task，只跑执行+验证）：
   mobile\\Scripts\\python.exe run_pipeline.py --task qq_10 --skip-infer --skip-generate
+
+手机已处于污染态时，跳过原任务直接跑恢复：
+  mobile\\Scripts\\python.exe run_pipeline.py --task qq_10 --skip-original --skip-infer --skip-generate
 """
 
 from __future__ import annotations
@@ -243,7 +246,7 @@ def run_recovery(task_id: str, run: str, task_path: Path,
 
     dev_mgr = DeviceManager(serial)
     agent = AgentFactory.create(model_name, model_url, dev_mgr.d)
-    executor = TaskExecutor(dev_mgr, agent, time_sleep, max_steps=max_steps)
+    executor = TaskExecutor(dev_mgr, agent, time_sleep, maximum_steps=max_steps)
 
     # 构造恢复 Task
     from mobilebench.utils.task_executor import Task
@@ -327,13 +330,17 @@ def run_verify(task_id: str, run: str, task_path: Path,
 
 def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                      config_path: Path, skip_infer: bool,
-                     skip_generate: bool) -> dict:
+                     skip_generate: bool, skip_original: bool) -> dict:
     """跑单个任务的完整 pipeline。"""
     out_dir = PIPELINE_OUT / run
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Step 1: 原任务
-    traj_path = run_original_task(task_id, csv_path, config_path, out_dir)
+    if skip_original:
+        traj_path = MBL_ROOT / "results" / run / task_id / "trajectory.json"
+        print(f"\n[Step 1] 跳过原任务，使用已有轨迹: {traj_path}")
+    else:
+        traj_path = run_original_task(task_id, csv_path, config_path, out_dir)
 
     # Step 2: 推断
     if skip_infer:
@@ -386,6 +393,8 @@ def main() -> int:
                     help="跳过推断，使用已有 ledger")
     ap.add_argument("--skip-generate", action="store_true",
                     help="跳过生成，使用已有 recovery task")
+    ap.add_argument("--skip-original", action="store_true",
+                    help="跳过原任务执行（手机已处于污染态时用），使用已有 trajectory")
     args = ap.parse_args()
 
     if not args.task and not args.all:
@@ -406,7 +415,7 @@ def main() -> int:
         try:
             r = run_pipeline_one(
                 tid, args.run, args.csv, args.config,
-                args.skip_infer, args.skip_generate)
+                args.skip_infer, args.skip_generate, args.skip_original)
             results.append(r)
         except Exception as e:  # noqa: BLE001
             print(f"\n✗ {tid} pipeline 失败: {e}")
