@@ -64,9 +64,14 @@ if _adb not in os.environ.get("PATH", ""):
     os.environ["PATH"] = _adb + os.pathsep + os.environ.get("PATH", "")
 if not os.environ.get("ADBUTILS_ADB_PATH"):
     os.environ["ADBUTILS_ADB_PATH"] = str(Path(_adb) / "adb.exe")
-# 编码
+# 编码：强制 UTF-8 输出，避免 Windows GBK 无法编码 emoji
 os.environ.setdefault("PYTHONUTF8", "1")
 os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import infer_mutations as infer  # noqa: E402
