@@ -297,36 +297,59 @@ def run_recovery(task_id: str, run: str, task_path: Path,
 
 # ----------------------------------------------------------------- Step 5: 验证（重新检测当前状态）
 
-def run_verify(task_id: str, run: str, task_path: Path,
+def run_verify(task_id: str, run: str, ledger_path: Path,
                final_img: Path, iter_idx: int) -> dict:
-    """用 VLM 重新检测当前状态，判断污染是否已清除。"""
-    _log(f"[Step 5] Verify 重新检测状态 {task_id} (第 {iter_idx} 轮)")
+    """用 VLM 重新检测当前状态：污染是否仍存在。
+
+    视角：污染检测（不是任务完成检测）。
+    从污染清单取实体名+type，问 VLM "当前截图中是否还能看到该污染"。
+    VLM 回答 no（看不到）→ 污染已清 → 成功
+    VLM 回答 yes（看得到）→ 污染仍在 → 失败
+    """
+    _log(f"[Step 5] Verify 重新检测污染 {task_id} (第 {iter_idx} 轮)")
 
     if final_img is None or not final_img.exists():
         print("  无最终截图，验证失败")
         return {"success": False, "reason": "no_screenshot", "answer": ""}
 
-    with open(task_path, encoding="utf-8") as f:
-        pset = json.load(f)
-    tasks = pset.get("tasks", [])
-    if not tasks:
-        return {"success": False, "reason": "no_task", "answer": ""}
+    # 从污染清单取实体名和 type
+    with open(ledger_path, encoding="utf-8") as f:
+        ledger = json.load(f)
+    this_task_muts = [m for m in ledger.get("mutations", [])
+                      if m.get("attribution") == "this_task"]
+    if not this_task_muts:
+        return {"success": True, "reason": "no_contamination", "answer": ""}
 
-    question = tasks[0]["expected_end_state"]["question"]
+    # 取第一个 this_task mutation 的实体名
+    entity = this_task_muts[0].get("entity", {})
+    entity_name = entity.get("name", "")
+    mut_type = this_task_muts[0].get("type", "")
+    type_desc = {
+        "search_history": "搜索历史记录",
+        "settings_toggle": "设置项",
+        "social_reaction": "互动记录",
+        "content_lifecycle": "内容",
+        "relationship_request": "关系请求",
+        "message_send": "消息",
+        "login_session": "登录状态",
+        "session_state": "会话状态",
+    }.get(mut_type, "状态变更")
+
+    question = f"当前截图中是否还能看到'{entity_name}'这条{type_desc}？"
+    print(f"  检测实体: {entity_name} (type={mut_type})")
     print(f"  检测问题: {question}")
 
     key = mbl_env.api_key()
     if not key:
         return {"success": False, "reason": "no_api_key", "answer": ""}
 
-    # 用 qwen3-vl-plus 看图回答 yes/no
     import base64
     with open(final_img, "rb") as f:
         img_b64 = base64.b64encode(f.read()).decode()
 
     sys_prompt = (
-        "你是 GUI 状态检测器。根据截图回答用户的 yes/no 问题。"
-        "只能回答 yes 或 no，不要解释。"
+        "你是 GUI 污染检测器。请仔细观察截图，回答用户关于某个状态是否仍然存在的问题。"
+        "只能回答 yes 或 no。yes 表示该状态仍然存在，no 表示该状态已经不存在。"
     )
     messages = [
         {"role": "system", "content": sys_prompt},
@@ -342,7 +365,9 @@ def run_verify(task_id: str, run: str, task_path: Path,
     answer = infer.chat_complete(
         infer.DEFAULT_BASE_URL, key, infer.DEFAULT_MODEL, messages)
     answer = answer.strip().lower()
-    clean = "yes" in answer
+    # VLM 说 no（看不到污染）→ 污染已清 → 成功
+    still_exists = "yes" in answer
+    clean = not still_exists
     print(f"  VLM 回答: {answer}")
     print(f"  污染状态: {'已清除' if clean else '仍存在'}")
     return {"success": clean, "answer": answer, "question": question}
@@ -438,7 +463,7 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
 
         # Step 5: 重新检测当前状态
         try:
-            verify = run_verify(task_id, run, task_path, final_img, i)
+            verify = run_verify(task_id, run, ledger_path, final_img, i)
             iter_info["verify"] = verify
             if verify["success"]:
                 success = True
