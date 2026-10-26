@@ -547,6 +547,86 @@ def merge_carried(prev: dict, cur: dict, typed_n: str = "") -> dict:
     return cur
 
 
+# ----------------------------------------------------------------- 恢复复核（重新审计）
+
+VERIFY_SYS_PROMPT = """你是移动 GUI 恢复效果的复核员。给你：
+  1. 一份「待清理污染清单」（每项含 mutation_id、type、app、实体名、硬标识），
+     这是恢复任务要清除的目标；
+  2. 一条「恢复任务的完整执行轨迹」（agent 每步 Thought + Action 文本）以及各步截图。
+
+任务：逐项判断污染清单里的每一处污染，是否被这条恢复轨迹**真正清除 / 反转**。
+
+判定口径（务必逐条核对）：
+  - cleared=true 仅当轨迹里有明确证据表明该污染已被撤销 / 删除 / 关闭 / 取消，例如：
+    搜索历史里该词已被删除、开关已关闭、申请已取消、消息已撤回、内容已删除，
+    并且界面或轨迹反馈能够确认完成；
+  - 仅"进入相关页面"却没有后续清除动作，或 agent 只是口头声称完成但轨迹里看不到
+    清除动作或清除后的证据 → cleared=false；
+  - evidence_quote 必须是从 Thought/Action 文本里**逐字摘录的连续原文**；
+  - 清单里有几项就要输出几项，不得漏项，也不得编造清单里不存在的 mutation_id。
+
+严格只输出一个 JSON 对象，不要 markdown 围栏，不要多余解释：
+{{"verdicts":[{{"mutation_id":"m1","cleared":true,"evidence_quote":"..."}}]}}
+"""
+
+
+def verify_cleared(ledger: dict, recovery_traj: dict, task_dir: Path,
+                   model: str, base_url: str, key: str) -> list[dict]:
+    """复核恢复效果：逐项判断 this_task 污染是否被恢复轨迹真正清除。
+
+    返回 verdicts 列表（每项含 mutation_id / cleared / evidence_quote）；
+    清单里没有 this_task 污染时返回 []（无需复核）。
+    """
+    this_muts = [m for m in ledger.get("mutations", [])
+                 if m.get("attribution") == "this_task"]
+    if not this_muts:
+        return []
+
+    items = []
+    for m in this_muts:
+        e = m.get("entity") or {}
+        items.append({
+            "mutation_id": m.get("id"),
+            "type": m.get("type"),
+            "app": m.get("app"),
+            "entity_name": e.get("name"),
+            "entity_identifier": e.get("identifier"),
+            "direction": m.get("direction"),
+        })
+
+    lines = [
+        "## 待清理污染清单",
+        "```json",
+        json.dumps(items, ensure_ascii=False, indent=1),
+        "```",
+        "",
+        "## 恢复任务完整轨迹",
+        "",
+    ]
+    lines.extend(step_lines(recovery_traj))
+    prompt = "\n".join(lines)
+
+    imgs = step_files(task_dir, "png")
+    content: list = [{"type": "text", "text": prompt}]
+    for imgf in imgs:
+        content.append({
+            "type": "image_url",
+            "image_url": {"url": encode_image_data_url(imgf)},
+        })
+
+    messages = [
+        {"role": "system", "content": VERIFY_SYS_PROMPT},
+        {"role": "user", "content": content},
+    ]
+
+    raw = chat_complete(base_url, key, model, messages)
+    obj = parse_ledger_json(raw)
+    verdicts = obj.get("verdicts")
+    if not isinstance(verdicts, list) or not verdicts:
+        raise ValueError("复核模型未返回 verdicts 列表")
+    return verdicts
+
+
 # ----------------------------------------------------------------- 主流程
 
 def run_order(run_dir: Path) -> list[str]:

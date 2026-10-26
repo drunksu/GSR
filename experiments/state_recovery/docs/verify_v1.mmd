@@ -1,0 +1,12 @@
+flowchart TD
+    A[原任务执行] --> B[Audit 推断污染清单]
+    B --> C{有 this_task 污染?}
+    C -->|否| D[无需恢复 直接成功]
+    C -->|是| E[Planner 生成恢复任务]
+    E --> F[Execute 执行恢复]
+    F --> G[VLM 回答 expected_end_state.question]
+    G --> H{任务完成?}
+    H -->|是| I[恢复成功]
+    H -->|否| J{达到最大迭代?}
+    J -->|否| E
+    J -->|是| K[恢复失败]

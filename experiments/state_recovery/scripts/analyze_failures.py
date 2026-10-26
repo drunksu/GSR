@@ -19,7 +19,7 @@ print()
 
 # 统计失败模式
 exec_fail = 0
-verify_no = 0
+verify_fail = 0
 for d in fails:
     for it in d.get("per_iteration", []):
         if not it.get("execute_ok"):
@@ -27,18 +27,29 @@ for d in fails:
         else:
             v = it.get("verify", {})
             if not v.get("success"):
-                verify_no += 1
+                verify_fail += 1
 
 print(f"执行失败次数: {exec_fail}")
-print(f"验证说no次数: {verify_no}")
+print(f"重新审计未清除次数: {verify_fail}")
 print()
+
+def verdict_summary(v):
+    verdicts = v.get("verdicts", [])
+    if not verdicts:
+        return f"reason={v.get('reason', '?')}"
+    cleared = [x for x in verdicts if x.get("cleared")]
+    leftover = [x.get("mutation_id") for x in verdicts if not x.get("cleared")]
+    s = f"cleared={len(cleared)}/{len(verdicts)}"
+    if leftover:
+        s += f" 残留={leftover}"
+    return s
+
 
 for d in fails[:8]:
     print(f"=== {d['task_id']} ===")
     print(f"  iterations: {d['iterations']}, failure: {d['failure_reason']}")
     for it in d.get("per_iteration", []):
         v = it.get("verify", {})
-        ans = v.get("answer", "")[:40]
         print(f"  iter {it['iter']}: exec_ok={it.get('execute_ok')}, "
-              f"verify={v.get('success')}, answer={ans}")
+              f"verify={v.get('success')}, {verdict_summary(v)}")
     print()

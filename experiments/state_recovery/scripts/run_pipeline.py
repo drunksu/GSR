@@ -5,14 +5,13 @@
 完整流程：
   Step 1: 跑原任务制造污染态（MobileBench 执行原 goal）
   Step 2: Audit 初始推断污染清单
-  Step 3: 如果无 this_task 污染 → 直接成功
-  循环（最多 max_iter 次）：
-    Step 4: Planner 生成恢复任务
-    Step 5: Execute 执行恢复
-    Step 6: Verify 重新检测当前状态（VLM 看图回答 expected_end_state.question）
-            → 回答 yes（污染已清除）→ 成功，退出循环
-            → 回答 no（污染仍存在）→ 继续下一轮（重新生成+执行）
-  达到 max_iter 仍未清除 → 失败
+  Step 3: 判断是否有 this_task 污染；无污染 → 直接成功
+  闭环循环（最多 max_iter 次）：
+    a. Planner 生成恢复任务
+    b. Execute 执行恢复（轨迹+截图落盘到独立目录）
+    c. Verify 重新审计恢复轨迹（逐项判断 this_task 污染是否被真正清除）
+       全部清除 → 成功并退出；仍有残留 → 下一轮
+  达到 max_iter 仍有残留 → 失败
 
 单任务用法：
   mobile\\Scripts\\python.exe run_pipeline.py --task qq_10
@@ -163,6 +162,8 @@ def run_original_task(task_id: str, csv_path: Path, config_path: Path,
     traj = executor.run(task, task_out, reset=False)
 
     traj_path = task_out / "trajectory.json"
+    with open(traj_path, "w", encoding="utf-8") as f:
+        json.dump(traj.__dict__, f, ensure_ascii=False, indent=2)
     print(f"  原任务完成: success={traj.success}, steps={len(traj.history_action)}")
     print(f"  轨迹保存: {traj_path}")
     return traj_path
@@ -186,10 +187,12 @@ def run_infer(task_id: str, run: str, traj_path: Path,
     key = mbl_env.api_key()
     ledger = infer.infer_one(
         traj_path=traj_path,
+        run_dir=traj_path.parent.parent,
+        run_id=run,
         model=infer.DEFAULT_MODEL,
         base_url=infer.DEFAULT_BASE_URL,
-        api_key=key,
-        run_id=run,
+        key=key,
+        dry_run=False,
     )
     with open(ledger_path, "w", encoding="utf-8") as f:
         json.dump(ledger, f, ensure_ascii=False, indent=2)
@@ -230,8 +233,8 @@ def run_generate(task_id: str, run: str, ledger_path: Path,
 
 def run_recovery(task_id: str, run: str, task_path: Path,
                  csv_path: Path, config_path: Path,
-                 out_dir: Path, iter_idx: int) -> Path:
-    """执行恢复任务，返回最终截图路径。"""
+                 out_dir: Path, iter_idx: int) -> dict:
+    """执行恢复任务，返回恢复轨迹 dict 与目录信息，供重新审计用。"""
     from mobilebench.utils.task_executor import (
         DeviceManager, AgentFactory, TaskExecutor, load_tasks,
     )
@@ -245,7 +248,7 @@ def run_recovery(task_id: str, run: str, task_path: Path,
     tasks = pset.get("tasks", [])
     if not tasks:
         print(f"  无自动恢复任务（可能全是人工挂起或空任务），跳过执行")
-        return None
+        return {"traj": {}, "task_dir": None, "final_img": None}
 
     # 取第一个自动恢复任务
     rec_task = tasks[0]
@@ -282,95 +285,62 @@ def run_recovery(task_id: str, run: str, task_path: Path,
         reset_query="",
     )
 
-    rec_out = out_dir / task_id
+    # 独立目录保存本轮轨迹与截图，避免覆盖原任务 / 上一轮的文件
+    rec_out = out_dir / task_id / f"recovery_iter{iter_idx}"
     rec_out.mkdir(parents=True, exist_ok=True)
     traj = executor.run(task, rec_out, reset=False)
 
     # 取最后一张截图
     imgs = traj.history_image_path
-    final_img = imgs[-1] if imgs else None
+    final_img = Path(imgs[-1]) if imgs else None
     print(f"  恢复执行完成: steps={len(traj.history_action)}")
     if final_img:
         print(f"  最终截图: {final_img}")
-    return Path(final_img) if final_img else None
+    return {
+        "traj": traj.__dict__,
+        "task_dir": str(rec_out),
+        "final_img": str(final_img) if final_img else None,
+    }
 
 
 # ----------------------------------------------------------------- Step 5: 验证（重新检测当前状态）
 
 def run_verify(task_id: str, run: str, ledger_path: Path,
-               final_img: Path, iter_idx: int) -> dict:
-    """用 VLM 重新检测当前状态：污染是否仍存在。
+               recovery_traj: dict, task_dir: str, iter_idx: int) -> dict:
+    """重新审计恢复轨迹：逐项判断 this_task 污染是否被真正清除。
 
-    视角：污染检测（不是任务完成检测）。
-    从污染清单取实体名+type，问 VLM "当前截图中是否还能看到该污染"。
-    VLM 回答 no（看不到）→ 污染已清 → 成功
-    VLM 回答 yes（看得到）→ 污染仍在 → 失败
+    对照原始污染清单（ledger），让 VLM 复核整条恢复轨迹（含各步截图），
+    逐项判断每一处 this_task 污染是否已被撤销/删除/关闭/取消。全部清除才算成功。
     """
-    _log(f"[Step 5] Verify 重新检测污染 {task_id} (第 {iter_idx} 轮)")
+    _log(f"[Step 5] Verify 重新审计恢复轨迹 {task_id} (第 {iter_idx} 轮)")
 
-    if final_img is None or not final_img.exists():
-        print("  无最终截图，验证失败")
-        return {"success": False, "reason": "no_screenshot", "answer": ""}
-
-    # 从污染清单取实体名和 type
     with open(ledger_path, encoding="utf-8") as f:
         ledger = json.load(f)
     this_task_muts = [m for m in ledger.get("mutations", [])
                       if m.get("attribution") == "this_task"]
     if not this_task_muts:
-        return {"success": True, "reason": "no_contamination", "answer": ""}
+        return {"success": True, "reason": "no_contamination", "verdicts": []}
 
-    # 取第一个 this_task mutation 的实体名
-    entity = this_task_muts[0].get("entity", {})
-    entity_name = entity.get("name", "")
-    mut_type = this_task_muts[0].get("type", "")
-    type_desc = {
-        "search_history": "搜索历史记录",
-        "settings_toggle": "设置项",
-        "social_reaction": "互动记录",
-        "content_lifecycle": "内容",
-        "relationship_request": "关系请求",
-        "message_send": "消息",
-        "login_session": "登录状态",
-        "session_state": "会话状态",
-    }.get(mut_type, "状态变更")
-
-    question = f"当前截图中是否还能看到'{entity_name}'这条{type_desc}？"
-    print(f"  检测实体: {entity_name} (type={mut_type})")
-    print(f"  检测问题: {question}")
+    if not task_dir:
+        return {"success": False, "reason": "no_recovery_traj", "verdicts": []}
 
     key = mbl_env.api_key()
     if not key:
-        return {"success": False, "reason": "no_api_key", "answer": ""}
+        return {"success": False, "reason": "no_api_key", "verdicts": []}
 
-    import base64
-    with open(final_img, "rb") as f:
-        img_b64 = base64.b64encode(f.read()).decode()
+    verdicts = infer.verify_cleared(
+        ledger, recovery_traj, Path(task_dir),
+        infer.DEFAULT_MODEL, infer.DEFAULT_BASE_URL, key)
 
-    sys_prompt = (
-        "你是 GUI 污染检测器。请仔细观察截图，回答用户关于某个状态是否仍然存在的问题。"
-        "只能回答 yes 或 no。yes 表示该状态仍然存在，no 表示该状态已经不存在。"
-    )
-    messages = [
-        {"role": "system", "content": sys_prompt},
-        {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": question},
-                {"type": "image_url",
-                 "image_url": {"url": f"data:image/png;base64,{img_b64}"}},
-            ],
-        },
-    ]
-    answer = infer.chat_complete(
-        infer.DEFAULT_BASE_URL, key, infer.DEFAULT_MODEL, messages)
-    answer = answer.strip().lower()
-    # VLM 说 no（看不到污染）→ 污染已清 → 成功
-    still_exists = "yes" in answer
-    clean = not still_exists
-    print(f"  VLM 回答: {answer}")
-    print(f"  污染状态: {'已清除' if clean else '仍存在'}")
-    return {"success": clean, "answer": answer, "question": question}
+    ids = {m.get("id") for m in this_task_muts}
+    got = {v.get("mutation_id") for v in verdicts}
+    cleared_ids = {v.get("mutation_id") for v in verdicts
+                   if v.get("cleared") is True}
+    all_cleared = bool(ids) and ids.issubset(got) and ids.issubset(cleared_ids)
+
+    print(f"  复核 verdicts: {verdicts}")
+    print(f"  污染状态: {'已全部清除' if all_cleared else '仍有残留'}")
+    return {"success": all_cleared, "reason": "reaudit", "verdicts": verdicts}
 
 
 # ----------------------------------------------------------------- 主流程
@@ -449,10 +419,11 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
 
         # Step 4: 执行恢复
         try:
-            final_img = run_recovery(task_id, run, task_path, csv_path,
-                                     config_path, out_dir, i)
-            iter_info["execute_ok"] = final_img is not None
-            iter_info["final_screenshot"] = str(final_img) if final_img else None
+            rec = run_recovery(task_id, run, task_path, csv_path,
+                               config_path, out_dir, i)
+            iter_info["execute_ok"] = rec["final_img"] is not None
+            iter_info["final_screenshot"] = rec["final_img"]
+            iter_info["recovery_task_dir"] = rec["task_dir"]
         except Exception as e:
             iter_info["execute_ok"] = False
             iter_info["error"] = str(e)
@@ -461,9 +432,10 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
             print(f"  ✗ 第 {i} 轮执行失败: {e}")
             break
 
-        # Step 5: 重新检测当前状态
+        # Step 5: 重新审计恢复轨迹，判断污染是否清除
         try:
-            verify = run_verify(task_id, run, ledger_path, final_img, i)
+            verify = run_verify(task_id, run, ledger_path, rec["traj"],
+                                rec["task_dir"], i)
             iter_info["verify"] = verify
             if verify["success"]:
                 success = True
