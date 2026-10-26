@@ -227,6 +227,16 @@ class TaskExecutor:
         self.agent = agent
         self.time_sleep = time_sleep
         self.maximum_steps = maximum_steps
+        # 阶段2 Harness：每步回调（默认 None → 行为与 v1 一致）
+        self._step_callback = None
+
+    def set_step_callback(self, cb) -> None:
+        """阶段2 Harness：每步执行后调用 cb(step_count, ok, stepdata) -> bool。
+
+        返回 True 表示 Harness 要求暂停本轮执行（返回控制权）。
+        默认无回调时 run() 行为与 v1 完全一致。
+        """
+        self._step_callback = cb
 
     def run(self, task: Task, save_dir: Path, reset: bool = False) -> Trajectory:
         self.agent.clear()
@@ -253,6 +263,10 @@ class TaskExecutor:
                 ok, stepdata = self.agent.step(task.goal, path=str(save_dir))
                 if ok:
                     break
+                # 阶段2 Harness：关键动作后返回控制权（默认无回调，行为与 v1 一致）
+                if self._step_callback is not None:
+                    if self._step_callback(len(stepdata["history_action"]), ok, stepdata):
+                        break
             time.sleep(self.time_sleep)
             success = evaluator_xpath.evaluate(task.key_nodes, stepdata)
 

@@ -1,0 +1,34 @@
+{
+  "schema": "policy-decision/v0.1",
+  "transitions": {
+    "init": {
+      "REPLAN": "planned"
+    },
+    "planned": {
+      "EXECUTE_PLAN": "executed",
+      "VERIFY": "verified (证据已足够，直接终验)",
+      "RE_AUDIT": "planned (重审计后重新规划)",
+      "REPLAN": "planned (计划被拒)",
+      "STOP_FAILURE": "terminal (计划重复被拒)",
+      "STOP_NEEDS_HUMAN": "terminal (人工门控)"
+    },
+    "executed": {
+      "VERIFY": "verified",
+      "RE_AUDIT": "planned (重审计后重新规划)",
+      "STOP_FAILURE": "terminal (预算耗尽)"
+    },
+    "verified": {
+      "STOP_SUCCESS": "terminal",
+      "OBSERVE": "verified (补证一次)",
+      "RE_AUDIT": "planned (重审计后重新规划)",
+      "REPLAN": "planned (失败且有进展/仍不确定)",
+      "STOP_FAILURE": "terminal (连续无进展/重复)"
+    },
+    "terminal": {
+      "STOP_*": "terminal (幂等)"
+    }
+  },
+  "no_progress_limit": 2,
+  "llm_call_cap_rule": "max_iter*2+1",
+  "actions_cap_rule": "max_iter*5"
+}

@@ -1,0 +1,684 @@
+[
+  {
+    "fault": "click_no_effect",
+    "expected_v4_response": "V3/V4 无进展早停（不重复盲跑）",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "page_delay_update",
+    "expected_v4_response": "V3/V4 无进展早停",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "control_moved",
+    "expected_v4_response": "V2+ precheck/校验拦截，不执行盲动",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "ledger_stale",
+    "expected_v4_response": "V4 证据足够直接终验（跳过第 2 轮执行）",
+    "versions": {
+      "V0": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_SUCCESS",
+        "termination_reason": "recovered",
+        "llm_calls": 2,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": true,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_SUCCESS",
+        "termination_reason": "recovered",
+        "llm_calls": 2,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": true,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_SUCCESS",
+        "termination_reason": "recovered",
+        "llm_calls": 2,
+        "actions_total": 2,
+        "decision_log": [],
+        "truth_cleared": true,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_SUCCESS",
+        "termination_reason": "recovered",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_SUCCESS"
+        ],
+        "truth_cleared": true,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 1,
+        "verify": 2,
+        "decision": "STOP_SUCCESS",
+        "termination_reason": "recovered",
+        "llm_calls": 4,
+        "actions_total": 1,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "VERIFY",
+          "STOP_SUCCESS"
+        ],
+        "truth_cleared": true,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "same_action_repeat_fail",
+    "expected_v4_response": "V4 tool_failure_run → OBSERVE 重新观察",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 2,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 4,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 4,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "OBSERVE",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "historical_pollution_target",
+    "expected_v4_response": "V2+ 授权检查拒绝越权目标（不执行）",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 1,
+        "replan": 2,
+        "execute": 0,
+        "verify": 0,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "plan_rejected",
+        "llm_calls": 1,
+        "actions_total": 0,
+        "decision_log": [
+          "REPLAN",
+          "REPLAN",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 1,
+        "replan": 2,
+        "execute": 0,
+        "verify": 0,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "plan_rejected",
+        "llm_calls": 1,
+        "actions_total": 0,
+        "decision_log": [
+          "REPLAN",
+          "REPLAN",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "planner_invalid_precondition",
+    "expected_v4_response": "V3/V4 计划校验拒绝 → REPLAN 或安全终止",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 1,
+        "replan": 2,
+        "execute": 0,
+        "verify": 0,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "plan_rejected",
+        "llm_calls": 1,
+        "actions_total": 0,
+        "decision_log": [
+          "REPLAN",
+          "REPLAN",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 1,
+        "replan": 2,
+        "execute": 0,
+        "verify": 0,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "plan_rejected",
+        "llm_calls": 1,
+        "actions_total": 0,
+        "decision_log": [
+          "REPLAN",
+          "REPLAN",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  },
+  {
+    "fault": "verify_insufficient",
+    "expected_v4_response": "V3/V4 OBSERVE 补证一次，不宣布成功",
+    "versions": {
+      "V0": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V1": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V2": {
+        "iterations": 3,
+        "replan": 3,
+        "execute": 3,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "max_iter_exceeded",
+        "llm_calls": 3,
+        "actions_total": 0,
+        "decision_log": [],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V3": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "OBSERVE",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      },
+      "V4": {
+        "iterations": 2,
+        "replan": 2,
+        "execute": 2,
+        "verify": 3,
+        "decision": "STOP_FAILURE",
+        "termination_reason": "no_progress",
+        "llm_calls": 4,
+        "actions_total": 2,
+        "decision_log": [
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "OBSERVE",
+          "REPLAN",
+          "EXECUTE_PLAN",
+          "VERIFY",
+          "STOP_FAILURE"
+        ],
+        "truth_cleared": false,
+        "erroneous_success": false
+      }
+    }
+  }
+]

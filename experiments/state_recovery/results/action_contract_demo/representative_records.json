@@ -1,0 +1,463 @@
+{
+  "schema": "action-contract/v0.1",
+  "records": [
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step1",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "position=[1, 2]",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": true,
+        "reason": "precheck passed",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "pass",
+            "note": "点击类动作带明确 position"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "无显式 id（position 型），无法确定性验证可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 10"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": false,
+        "error": "adb: device not found"
+      },
+      "execution_status": "error",
+      "gui_changed": "unchanged",
+      "clearance": "not_cleared",
+      "clearance_basis": "设置项 夜间模式 仍处于开启状态",
+      "new_contamination_signal": false,
+      "observation_ref": {
+        "xml_before_sig": "6bb1160927940c1307de41eb475e076c",
+        "xml_after_sig": "6bb1160927940c1307de41eb475e076c"
+      },
+      "error_reason": "adb: device not found",
+      "_scenario": "tool_failure"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step2",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "position=[1, 2]",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": true,
+        "reason": "precheck passed",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "pass",
+            "note": "点击类动作带明确 position"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "无显式 id（position 型），无法确定性验证可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 9"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": true,
+        "error": null
+      },
+      "execution_status": "executed",
+      "gui_changed": "unchanged",
+      "clearance": "not_cleared",
+      "clearance_basis": "设置项 夜间模式 仍处于开启状态",
+      "new_contamination_signal": false,
+      "observation_ref": {
+        "xml_before_sig": "6bb1160927940c1307de41eb475e076c",
+        "xml_after_sig": "6bb1160927940c1307de41eb475e076c"
+      },
+      "error_reason": null,
+      "_scenario": "no_state_change"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step3",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": false,
+        "reason": "target_clarity: 点击类动作缺少明确 position 参数",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "block",
+            "note": "点击类动作缺少明确 position 参数"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "无显式 id（position 型），无法确定性验证可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 8"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": null,
+        "error": "target_clarity: 点击类动作缺少明确 position 参数"
+      },
+      "execution_status": "blocked",
+      "gui_changed": "uncertain",
+      "clearance": "uncertain",
+      "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+      "new_contamination_signal": false,
+      "observation_ref": null,
+      "error_reason": "target_clarity: 点击类动作缺少明确 position 参数",
+      "_scenario": "target_unlocatable"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step4",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "id=com.qq:id/toggle",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": false,
+        "reason": "target_clarity: 点击类动作缺少明确 position 参数; target_found: 目标控件 com.qq:id/toggle 不在当前页面（前置条件不成立）",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "block",
+            "note": "点击类动作缺少明确 position 参数"
+          },
+          "target_found": {
+            "result": "block",
+            "note": "目标控件 com.qq:id/toggle 不在当前页面（前置条件不成立）"
+          },
+          "precondition": {
+            "result": "unknown",
+            "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 7"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": null,
+        "error": "target_clarity: 点击类动作缺少明确 position 参数; target_found: 目标控件 com.qq:id/toggle 不在当前页面（前置条件不成立）"
+      },
+      "execution_status": "blocked",
+      "gui_changed": "uncertain",
+      "clearance": "uncertain",
+      "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+      "new_contamination_signal": false,
+      "observation_ref": null,
+      "error_reason": "target_clarity: 点击类动作缺少明确 position 参数; target_found: 目标控件 com.qq:id/toggle 不在当前页面（前置条件不成立）",
+      "_scenario": "precondition_invalid"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step5",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "position=[1, 2]",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": true,
+        "reason": "precheck passed",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "pass",
+            "note": "点击类动作带明确 position"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "无显式 id（position 型），无法确定性验证可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 6"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": true,
+        "error": null
+      },
+      "execution_status": "executed",
+      "gui_changed": "changed",
+      "clearance": "not_cleared",
+      "clearance_basis": "设置项 夜间模式 仍处于开启状态",
+      "new_contamination_signal": false,
+      "observation_ref": {
+        "xml_before_sig": "6bb1160927940c1307de41eb475e076c",
+        "xml_after_sig": "9e6ca4f65ef95ff9975cd7d7b58c8901"
+      },
+      "error_reason": null,
+      "_scenario": "pollution_remains"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step6",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "position=[1, 2]",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": true,
+        "reason": "precheck passed",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "pass",
+            "note": "点击类动作带明确 position"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "无显式 id（position 型），无法确定性验证可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 5"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": true,
+        "error": null
+      },
+      "execution_status": "executed",
+      "gui_changed": "changed",
+      "clearance": "cleared",
+      "clearance_basis": "设置项 夜间模式 已关闭",
+      "new_contamination_signal": false,
+      "observation_ref": {
+        "xml_before_sig": "6bb1160927940c1307de41eb475e076c",
+        "xml_after_sig": "e326936cae343dcaa096722f6fa61cbe"
+      },
+      "error_reason": null,
+      "_scenario": "externally_cleared"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step7",
+      "target_id": "m1",
+      "action_type": "click",
+      "target_description": "position=[1, 2]",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": true,
+        "reason": "precheck passed",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 click"
+          },
+          "target_clarity": {
+            "result": "pass",
+            "note": "点击类动作带明确 position"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "无显式 id（position 型），无法确定性验证可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 4"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": true,
+        "error": null
+      },
+      "execution_status": "executed",
+      "gui_changed": "uncertain",
+      "clearance": "uncertain",
+      "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+      "new_contamination_signal": false,
+      "observation_ref": {
+        "xml_before_sig": "6bb1160927940c1307de41eb475e076c",
+        "xml_after_sig": ""
+      },
+      "error_reason": null,
+      "_scenario": "insufficient_evidence"
+    },
+    {
+      "schema": "action-contract/v0.1",
+      "action_id": "demo.recovery.base_canonical.iter1.step8",
+      "target_id": "m1",
+      "action_type": "type",
+      "target_description": "新残留词条",
+      "preconditions": {
+        "schema": "action-contract/v0.1",
+        "allow": true,
+        "reason": "precheck passed",
+        "checks": {
+          "action_allowed": {
+            "result": "pass",
+            "note": "允许的动作类型 type"
+          },
+          "target_clarity": {
+            "result": "pass",
+            "note": "输入动作带非空 text"
+          },
+          "target_found": {
+            "result": "unknown",
+            "note": "仅点击类检查控件可达性"
+          },
+          "precondition": {
+            "result": "pass",
+            "note": "前置条件检查对象在当前页面可见"
+          },
+          "authorized": {
+            "result": "unknown",
+            "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+          },
+          "budget": {
+            "result": "pass",
+            "note": "剩余动作配额 3"
+          }
+        }
+      },
+      "expected_effect": {
+        "kind": "vlm_judge",
+        "question": "夜间模式开关是否已关闭？",
+        "expected": "yes"
+      },
+      "tool_result": {
+        "adb_ok": true,
+        "error": null
+      },
+      "execution_status": "executed",
+      "gui_changed": "changed",
+      "clearance": "cleared",
+      "clearance_basis": "设置项 夜间模式 已关闭",
+      "new_contamination_signal": true,
+      "observation_ref": {
+        "xml_before_sig": "c2209277a50f14b54dffd7fea576bc9b",
+        "xml_after_sig": "00c3839306cedb678ab529555d6ee8c9"
+      },
+      "error_reason": null,
+      "_scenario": "new_contamination"
+    }
+  ]
+}
