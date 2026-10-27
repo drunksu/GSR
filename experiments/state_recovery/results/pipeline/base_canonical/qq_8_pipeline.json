@@ -1,0 +1,51 @@
+{
+  "task_id": "qq_8",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\qq_8\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\qq_8_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\qq_8_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\qq_8_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\qq_8\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在QQ表情面板中是否已存在名为“恭喜发财”的表情包且处于可点击选中状态？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\qq_8_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\qq_8\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "QQ搜索历史中是否明确显示了‘恭喜发财’这一条目？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\qq_8_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\qq_8\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "恭喜发财的状态是否已恢复到目标状态？"
+      }
+    }
+  ]
+}

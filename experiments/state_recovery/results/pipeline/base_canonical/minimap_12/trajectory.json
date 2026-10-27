@@ -1,0 +1,63 @@
+{
+  "task_id": "minimap_12",
+  "task_goal": "在高德看看我的收藏夹",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1038,
+          2517
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.85,
+          0.93
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          373,
+          1410
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.31,
+          0.52
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "已在高德地图中查看了我的收藏夹"
+      },
+      "normalized_params": {
+        "text": "已在高德地图中查看了我的收藏夹"
+      }
+    }
+  ],
+  "history_image_path": [
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_12\\step_1.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_12\\step_2.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_12\\step_3.png"
+  ],
+  "history_response": [
+    "Thought: 我需要查看高德地图中的收藏夹。当前界面是高德地图的首页，底部导航栏有“我的”选项，点击它应该可以进入个人中心，在那里找到收藏夹。  \nAction: click(point='<point>851 928</point>')",
+    "Thought: 在“我的”页面中，我看到了一个“收藏”图标（星形），这正是查看收藏夹的入口。根据任务目标，下一步应点击该图标进入收藏夹页面。  \nAction: click(point='<point>306 520</point>')",
+    "Thought: 我已经成功进入了高德地图的“我收藏的”页面，可以看到创建的收藏夹（如“成定”“城市定向”）以及默认收藏夹中的地点（如“北京大学(东门)”等）。这表明任务目标——查看收藏夹——已经完成。  \nAction: finished(content='已在高德地图中查看了我的收藏夹')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

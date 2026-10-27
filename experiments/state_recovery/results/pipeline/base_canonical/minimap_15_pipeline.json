@@ -1,0 +1,105 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "minimap_15",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\minimap_15_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\minimap_15_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "计划与已失败尝试重复且无变化",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\minimap_15_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中将公司地址设置为小米科技园B栋",
+        "m2": "在高德地图中将公司地址设置为小米移动互联网产业园B栋，并确保该地址已成功保存为当前公司地址"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical.1793044216.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1038, 2517]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "小米科技园B栋的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "界面中不再包含词条 小米科技园B栋",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "e6af050854fb5f6685e1f3c6a4a1264b",
+            "xml_after_sig": "858f941e28733ba07a0038ffd1bdf264"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\recovery_iter1\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\recovery_iter1",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1038,
+              2517
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_15\\recovery_iter1\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 

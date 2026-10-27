@@ -1,0 +1,51 @@
+{
+  "task_id": "wuba_20",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_20\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\wuba_20_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_20_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_20_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_20\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "当前58同城App界面是否已成功显示房贷计算器功能主界面？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_20_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_20\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "当前58同城App界面是否已成功显示房贷计算器的主功能页面？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_20_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_20\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "房贷计算器的状态是否已恢复到目标状态？"
+      }
+    }
+  ]
+}

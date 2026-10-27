@@ -1,0 +1,570 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "minimap_8",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\minimap_8_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\minimap_8_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "GUI 动作预算耗尽 (16/15)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\minimap_8_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中将搜索状态恢复为已输入‘三里屯’并处于搜索准备就绪状态，即搜索框内显示‘三里屯’且未触发搜索结果列表展开",
+        "m2": "在高德地图中将搜索状态恢复为已输入‘麦当劳’并显示相关搜索结果列表的状态"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[464, 1595]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "0e07f99c0188e28af54961b111f14559",
+            "xml_after_sig": "a68865b94c9ba7040b4f4a03057dd557"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[454, 2593]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "a68865b94c9ba7040b4f4a03057dd557",
+            "xml_after_sig": "a68865b94c9ba7040b4f4a03057dd557"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[454, 2593]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "a68865b94c9ba7040b4f4a03057dd557",
+            "xml_after_sig": "a68865b94c9ba7040b4f4a03057dd557"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step4",
+          "target_id": "m1",
+          "action_type": "type",
+          "target_description": "三里屯",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 type"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "输入动作带非空 text"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "动作目标与恢复实体 三里屯 直接关联"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "a68865b94c9ba7040b4f4a03057dd557",
+            "xml_after_sig": "10fd40a770fd5c90e0f8494131cfc08c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[611, 119]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "4f2798bb592f421829fc58166372f352",
+            "xml_after_sig": "eb5c48df23f9d505d0d894470ad17e64"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[254, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "eb5c48df23f9d505d0d894470ad17e64",
+            "xml_after_sig": "0ae73dd02ae25ca445e19226b92b1e47"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1115, 1722]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 三里屯",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "0ae73dd02ae25ca445e19226b92b1e47",
+            "xml_after_sig": "216fea4ac08f20c20d83192315c2084f"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_8.base_canonical.1793046123.iter1.step8",
+          "target_id": "m1",
+          "action_type": "invalid",
+          "target_description": "",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": false,
+            "reason": "action_allowed: 非法动作类型 'invalid'",
+            "checks": {
+              "action_allowed": {
+                "result": "block",
+                "note": "非法动作类型 'invalid'"
+              },
+              "target_clarity": {
+                "result": "unknown",
+                "note": "无法判定目标明确性"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "三里屯的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": null,
+            "error": "action_allowed: 非法动作类型 'invalid'"
+          },
+          "execution_status": "blocked",
+          "gui_changed": "uncertain",
+          "clearance": "uncertain",
+          "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+          "new_contamination_signal": false,
+          "observation_ref": null,
+          "error_reason": "action_allowed: 非法动作类型 'invalid'"
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              464,
+              1595
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              454,
+              2593
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              454,
+              2593
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "type",
+            "target": "三里屯",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              611,
+              119
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              254,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              1115,
+              1722
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "invalid",
+            "target": null,
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_8\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 

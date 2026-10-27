@@ -1,0 +1,240 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "articlenews_19",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\articlenews_19_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\articlenews_19_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\articlenews_19_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中将一键防护开关开启，使其处于开启状态（绿色），确保3天内不接收陌生人的评论、转发和私信"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_19.base_canonical.1793031059.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1097, 2582]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条隐私中心的‘互动’部分，‘一键防护开关’是否已显示为绿色开启状态，表示3天内不接收陌生人评论/转发/私信？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "ae03f3de631331d47abcaf104828b545",
+            "xml_after_sig": "e74b3ea1977f940946c4ef36a9f61334"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_19.base_canonical.1793031059.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1113, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条隐私中心的‘互动’部分，‘一键防护开关’是否已显示为绿色开启状态，表示3天内不接收陌生人评论/转发/私信？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "e74b3ea1977f940946c4ef36a9f61334",
+            "xml_after_sig": "0cf2c12b1bdf3048fbff48da2cdf03b2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_19.base_canonical.1793031059.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[167, 903]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条隐私中心的‘互动’部分，‘一键防护开关’是否已显示为绿色开启状态，表示3天内不接收陌生人评论/转发/私信？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 一键防护开关 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "0cf2c12b1bdf3048fbff48da2cdf03b2",
+            "xml_after_sig": "081a04da1bc10f03966d43a5cb9c43c2"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_3.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1",
+        "step_count": 3,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1097,
+              2582
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1113,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              167,
+              903
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_19\\recovery_iter1\\step_3.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 

@@ -1,0 +1,51 @@
+{
+  "task_id": "tonghuashun_5",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_5\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\tonghuashun_5_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_5_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_5_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_5\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺自选股列表中，光大证券（601788）右侧按钮是否为“−”？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_5_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_5\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "光大证券（601788）的状态是否已恢复到目标状态？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_5_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_5\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺中，光大证券（601788）右侧的按钮是否为‘−’，表明它已被成功加入自选股？"
+      }
+    }
+  ]
+}

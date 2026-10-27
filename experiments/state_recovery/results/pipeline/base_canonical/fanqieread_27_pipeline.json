@@ -1,0 +1,240 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "fanqieread_27",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\fanqieread_27_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\fanqieread_27_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\fanqieread_27_tasks.json",
+      "accepted_plan": {
+        "m1": "在番茄小说中将‘清理缓存’功能恢复为可点击的一键清理状态，即确保‘清理缓存’页面显示可清理缓存大小（如766.48 MB）且右侧存在橙色‘一键清理’按钮。"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_27.base_canonical.1793041697.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1077, 2579]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在番茄小说的‘清理缓存’页面中，是否同时显示了可清理缓存大小（例如766.48 MB）和右侧橙色‘一键清理’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "01ca889a1aa27571f815c115b3163ea3",
+            "xml_after_sig": "f5304746c0a38a4bd4bb7bf851e5b6da"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_27.base_canonical.1793041697.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1130, 201]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在番茄小说的‘清理缓存’页面中，是否同时显示了可清理缓存大小（例如766.48 MB）和右侧橙色‘一键清理’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "f5304746c0a38a4bd4bb7bf851e5b6da",
+            "xml_after_sig": "cf94a794eef47fe79dd6272639364109"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_27.base_canonical.1793041697.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1122, 201]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在番茄小说的‘清理缓存’页面中，是否同时显示了可清理缓存大小（例如766.48 MB）和右侧橙色‘一键清理’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 清理缓存 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "cf94a794eef47fe79dd6272639364109",
+            "xml_after_sig": "cb9a3e0325c43d9ffbca35008ee7b1f8"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_3.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1",
+        "step_count": 3,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1077,
+              2579
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1130,
+              201
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              1122,
+              201
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_27\\recovery_iter1\\step_3.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 

@@ -1,0 +1,105 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "fanqieread_5",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\fanqieread_5_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\fanqieread_5_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\fanqieread_5_tasks.json",
+      "accepted_plan": {
+        "m1": "在番茄小说App中，确保搜索框中已输入‘明朝那些事儿’并完成搜索，使页面正确展示该书的详情页，以便查看其书评并为第一条书评点赞",
+        "m2": "在番茄小说中，将书评‘没得说 这本书非常好看 比番茄上任何一本历史小说都好看...’的状态恢复为已点赞状态（即点赞数已增加1且图标呈高亮）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_5.base_canonical.1793042451.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1071, 187]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "当前页面是否已正确显示‘明朝那些事儿’的书籍详情页？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "界面中不再包含词条 明朝那些事儿",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "e61e33465b424b3d3716c06916006aaa",
+            "xml_after_sig": "154be2d753e8d58ed5bfad96f5bc0e21"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\recovery_iter1\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\recovery_iter1",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1071,
+              187
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_5\\recovery_iter1\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 

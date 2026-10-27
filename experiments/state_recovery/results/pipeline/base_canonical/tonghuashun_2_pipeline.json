@@ -1,0 +1,51 @@
+{
+  "task_id": "tonghuashun_2",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_2\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\tonghuashun_2_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_2_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_2_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_2\\step_5.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "同花顺App的搜索历史中是否明确显示‘云南白药’条目，且当前页面为云南白药的个股详情页并展示周K线图？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_2_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_2\\step_5.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺App的搜索历史列表中，能否看到‘云南白药’条目并点击后进入其个股页面？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_2_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_2\\step_7.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "云南白药的状态是否已恢复到目标状态？"
+      }
+    }
+  ]
+}

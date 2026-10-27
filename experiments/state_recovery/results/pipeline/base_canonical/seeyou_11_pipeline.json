@@ -1,0 +1,39 @@
+{
+  "task_id": "seeyou_11",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_11\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\seeyou_11_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_11_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": true,
+  "first_try_success": false,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_11_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_11\\step_7.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在美柚App中，‘问医生’功能的提问页面是否已打开，且输入框为空、未包含‘能不能吃’等无关历史内容？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_11_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_11\\step_6.png",
+      "verify": {
+        "success": true,
+        "answer": "yes",
+        "question": "问医生的状态是否已恢复到目标状态？"
+      }
+    }
+  ]
+}

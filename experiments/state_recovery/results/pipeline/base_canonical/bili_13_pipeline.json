@@ -1,0 +1,237 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "bili_13",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\bili_13_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\bili_13_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\bili_13_tasks.json",
+      "accepted_plan": {
+        "m1": "在B站中搜索并打开‘西游记第二集’的视频页面，确保当前播放或展示的是该视频的主播放页。"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "bili_13.base_canonical.1793035917.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[547, 198]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "当前B站页面是否正在展示标题为‘西游记第二集’的视频播放页？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 西游记第二集",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "3decfa7f462aea317fbcd3a885ac877c",
+            "xml_after_sig": "18ce3e044b350ba9f0c351987e31c02b"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "bili_13.base_canonical.1793035917.iter1.step2",
+          "target_id": "m1",
+          "action_type": "type",
+          "target_description": "西游记第二集",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 type"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "输入动作带非空 text"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "动作目标与恢复实体 西游记第二集 直接关联"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "当前B站页面是否正在展示标题为‘西游记第二集’的视频播放页？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "not_cleared",
+          "clearance_basis": "界面仍包含词条 西游记第二集",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "18ce3e044b350ba9f0c351987e31c02b",
+            "xml_after_sig": "1272ca2aa58997773184d333784d66cf"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "bili_13.base_canonical.1793035917.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[314, 626]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "当前B站页面是否正在展示标题为‘西游记第二集’的视频播放页？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "界面中不再包含词条 西游记第二集",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "1272ca2aa58997773184d333784d66cf",
+            "xml_after_sig": "8b4a520504f8b7cb1bce4a58f4339c96"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_3.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1",
+        "step_count": 3,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              547,
+              198
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "type",
+            "target": "西游记第二集",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              314,
+              626
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\bili_13\\recovery_iter1\\step_3.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 

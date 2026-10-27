@@ -1,0 +1,51 @@
+{
+  "task_id": "tonghuashun_21",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_21\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\tonghuashun_21_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_21_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_21_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_21\\step_4.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "同花顺App中是否已成功显示‘新发基金’标题及其对应的最新基金列表？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_21_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_21\\step_7.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "同花顺App当前页面是否明确显示‘新发基金’标题及对应的新发基金列表？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_21_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_21\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "同花顺App中当前页面是否明确显示‘新发基金’标题及最新发行的基金列表？"
+      }
+    }
+  ]
+}

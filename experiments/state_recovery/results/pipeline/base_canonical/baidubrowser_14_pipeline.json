@@ -1,0 +1,62 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "baidubrowser_14",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\baidubrowser_14\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\baidubrowser_14_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "baidubrowser_14.base_canonical.1793033453",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "百度浏览器",
+        "entity": {
+          "kind": "setting",
+          "name": "夜间模式",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "attempted_unknown",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4,
+          5
+        ],
+        "evidence_quote": "Step 4: THOUGHT: 在设置菜单中，我找到了“夜间模式”选项，图标是一个月亮形状，位于“常用功能”区域。这正是我们需要的入口，点击它应该可以开启或关闭夜间模式。根据任务目标，下一步就是点击这个“夜间模式”选项。\\nStep 5: THOUGHT: 当前界面已进入夜间模式设置页面，右侧“夜间”选项已被选中（蓝色对勾），说明百度浏览器已成功切换为夜间模式。",
+        "confidence": 0.4,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "夜间模式",
+        "description": "设置项 夜间模式 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

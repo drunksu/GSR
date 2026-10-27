@@ -1,0 +1,39 @@
+{
+  "task_id": "wuba_7",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_7\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\wuba_7_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_7_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": true,
+  "first_try_success": false,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_7_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_7\\step_2.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "当前页面是否为58同城中‘58官方 日常保洁’服务的用户评价列表页？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_7_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_7\\step_2.png",
+      "verify": {
+        "success": true,
+        "answer": "yes",
+        "question": "58官方 日常保洁的状态是否已恢复到目标状态？"
+      }
+    }
+  ]
+}

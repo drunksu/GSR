@@ -1,0 +1,63 @@
+{
+  "task_id": "minimap_10",
+  "task_goal": "高德查一下到最近的麦当劳的步行路线",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          792,
+          876
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.65,
+          0.32
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1009,
+          2514
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.83,
+          0.93
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "已查到最近麦当劳的步行路线：距离767米，预计11分钟，途经4个红绿灯。"
+      },
+      "normalized_params": {
+        "text": "已查到最近麦当劳的步行路线：距离767米，预计11分钟，途经4个红绿灯。"
+      }
+    }
+  ],
+  "history_image_path": [
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_10\\step_1.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_10\\step_2.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\minimap_10\\step_3.png"
+  ],
+  "history_response": [
+    "Thought: 我需要查找最近的麦当劳并规划步行路线。当前地图上已经显示了一个“麦当劳”图标，位于内环高架路附近。为了获取步行路线，我应该点击这个麦当劳图标，进入详情页面后选择步行导航选项。  \nAction: click(point='[649, 323]')",
+    "Thought: 当前界面已经显示了最近的麦当劳（杨浦国康路餐厅）信息，包括步行距离751米、预计用时11分钟。为了获取详细的步行路线指引，我需要点击“路线”按钮，进入路线规划页面。  \nAction: click(point='[827, 927]')",
+    "Thought: 当前界面已成功显示从当前位置到最近麦当劳（杨浦国康路餐厅）的步行路线，距离767米，预计用时11分钟，并标注了4个红绿灯。任务目标“查一下到最近的麦当劳的步行路线”已经完成。  \nAction: finished(content='已查到最近麦当劳的步行路线：距离767米，预计11分钟，途经4个红绿灯。')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": false
+}

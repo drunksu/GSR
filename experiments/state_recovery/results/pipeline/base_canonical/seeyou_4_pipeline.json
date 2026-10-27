@@ -1,0 +1,51 @@
+{
+  "task_id": "seeyou_4",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_4\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\seeyou_4_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_4_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_4_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_4\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在美柚的经期症状记录界面中，是否已明确显示‘痛经：轻微痛’且处于已选状态？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_4_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_4\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在美柚的经期症状记录界面中，是否明确显示‘痛经：轻微痛’作为当前已保存的症状？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\seeyou_4_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\seeyou_4\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在美柚的经期症状记录界面中，是否明确显示‘痛经：轻微痛’作为当前已保存的症状？"
+      }
+    }
+  ]
+}

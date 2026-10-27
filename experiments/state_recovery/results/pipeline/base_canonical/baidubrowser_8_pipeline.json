@@ -1,0 +1,61 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "baidubrowser_8",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\baidubrowser_8\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\baidubrowser_8_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "baidubrowser_8.base_canonical.1793034887",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "message_send",
+        "app": "百度浏览器",
+        "entity": {
+          "kind": "content",
+          "name": "天安门前换上新的伟人像",
+          "identifier": null
+        },
+        "direction": "sent",
+        "persistence": "server",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          5
+        ],
+        "evidence_quote": "Thought: 评论“泰酷辣”已成功发布，当前界面显示该评论出现在评论区第一条，且标注为“刚刚”发布，说明操作已完成。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_sent",
+        "entity_name": "天安门前换上新的伟人像",
+        "description": "消息 天安门前换上新的伟人像 已不存在于会话"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

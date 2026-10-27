@@ -1,0 +1,64 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "fanqieread_25",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\fanqieread_25\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\fanqieread_25_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "fanqieread_25.base_canonical.1793041406",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "番茄小说",
+        "entity": {
+          "kind": "setting",
+          "name": "字体大小",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "attempted_unknown",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          5,
+          6,
+          10,
+          16
+        ],
+        "evidence_quote": "Step 5: THOUGHT: 在设置页面中，我找到了“字体大小”选项……Step 6: THOUGHT: 当前页面是字体大小预览界面，底部有“标准”、“大”、“超大”三个选项，其中“大”已被选中（高亮显示）……Step 10: THOUGHT: ……当前“大”已高亮，但或许需手动滑动选择以触发更新……Step 16: THOUGHT: ……‘大’已高亮，结合界面提示‘拖动滑块设置字体大小’，推测实际交互应为在预览图区域进行水平滑动以调整字体大小……",
+        "confidence": 0.4,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "字体大小",
+        "description": "设置项 字体大小 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

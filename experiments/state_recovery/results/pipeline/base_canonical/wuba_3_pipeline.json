@@ -1,0 +1,51 @@
+{
+  "task_id": "wuba_3",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_3\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\wuba_3_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_3_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_3_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_3\\step_3.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在58同城App的租房频道页面中，是否已明确显示‘合租’作为当前筛选条件且房源列表为合租房源？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_3_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_3\\step_3.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在58同城App的租房频道页面中，搜索框内是否已输入‘合租’且页面正展示合租房源列表？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\wuba_3_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\wuba_3\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在58同城App的租房频道页面中，搜索框内是否已准确显示‘合租’？"
+      }
+    }
+  ]
+}

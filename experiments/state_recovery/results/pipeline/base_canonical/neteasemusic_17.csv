@@ -1,0 +1,2 @@
+﻿task_id,task_identifier,task_app,task_app_CHN,adb_home_page,功能点,真机/模拟器,"level（easy步数少<5步，是APP的基础操作,主页一眼就能看到，medium步数较多,但每一步都能直接看到。或是需要探索一下但步数特别少(<4)，hard经过的一些功能需要探索才能发现）",golden_steps,goal,key_nodes,Reset
+,neteasemusic_17,neteasemusic,网易云音乐,com.netease.cloudmusic/.activity.IconChangeDefaultAlias,发现,,hard,8,打开网易云发现博客广播电台,"{""xpath"": [''' //*[contains(@text, ""播客"") and @selected=""true""]   and //*[contains(@resource-id, ""id/title"") and contains(@text, ""广播电台"")  and bbox_contains_point(@bounds,$point) ]''' ]}",

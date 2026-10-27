@@ -1,0 +1,51 @@
+{
+  "task_id": "tonghuashun_4",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_4\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\tonghuashun_4_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_4_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_4_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_4\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺搜索结果中，江淮汽车（600418）右侧是否显示灰色减号按钮，表明其已成功加入自选股？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_4_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_4\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺搜索结果中，江淮汽车（600418）右侧的按钮是否为灰色减号，表明其已成功加入自选股？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_4_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_4\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺搜索结果中，江淮汽车（600418）右侧是否显示灰色减号按钮，表明其已加入自选股？"
+      }
+    }
+  ]
+}

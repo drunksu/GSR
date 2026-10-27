@@ -1,0 +1,61 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "neteasemusic_20",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\neteasemusic_20\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\neteasemusic_20_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "neteasemusic_20.base_canonical.1793048345",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "content_lifecycle",
+        "app": "网易云音乐",
+        "entity": {
+          "kind": "content",
+          "name": "逢考必过",
+          "identifier": null
+        },
+        "direction": "deleted",
+        "persistence": "server",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          6
+        ],
+        "evidence_quote": "Thought: 系统弹出了确认删除的对话框，询问“确定要删除此动态？”，这是最后一步确认操作。为了完成删除笔记的任务，我需要点击右侧的“删除”按钮来确认删除。……Step 7: THOUGHT: 回到“笔记”页面后，看到提示“笔记为空，分享你的音乐生活吧”，说明之前发布的笔记“逢考必过”已经成功删除。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "content_absent",
+        "entity_name": "逢考必过",
+        "description": "内容 逢考必过 已被删除/撤销"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

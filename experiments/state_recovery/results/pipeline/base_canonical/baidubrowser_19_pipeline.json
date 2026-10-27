@@ -1,0 +1,51 @@
+{
+  "task_id": "baidubrowser_19",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\baidubrowser_19\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\baidubrowser_19_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\baidubrowser_19_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\baidubrowser_19_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\baidubrowser_19\\step_7.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在百度浏览器‘我的’页面中，‘清理缓存’功能项是否明确显示‘已清理’字样及对应缓存清理量（例如‘已清理211MB缓存垃圾’）？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\baidubrowser_19_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\baidubrowser_19\\step_8.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在百度浏览器‘我的’页面中，‘清理缓存’功能项是否明确显示‘已清理’字样及对应缓存量（例如‘已清理211MB缓存垃圾’）？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\baidubrowser_19_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\baidubrowser_19\\step_4.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在百度浏览器的‘我的’页面中，‘清理缓存’功能是否显示‘检测到211MB缓存垃圾’并呈现可点击的蓝色‘清理’按钮，表明缓存尚未被清理？"
+      }
+    }
+  ]
+}

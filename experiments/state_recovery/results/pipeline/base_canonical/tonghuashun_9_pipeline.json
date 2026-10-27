@@ -1,0 +1,51 @@
+{
+  "task_id": "tonghuashun_9",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_9\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\tonghuashun_9_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_9_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "max_iter_exceeded (3)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_9_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_9\\step_4.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺App的搜索历史列表中，能否看到‘燕京啤酒’这一条目并确认其为可点击状态？"
+      }
+    },
+    {
+      "iter": 2,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_9_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_9\\step_4.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺App的搜索历史列表中，能否看到‘燕京啤酒’这一条目并确认其为可点击状态？"
+      }
+    },
+    {
+      "iter": 3,
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\tonghuashun_9_tasks.json",
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\tonghuashun_9\\step_4.png",
+      "verify": {
+        "success": false,
+        "answer": "no",
+        "question": "在同花顺App中，搜索历史列表里是否明确显示‘燕京啤酒’这一项，且该项可点击跳转至对应股票详情页？"
+      }
+    }
+  ]
+}

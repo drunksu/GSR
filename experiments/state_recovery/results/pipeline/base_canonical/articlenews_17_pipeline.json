@@ -1,0 +1,172 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "articlenews_17",
+  "run": "base_canonical",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical\\articlenews_17_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\articlenews_17_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical\\articlenews_17_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条App中，将‘清除缓存’功能恢复至已执行完成状态，即缓存大小显示为0.0B且无待清理数据。"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_17.base_canonical.1793030636.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1102, 2579]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条设置页面中，‘清除缓存’选项下方是否显示缓存文件大小为0.0B且无可清理数据？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "17ea776c6d7cdcd1c15db4979f34c3bd",
+            "xml_after_sig": "a9f35e42e39a8cffe546b85e10a6c032"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_17.base_canonical.1793030636.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1111, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条设置页面中，‘清除缓存’选项下方是否显示缓存文件大小为0.0B且无可清理数据？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 清除缓存 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "a9f35e42e39a8cffe546b85e10a6c032",
+            "xml_after_sig": "afc65c392eb0fdda8dd154624be76e52"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1102,
+              2579
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1111,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical\\articlenews_17\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": 
