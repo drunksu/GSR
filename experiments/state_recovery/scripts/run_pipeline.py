@@ -189,15 +189,24 @@ def run_infer(task_id: str, run: str, traj_path: Path,
         return ledger_path
 
     key = mbl_env.api_key()
-    ledger = infer.infer_one(
-        traj_path=traj_path,
-        run_dir=traj_path.parent.parent,
-        run_id=run,
-        model=infer.DEFAULT_MODEL,
-        base_url=infer.DEFAULT_BASE_URL,
-        key=key,
-        dry_run=False,
-    )
+    try:
+        ledger = infer.infer_one(
+            traj_path=traj_path,
+            run_dir=traj_path.parent.parent,
+            run_id=run,
+            model=infer.DEFAULT_MODEL,
+            base_url=infer.DEFAULT_BASE_URL,
+            key=key,
+            dry_run=False,
+        )
+    except Exception as e:
+        # 推断失败（额度/网络/解析）必须显式报错，绝不能静默当作
+        # "无污染"直接成功 —— 否则额度耗尽时会产出大量假成功。
+        raise RuntimeError(
+            f"infer 失败（未写入 ledger，避免误判无污染）: {e}") from e
+    if not isinstance(ledger, dict) or "mutations" not in ledger:
+        raise RuntimeError(
+            "infer 返回非法格式（未写入 ledger，避免误判无污染）")
     with open(ledger_path, "w", encoding="utf-8") as f:
         json.dump(ledger, f, ensure_ascii=False, indent=2)
     n_mut = len(ledger.get("mutations", []))
@@ -763,7 +772,9 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--task", help="单个任务 ID，如 qq_10")
     ap.add_argument("--all", action="store_true", help="跑全部 base_canonical 任务")
-    ap.add_argument("--run", default=DEFAULT_RUN)
+    ap.add_argument("--run", default=None,
+                    help="结果目录 run 名（默认 base_canonical；harness v2/v3 时"
+                         "自动用 base_canonical_{v2,v3}，避免覆盖旧基线）")
     ap.add_argument("--csv", type=Path, default=DEFAULT_CSV)
     ap.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     ap.add_argument("--skip-infer", action="store_true",
@@ -783,6 +794,17 @@ def main() -> int:
                          "（阶段3/4：确定性动态控制循环 + 证据驱动诊断/按需调度）。"
                          "v1 始终保留为固定循环基线，可随时回退")
     args = ap.parse_args()
+
+    # ---- run 目录隔离（避免不同 harness 模式互相覆盖 / 混叠歧义）----
+    # 显式 --run 尊重用户；未指定时按 harness 模式自动分流：
+    #   v1（旧基线）→ base_canonical；v2 → base_canonical_v2；
+    #   v3（V4 动态控制）→ base_canonical_v3
+    # 这样 ledger / recovery_tasks / pipeline 三处输出都落在各自独立
+    # 目录，V4 结果不会覆盖 V0 基线，统计口径清晰。
+    if args.run is None:
+        args.run = DEFAULT_RUN if args.harness == "v1" \
+            else f"{DEFAULT_RUN}_{args.harness}"
+    print(f"结果目录 run = {args.run}（harness={args.harness}）")
 
     if not args.task and not args.all:
         ap.error("需要指定 --task 或 --all")
