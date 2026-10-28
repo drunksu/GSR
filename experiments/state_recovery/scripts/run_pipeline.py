@@ -574,7 +574,7 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
 
     # ---- 阶段3：Policy Engine 驱动的闭环（v3，确定性管理，不再让循环盲跑）----
     if harness_mode == "v3":
-        holder = {"task_path": None, "last_rec": None}
+        holder = {"task_path": None, "last_rec": None, "executed_iter": 0}
 
         def _replan():
             task_path = run_generate(task_id, run, ledger_path,
@@ -598,12 +598,19 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                                config_path, out_dir, st.iteration,
                                harness=harness_ctx)
             holder["last_rec"] = rec
+            holder["executed_iter"] = st.iteration
             return rec
 
         def _verify():
             rec = holder.get("last_rec")
             if rec is None or rec.get("task_dir") is None:
                 return {"success": False, "reason": "no_recovery_traj",
+                        "verdicts": []}
+            if holder.get("executed_iter") != st.iteration:
+                # 本轮 REPLAN 后被判定为"证据已足够"直接终验：必须用本轮
+                # 新轨迹。否则拿上一轮轨迹复核，必然复读同一个结论
+                # （2026-10-28 真机 st=2 时仍在复核 iter1 的证据）。
+                return {"success": False, "reason": "no_new_evidence",
                         "verdicts": []}
             return run_verify(task_id, run, ledger_path, rec["traj"],
                               rec["task_dir"], st.iteration)

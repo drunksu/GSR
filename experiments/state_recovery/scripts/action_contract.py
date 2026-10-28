@@ -347,13 +347,13 @@ def _clearance_predicate(ctx, action_type, params, xml_after: str) -> tuple:
         return "uncertain", f"设置项 {name} 无明确开关状态属性 (checked={raw!r})"
 
     if mtype == "search_history":
-        if not name:
-            return "uncertain", "搜索词条名称缺失，无法判定"
-        if not xml_after:
-            return "uncertain", "执行后观察缺失"
-        if name in _node_texts(xml_after):
-            return "not_cleared", f"界面仍包含词条 {name}"
-        return "cleared", f"界面中不再包含词条 {name}"
+        # 2026-10-28 真机 Bug：界面"当前页面不含该词条"不能证明搜索历史已清除。
+        # 点击搜索框 / 点击历史条目 / 跳到结果页，都会让词条从当前页面消失，
+        # 但历史并未更新；界面还常把长词条截断显示（"黄金今日的..."），
+        # 与完整 name 对不上就会误判 cleared，导致 Policy 跳过下一轮执行。
+        # XML 读不到完整搜索历史列表 → 一律 uncertain，交 VLM verify 裁决。
+        return ("uncertain",
+                "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）")
 
     if mtype == "session_state":
         return "uncertain", "会话类污染依赖完整轨迹验证，XML 谓词不足"
