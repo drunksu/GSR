@@ -510,7 +510,25 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
 
     # ---- Step 1: 原任务（只跑一次，制造污染态）----
     if skip_original:
-        traj_path = MBL_ROOT / "results" / run / task_id / "trajectory.json"
+        # 按优先级查找现有轨迹（2026-10-28 修复：run_original_task 写到
+        # pipeline 输出目录，skip_original 之前只查 MBL_ROOT/results 目录）：
+        #   1) pipeline 输出目录同 run 下（run_pipeline 自己写的）
+        #   2) MobileBench 默认 results/run 目录（旧 harness v1）
+        #   3) MobileBench 默认 results/base_canonical 目录（跨 harness 复用）
+        candidates = [
+            PIPELINE_OUT / run / task_id / "trajectory.json",
+            MBL_ROOT / "results" / run / task_id / "trajectory.json",
+            MBL_ROOT / "results" / DEFAULT_RUN / task_id / "trajectory.json",
+        ]
+        traj_path = None
+        for cand in candidates:
+            if cand.exists():
+                traj_path = cand
+                break
+        if traj_path is None:
+            raise RuntimeError(
+                f"skip-original 找不到 trajectory.json，检查过：\n"
+                + "\n".join(f"  {c}" for c in candidates))
         print(f"\n[Step 1] 跳过原任务，使用已有轨迹: {traj_path}")
     else:
         traj_path = run_original_task(task_id, csv_path, config_path, out_dir)
