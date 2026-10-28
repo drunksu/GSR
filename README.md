@@ -1,6 +1,6 @@
 # GSR —— 面向 MobileBench-OL 的「执行顺序 → 成功率」实验工作台
 
-> 课题：**面向移动 GUI 智能体评测的应用状态污染检测和恢复方法研究**（开题报告见 `开题报告 ….md`）
+> 课题：**面向移动 GUI 智能体评测的应用状态污染检测和恢复方法研究**（开题报告见 `docs/开题报告.md`）
 >
 > 本仓库服务于其中一个具体实验：
 > **OD Flaky tests 是否影响成功率？某个任务因为执行顺序变化而失败**
@@ -11,30 +11,27 @@
 所以"打乱任务"= 生成同一批任务的另一份行序排列的 CSV —— 本仓库提供生成器。
 
 **本文档所有命令都写成 CMD 版本**（Windows 命令提示符，可直接粘贴）。
-两个入口 `run_mbl.cmd` / `pilot.cmd` 是 PowerShell 脚本的包装，环境变量会自动载入，cmd 里不需要事先 `set` 任何东西。
+Python 解释器固定在仓库根的 `mobile\Scripts\python.exe`，`mobile.env.ps1` 会被脚本自动读取，不需要事先 `set` 任何东西。
 
 ---
 
 ## 现在要做什么（先看这一节）
 
-有**两台**机器，分工不同：
+第一阶段（动机研究）已经跑完，整套长跑入口脚本已随目录重构移除；现在要执行的是第二阶段的状态恢复闭环。
 
-| | 有手机的那台（仓库在 `D:\GSR`） | 分析机（本文档所在机器） |
+| | 有手机的那台 | 分析机（本文档所在机器） |
 |---|---|---|
-| 干什么 | **跑实验**（全部 ≈ 28 h） | **只出报告**，不插手机 |
-| 怎么做 | `git pull --rebase --autostash`，然后跑 **`D:\GSR\run_all.cmd`** —— 就这一条。中途 12 次 `pause` 时在手机上恢复 QQ 状态 | `git pull` → 跑 `analyze_order_effects.py`，见 **「二、分析机」** |
-| 命令在哪 | **「一、有手机的那台机器」**（一条命令） | **「二、分析机」** |
+| 干什么 | 跑 `experiments/state_recovery/scripts/run_pipeline.py`（harness 版待跑） | **只出报告**，不插手机 |
+| 怎么做 | `git pull --rebase --autostash`，再按 **「一、有手机的那台机器」** 的命令跑 | `git pull` → 跑 `analyze_order_effects.py`，见 **「二、分析机」** |
+| 命令在哪 | **「一、」** | **「二、」** |
 
-**为什么是一条脚本、而不是让你粘贴一大堆命令**：粘贴大段命令有两个实测踩过的坑 ——
-① 文本里只要有**一个非 ASCII 字符**，cmd 会用 GBK 解码 UTF-8 字节、**吃掉下一行的开头**，所有 `set` 残废；
-② 在一条命令还在执行时把后面几十行灌进去，控制台会**原样回显但不执行**，看起来像"跑完了"其实什么都没发生。
-（详见坑 #18。）`run_all.cmd` 是**纯 ASCII 文件**，这两类问题都不存在。它做的事和原来看起来一样，
-内容可以直接打开核对。
+**状态恢复的两个版本**：
 
-一次性补跑脚本（`run_missing.cmd` / `run_finish.cmd` / `run_flash_tail.cmd`）已经删除。
-它们只服务已经结束的某一轮，不是长期入口。要跑实验用 **`run_all.cmd`**；只补某一格用 `run_mbl.cmd`，
-把 `-Model` / `-ConfigFile` / `-TaskFile` / `-Output` 写全。未跑完的 flash 收尾轮不再追加，
-口径见 [docs\motivation_study.md](docs\motivation_study.md)。
+- **workflow 版**（原 V0）：固定循环 generate→execute→verify，无状态/契约/Policy 约束；**已完成全量 310 任务**，结果在 `experiments/state_recovery/results/{pipeline,ledgers,recovery_tasks}/base_canonical_workflow/`。
+- **harness 版**（原 V4）：动作契约 + Policy Engine 动态控制闭环；**待跑**，结果会写到 `base_canonical_harness/`。
+
+原 V1/V2/V3 的离线对照实现已从 `evaluate_versions.py` 删除，现在只对照 `workflow` / `harness` 两版；`policy_engine.py --demo` 的对照标签也已改成 workflow / harness。
+动机研究阶段的一次性补跑脚本、一键全量脚本、单轮/两轮编排脚本、重复调度脚本与同步脚本均已删除；历史结果保留在 `experiments/motivation_study/results/` 与 `third_party/mobilebench-ol-main/results/`。口径见 [docs\motivation_study.md](docs\motivation_study.md)。
 
 ---
 
@@ -42,12 +39,12 @@
 
 | 章节 | 讲什么 | 谁需要看 |
 |---|---|---|
-| **一、有手机的那台机器** | 跑 `run_all.cmd`；只补某一格用 `run_mbl.cmd` | ★ 有手机那台，**只看这个** |
+| **一、有手机的那台机器** | 跑状态恢复闭环（workflow / harness 两版） | ★ 有手机那台，**只看这个** |
 | **二、分析机** | 拉取 → 校验标签 → 出三份报告 → 看判据 → 上传 | 分析机 |
 | **A. 新机器部署** | 克隆 / 建 venv / adb / 装 App / 改设备序列号 | 换新机器时 |
-| **B. 运行命令** | 每个脚本的单独用法：B1 唤醒 · B3 全量两顺序 · B4 reset 通道 · B5 换模型 · B6 造任务集 · B7 清洗 · B8 出报告 · B10 重复实验 | 想单独跑某一步时 |
+| **B. 运行命令** | 每个脚本的单独用法：B1 唤醒 · B2 自检 · B3 闭环 · B4 换模型 · B5 造任务集 · B6 清洗 · B7 出报告 · B8 查看 · B9 重复实验口径 | 想单独跑某一步时 |
 | **C. 同步方式** | 上传 / 拉取 / 什么会入库什么不会 | 每轮跑完 |
-| **D. 十八个必踩的坑** | 全是实测踩过的静默失效 | **出问题先查这里** |
+| **D. 十九个必踩的坑** | 全是实测踩过的静默失效 | **出问题先查这里** |
 | **E. 补丁** | 为什么这个仓库改了 benchmark 源码 | 想了解背景 |
 | **F. 当前进度** | 已经跑出什么结果、还缺什么 | 想了解现状 |
 | **G. 术语** | OD flaky / victim / polluter / CTCI / PASR / DiD | 看报告时 |
@@ -58,15 +55,11 @@
 | 路径 | 内容 |
 |---|---|
 | `mobile.env.ps1` | **环境配置**：API key、模型注册表（含坐标约定）、路径、设备序列号 |
-| **`run_all.cmd`** | ★ **跑完全部实验的唯一入口**（一条命令，纯 ASCII，见「一、」） |
-| `run_mbl.cmd` / `run_mbl.ps1` | 跑一轮：自检 → 写 manifest → 执行 → **自动转 `episodes.jsonl`** |
-| `pilot.cmd` / `pilot.ps1` | **一条命令跑完两轮顺序 + 自动分析** |
-| `run_repeats.cmd` | 把**同一份任务集跑 N 遍**，每遍独立 `-Output`（重复实验用，见 B10） |
-| `sync.cmd` | 一键 `add → 校验有没有 results\ → commit → push`（见 C1） |
+| **`experiments/state_recovery/scripts/run_pipeline.py`** | ★ **手机端状态恢复闭环入口**：`--mode workflow\|harness`，结果按版本分流（见「一、」） |
+| `experiments/state_recovery/results/{pipeline,ledgers,recovery_tasks}/base_canonical_workflow/` | workflow 版全量 310 任务结果；harness 版将写到同名 `base_canonical_harness/` |
 | `experiments/common/` | 跨实验复用的设施：key 查找、benchmark 补丁、端点/坐标探测、App 清单 |
 | `experiments/motivation_study/` | 第一阶段动机研究的脚本 / docs / 安装清单（见下；研究文档在 `docs/motivation_study.md`） |
-| `experiments/selftest.py` | 不依赖真机 / key 的回归自检（5 项：统计函数 + 编码守卫） |
-| `backup/androidworld/` | AndroidWorld 模拟器支线（代码 + 产物，真机路径未验证，附说明） |
+| `experiments/selftest.py` | 不依赖真机 / key 的回归自检（D/G/H 三组：统计函数、编码守卫、状态恢复闭环） |
 | `third_party/mobilebench-ol-main/` | **已打补丁**的 MobileBench-OL（源码 + 全套 CSV + 顺序任务集 + reset 配置） |
 | `third_party/mobilebench-ol-main/results/` | 运行产物。**小文件（episodes / manifest / trajectory / report）会入库**，只有截图与元素树被 `.gitignore` 排除 |
 
@@ -90,125 +83,70 @@
 | `mbl_traj_to_episodes.py` | 真机结果 → `episodes.jsonl`（分析器的输入）；含黑屏检测 |
 | `analyze_order_effects.py` | **核心分析**：2×2 析因、ΔSR / CTCI / PASR / victim / polluter / DiD；报告带「§0 空表诊断」 |
 | `mbl_task_audit.py` | 任务集审计（编码 / 坏行 / App / Reset 标注 / reset 集重叠） |
-| `mbl_purge_tasks.py` | 长跑后摘掉**设备问题**造成的假失败以便补跑（用 `--blank-failed-only`，见 B7） |
+| `mbl_purge_tasks.py` | 长跑后摘掉**设备问题**造成的假失败以便补跑（用 `--blank-failed-only`，见 B6） |
 | `mbl_fix_condition_labels.py` | **修正 manifest / episodes 里写错的重置条件标签**（见坑 #13） |
 | `mbl_find_actions.py` | **轨迹取证**：查"是哪个任务的哪一步改了什么" |
 
-`task_catalog.py` / `order_runner.py` / `make_sim_data.py` / `power_analysis.py` 属 AndroidWorld 支线，已归档到 `backup/androidworld/`（附说明）。
+AndroidWorld 模拟器支线（`task_catalog.py` / `order_runner.py` / `make_sim_data.py` / `power_analysis.py`）的代码与产物已从工作树移除，当时的研究记录保留在 `experiments/motivation_study/docs/`。
 
 ---
 
-# 一、有手机的那台机器：跑一条命令
+# 一、有手机的那台机器：跑状态恢复闭环
 
-## 就这样，一条命令
+动机研究的长跑入口脚本已移除；手机端现在只剩第二阶段的恢复 pipeline。完整流程是：
+跑原任务制造污染态 → Audit 推断污染清单 → Planner 生成恢复任务 → Execute 恢复 → Verify 重新审计，
+最多 `--max-iter` 轮（默认 3）。
+
+## 两个版本
+
+| 版本 | 控制方式 | 结果目录 | 状态 |
+|---|---|---|---|
+| `workflow`（原 V0） | 固定循环 generate→execute→verify；无 RecoveryState / 动作契约 / Policy 约束 | `results/{pipeline,ledgers,recovery_tasks}/base_canonical_workflow/` | 已跑完全量 310 任务 |
+| `harness`（原 V4） | 动作契约 + Policy Engine 动态控制闭环（RE_AUDIT / 证据直接终验 / 工具失败 OBSERVE / 预算与无进展控制） | `results/{pipeline,ledgers,recovery_tasks}/base_canonical_harness/` | 待跑 |
+
+结果目录按 `--mode` 自动分流，也可用 `--run` 显式指定 run 名。
+
+## 常用命令
 
 ```cmd
-D:\GSR\run_all.cmd
+rem 单任务
+mobile\Scripts\python.exe experiments\state_recovery\scripts\run_pipeline.py --task qq_10
+
+rem 全量 + 断点续传（跳过已有推断 / 生成结果）
+mobile\Scripts\python.exe experiments\state_recovery\scripts\run_pipeline.py --all --skip-infer --skip-generate --skip-existing
+
+rem 手机已处于污染态：跳过原任务
+mobile\Scripts\python.exe experiments\state_recovery\scripts\run_pipeline.py --task qq_10 --skip-original --skip-infer --skip-generate
+
+rem 跑 harness 版
+mobile\Scripts\python.exe experiments\state_recovery\scripts\run_pipeline.py --all --mode harness
 ```
 
-> 打开 cmd，敲（或粘贴）上面这一行，回车，然后就不用管了 —— **除了中途 12 次 `pause`**。
-> 脚本会自己检查环境、跑完全部实验、出三份报告、最后 `git pull` + 上传。
+## 参数
 
-**为什么是一条脚本而不是让你粘贴一大堆命令**：往 cmd 里粘贴大段命令有两个实测踩过的坑 ——
-① 文本里只要有**一个非 ASCII 字符**，cmd 会用 GBK 解码 UTF-8 字节、**吃掉下一行的开头**，`set` 全部残废；
-② 在一条命令还在执行时把后面几十行灌进去，控制台会先**原样回显**它们但**不执行**，看起来像"跑完了其实什么都没发生"。
-`run_all.cmd` 是**纯 ASCII 文件**（内容等于原来那一大块命令，循环变量已改成 `%%r`），**这两类问题都不存在**。
-脚本内容可直接打开 `run_all.cmd` 核对。
-
-> 想让控制台中文不乱码：先单独敲一行 `chcp 65001` 再跑脚本（可选，不影响实验）。
-
-## 脚本会做什么
-
-| 步 | 内容 | 机器时间 | tokens |
-|---|---|---|---|
-| 0 | 环境自检（`[CHECK]`/`[FATAL]`）+ flash 坐标检测 + 唤醒手机 | 5 min | — |
-| 1 | plus：补 `base_shuffle` 缺的 2 个任务 + 65 任务同日四格 | ≈ 6.1 h | ≈ 29 M |
-| 2 | flash：65 任务四格 + flash 310×2 顺序（全量） | ≈ 17.9 h | ≈ 119 M |
-| 3 | `pilot12` 换 flash | ≈ 0.9 h | ≈ 6 M |
-| 4 | 重复实验重做版：6 轮 × 2 顺序 × 2 模型（**12 次人工恢复 QQ 状态**） | ≈ 3.7 h | ≈ 25 M |
-| 5 | 出三份报告（`type` 出来给你看） | 几分钟 | — |
-| 6 | `git pull` + `sync.cmd` 上传 | — | — |
-| 7 | 打印三条报告路径 | — | — |
-| **合计** | | **≈ 28 h** | **≈ 177 M** |
+| 参数 | 作用 |
+|---|---|
+| `--task <id>` / `--all` | 单个任务 / 全部 `base_canonical` 任务 |
+| `--mode workflow\|harness` | 控制策略，默认 `workflow`，结果目录自动分流 |
+| `--run <name>` | 显式指定结果 run 名 |
+| `--csv` / `--config` | 任务集与 benchmark 配置（默认 `base_canonical.csv` / `interact_API_qwen3vl_base.conf`） |
+| `--max-iter` | 闭环最多迭代轮数，默认 3 |
+| `--trace` | 开启显式 RecoveryState（targets / attempt_history）与 JSONL Trace 日志 |
+| `--skip-original` | 手机已处于污染态时跳过第 1 步原任务 |
+| `--skip-infer` / `--skip-generate` | 跳过推断 / 生成，复用已有 ledger / 恢复任务 |
+| `--skip-existing` | 断点续传：跳过已成功完成的任务 |
 
 ## 三条铁律
 
-1. **先 pull**：跑之前保证仓库是最新的（`cd /d D:\GSR` → `git pull --rebase --autostash`），
-   否则脚本里引用的 `run_all.cmd` / `sync.cmd` / 任务集 CSV 可能不存在。
-2. **中断了就直接重跑 `D:\GSR\run_all.cmd`** —— 每个运行目录有自己的 `result_list.txt`，
-   已完成的任务会跳过，**不会重复烧 token**。断电、接口抖动、手机掉线都不怕。
-3. **第 4 步那 12 次 `pause` 必须有人守着**：每次要在手机上做三件事 ——
-   ① 退出这一轮加进去的那个 DND 群；② 删掉好友 `1098074562`；③ 取消和「绕堤沙」的聊天置顶、
-   如果聊天记录被删了就随便发一条恢复。做完回 cmd 按任意键。
-   **人不在旁边它就会一直停在那里。**
-
-## 想省时间 / 省 token
-
-`run_all.cmd` 里每一步都有 `echo ============ N. ...` 分隔和 `rem` 说明，**整段删掉即可**，段与段互不依赖。
-最贵的是第 2 步里的 `baseflash`（310×2 顺序 = 12.1 h / 81 M tokens）——
-**删掉它仍然满足"§1 每个对比都有两个模型"**（第 2 步剩下的四行 `f_*` 就是 65 任务的 flash 四格）。
-
-## 如果只有一部分失败（补跑）
-
-`2026-09-28` 实测过一次：8 个 2×2 格子和 24 个重复实验都成功，但 4 个换 flash 的批次
-（`baseflash_*`、`pilot12flash_*`）**各跑了 1 秒、0 个 episode** —— 原因是 `pilot.ps1` 的参数
-splat 错位（见坑 #19），**不是模型有问题**。这种"只有一部分失败"的情况不用重跑整套 28 小时。`pilot.ps1` 已修好；缺的那一格直接调用
-`run_mbl.cmd`，**参数名写全**，`-Output` 指向原来的目录（已完成任务按 `result_list.txt` 跳过）：
-
-```cmd
-run_mbl.cmd -Model qwen3-vl-flash -ConfigFile config\interact_API_qwen3vl_base.conf -TaskFile data\base_canonical.csv -Output results\baseflash_canonical
-```
-
-不要把开关拼进数组再 splat —— 那就是坑 #19。当时用来整批补跑的 `run_missing.cmd` 是一次性脚本，已经删除。
-
-## 已结束的一次性收尾（脚本已删除）
-
-`run_finish.cmd`、`run_flash_tail.cmd` 只服务 2026-10-02 那一轮，现已删除，不要再去跑。
-它们做过的事：① 补 `baseflash_shuffle` 缺的 `qq_5` —— **已完成**（310/310）；
-② 4 任务预注册子集追加轮次。plus 侧已完成；flash 侧计划补到 n=20，实际停在 8/7。
-**按 [docs\motivation_study.md](docs\motivation_study.md) 不再追加**——加轮是为了填 victim 表，不是为了回答已经回答的问题。
-
-**第 2 件为什么这么设计**：victim 表要求某任务 `|ΔSR| ≥ 0.2` **且** `q < 0.05`。而现有 8 任务 QQ 集里
-**大部分任务在两种顺序下成功率完全相同**（plus 只有 `qq_1` 有方差，flash 只有 `qq_1/qq_10/qq_13/qq_14`）——
-这些确定性任务不可能翻转，只会抬高 FDR 的负担。实测推算：
-
-| 任务集 | 需要的重复 | 追加轮数 | 两模型成本 | 手工暂停 |
-|---|---|---|---|---|
-| K=8（现有全集） | n=24 | +18 | ≈17 h | 72 |
-| **K=4（有方差的 4 个）** | **n=20** | **+14** | **≈5 h** | **56** |
-| K=2（`qq_10`,`qq_14`） | n=20 | +14 | ≈2.5 h | 28 |
-
-所以 v3 用 `data\qqvar4_canonical.csv`（`qq_1→qq_10→qq_13→qq_14`）与其反向版跑 14 轮新数据，
-再把已有的 6 轮（`q2_*`）用 **`--tasks` 过滤后合并**。分析器新增的 `--tasks` 就是为此：
-FDR 负担按**参与检验的任务数**算，把确定性任务排除掉才能把所需轮数从 24 降到 20。
-
-> ⚠️ 这 4 个任务是**按 n=6 观测到的方差挑的**，所以它们的效应估计有选择性偏差
-> （子集上 ΔSR 从 −0.104 变成 −0.208）。新跑的 14 轮是**新数据**：若效应保持 → 说明是真的；
-> 若缩水 → 说明那是选择噪声，结论应写成"该效应量下逐任务检出所需样本量超过预算"。
-
-## 跑完（或跑挂了）怎么办
-
-**跑完**：脚本最后一条就是上传。直接把 `D:\GSR` 上最新的 commit 号发给我，我在这台机器上出报告。
-
-**跑挂了**：把 cmd 窗口最后 30 行发我。特别注意这几种：
-- 出现 `[FATAL]` → 环境问题，脚本已经停在实验之前，什么都没跑
-- `退出码: 1` 而且上面有 `Connection error` → 接口抖动，**直接重跑脚本**即可续跑
-- 卡在 `Press any key to continue` → 是第 4 步在等你恢复 QQ 状态
-
-**跑到什么程度算"所有实验都有两个模型"**
-
-| 报告 | 需要的目录 | 每个对比的模型数 |
-|---|---|---|
-| §1 2×2（主结果） | `p1_* p2_* f_*` 共 8 格 | **2** ✅ |
-| §2 规模（n≈310） | `base_* baseflash_*` | **2** ✅ |
-| §2 小样本（n=65） | 同上 8 格 | **2** ✅ |
-| §3 victim / §4 polluter | `q2_*`（＋`q2_*f`） | **2** ✅ |
+1. **先 pull**：跑之前保证仓库是最新的（`git pull --rebase --autostash`）。
+2. **中断了直接重跑同一条命令**，再加上 `--skip-existing`（或按步骤用 `--skip-infer` / `--skip-generate`）—— 已完成的 ledger / 恢复任务 / 执行结果会跳过，不会重复烧 token。
+3. **手机保持唤醒并充电**（见 B1）—— 熄屏会造成整轮假失败。
 
 ---
 
 # 二、分析机（不插手机的那台）
 
-那台跑完并把块尾的 `sync.cmd` 跑掉之后，在**这台**机器上做下面的操作。
+那台跑完并 `git push` 之后，在**这台**机器上做下面的操作。
 
 ```cmd
 cd /d D:\projects\GUI state recovery
@@ -243,7 +181,11 @@ type results\scale_analysis\report.md
 type results\repeat_analysis\report.md
 
 rem step 5. upload the regenerated reports
-%MBL%\sync.cmd "analysis: two-model 2x2 + scale + repeats"
+cd /d "%MBL%"
+git add -A
+git status --short
+git commit -m "analysis: two-model 2x2 + scale + repeats"
+git push
 ```
 
 **看报告的判据**
@@ -268,7 +210,7 @@ git --version
 python --version
 ```
 
-## 1) 克隆（路径随意 —— 脚本已改为自动定位）
+## 1) 克隆（路径随意；下面所有命令都用变量指过去）
 
 ```cmd
 set MBL=D:\GSR
@@ -342,10 +284,10 @@ notepad mobile.env.ps1
 ## 5) 自检（不插手机也能跑）
 
 ```cmd
-run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\_selftest -DryRun
+mobile\Scripts\python.exe experiments\selftest.py
 ```
 
-看到 `[run_mbl] 模型 = qwen3-vl-plus   坐标约定 = norm` 即环境就绪。
+看到 `✅ 全部通过（不依赖模拟器 / API key）` 即环境就绪。
 
 ## 6) 开跑 → 见下面 B 节
 
@@ -369,7 +311,7 @@ cd /d %REPO%
 > `set PY=x && %PY% y.py` 这种写法里 `%PY%` 会展开成**空值**（实测踩过）。
 > ⚠️ `set VAR=值`：等号两边**不能有空格**，值**不要加引号**（引号会变成值的一部分）。
 > ⚠️ `cd /d` 换盘符时必须加 `/d`。
-> ⚠️ 若你的路径含空格，调用时加引号：`"%MBL%\run_mbl.cmd" ...`。
+> ⚠️ 若你的路径含空格，调用时给整个路径加引号。
 
 **为什么要 `cd` 到 `%REPO%`**：benchmark 用相对路径 `data\...` 解析任务集，输出目录 `results\...` 也落在 benchmark 目录下（与官方一致）。
 `%PY%` / `%SC%` / `%SS%` / `%ADB%` 都是**绝对路径**（`%SC%` = `experiments\common`，`%SS%` = `experiments\motivation_study\scripts`），所以在哪个目录下都能用。
@@ -382,61 +324,24 @@ cd /d %REPO%
 %ADB% -s GAGU8HGYW8JF9TIJ shell "svc power stayon true; input keyevent KEYCODE_WAKEUP; wm dismiss-keyguard; settings put system screen_off_timeout 1800000"
 ```
 
-> `pilot.cmd` 会自己唤醒，用 `run_mbl.cmd` 时才需要手动跑这一条。
+> 用 `run_pipeline.py` 跑真机前需要手动跑这一条。
 
-## B2 冒烟：2 个 B站任务（约 3 分钟）
-
-```cmd
-%MBL%\run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\smoke
-```
-
-## B3 全量两种顺序（一条命令跑完两轮 + 自动分析）
+## B2 自检（不插手机也能跑）
 
 ```cmd
-%MBL%\pilot.cmd -Tag base -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
+%PY% %MBL%\experiments\selftest.py
 ```
 
-- 310 个任务 / 一种顺序：**实测 6.9 小时**、**31.6 M tokens**（平均 80.5 s、101,960 tokens/任务）
-
-> ⏱️ **别再按"3 小时"做预算了**（这个数字早先是拍脑袋估的，实测差 2.4 倍）。
-> 2026-09-24 用 `sum(episode.run_time_s)` 核过：`base_canonical` **6.93 h**、`base_shuffle` **6.54 h**，
-> 与 `base_shuffle` 那次的真实墙钟（09-22 22:55 → 09-23 06:04 = 7.15 h，含跳过的规范序一轮）对得上。
-
-- 报告自动生成在 `results\base_analysis\report.md`
-- **中断不用怕**：结果按任务落盘，重跑同一条命令会自动续跑（已完成任务跳过）
-
-## B4 reset 通道（跑 benchmark 自带的 cleaner）
+## B3 跑状态恢复闭环
 
 ```cmd
-%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_smoke_2task.csv -Output results\reset_smoke
-%MBL%\run_mbl.cmd -ConfigFile config\interact_API_qwen3vl_reset.conf -TaskFile data\reset_canonical.csv -Output results\reset_r1
+%PY% %MBL%\experiments\state_recovery\scripts\run_pipeline.py --task qq_10
+%PY% %MBL%\experiments\state_recovery\scripts\run_pipeline.py --all --mode harness
 ```
 
-第一条是 2 个任务的通道验证（约 3 分钟），第二条是完整的 65 个任务。
+参数、结果目录与断点续传见「一、有手机的那台机器」。
 
-> ⏱️ **实测耗时（2026-09-23）**：`reset_canonical` 65 个任务墙钟 **2 h 35 m**（10:21→12:56）、
-> `reset_shuffle0` **2 h 19 m**（13:21→15:40）；折算到 agent 身上的净时间分别是 **1.91 h / 1.65 h**
-> （106.0 s 与 91.4 s / 任务）。比一开始估的 40 分钟长得多 —— 因为 cleaner 是
-> **同一个 GUI agent 去执行 `reset_query`**，每个任务等于多跑一趟。
-> 反过来，65 个任务**不跑 cleaner**（base.conf）约 **1.2 h**（约 70 s/任务）。做时间预算时按这个量级算。
-
-跑完 `run_mbl.cmd` 会**自动**在同目录生成 `episodes.jsonl`（转格式已内置，见坑 #10）。所以只有「用别的办法跑的轮次」才需要手动转：
-
-```cmd
-%PY% %SS%\mbl_traj_to_episodes.py --run-dir results\reset_r1
-```
-
-⚠️ **reset 必须用独立的 `-Output`**：reset 集的 65 个 task_identifier 与主集**完全重叠**，共用目录会让主运行把它们当成"已完成"跳过。
-
-## B5 换模型 / 多 Agent 对比
-
-```cmd
-rem run both order passes with another model
-%MBL%\pilot.cmd -Tag baseflash -Model qwen3-vl-flash -TasksCanonical data\base_canonical.csv -TasksShuffle data\base_shuffle0.csv
-
-rem or just one pass (for repeats use run_repeats.cmd)
-%MBL%\run_mbl.cmd -Model qwen3-vl-flash -TaskFile data\reset_canonical.csv -Output results\flash_none_can
-```
+## B4 换模型 / 坐标约定
 
 **可用模型与坐标约定**（`mobile.env.ps1` 里的注册表；★ 约定填错 → 所有点击挤到左上角、任务全灭）
 
@@ -481,7 +386,7 @@ qwen3.8-omni-flash[-realtime], qwen-omni-turbo
 > 配合注册表里的 `MBL_COORD=norm`。**plus 和 flash 都是 norm，所以这一步的输出一直是这个，
 > 属于预期结果，直接继续跑。**
 
-## B6 生成新的顺序任务集
+## B5 生成新的顺序任务集
 
 ```cmd
 %PY% %SS%\mbl_make_task_csv.py --repo %REPO% --order reverse --out base_reverse.csv
@@ -491,7 +396,7 @@ qwen3.8-omni-flash[-realtime], qwen-omni-turbo
 
 > `--out` 写成纯文件名时，输出落到 `%REPO%\data\` 下；文件名必须含 `shuffle<数字>` 才会被 manifest 识别为乱序并记录 seed。
 
-## B7 长跑后的清洗与补跑
+## B6 长跑后的清洗与补跑
 
 ```cmd
 rem dry run first to see what would be dropped
@@ -499,7 +404,7 @@ rem dry run first to see what would be dropped
 %PY% %SS%\mbl_purge_tasks.py --run-dir results\base_shuffle --blank-failed-only
 ```
 
-摘掉那些与顺序无关的失败（黑屏/熄屏这类**设备问题**）之后，重跑 B3 就会自动补跑它们。
+摘掉那些与顺序无关的失败（黑屏/熄屏这类**设备问题**）之后，重跑对应任务集就会自动补跑它们。
 
 > ⚠️ **用 `--blank-failed-only`，不要用 `--blank-only`。** 实测 `base_canonical` 的 310 条记录里，
 > 末帧偏暗的有 20 个，但其中 **12 个其实是成功的** —— 播放类任务（网易云）成功之后屏幕就熄了，
@@ -507,7 +412,7 @@ rem dry run first to see what would be dropped
 > `--blank-only` 会把这 12 个成功结果一起删掉、污染 SR；`--blank-failed-only`
 > 只取「末帧暗 **且** 失败」的交集（实测 20 → 8）。
 
-## B8 单独出报告
+## B7 单独出报告
 
 ```cmd
 %PY% %SS%\analyze_order_effects.py --input results\base_canonical results\base_shuffle --out results\base_analysis --official-condition official
@@ -519,7 +424,7 @@ type results\base_analysis\report.md
 > 之前这里写的是 `none`，是配合一个 bug 写的（见坑 #13）—— 现在已改正。
 > 报告最上面那节「§0 空表诊断」会告诉你还缺哪一格、缺几次重复，**先读它再读表**。
 
-## B9 其他常用查看命令
+## B8 其他常用查看命令
 
 ```cmd
 type results\base_canonical\result_list.txt
@@ -527,22 +432,9 @@ dir /b results\base_canonical | find /c /v ""
 notepad results\base_analysis\report.md
 ```
 
-## B10 重复实验（**让 §3 victim / §4 polluter 两张表有内容的前提**）
+## B9 重复实验（历史口径）
 
-单轮每格只有 1 个样本时，Fisher 双边 p **恒等于 1.0**、polluter 需要的前序支持度也只有 1 —— 这两张表**必然为空**，和真实效应无关。要它们有内容就必须重复跑。
-
-```cmd
-rem pre-registered 8-task QQ subset, writer-before-reader order
-%MBL%\run_repeats.cmd data\qqset_canonical.csv results\qqset_A 6
-
-rem same tasks in reverse order (readers first, writers last)
-%MBL%\run_repeats.cmd data\qqset_reverse.csv results\qqset_B 6
-
-rem optional: same set with the second agent
-%MBL%\run_repeats.cmd data\qqset_canonical.csv results\qqset_A 6 -Model qwen3-vl-flash
-```
-
-`run_repeats.cmd TASKFILE OUTPREFIX N [额外参数]` 会把同一份任务集跑 N 遍，每遍写进**独立的 `-Output`**（`OUTPREFIX_r1` … `OUTPREFIX_rN`）—— 共用目录会被 `result_list.txt` 当成"已完成"整轮跳过，这是必须分开的原因。
+单轮每格只有 1 个样本时，Fisher 双边 p **恒等于 1.0**、polluter 需要的前序支持度也只有 1 —— 这两张表**必然为空**，和真实效应无关。要它们有内容就必须重复跑。把同一份任务集跑 N 遍的重复调度脚本已移除；历史重复轮次仍在 `%REPO%\results\q2_*`、`qqset_*`，可以直接用分析器重建报告。
 
 **重复次数怎么定**：不是拍脑袋，由多重比较负担决定（`§0 空表诊断` 会直接算给你）。在最理想的 0/n vs n/n 分裂下：
 
@@ -609,7 +501,7 @@ git stash pop
 | `results\*\episodes.jsonl`（每任务一行，判定+步数） | `mobile\`（venv，245 MB） |
 | `results\*\run_manifest.json`（这个目录是哪种顺序/条件） | `third_party\platform-tools.zip` |
 | `results\*\*\trajectory.json`、`api_metrics.jsonl`、`step_timing.jsonl`、`result_list.txt` | `paper\`（参考论文 PDF） |
-| `results\*_analysis\report.md` 等分析产物 | `backup\androidworld\sim\`（合成数据，可重生成） |
+| `results\*_analysis\report.md` 等分析产物 | |
 | adb（`adb.exe` + 2 个 DLL，8.1 MB，见 A3） | |
 
 ---
@@ -621,24 +513,24 @@ git stash pop
 | 1 | **坐标约定** | 模型输出 0–1000 归一化坐标而代码当像素用 → 所有点击挤到左上角、**任务全灭且看不出原因**。对策：注册表 + `MBL_COORD`，换模型必跑检测 |
 | 2 | **`-Output` 目录复用** | `result_list.txt` 是续跑缓存，重名会让任务**全部被跳过**。对策：每种顺序用独立目录 |
 | 3 | **venv 必须叫 `mobile` 且在仓库根** | `mobile.env.ps1` 里 `$PY = "$MBL_ROOT\mobile\Scripts\python.exe"` |
-| 4 | **手机熄屏** | 截图全黑 → 整轮变成"假失败"，与污染无关。对策：B1 唤醒 + 保持充电；分析前用 `mbl_purge_tasks.py --blank-only` 剔除 |
+| 4 | **手机熄屏** | 截图全黑 → 整轮变成"假失败"，与污染无关。对策：B1 唤醒 + 保持充电；分析前用 `mbl_purge_tasks.py --blank-failed-only` 剔除 |
 | 5 | **cmd 里写中文注释** | cmd.exe 用本地代码页（中文 Windows 是 GBK）读 `.bat/.cmd`，UTF-8 中文会被误读、`rem` 行断掉后被当成命令执行。**批处理文件一律纯 ASCII**（本仓库的 `.cmd` 已遵守；想写中文说明就写进 `.md`） |
 | 6 | **cmd 里 `set` 与 `%VAR%` 写在同一行** | cmd 在**解析整行时**就展开 `%VAR%`，`set PY=x && %PY% y.py` 会让 `%PY%` 变成空值。**`set` 必须单独一行**（实测踩过） |
 | 7 | **相对路径的基准目录** | `results\...` 是相对 benchmark 目录，`mobile\Scripts\...` 是相对仓库根 —— 混用会报"文件不存在"。对策：按 B0 设好绝对路径变量 |
 | 8 | **Windows curl 下载失败（schannel 吊销检查）** | `curl: (35) ... CRYPT_E_REVOCATION_OFFLINE (0x80092013)` —— curl 走 schannel，联网查不到证书吊销状态就拒绝下载。对策：`curl --ssl-no-revoke ...`、或换 `Invoke-WebRequest`、或浏览器下载。（adb 已随仓库提供，正常情况下不需要下载） |
 | 9 | **`.gitignore` 把 `results\` 全排掉 → 实验结果悄悄传不上去** | 实测踩过：另一台机器跑完 `git add -A; git commit -m "add report"; git push`，**看着一切正常**，但推上来的 commit 只改了 `mobile.env.ps1` 一个文件，310 个任务的日志全留在本地。原因就是 `.gitignore` 里的 `**/results/**`。对策：只排除 `step_*.png/xml/som/jpg`（当前 `.gitignore` 已如此），并且**推送前用 `git diff --cached --stat` 确认 `results\` 在列表里** |
-| 10 | **`run_mbl.ps1` 把 benchmark 跑两遍、且从不转格式** | 实测踩过：脚本末尾**又调用了一次 `& $PY @runArgs`**，而上面那行提示写的是"转成分析格式 `mbl_traj_to_episodes.py`"。三个后果：① 白跑一遍全量扫描（长跑时好几分钟）；② 第一遍崩了第二遍会**悄悄续跑**，退出码没法解读；③ 最要命 —— `run_mbl.cmd` 跑完**根本没有 `episodes.jsonl`**，直接接 B8 会报"没有读到任何 episode"。已修，并在结尾打印 episodes 行数 |
-| 11 | **含中文的 `.ps1` 丢了 UTF-8 BOM** | `run_mbl.cmd` 走的是 PowerShell **5.1**，它读**无 BOM** 的 `.ps1` 时按本地代码页 GBK 解码，轻则输出乱码、重则语法错误。实测踩过两次（编辑工具会把 BOM 吃掉）。对策：`selftest.py` 新增 **G1/G2 守卫**（含中文的 `.ps1` 必须有 BOM；`.cmd`/`.bat` 必须纯 ASCII），**改完 `.ps1` 就跑一次自检** |
+| 10 | **旧单轮包装脚本把 benchmark 跑两遍、且从不转格式（脚本已移除，仅作历史教训）** | 实测踩过：脚本末尾**又调用了一次 `& $PY @runArgs`**，而上面那行提示写的是"转成分析格式 `mbl_traj_to_episodes.py`"。三个后果：① 白跑一遍全量扫描（长跑时好几分钟）；② 第一遍崩了第二遍会**悄悄续跑**，退出码没法解读；③ 最要命 —— 单轮包装脚本跑完**根本没有 `episodes.jsonl`**，直接接出报告那一步会报"没有读到任何 episode"。已修，并在结尾打印 episodes 行数 |
+| 11 | **含中文的 `.ps1` 丢了 UTF-8 BOM** | 旧单轮包装脚本走的是 PowerShell **5.1**，它读**无 BOM** 的 `.ps1` 时按本地代码页 GBK 解码，轻则输出乱码、重则语法错误。实测踩过两次（编辑工具会把 BOM 吃掉）。对策：`selftest.py` 新增 **G1/G2 守卫**（含中文的 `.ps1` 必须有 BOM；`.cmd`/`.bat` 必须纯 ASCII），**改完 `.ps1` 就跑一次自检** |
 | 12 | **用 `Get-Content \| Set-Content` 回写含中文的文件会双重编码** | 实测踩过（代价：整份 README 变乱码 + 被推上远端）：本环境的 `Get-Content -Raw` 不带 `-Encoding` 时按 **GBK** 解码 UTF-8 文件，`Set-Content -Encoding UTF8` 再写回 → 全文中文字符串变成 `鈥斺€?` 之类，同时被加上 BOM、换行符也被改写。对策：**不要用 cmdlet 回写要保留的文本**；用编辑工具改，或用 `[System.IO.File]::ReadAllText($p, [System.Text.UTF8Encoding]::new($false))` / `WriteAllText`（显式指定 UTF-8 无 BOM）。改完用 `git diff --stat` 核对：**行数不该出现"整文件重写"那种规模** |
-| 13 | **`run_mbl.ps1` 的 reset 判定恒为真 → 所有轮次被标成 `official`** | 原代码 `((Get-Content $cfg \| Select-String '^reset=') -match 'true').Count -gt 0` **永远为真**：config 里实际写的是 `[reset=false]`（带方括号）→ `^reset=` 匹配不到 → 左边是 `$null` → `$null -match 'true'` 得到标量 `$false` → 而 **PowerShell 3+ 给标量也加了 `.Count`（恒为 1）** → `1 -gt 0` = `$true`。后果：用 `reset=false` 的 base.conf 跑出来的 6 个 manifest 全被写成 `reset=True / condition=official`，**把"没跑 cleaner"的轮次标成了官方重置**。拿这种标签做 2×2，两格合并成一格、**交互项静默消失**。已修（显式解析 `[reset=...]` 并跳过注释行），并用 `experiments\motivation_study\scripts\mbl_fix_condition_labels.py` 把已产生的 5 个目录标签改正 |
+| 13 | **旧单轮包装脚本的 reset 判定恒为真 → 所有轮次被标成 `official`（脚本已移除，仅作历史教训）** | 原代码 `((Get-Content $cfg \| Select-String '^reset=') -match 'true').Count -gt 0` **永远为真**：config 里实际写的是 `[reset=false]`（带方括号）→ `^reset=` 匹配不到 → 左边是 `$null` → `$null -match 'true'` 得到标量 `$false` → 而 **PowerShell 3+ 给标量也加了 `.Count`（恒为 1）** → `1 -gt 0` = `$true`。后果：用 `reset=false` 的 base.conf 跑出来的 6 个 manifest 全被写成 `reset=True / condition=official`，**把"没跑 cleaner"的轮次标成了官方重置**。拿这种标签做 2×2，两格合并成一格、**交互项静默消失**。已修（显式解析 `[reset=...]` 并跳过注释行），并用 `experiments\motivation_study\scripts\mbl_fix_condition_labels.py` 把已产生的 5 个目录标签改正 |
 | 14 | **改完 `.ps1` 一定要重跑自检** | 坑 #11（BOM 被吃掉）、#13（PowerShell 标量 `.Count` 陷阱）都属于"看着没问题、结果全错"的类型。`%PY% %MBL%\experiments\selftest.py` 不依赖手机与 API key，5 项检查约 1 秒，是唯一能在长跑前挡住这类错误的关卡 |
-| 15 | **`analyze_order_effects.py --input` 传目录会读进无关文件** | 原实现用 `os.walk` 收目录下**所有** `*.jsonl`，于是每个任务子目录里的 `api_metrics.jsonl` / `step_timing.jsonl`（完全不同的 schema）也被当成 episode 读入 → `KeyError: 'agent'`；若某些行恰好带同名字段，则会**静默**混进统计。而"传目录"恰恰是最自然的写法（B10 就是这么用的）。已修为**只认 `episodes.jsonl`**，找不到时给出明确报错 |
-| 16 | **在新开的 cmd 里直接 `%PY% 某脚本.py` 会崩在中文输出上** | `run_mbl.cmd` / `pilot.cmd` 没问题（`mobile.env.ps1` 里设了 `PYTHONUTF8=1` / `PYTHONIOENCODING=utf-8`），但**直接调 python 就没有这两个变量**，Python 会用控制台默认代码页 GBK。实测踩过：`%PY% %MBL%\experiments\selftest.py` 在新 cmd 里 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'` —— 因为它最后一行要打印 `✅ 全部通过`。**后果比崩掉更糟：看起来像"自检失败"，其实是输出编码问题。** 对策：① 块里已 `set PYTHONUTF8=1` + `set PYTHONIOENCODING=utf-8`；② `selftest.py` 自己也做了 `sys.stdout.reconfigure(encoding="utf-8")` 兜底 |
+| 15 | **`analyze_order_effects.py --input` 传目录会读进无关文件** | 原实现用 `os.walk` 收目录下**所有** `*.jsonl`，于是每个任务子目录里的 `api_metrics.jsonl` / `step_timing.jsonl`（完全不同的 schema）也被当成 episode 读入 → `KeyError: 'agent'`；若某些行恰好带同名字段，则会**静默**混进统计。而"传目录"恰恰是最自然的写法（B9 的重复分析就是这么用的）。已修为**只认 `episodes.jsonl`**，找不到时给出明确报错 |
+| 16 | **在新开的 cmd 里直接 `%PY% 某脚本.py` 会崩在中文输出上** | 旧包装脚本（已移除）没问题（`mobile.env.ps1` 里设了 `PYTHONUTF8=1` / `PYTHONIOENCODING=utf-8`），但**直接调 python 就没有这两个变量**，Python 会用控制台默认代码页 GBK。实测踩过：`%PY% %MBL%\experiments\selftest.py` 在新 cmd 里 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'` —— 因为它最后一行要打印 `✅ 全部通过`。**后果比崩掉更糟：看起来像"自检失败"，其实是输出编码问题。** 对策：① 块里已 `set PYTHONUTF8=1` + `set PYTHONIOENCODING=utf-8`；② `selftest.py` 自己也做了 `sys.stdout.reconfigure(encoding="utf-8")` 兜底 |
 | 17 | **诊断脚本"未设置 MBL_API_KEY"** | `mbl_api_probe.py` / `mbl_coord_convention_check.py` 是纯标准库直连 API、**不经过 PowerShell**，所以读不到 `mobile.env.ps1` 里设的 key，在新 cmd 里直接跑会报 `❌ 未设置 MBL_API_KEY`。实测踩过（正好卡在一键流程的第 0 段）。已新增 `experiments/common/mbl_env.py`：**先看环境变量，找不到就自动去仓库根的 `mobile.env.ps1` 里解析** —— 不用再手动 `set`，也不用把密钥抄到第二个地方 |
-| 18 | **手工往 cmd 粘贴大段命令 → 整块静默失效（两个独立原因）** | ★ **最容易让人误判"环境坏了"的坑，实测踩过两次。**<br>**原因 A（非 ASCII）**：cmd 用**当前代码页**（中文 Windows = GBK）解码粘贴进来的 UTF-8 字节，多出的半个字节会**吃掉下一行的开头** —— `set MBL=D:\projects\X` 变成 `jects\X` → 变量全空 → 后面每条命令瞬间报"不是内部或外部命令" → **28 小时的实验块 1 秒"跑完"**。更狠的是 `chcp 65001` 夹在粘贴流中间时，**后面整段输入被直接丢弃**（实测只剩前两行）。<br>**原因 B（输入缓冲）**：在一条命令（如 `adb shell`、`selftest.py`）**还在执行时**把后面几十行灌进去，控制台会先把它们**原样回显**（特征是**没有 `D:\...>` 提示符前缀**），cmd 要等当前命令结束才回到提示符去读 —— 看起来像"跑完了"，实际一条都没执行。<br>**对策（釜底抽薪）**：不要手工粘贴，**把命令写进一个纯 ASCII 的 `.cmd` 文件，跑那个文件** —— 见「一、」的 `run_all.cmd`。若必须粘贴：① 块保持纯 ASCII；② 先单独敲 `chcp 65001` 回车再粘；③ **等上一条命令跑完、提示符回来再粘下一段**；④ 块里放 `echo [CHECK]` 打印变量 + `if not exist ... echo [FATAL]` 兜底，粘完先看这几行 |
-| 19 | **PowerShell 数组 splat 把 `'-Model'` 当位置参数 → 参数整体错位一格** | ★ **实测毁掉了一整轮 12 小时的实验（2026-09-27）。** `pilot.ps1` 原来这么写：<br>`$modelArgs = @(); if ($Model) { $modelArgs += @('-Model', $Model) }`<br>`& $RUN -TaskFile $tf -Output $od @modelArgs`<br>**PowerShell 不把数组 splat 里的 `'-Model'` 当参数名**，而是当**位置参数**，于是整体右移一格：`$Subset` 收到 `'-Model'`、`$ConfigFile` 收到 `'qwen3-vl-flash'`。实际发给 `run.py` 的命令行变成 `run.py --subset -Model --config qwen3-vl-flash` → argparse 立刻退出 → **每轮 1 秒结束、0 个 episode**；而且 `$Model` 始终为空，manifest 里 `agent` 还是默认的 `qwen3-vl-plus`，**看起来像"模型参数没生效"，其实是"根本没跑"**。<br>**对策**：① 显式写参数名（空字符串在 `run_mbl.ps1` 里是 falsy，不用条件拼接）；② `run_mbl.ps1` 现在会拦 `$Subset` 以 `-` 开头、`$ConfigFile` 不以 `.conf` 结尾这两种错位；③ `pilot.ps1 -DryRun` **真的调用** `run_mbl.ps1 -DryRun` 而不是只回显一行字；④ 跑完核对 manifest 的 `agent` 是否等于请求的模型 |
+| 18 | **手工往 cmd 粘贴大段命令 → 整块静默失效（两个独立原因）** | ★ **最容易让人误判"环境坏了"的坑，实测踩过两次。**<br>**原因 A（非 ASCII）**：cmd 用**当前代码页**（中文 Windows = GBK）解码粘贴进来的 UTF-8 字节，多出的半个字节会**吃掉下一行的开头** —— `set MBL=D:\projects\X` 变成 `jects\X` → 变量全空 → 后面每条命令瞬间报"不是内部或外部命令" → **28 小时的实验块 1 秒"跑完"**。更狠的是 `chcp 65001` 夹在粘贴流中间时，**后面整段输入被直接丢弃**（实测只剩前两行）。<br>**原因 B（输入缓冲）**：在一条命令（如 `adb shell`、`selftest.py`）**还在执行时**把后面几十行灌进去，控制台会先把它们**原样回显**（特征是**没有 `D:\...>` 提示符前缀**），cmd 要等当前命令结束才回到提示符去读 —— 看起来像"跑完了"，实际一条都没执行。<br>**对策（釜底抽薪）**：不要手工粘贴，**把命令写进一个纯 ASCII 的 `.cmd` 文件，跑那个文件**。若必须粘贴：① 块保持纯 ASCII；② 先单独敲 `chcp 65001` 回车再粘；③ **等上一条命令跑完、提示符回来再粘下一段**；④ 块里放 `echo [CHECK]` 打印变量 + `if not exist ... echo [FATAL]` 兜底，粘完先看这几行 |
+| 19 | **PowerShell 数组 splat 把 `'-Model'` 当位置参数 → 参数整体错位一格（旧编排脚本已移除，仅作历史教训）** | ★ **实测毁掉了一整轮 12 小时的实验（2026-09-27）。** 旧的两轮编排脚本原来这么写：<br>`$modelArgs = @(); if ($Model) { $modelArgs += @('-Model', $Model) }`<br>`& $RUN -TaskFile $tf -Output $od @modelArgs`<br>**PowerShell 不把数组 splat 里的 `'-Model'` 当参数名**，而是当**位置参数**，于是整体右移一格：`$Subset` 收到 `'-Model'`、`$ConfigFile` 收到 `'qwen3-vl-flash'`。实际发给 `run.py` 的命令行变成 `run.py --subset -Model --config qwen3-vl-flash` → argparse 立刻退出 → **每轮 1 秒结束、0 个 episode**；而且 `$Model` 始终为空，manifest 里 `agent` 还是默认的 `qwen3-vl-plus`，**看起来像"模型参数没生效"，其实是"根本没跑"**。<br>**对策**：① 显式写参数名（空字符串在单轮包装脚本里是 falsy，不用条件拼接）；② 旧单轮包装脚本曾拦截 `$Subset` 以 `-` 开头、`$ConfigFile` 不以 `.conf` 结尾这两种错位；③ 旧编排脚本的 `-DryRun` **真的调用**单轮包装脚本的 `-DryRun` 而不是只回显一行字；④ 跑完核对 manifest 的 `agent` 是否等于请求的模型 |
 
-**顺带一个方法论教训**：我当初用一个 `.cmd` 把会跑实验的行替换成 `echo` 来"演练"，那只验证了**参数拼接**、没验证**参数绑定** —— 而 bug 恰好就在绑定环节。**能覆盖真实调用路径的演练才算演练**（所以现在 `pilot.ps1 -DryRun` 会真调用 `run_mbl.ps1`）。
+**顺带一个方法论教训**：我当初用一个 `.cmd` 把会跑实验的行替换成 `echo` 来"演练"，那只验证了**参数拼接**、没验证**参数绑定** —— 而 bug 恰好就在绑定环节。**能覆盖真实调用路径的演练才算演练**（所以当时的编排脚本 `-DryRun` 会真调用单轮包装脚本）。
 
 其他已修掉的两个静默失效：
 
@@ -714,7 +606,7 @@ flash 实测：**70.4 s**、**130,842 tokens / 任务**（`none` 条件）；带
 | **A 全** | 再补 base 310 × 2 顺序 | +620 | **≈ 12.1 h** | ≈ 81 M |
 | A 合计 | | 880 | **≈ 17.9 h** | ≈ 119 M |
 
-详细命令见「B5 换模型 / 多 Agent 对比」。★ 注意 **flash 比 plus 更快但更贵**（tokens 多 22%，
+详细命令见「B4 换模型 / 坐标约定」。★ 注意 **flash 比 plus 更快但更贵**（tokens 多 22%，
 因为步数多、而每步 prompt 带历史截图 → token 随步数超线性增长），所以别指望用 flash 省 token。
 
 推荐 **B 档**：这样 §1 的四个对比每个都有两个 agent，才能回答"结论是否依赖 Agent"。
@@ -770,7 +662,7 @@ flash 实测：**70.4 s**、**130,842 tokens / 任务**（`none` 条件）；带
 1. **设备状态已饱和。** 这 8 个 QQ 任务在 09-20 那轮已经跑过，状态被推到固定点：`qq_1`（找 DND 群组）
    当时**成功**（提交了加群申请），现在 **12/12 全失败**（群已加进去、界面路径变了）。
    其余 7 个是幂等的写/读（加好友、置顶、删聊天记录、看钱包），第一遍就到固定点。
-2. **重复之间没有重置，顺序这个自变量被自己消掉了。** `run_repeats.cmd` 是先跑完 A 序 6 遍再跑 B 序 6 遍，
+2. **重复之间没有重置，顺序这个自变量被自己消掉了。** 当时的重复调度脚本（已移除）是先跑完 A 序 6 遍再跑 B 序 6 遍，
    A 序第 1 遍就定了固定点 → B 序的起点与 A 相同 → B 不再是"干净起点先跑 reader"的对照。
    **ΔSR 恒等于 0 是这个设计的必然结果。**
 

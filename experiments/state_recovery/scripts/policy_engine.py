@@ -279,9 +279,9 @@ def decide(st: dict, ctx: dict) -> dict:
       observe_count    已补证次数
       reaudit_count    已重审计次数（每轮限 1 次）
       llm_cap/actions_cap/time_budget_seconds/time_used 预算覆盖（可选）
-      dynamic          阶段4 动态调度开关（默认 True）：False 时退化为阶段3
-                       静态 Policy（禁用 RE_AUDIT/证据直接终验/工具失败 OBSERVE）
-                       供 V3 vs V4 消融对照使用
+      dynamic          动态调度开关（默认 True）：False 时退化为静态 Policy
+                       （禁用 RE_AUDIT/证据直接终验/工具失败 OBSERVE），
+                       用于消融对照
     """
     checks = {}
     dec = {"schema": POLICY_SCHEMA, "decision": None, "phase_after": None,
@@ -459,7 +459,7 @@ def run_loop(st, *, replan, execute, verify, observe=None, reaudit=None,
     reaudit() -> dict|None 重新审计（阶段4：重推断污染并调整 targets；返回 None=无变化）
     plan_validator(pset, ledger) -> list[str] 结构校验
     ctx_update(state_dict, phase, ctx) -> dict 每轮可注入额外上下文
-    dynamic: False 时退化为阶段3 静态 Policy（供 V3 vs V4 消融对照）
+    dynamic: False 时禁用动态调度，退化为静态 Policy（消融对照用）
     """
     if max_rounds is None:
         # 安全轮数上限：正常每轮 3 次判定（REPLAN/EXECUTE/VERIFY）+ 被拒重试，
@@ -596,8 +596,8 @@ def _initial_phase(st) -> str:
 
 # ---------------------------------------------------------------- 对照实验 demo
 
-def _sim_v1_loop(max_iter: int, step_gen, step_exec, step_verify):
-    """复刻 v1 固定循环语义（generate→execute→verify，成功即退出）。"""
+def _sim_workflow_loop(max_iter: int, step_gen, step_exec, step_verify):
+    """复刻 workflow 固定循环语义（generate→execute→verify，成功即退出）。"""
     planner_calls = verify_calls = execute_calls = 0
     for i in range(1, max_iter + 1):
         planner_calls += 1
@@ -618,7 +618,7 @@ def _sim_v1_loop(max_iter: int, step_gen, step_exec, step_verify):
 
 
 def _demo_scenarios(max_iter: int = 3) -> list[dict]:
-    """真实跑 v1 固定循环 vs v3 Policy Engine，输出可复现的对照数据。"""
+    """真实跑 workflow 固定循环 vs harness Policy Engine，输出可复现的对照数据。"""
     import recovery_state as rs
 
     out = []
@@ -681,8 +681,8 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
 
         return replan, execute, verify, verify_fail, ctx_update, calls
 
-    def _v3m(final, calls):
-        """v3 受控对照指标。unexpected_termination=True 表示循环跑飞（新错误终止）。"""
+    def _harness_metrics(final, calls):
+        """harness 受控对照指标。unexpected_termination=True 表示循环跑飞（新错误终止）。"""
         return {"iterations": final["iterations"],
                 "planner_calls": calls["replan"],
                 "execute_calls": calls["execute"],
@@ -715,48 +715,48 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
     r1, e1, v1, _v1f, c1, cts1 = _steppers(cleared_on=True)
     s1 = _mk_state(led1)
     final1 = run_loop(s1, replan=r1, execute=e1, verify=v1, ctx_update=c1)
-    v1_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v1_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: i == 1)
     out.append({"scenario": "first_try_success",
-                "v1": v1_sim, "v3": _v3m(final1, cts1),
-                "note": "成功即停：v3 验证通过后不再调用 Planner/Executor"})
+                "workflow": v1_sim, "harness": _harness_metrics(final1, cts1),
+                "note": "成功即停：harness 验证通过后不再调用 Planner/Executor"})
 
     # ---- 场景 2：相同计划重复被拒 → 安全终止（不重复执行相同动作）----
     r2, e2, v2, _v2f, c2, cts2 = _steppers(cleared_on=False)
     s2 = _mk_state(led1)
     final2 = run_loop(s2, replan=r2, execute=e2, verify=v2, ctx_update=c2)
-    v2_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v2_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: False)
     out.append({"scenario": "no_progress_identical_plan",
-                "v1": v2_sim, "v3": _v3m(final2, cts2),
+                "workflow": v2_sim, "harness": _harness_metrics(final2, cts2),
                 "note": "相同计划重复被拒 → 安全终止，不再重复执行相同动作；"
-                        "v1 会盲跑满 max_iter"})
+                        "workflow 会盲跑满 max_iter"})
 
     # ---- 场景 3：模型调用预算耗尽 ----
     r3, e3, v3, _v3f, c3, cts3 = _steppers(cleared_on=False,
                                            budget_overrides={"llm_cap": 2})
     s3 = _mk_state(led1)
     final3 = run_loop(s3, replan=r3, execute=e3, verify=v3, ctx_update=c3)
-    v3_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v3_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: False)
     out.append({"scenario": "budget_limited",
-                "v1": v3_sim, "v3": _v3m(final3, cts3),
-                "note": "模型调用预算（llm_cap=2）耗尽 → v3 停止，v1 没有该约束"})
+                "workflow": v3_sim, "harness": _harness_metrics(final3, cts3),
+                "note": "模型调用预算（llm_cap=2）耗尽 → harness 停止，workflow 没有该约束"})
 
     # ---- 场景 4：计划各异但验证连续无进展 → 早停（不靠加大 max_iter）----
     r4, e4, v4, _v4f, c4, cts4 = _steppers(cleared_on=False, vary_plan=True)
     s4 = _mk_state(led1)
     final4 = run_loop(s4, replan=r4, execute=e4, verify=v4, ctx_update=c4)
-    v4_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v4_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: False)
     out.append({"scenario": "no_progress_varying_plan",
-                "v1": v4_sim, "v3": _v3m(final4, cts4),
+                "workflow": v4_sim, "harness": _harness_metrics(final4, cts4),
                 "note": "计划各不相同但验证连续无进展 → 按 NO_PROGRESS_LIMIT "
-                        "早停，不依赖加大 max_iter；v1 会盲跑满 max_iter"})
+                        "早停，不依赖加大 max_iter；workflow 会盲跑满 max_iter"})
 
     # ---- 场景 5：动态调度 —— 外部已清除，证据足够 → 直接终验（不重复执行）----
     # iter1 执行后动作级证据 clearance=cleared；iter2 计划不同但证据已足够：
-    # v3 跳过 EXECUTE 直接最终验证，v1 仍会盲执行第 2 轮。
+    # harness 跳过 EXECUTE 直接最终验证，workflow 仍会盲执行第 2 轮。
     act_cleared = [{"action_id": "d.iter1.step1", "target_id": "m1",
                     "action_type": "click", "execution_status": "executed",
                     "gui_changed": "unchanged", "clearance": "cleared",
@@ -770,12 +770,12 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
         cleared_on=False, vary_plan=True, actions=act_cleared,
         verify_seq=v_ok2, state=s5)
     final5 = run_loop(s5, replan=r5, execute=e5, verify=v5, ctx_update=c5)
-    v5_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v5_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: i == 2)
     out.append({"scenario": "external_cleared_direct_final_verify",
-                "v1": v5_sim, "v3": _v3m(final5, cts5),
-                "note": "动作级证据（clearance=cleared）显示目标已清除 → v3 跳过 "
-                        "第 2 轮执行直接终验（execute=1 vs v1 的 execute=2），"
+                "workflow": v5_sim, "harness": _harness_metrics(final5, cts5),
+                "note": "动作级证据（clearance=cleared）显示目标已清除 → harness 跳过 "
+                        "第 2 轮执行直接终验（execute=1 vs workflow 的 execute=2），"
                         "避免过度保守"})
 
     # ---- 场景 6：动态调度 —— 工具执行失败 → 检查工具状态并重新观察 ----
@@ -793,11 +793,11 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
     r6, e6, v6, _v6f, c6, cts6 = _steppers(
         cleared_on=False, actions=act_err, verify_seq=v_fail1, state=s6)
     final6 = run_loop(s6, replan=r6, execute=e6, verify=v6, ctx_update=c6)
-    v6_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v6_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: False)
     out.append({"scenario": "tool_failure_reobserve",
-                "v1": v6_sim, "v3": _v3m(final6, cts6),
-                "note": "工具执行失败（execution_status=error）→ v3 先 OBSERVE "
+                "workflow": v6_sim, "harness": _harness_metrics(final6, cts6),
+                "note": "工具执行失败（execution_status=error）→ harness 先 OBSERVE "
                         "重新观察，不凭错误字符串猜测根因；诊断只读执行结果/状态"
                         "证据；最终按 no_progress 安全终止"})
 
@@ -812,40 +812,40 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
         state=s7)
     final7 = run_loop(s7, replan=r7, execute=e7, verify=v7,
                       reaudit=lambda: {"reaudited": True}, ctx_update=c7)
-    v7_sim = _sim_v1_loop(max_iter, lambda i: True, lambda i: True,
+    v7_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: False)
     out.append({"scenario": "new_contamination_reaudit",
-                "v1": v7_sim, "v3": _v3m(final7, cts7),
-                "note": "新污染信号出现在授权目标范围 → v3 按需调度 RE_AUDIT "
+                "workflow": v7_sim, "harness": _harness_metrics(final7, cts7),
+                "note": "新污染信号出现在授权目标范围 → harness 按需调度 RE_AUDIT "
                         "重新审计并评估风险（decision_log 含 RE_AUDIT），"
                         "重审计后重新规划继续恢复"})
 
     # ---- 受控对照汇总（相同初始条件：同一 ledger_demo，max_iter=3）----
     scens = [out[i]["scenario"] for i in range(len(out))]
-    v1_tot = {"planner": 0, "execute": 0, "verify": 0}
-    v3_tot = {"planner": 0, "execute": 0, "verify": 0}
+    workflow_tot = {"planner": 0, "execute": 0, "verify": 0}
+    harness_tot = {"planner": 0, "execute": 0, "verify": 0}
     for i in range(len(out)):
-        v1_tot["planner"] += out[i]["v1"]["planner_calls"]
-        v1_tot["execute"] += out[i]["v1"]["execute_calls"]
-        v1_tot["verify"] += out[i]["v1"]["verify_calls"]
-        v3_tot["planner"] += out[i]["v3"]["planner_calls"]
-        v3_tot["execute"] += out[i]["v3"]["execute_calls"]
-        v3_tot["verify"] += out[i]["v3"]["verify_calls"]
-    unexpected = [f"{out[i]['scenario']}={out[i]['v3']['termination_reason']}"
+        workflow_tot["planner"] += out[i]["workflow"]["planner_calls"]
+        workflow_tot["execute"] += out[i]["workflow"]["execute_calls"]
+        workflow_tot["verify"] += out[i]["workflow"]["verify_calls"]
+        harness_tot["planner"] += out[i]["harness"]["planner_calls"]
+        harness_tot["execute"] += out[i]["harness"]["execute_calls"]
+        harness_tot["verify"] += out[i]["harness"]["verify_calls"]
+    unexpected = [f"{out[i]['scenario']}={out[i]['harness']['termination_reason']}"
                   for i in range(len(out))
-                  if out[i]["v3"]["unexpected_termination"]]
+                  if out[i]["harness"]["unexpected_termination"]]
     out.append({
         "scenario": "controlled_comparison",
         "setup": "相同初始条件：同一 ledger_demo.json，max_iter=3，逐场景同预算",
         "scenarios": scens,
-        "v1_total": dict(v1_tot), "v3_total": dict(v3_tot),
-        "v3_unexpected_terminations": unexpected,
-        "v3_decision_logs": {out[i]["scenario"]: out[i]["v3"]["decision_log"]
+        "workflow_total": dict(workflow_tot), "harness_total": dict(harness_tot),
+        "harness_unexpected_terminations": unexpected,
+        "harness_decision_logs": {out[i]["scenario"]: out[i]["harness"]["decision_log"]
                              for i in range(len(out))},
         "conclusion": (
-            "v3 在成功/外部清除场景减少 Planner/Executor 调用，在无进展与预算"
+            "harness 在成功/外部清除场景减少 Planner/Executor 调用，在无进展与预算"
             "受限场景提前终止而非盲跑满 max_iter；终止原因均为显式确定性原因，"
-            "无意外终止（max_rounds/replan_error）。v3 相对 v1 没有新增错误"
+            "无意外终止（max_rounds/replan_error）。harness 相对 workflow 没有新增错误"
             "终止类别。")
     })
     return out

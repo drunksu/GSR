@@ -3,7 +3,7 @@
 
 为什么需要
 ==========
-`run_mbl.ps1` 早期版本用
+旧的单轮包装脚本（已移除）早期版本用
 
     ((Get-Content $cfg | Select-String '^reset=') -match 'true').Count -gt 0
 

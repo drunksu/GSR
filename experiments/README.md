@@ -17,6 +17,11 @@ experiments/
 │  ├─ mbl_api_probe.py            ← 新模型接入第一步：端点连通 / 延迟探测
 │  ├─ mbl_coord_convention_check.py ← 新模型接入第二步：坐标约定（norm/pixel）实测
 │  └─ mbl_app_checklist.py        ← 生成"要装哪些 App"的安装清单
+├─ state_recovery/                ← 第二阶段：状态污染检测与恢复闭环
+│  ├─ docs/                       ← design.md（设计日志）/ method.md（中文方法叙述）
+│  ├─ eval/                       ← 人工金标 / AI 污染清单
+│  ├─ scripts/                    ← run_pipeline.py（`--mode workflow|harness` 入口）等
+│  └─ results/{pipeline,ledgers,recovery_tasks}/base_canonical_workflow/ ← workflow 版全量 310 任务
 └─ motivation_study/              ← 第一阶段：动机研究（三个实验的支撑代码）
    ├─ docs/
    │  ├─ 01-数据集与Agent选型.md   ← 在哪跑（在线数据集）、用谁跑（Agent）
@@ -39,18 +44,18 @@ experiments/
 ## 自检
 
 ```powershell
-$env:PYTHONUTF8=1
-python experiments\selftest.py
+mobile\Scripts\python.exe experiments\selftest.py
 ```
 
-5 项检查、约 1 秒、不需要模拟器或 API key：
+D/G/H 三组检查、约 1 秒、不需要模拟器或 API key：
 
 - **D1–D3**：分析器统计函数的已知值回归（Fisher 精确检验、BH-FDR 单调性、bootstrap CI 覆盖真值）——这些函数是全部实验报告的口径；
-- **G1–G2**：仓库编码守卫——含中文的根目录 `.ps1` 必须带 UTF-8 BOM，`.cmd/.bat` 必须纯 ASCII。
+- **G1–G2**：仓库编码守卫——含中文的根目录 `.ps1` 必须带 UTF-8 BOM，`.cmd/.bat` 必须纯 ASCII；
+- **H1–H44**：状态恢复闭环的 schema / 接地 / 门控 / 动作契约 / Policy Engine / workflow-harness 对照断言。
 
 ## 支线
 
-AndroidWorld（模拟器路线）的 4 个脚本（任务目录、顺序调度器、合成数据、样本量）真机路径从未验证，已连同其产物归档到 [`../backup/androidworld/`](../backup/androidworld/)。
+AndroidWorld（模拟器路线）的 4 个脚本（任务目录、顺序调度器、合成数据、样本量）真机路径从未验证，其代码与产物已从工作树移除；当时的研究记录保留在 [`motivation_study/docs/`](motivation_study/docs/)。
 
 ## 术语速查
 

@@ -291,7 +291,7 @@ def run_recovery(task_id: str, run: str, task_path: Path,
 
     harness（阶段2）：非 None 且 enabled 时，把 Executor 改造成受 Harness
     管理的组件 —— 每步挂动作契约钩子（执行前检查 / 执行后三分离验证），
-    并在关键动作后通过 step 回调返回控制权。默认 None = 旧行为（v1）。
+    并在关键动作后通过 step 回调返回控制权。默认 None = workflow 模式行为。
     """
     from mobilebench.utils.task_executor import (
         DeviceManager, AgentFactory, TaskExecutor, load_tasks,
@@ -483,19 +483,19 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                      config_path: Path, skip_infer: bool,
                      skip_generate: bool, skip_original: bool,
                      max_iter: int, trace: bool = False,
-                     harness_mode: str = "v1") -> dict:
+                     engine_mode: str = "workflow") -> dict:
     """跑单个任务的完整闭环 pipeline。
 
     trace=True 时：开启显式 RecoveryState（targets / attempt_history /
     termination_reason）与 JSONL Trace 日志；循环策略本身不变（阶段1
     不引入动态策略、不改 Planner Prompt、不改执行器动作策略、不加 LLM 调用）。
 
-    harness_mode="v2" 时（阶段2）：启用动作契约与独立验证 —— 每步执行前
+    engine_mode="harness" 时：启用动作契约与独立验证 —— 每步执行前
     检查（授权/前置/明确性/动作集合/预算）、执行后三分离验证
     （execution_status / gui_changed / clearance），Executor 受 Harness
     管理（关键动作后返回控制权，不允许自宣成功）。动作结果与最终恢复结果
-    分开表示：恢复成功仍只由 Verify（VLM 复核）判定。v2 隐含启用显式
-    RecoveryState（targets/budget/actions 记录）。
+    分开表示：恢复成功仍只由 Verify（VLM 复核）判定。同时开启显式
+    RecoveryState（targets/budget/actions 记录）并由 Policy Engine 驱动循环。
     """
     out_dir = PIPELINE_OUT / run
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -515,7 +515,7 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
         # 按优先级查找现有轨迹（2026-10-28 修复：run_original_task 写到
         # pipeline 输出目录，skip_original 之前只查 MBL_ROOT/results 目录）：
         #   1) pipeline 输出目录同 run 下（run_pipeline 自己写的）
-        #   2) MobileBench 默认 results/run 目录（旧 harness v1）
+        #   2) MobileBench 默认 results/run 目录（原 workflow 目录）
         #   3) MobileBench 默认 results/base_canonical 目录（跨 harness 复用）
         candidates = [
             PIPELINE_OUT / run / task_id / "trajectory.json",
@@ -542,8 +542,8 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                             skip_existing=skip_infer)
     st.ledger_path = str(ledger_path)
 
-    # 检查是否有 this_task 污染（trace / v2 / v3 时走严格只读校验并构造 targets）
-    if trace or harness_mode in ("v2", "v3"):
+    # 检查是否有 this_task 污染（trace / harness 时走严格只读校验并构造 targets）
+    if trace or engine_mode == "harness":
         st.load_ledger(ledger_path)          # 严格校验 + targets/context 构造
         has_contamination = st.has_contamination
         n_this_task = len(st.targets)
@@ -554,7 +554,7 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                                       "this_task_count": n_this_task})
     print(f"\n  初始检测: this_task 污染 {n_this_task} 条")
 
-    extended = trace or harness_mode in ("v2", "v3")
+    extended = trace or engine_mode == "harness"
 
     # 无 this_task 污染 → 无需恢复，直接成功
     if not has_contamination:
@@ -574,8 +574,8 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
     final_state = "contaminated"
     failure_reason = None
 
-    # ---- 阶段3：Policy Engine 驱动的闭环（v3，确定性管理，不再让循环盲跑）----
-    if harness_mode == "v3":
+    # ---- 阶段3：Policy Engine 驱动的闭环（harness，确定性管理，不让循环盲跑）----
+    if engine_mode == "harness":
         holder = {"task_path": None, "last_rec": None, "executed_iter": 0}
 
         def _build_replan_feedback():
@@ -639,7 +639,7 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
         def _execute():
             task_path = holder.get("task_path")
             if task_path is None:
-                raise RuntimeError("v3: 无计划可执行（replan 未先行）")
+                raise RuntimeError("harness: 无计划可执行（replan 未先行）")
             with open(task_path, encoding="utf-8") as f:
                 pset = json.load(f)
             harness_ctx = _build_harness_ctx(st, pset)
@@ -753,12 +753,8 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
             print(f"  ✗ 第 {i} 轮生成失败: {e}")
             break
 
-        # ---- 阶段2：构造 Harness 上下文（授权范围 / 目标 / 预算 / 记录回调）----
+        # workflow 模式不启用动作契约，执行器保持原始行为
         harness_ctx = None
-        if harness_mode == "v2":
-            with open(task_path, encoding="utf-8") as f:
-                _pset = json.load(f)
-            harness_ctx = _build_harness_ctx(st, _pset)
 
         # Step 4: 执行恢复
         st.emit_event("execute.intent", i, {
@@ -861,8 +857,8 @@ def main() -> int:
     ap.add_argument("--task", help="单个任务 ID，如 qq_10")
     ap.add_argument("--all", action="store_true", help="跑全部 base_canonical 任务")
     ap.add_argument("--run", default=None,
-                    help="结果目录 run 名（默认 base_canonical；harness v2/v3 时"
-                         "自动用 base_canonical_{v2,v3}，避免覆盖旧基线）")
+                    help="结果目录 run 名（默认按 --mode 自动分流为 "
+                         "base_canonical_workflow / base_canonical_harness）")
     ap.add_argument("--csv", type=Path, default=DEFAULT_CSV)
     ap.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     ap.add_argument("--skip-infer", action="store_true",
@@ -877,22 +873,20 @@ def main() -> int:
                     help=f"最大闭环迭代次数（默认 {DEFAULT_MAX_ITER}）")
     ap.add_argument("--trace", action="store_true",
                     help="开启显式 RecoveryState（targets/attempt_history）与 JSONL Trace 日志")
-    ap.add_argument("--harness", choices=("v1", "v2", "v3"), default="v1",
-                    help="v2=启用动作契约与独立验证（阶段2）；v3=v2 + Policy Engine"
-                         "（阶段3/4：确定性动态控制循环 + 证据驱动诊断/按需调度）。"
-                         "v1 始终保留为固定循环基线，可随时回退")
+    ap.add_argument("--mode", choices=("workflow", "harness"),
+                    default="workflow",
+                    help="workflow=固定循环基线（V0，已完成）；"
+                         "harness=动作契约 + Policy Engine 动态控制闭环（V4）")
     args = ap.parse_args()
 
-    # ---- run 目录隔离（避免不同 harness 模式互相覆盖 / 混叠歧义）----
-    # 显式 --run 尊重用户；未指定时按 harness 模式自动分流：
-    #   v1（旧基线）→ base_canonical；v2 → base_canonical_v2；
-    #   v3（V4 动态控制）→ base_canonical_v3
-    # 这样 ledger / recovery_tasks / pipeline 三处输出都落在各自独立
-    # 目录，V4 结果不会覆盖 V0 基线，统计口径清晰。
+    # ---- run 目录隔离（不同模式互不覆盖）----
+    # 显式 --run 尊重用户；未指定时按模式分流：
+    #   workflow → base_canonical_workflow（V0 固定循环基线）
+    #   harness  → base_canonical_harness（V4 Policy Engine 闭环）
+    # 这样 ledger / recovery_tasks / pipeline 三处输出都落在各自独立目录。
     if args.run is None:
-        args.run = DEFAULT_RUN if args.harness == "v1" \
-            else f"{DEFAULT_RUN}_{args.harness}"
-    print(f"结果目录 run = {args.run}（harness={args.harness}）")
+        args.run = f"{DEFAULT_RUN}_{args.mode}"
+    print(f"结果目录 run = {args.run}（mode={args.mode}）")
 
     if not args.task and not args.all:
         ap.error("需要指定 --task 或 --all")
@@ -930,7 +924,7 @@ def main() -> int:
             r = run_pipeline_one(
                 tid, args.run, args.csv, args.config,
                 args.skip_infer, args.skip_generate, args.skip_original,
-                args.max_iter, trace=args.trace, harness_mode=args.harness)
+                args.max_iter, trace=args.trace, engine_mode=args.mode)
             results.append(r)
         except Exception as e:  # noqa: BLE001
             print(f"\n✗ {tid} pipeline 失败: {e}")

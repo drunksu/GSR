@@ -458,8 +458,8 @@ class RecoveryState:
         """base 字段与旧 *_pipeline.json 完全兼容（additive only）。
 
         extended=True 时追加 targets/budget/attempt_history 等扩展字段；
-        是否扩展由调用方（run_pipeline 的 extended = trace or harness v2/v3）
-        决定，不再受 TraceLogger 是否挂接影响 —— v2/v3 模式即使不开 --trace，
+        是否扩展由调用方（run_pipeline 的 extended = trace or mode == "harness"）
+        决定，不再受 TraceLogger 是否挂接影响 —— harness 模式即使不开 --trace，
         也必须落盘完整状态以便失败后重建续跑。
         """
         d = {

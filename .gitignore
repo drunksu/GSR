@@ -15,9 +15,6 @@ step_*.xml
 *_som.png
 step_*.jpg
 
-# ---- 合成实验数据（AndroidWorld 支线，可用 backup/androidworld/make_sim_data.py 重新生成，9 MB）----
-/backup/androidworld/sim/
-
 # ---- platform-tools：只提交 adb 运行必需的 3 个文件（8.1 MB）----
 # 这样新机器 clone 完就有 adb，不用下载（Windows 自带 curl 常因
 # CRYPT_E_REVOCATION_OFFLINE 失败）。其余 exe（fastboot/sqlite3/...）不提交。
@@ -43,6 +40,9 @@ step_*.jpg
 
 # ---- 参考论文 PDF（7.6 MB；想同步就 git add -f paper/）----
 /paper/
+
+# ---- 数据集：体积大且可重新下载/生成，不同步 ----
+/datasets/
 
 # ---- Python ----
 __pycache__/

@@ -1,22 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""evaluate_versions.py —— 阶段5：V0-V4 离线确定性对照引擎。
+"""evaluate_versions.py —— 阶段5：workflow / harness 离线确定性对照引擎。
 
-对照实验框架：所有版本吃**完全相同的真实输入**（同一批污染清单 ledger、
+对照实验框架：两版吃**完全相同的真实输入**（同一批污染清单 ledger、
 同一批 Planner 产出 recovery_tasks、同一组注入的执行/验证结果），只切换
-控制机制本身，从而把 V0-V4 的差异归因到 Harness 改造，而不是模型/Prompt/
-数据集/GUI 环境差异（阶段5 任务A）。
+控制机制本身，从而把 workflow 与 harness 的差异归因到 Harness 改造，而不是
+模型/Prompt/数据集/GUI 环境差异（阶段5 任务A）。
 
-版本定义（离线实现语义与 run_pipeline --harness 对应）：
-  V0  原始 Workflow：固定循环 generate→execute→verify，无 RecoveryState
-       约束、无动作契约、无 Policy、无预算/重复/无进展控制。
-  V1  V0 + RecoveryState + Trace：状态记录与轨迹，但循环决策不变。
-  V2  V1 + 动作前置条件 + 动作后三分离验证：动作契约拦截越权/预算/目标
-       不明/前置不成立的执行。
-  V3  V2 + Policy Engine（阶段3 静态版）：deterministic decide，含预算/
-       重复/无进展/授权/终止控制；dynamic=False。
-  V4  V3 + Harness 动态控制循环（阶段4）：RE_AUDIT / 证据直接终验 /
-       工具失败 OBSERVE / 按需调度；dynamic=True。
+版本定义（离线实现语义与 run_pipeline --mode 对应）：
+  workflow  固定循环 generate→execute→verify：无 RecoveryState 约束、无动作
+            契约、无 Policy、无预算/重复/无进展控制（V0 基线，已有全量结果）。
+  harness   动作契约 + Policy Engine 动态控制循环：RE_AUDIT / 证据直接终验 /
+            工具失败 OBSERVE / 预算/重复/无进展/授权/终止控制（V4）。
 
 离线可复现：全部注入确定性结果，无随机数；同一命令两次运行输出完全一致。
 没有真机执行/验证结果的地方，用「场景注入」替代，并在指标中同时记录
@@ -40,8 +35,8 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-LEDGER_ROOT = HERE.parent / "results" / "ledgers" / "base_canonical"
-TASK_ROOT = HERE.parent / "results" / "recovery_tasks" / "base_canonical"
+LEDGER_ROOT = HERE.parent / "results" / "ledgers" / "base_canonical_workflow"
+TASK_ROOT = HERE.parent / "results" / "recovery_tasks" / "base_canonical_workflow"
 OUT_DIR = HERE.parent / "results" / "version_comparison"
 
 sys.path.insert(0, str(HERE))
@@ -49,9 +44,8 @@ import mutation_taxonomy as tax  # noqa: E402
 import recovery_state as rs  # noqa: E402
 import policy_engine as pe  # noqa: E402
 import recovery_task as rt  # noqa: E402
-import action_contract as ac  # noqa: E402
 
-VERSIONS = ("V0", "V1", "V2", "V3", "V4")
+VERSIONS = ("workflow", "harness")
 MAX_ITER = 3
 
 
@@ -63,8 +57,8 @@ def _mk_state(task: dict) -> rs.RecoveryState:
     return st
 
 
-def run_v0(task: dict, scn: dict) -> dict:
-    """V0：固定循环（无 RecoveryState 约束、无 Policy）。"""
+def run_workflow(task: dict, scn: dict) -> dict:
+    """workflow：固定循环（无 RecoveryState 约束、无 Policy）。"""
     calls = {"replan": 0, "execute": 0, "verify": 0}
     if not task["has_this_task"]:
         return {"iterations": 0, **calls, "decision": "STOP_SUCCESS",
@@ -100,117 +94,8 @@ def run_v0(task: dict, scn: dict) -> dict:
             "truth_cleared": scn["truth"](MAX_ITER), "erroneous_success": False}
 
 
-def run_v1(task: dict, scn: dict) -> dict:
-    """V1：固定循环 + RecoveryState + Trace（决策不变，仅记录）。"""
-    calls = {"replan": 0, "execute": 0, "verify": 0}
-    if not task["has_this_task"]:
-        return {"iterations": 0, **calls, "decision": "STOP_SUCCESS",
-                "termination_reason": "recovered", "llm_calls": 0,
-                "actions_total": 0, "decision_log": [],
-                "truth_cleared": None, "erroneous_success": False}
-    st = _mk_state(task)
-    for i in range(1, MAX_ITER + 1):
-        st.begin_iteration(i)
-        calls["replan"] += 1
-        plan = scn["plan"](i)
-        st.record_generate(ok=plan is not None,
-                           task_path="tasks.json" if plan else None)
-        if plan is None:
-            break
-        calls["execute"] += 1
-        rec = scn["execute"](i, plan)
-        st.record_execute(ok=not rec.get("error"), rec=rec)
-        if rec.get("error"):
-            break
-        calls["verify"] += 1
-        v = scn["verify"](i)
-        st.record_verify(v)
-        if v["success"]:
-            st.finish(True, i == 1, "clean")
-            return {"iterations": i, **calls, "decision": "STOP_SUCCESS",
-                    "termination_reason": "recovered",
-                    "llm_calls": calls["replan"],
-                    "actions_total": 0, "decision_log": [],
-                    "truth_cleared": scn["truth"](i),
-                    "erroneous_success": not scn["truth"](i)}
-    st.finish(False, False, "contaminated",
-              failure_reason="max_iter_exceeded",
-              termination_reason="max_iter_exceeded")
-    return {"iterations": MAX_ITER, **calls, "decision": "STOP_FAILURE",
-            "termination_reason": "max_iter_exceeded",
-            "llm_calls": calls["replan"], "actions_total": 0,
-            "decision_log": [], "truth_cleared": scn["truth"](MAX_ITER),
-            "erroneous_success": False}
-
-
-def run_v2(task: dict, scn: dict) -> dict:
-    """V2：固定循环 + 动作前置条件 + 动作后三分离验证（动作契约拦截）。
-
-    与 V1 的差别：execute 走 precheck（越权/预算/目标不明/前置不成立 → block），
-    动作记录含三分离字段；决策仍是固定循环。
-    """
-    calls = {"replan": 0, "execute": 0, "verify": 0}
-    if not task["has_this_task"]:
-        return {"iterations": 0, **calls, "decision": "STOP_SUCCESS",
-                "termination_reason": "recovered", "llm_calls": 0,
-                "actions_total": 0, "decision_log": [],
-                "truth_cleared": None, "erroneous_success": False}
-    st = _mk_state(task)
-    ctx = {"enabled": True, "recovery_id": st.recovery_id,
-           "target_ids": [t["mutation_id"] for t in st.targets
-                          if t.get("recovery_status") != "verified_cleared"],
-           "target_id": (task["tasks"][0].get("mutation_id")
-                         if task["tasks"] else None),
-           "budget": dict(st.budget), "max_actions": 10,
-           "action_log": [], "record": st.record_action}
-    blocked = 0
-    for i in range(1, MAX_ITER + 1):
-        st.begin_iteration(i)
-        calls["replan"] += 1
-        plan = scn["plan"](i)
-        st.record_generate(ok=plan is not None,
-                           task_path="tasks.json" if plan else None)
-        if plan is None:
-            break
-        # 动作契约：执行前检查（授权/预算/目标）
-        pre = ac.precheck_action({"action": "click",
-                                  "params": {"position": [1, 2]}}, "", ctx)
-        if not pre["allow"]:
-            blocked += 1
-            rec = {"error": "precheck_blocked",
-                   "traj": {"history_action": [], "success": False},
-                   "task_dir": f"iter{i}", "final_img": None}
-            st.record_execute(ok=False, rec=rec)
-            break
-        calls["execute"] += 1
-        rec = scn["execute"](i, plan, contract=True)
-        st.record_execute(ok=not rec.get("error"), rec=rec)
-        if rec.get("error"):
-            break
-        calls["verify"] += 1
-        v = scn["verify"](i)
-        st.record_verify(v)
-        if v["success"]:
-            st.finish(True, i == 1, "clean")
-            return {"iterations": i, **calls, "decision": "STOP_SUCCESS",
-                    "termination_reason": "recovered",
-                    "llm_calls": calls["replan"],
-                    "actions_total": blocked + calls["execute"],
-                    "decision_log": [],
-                    "truth_cleared": scn["truth"](i),
-                    "erroneous_success": not scn["truth"](i)}
-    st.finish(False, False, "contaminated",
-              failure_reason="max_iter_exceeded",
-              termination_reason="max_iter_exceeded")
-    return {"iterations": MAX_ITER, **calls, "decision": "STOP_FAILURE",
-            "termination_reason": "max_iter_exceeded",
-            "llm_calls": calls["replan"], "actions_total": blocked,
-            "decision_log": [], "truth_cleared": scn["truth"](MAX_ITER),
-            "erroneous_success": False}
-
-
-def run_v3v4(task: dict, scn: dict, dynamic: bool) -> dict:
-    """V3（dynamic=False）与 V4（dynamic=True）：Policy Engine 循环。"""
+def run_harness(task: dict, scn: dict) -> dict:
+    """harness：动作契约 + Policy Engine 动态控制循环。"""
     st = _mk_state(task)
     if not task["has_this_task"]:
         return {"iterations": 0, "replan": 0, "execute": 0, "verify": 0,
@@ -246,10 +131,9 @@ def run_v3v4(task: dict, scn: dict, dynamic: bool) -> dict:
     ledger_ro = rs.load_ledger_immutable(task["ledger_path"])
     final = pe.run_loop(st, replan=_replan, execute=_execute, verify=_verify,
                         observe=_verify,
-                        reaudit=(lambda: {"reaudited": True})
-                        if dynamic else None,
+                        reaudit=lambda: {"reaudited": True},
                         plan_validator=rt.validate_task_set,
-                        ledger=ledger_ro, dynamic=dynamic)
+                        ledger=ledger_ro, dynamic=True)
     return {"iterations": final["iterations"],
             "replan": calls["replan"], "execute": calls["execute"],
             "verify": calls["verify"],
@@ -264,16 +148,10 @@ def run_v3v4(task: dict, scn: dict, dynamic: bool) -> dict:
 
 
 def run_version(version: str, task: dict, scn: dict) -> dict:
-    if version == "V0":
-        return run_v0(task, scn)
-    if version == "V1":
-        return run_v1(task, scn)
-    if version == "V2":
-        return run_v2(task, scn)
-    if version == "V3":
-        return run_v3v4(task, scn, dynamic=False)
-    if version == "V4":
-        return run_v3v4(task, scn, dynamic=True)
+    if version == "workflow":
+        return run_workflow(task, scn)
+    if version == "harness":
+        return run_harness(task, scn)
     raise ValueError(version)
 
 
@@ -282,7 +160,7 @@ def run_version(version: str, task: dict, scn: dict) -> dict:
 def make_scenarios(task: dict) -> dict[str, dict]:
     """构造确定性场景注入器（ground truth 明确，可复现）。
 
-    所有场景对五个版本注入**完全相同**的 plan / execute / verify 结果，
+    所有场景对两版注入**完全相同**的 plan / execute / verify 结果，
     唯一区别是各版本控制机制不同 —— 结果差异可归因于 Harness。
     """
     # 场景定义基于当前任务的真实 targets 与真实 recovery_tasks
@@ -293,7 +171,7 @@ def make_scenarios(task: dict) -> dict[str, dict]:
         # 返回完整任务集（schema/task_id/run_id/human_gate 保留），
         # 只把 tasks 过滤到授权目标 —— 与真实 pipeline replan 输出一致。
         # i>=2 时改变 recovery_goal（模拟真实 Planner 每轮可能给出不同方案），
-        # 否则 V3/V4 的「计划重复拒绝」会把公平对照误伤。
+        # 否则 harness 的「计划重复拒绝」会把公平对照误伤。
         plan = dict(real_plan)
         plan["tasks"] = [t for t in real_plan.get("tasks") or []
                          if t.get("mutation_id") in tid_targets]
@@ -334,11 +212,11 @@ def make_scenarios(task: dict) -> dict[str, dict]:
             "plan": _plan_fixed, "execute": _execute_ok,
             "verify": _verify_ok, "truth": lambda i: True,
         },
-        "clear_round2": {  # 第 2 轮才清除 → V0-V2 盲执行第 1 轮，V3/V4 同
+        "clear_round2": {  # 第 2 轮才清除 → workflow 盲执行第 1 轮，harness 同
             "plan": _plan_fixed, "execute": _execute_ok,
             "verify": _verify_first_fail, "truth": lambda i: i >= 2,
         },
-        "persistent_fail": {  # 始终未清除 → V0-V2 盲跑满，V3/V4 早停
+        "persistent_fail": {  # 始终未清除 → workflow 盲跑满，harness 早停
             "plan": _plan_fixed, "execute": _execute_ok,
             "verify": _verify_fail, "truth": lambda i: False,
         },
@@ -427,11 +305,11 @@ def compute_metrics(rows: list[dict]) -> dict:
 # ============================================================ 故障注入（任务D）
 
 def fault_injection(tasks: list[dict]) -> dict:
-    """8 类故障场景回放：每类注入差异化执行证据/验证结果，V0-V4 都吃
+    """8 类故障场景回放：每类注入差异化执行证据/验证结果，两版都吃
     相同注入，检查预期响应（阶段5 任务D）。
 
     使用独立 ground truth（注入的真实清除状态）判定，不依赖 LLM 自报；
-    也记录每类故障的 V4 预期响应供人工核验。
+    也记录每类故障的 harness 预期响应供人工核验。
     """
     out = []
     # 取一个真实含污染任务做回放模板
@@ -486,33 +364,33 @@ def fault_injection(tasks: list[dict]) -> dict:
 
     cases = {
         # 1) 点击没有生效：executed/unchanged/not_cleared
-        "click_no_effect": {"expected": "V3/V4 无进展早停（不重复盲跑）",
+        "click_no_effect": {"expected": "harness 无进展早停（不重复盲跑）",
                             "plan": _p,
                             "execute": _exe([_act(gui_changed="unchanged",
                                                   clearance="not_cleared")]),
                             "verify": _vf, "truth": lambda i: False},
         # 2) 页面延迟更新：页面未变（unchanged）
-        "page_delay_update": {"expected": "V3/V4 无进展早停",
+        "page_delay_update": {"expected": "harness 无进展早停",
                               "plan": _p,
                               "execute": _exe([_act(gui_changed="unchanged",
                                                     clearance="not_cleared")]),
                               "verify": _vf, "truth": lambda i: False},
         # 3) 控件位置变化：目标未找到 → 前置不成立
-        "control_moved": {"expected": "V2+ precheck/校验拦截，不执行盲动",
+        "control_moved": {"expected": "harness precheck/校验拦截，不执行盲动",
                           "plan": _p,
                           "execute": _exe([_act(execution_status="blocked",
                                                 gui_changed="unchanged",
                                                 clearance="not_cleared")]),
                           "verify": _vf, "truth": lambda i: False},
         # 4) 初始污染清单与当前状态不一致：动作级证据显示已清除
-        "ledger_stale": {"expected": "V4 证据足够直接终验（跳过第 2 轮执行）",
+        "ledger_stale": {"expected": "harness 证据足够直接终验（跳过第 2 轮执行）",
                          "plan": _p,
                          "execute": _exe([_act(clearance="cleared")]),
                          "verify": lambda i: _vo(i) if i >= 2 else _vf(i),
                          "truth": lambda i: i >= 2},
         # 5) 相同动作连续失败：execution_status=error ×2
         "same_action_repeat_fail": {
-            "expected": "V4 tool_failure_run → OBSERVE 重新观察",
+            "expected": "harness tool_failure_run → OBSERVE 重新观察",
             "plan": _p,
             "execute": _exe([_act(execution_status="error",
                                   error_reason="adb timeout"),
@@ -521,7 +399,7 @@ def fault_injection(tasks: list[dict]) -> dict:
             "verify": _vf, "truth": lambda i: False},
         # 6) 误将历史污染作为当前恢复目标：计划含 carried_over
         "historical_pollution_target": {
-            "expected": "V2+ 授权检查拒绝越权目标（不执行）",
+            "expected": "harness 授权检查拒绝越权目标（不执行）",
             "plan": lambda i: {"tasks": [x for x in (real_plan.get("tasks")
                                                      or [])
                                          if x.get("mutation_id") in
@@ -533,14 +411,14 @@ def fault_injection(tasks: list[dict]) -> dict:
             "truth": lambda i: False},
         # 7) Planner 生成前置条件不成立的计划：结构校验拒绝
         "planner_invalid_precondition": {
-            "expected": "V3/V4 计划校验拒绝 → REPLAN 或安全终止",
+            "expected": "harness 计划校验拒绝 → REPLAN 或安全终止",
             "plan": lambda i: {"tasks": [{"mutation_id": tid_targets[0],
                                           "recovery_goal": "",
                                           "max_steps": 0}]},
             "execute": _exe([_act()]), "verify": _vf,
             "truth": lambda i: False},
         # 8) 验证证据不足：verdicts 不确定
-        "verify_insufficient": {"expected": "V3/V4 OBSERVE 补证一次，"
+        "verify_insufficient": {"expected": "harness OBSERVE 补证一次，"
                                             "不宣布成功",
                                 "plan": _p,
                                 "execute": _exe([_act()]),
@@ -567,7 +445,7 @@ def load_tasks(limit: int | None = None) -> list[dict]:
         pset = json.loads(tf.read_text(encoding="utf-8"))
         ledger = json.loads(lp.read_text(encoding="utf-8"))
         tasks.append({
-            "task_id": tid, "run_id": "base_canonical",
+            "task_id": tid, "run_id": "base_canonical_workflow",
             "ledger_path": str(lp),
             "has_this_task": any(m.get("attribution") == "this_task"
                                  for m in ledger.get("mutations", [])),
@@ -595,7 +473,7 @@ def main() -> int:
           f"{sum(1 for t in tasks if t['has_this_task'])}")
 
     # 逐任务构造场景（每个任务用自己真实的 targets / recovery_tasks 注入，
-    # 保证五个版本在相同任务上吃到完全相同的输入）
+    # 保证两版在相同任务上吃到完全相同的输入）
     scn_names = tuple(make_scenarios(tasks[0])) if tasks else ()
     detail, summary = [], {}
     for ver in VERSIONS:
@@ -622,14 +500,12 @@ def main() -> int:
         "setup": {
             "model": "qwen3-vl-plus（Audit/Planner 共用）",
             "max_iter": MAX_ITER,
-            "dataset": "base_canonical（真实 ledger + recovery_tasks）",
+            "dataset": "base_canonical_workflow（真实 ledger + recovery_tasks）",
             "injection": "确定性场景注入，无随机；可复现",
             "versions": {
-                "V0": "原始 Workflow（固定循环，无约束）",
-                "V1": "V0 + RecoveryState + Trace（决策不变）",
-                "V2": "V1 + 动作契约（precheck/三分离）",
-                "V3": "V2 + Policy Engine 静态版（dynamic=False）",
-                "V4": "V3 + Harness 动态控制循环（dynamic=True）",
+                "workflow": "固定循环 generate→execute→verify（无约束，"
+                            "V0 基线）",
+                "harness": "动作契约 + Policy Engine 动态控制循环（V4）",
             },
         },
         "summary": summary,

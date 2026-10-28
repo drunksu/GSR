@@ -12,7 +12,7 @@
      .cmd/.bat 必须是纯 ASCII。
 
 （顺序构造 / 对抗序 / 样本量 / 合成数据端到端管道的 A/B/C/E/F 检查属于
-AndroidWorld 支线，随其脚本一起移到了 backup/androidworld/。）
+AndroidWorld 支线，随其脚本一起从工作树移除；历史记录见 motivation_study/docs/。）
 
 全部通过则退出码 0，任一失败退出码 1。
 """
@@ -30,7 +30,7 @@ import sys
 #      UnicodeEncodeError: 'gbk' codec can't encode character '\u2705'
 #    因为最后那行 print("✅ 全部通过…") 的 ✅ 无法用 GBK 编码。
 #    后果比崩掉更糟 —— **它会看起来像"自检失败"**，而其实是输出编码问题。
-#    （run_mbl.cmd / pilot.cmd 不会有这个问题：mobile.env.ps1 里设了
+#    （旧的 PowerShell 包装脚本不会有这个问题：mobile.env.ps1 里设了
 #      PYTHONUTF8=1 与 PYTHONIOENCODING=utf-8，但直接调 python 就没有。）
 # ---------------------------------------------------------------------------
 for _stream in (sys.stdout, sys.stderr):
@@ -539,13 +539,16 @@ def main() -> int:
           f"b.clear={post21b['clearance']}")
 
     # H22: 恢复操作引入新的污染 → new_contamination_signal=True（type 残留）
+    #      search_history 的 clearance 一律 uncertain（界面看不到完整列表，
+    #      交 VLM verify 裁决），这里只断言「新污染信号」与 uncertain 口径。
     post22 = ac.postcheck_action(
         {"action": "type", "params": {"text": "新残留词条"}},
         {"adb_ok": True, "error": None}, OFF_XML, _xml(False, "新残留词条"), ctx2b)
-    check("H22. 恢复操作引入新污染 → new_contamination_signal=True",
+    check("H22. 恢复操作引入新污染 → new_contamination_signal=True（clearance 不臆断）",
           post22["new_contamination_signal"] is True
-          and post22["clearance"] == "cleared",
+          and post22["clearance"] == "uncertain",
           f"signal={post22['new_contamination_signal']}, "
+          f"clear={post22['clearance']}, "
           f"basis={post22['new_contamination_basis']}")
 
     # H23: compose_record 完整动作契约（10 字段）+ blocked/not_executed 状态
@@ -818,8 +821,8 @@ def main() -> int:
 
     # ---- H34-H39. 阶段4：Harness 驱动的动态控制循环（不依赖 API/手机）----
     # 受控对照：相同初始条件（同一 policy_led.json, max_iter=3），
-    # v1 用 _sim_v1_loop（固定 generate→execute→verify 每轮全调用）复刻，
-    # v3 用 run_loop（按需调度）。比较 planner/execute/verify 调用数与终止原因。
+    # workflow 用 _sim_workflow_loop（固定 generate→execute→verify 每轮全调用）复刻，
+    # harness 用 run_loop（按需调度）。比较 planner/execute/verify 调用数与终止原因。
 
     def _p_steppers4(verify_seq, *, plan_seq=None, actions=None, state=None):
         """阶段4 steppers：execute 时把动作契约记录写入 state（供诊断读取）。
@@ -868,18 +871,18 @@ def main() -> int:
         v_seq34, plan_seq=[_p_plan(), _p_plan(goal="方案2")],
         actions=act_cleared34, state=s34)
     f34 = pe.run_loop(s34, replan=r34, execute=e34, verify=v34)
-    v1_34 = pe._sim_v1_loop(3, lambda i: True, lambda i: True,
-                            lambda i: i == 2)
+    wf_34 = pe._sim_workflow_loop(3, lambda i: True, lambda i: True,
+                                  lambda i: i == 2)
     log34 = [d["decision"] for d in f34["decision_log"]]
-    check("H34a. 外部清除→直接终验：v3 execute=1 < v1 execute=2（不再重复执行）",
+    check("H34a. 外部清除→直接终验：harness execute=1 < workflow execute=2（不再重复执行）",
           f34["decision"] == "STOP_SUCCESS"
-          and cts34["execute"] == 1 and v1_34["execute_calls"] == 2
+          and cts34["execute"] == 1 and wf_34["execute_calls"] == 2
           and cts34["verify"] == 2,
-          f"v3 execute={cts34['execute']}, v1 execute={v1_34['execute_calls']}, "
+          f"harness execute={cts34['execute']}, workflow execute={wf_34['execute_calls']}, "
           f"log={log34}")
 
-    # H34b: 受控对照——相同计划连续无进展：v3 重复被拒提前安全终止
-    #       （repeated_plan, execute=1），v1 盲跑满 max_iter
+    # H34b: 受控对照——相同计划连续无进展：harness 重复被拒提前安全终止
+    #       （repeated_plan, execute=1），workflow 盲跑满 max_iter
     #       （planner/execute/verify 各 3 次）。
     s34b = _mk_ps()
     r34b, e34b, v34b, cts34b = _p_steppers4(
@@ -887,15 +890,15 @@ def main() -> int:
           "verdicts": [{"mutation_id": "m1", "cleared": False}]}],
         plan_seq=[_p_plan(), _p_plan(), _p_plan()], state=s34b)
     f34b = pe.run_loop(s34b, replan=r34b, execute=e34b, verify=v34b)
-    v1_34b = pe._sim_v1_loop(3, lambda i: True, lambda i: True,
-                             lambda i: False)
-    check("H34b. 受控对照：v3 无进展早停不重复执行，v1 盲跑满 max_iter",
+    wf_34b = pe._sim_workflow_loop(3, lambda i: True, lambda i: True,
+                                   lambda i: False)
+    check("H34b. 受控对照：harness 无进展早停不重复执行，workflow 盲跑满 max_iter",
           f34b["termination_reason"] == "repeated_plan"
           and cts34b["execute"] == 1
-          and v1_34b["planner_calls"] == 3
-          and v1_34b["execute_calls"] == 3,
-          f"v3 reason={f34b['termination_reason']}, execute={cts34b['execute']}, "
-          f"v1 planner/execute={v1_34b['planner_calls']}/{v1_34b['execute_calls']}")
+          and wf_34b["planner_calls"] == 3
+          and wf_34b["execute_calls"] == 3,
+          f"harness reason={f34b['termination_reason']}, execute={cts34b['execute']}, "
+          f"workflow planner/execute={wf_34b['planner_calls']}/{wf_34b['execute_calls']}")
 
     # H34c: 受控对照——无意外终止（max_rounds/replan_error 从未出现）
     #       且每次决策都有原因（decision_log 可完整重建决策过程）。
@@ -906,7 +909,7 @@ def main() -> int:
           not any(r in ("max_rounds", "replan_error") for r in unexp34)
           and all(r for r in reasons34b)
           and len(log34b) >= 3,
-          f"v3 terminations={unexp34}, log34={log34}, log34b={log34b}")
+          f"harness terminations={unexp34}, log34={log34}, log34b={log34b}")
 
     # H35: 动态调度——工具执行失败（execution_status=error，不猜错误字符串）
     #      → 诊断读执行结果，先 OBSERVE 重新观察。
@@ -986,67 +989,67 @@ def main() -> int:
           dec37 == log37 and len(dec37) >= 3,
           f"trace={dec37}, decision_log={log37}")
 
-    # H38: 回退——v1 固定循环基线语义不变（每轮 planner→execute→verify 全调用）
-    v1_38 = pe._sim_v1_loop(3, lambda i: True, lambda i: True, lambda i: False)
+    # H38: 基线保留——workflow 固定循环语义不变（每轮 planner→execute→verify 全调用）
+    wf_38 = pe._sim_workflow_loop(3, lambda i: True, lambda i: True,
+                                  lambda i: False)
     with open(os.path.join(HERE, "state_recovery", "scripts",
                            "run_pipeline.py"), encoding="utf-8") as f:
         src38 = f.read()
-    check("H38. v1 固定循环基线保留且可配置回退（--harness v1 语义不变）",
-          v1_38["planner_calls"] == 3 and v1_38["execute_calls"] == 3
-          and v1_38["verify_calls"] == 3
-          and v1_38["stop"] == "max_iter_exceeded"
-          and "--harness" in src38
-          and "v1 始终保留为固定循环基线，可随时回退" in src38,
-          f"v1={v1_38}, harness 开关={'--harness' in src38}")
+    check("H38. workflow 固定循环基线保留且可切换回退（--mode workflow）",
+          wf_38["planner_calls"] == 3 and wf_38["execute_calls"] == 3
+          and wf_38["verify_calls"] == 3
+          and wf_38["stop"] == "max_iter_exceeded"
+          and "--mode" in src38
+          and 'choices=("workflow", "harness")' in src38,
+          f"workflow={wf_38}, mode 开关={'--mode' in src38}")
 
-    # ---- H39-H44. 阶段5：V0-V4 离线确定性对照（不依赖 API/手机）----
+    # ---- H39-H44. 阶段5：workflow / harness 离线确定性对照（不依赖 API/手机）----
     import evaluate_versions as ev
 
     # H39a: 确定性 —— 相同输入两次运行结果一致（可复现）
     tasks39 = ev.load_tasks(limit=6)
     scn39 = ev.make_scenarios(tasks39[0]) if tasks39 else {}
-    r39a = ev.run_version("V3", tasks39[0], scn39["clean_first"])
-    r39b = ev.run_version("V3", tasks39[0], scn39["clean_first"])
+    r39a = ev.run_version("harness", tasks39[0], scn39["clean_first"])
+    r39b = ev.run_version("harness", tasks39[0], scn39["clean_first"])
     check("H39a. 离线对照可复现（同输入同结果）",
           r39a == r39b and len(tasks39) > 0,
-          f"V3 clean_first={r39a['decision']}")
+          f"harness clean_first={r39a['decision']}")
 
     # H39b: 统计口径 —— 无污染任务不混入恢复率分母（truth_cleared=None）
     rows39 = []
     for t in tasks39:
         scns = ev.make_scenarios(t)
-        for ver in ("V0", "V4"):
+        for ver in ("workflow", "harness"):
             rows39.append(ev.run_version(ver, t, scns["clean_first"]))
     m39 = ev.compute_metrics(rows39)
     n_contam = sum(1 for t in tasks39 if t["has_this_task"])
     check("H39b. 统一口径：无污染任务不混入恢复率分母",
-          m39["contaminated"] == n_contam * 2  # V0+V4 两条记录
+          m39["contaminated"] == n_contam * 2  # workflow+harness 两条记录
           and m39["contaminated"] < len(rows39)
           and m39["final_recovery_rate"] == 1.0,
           f"contaminated={m39['contaminated']} (记录数), "
           f"污染任务={n_contam}, rows={len(rows39)}, "
           f"rate={m39['final_recovery_rate']}")
 
-    # H40: 受控对照 —— 无进展场景 V3/V4 早停（迭代 < V0 盲跑满）
+    # H40: 受控对照 —— 无进展场景 harness 早停（迭代 < workflow 盲跑满）
     t40 = next(t for t in ev.load_tasks(limit=30) if t["has_this_task"])
     scns40 = ev.make_scenarios(t40)
     p40 = {"persistent_fail": {}}
-    for ver in ("V0", "V3", "V4"):
+    for ver in ("workflow", "harness"):
         p40["persistent_fail"][ver] = ev.run_version(
             ver, t40, scns40["persistent_fail"])
-    v0_iter = p40["persistent_fail"]["V0"]["iterations"]
-    v3_iter = p40["persistent_fail"]["V3"]["iterations"]
-    v4_iter = p40["persistent_fail"]["V4"]["iterations"]
-    check("H40. 无进展早停：V3/V4 迭代 < V0 盲跑满（不靠加大 max_iter）",
-          v0_iter == ev.MAX_ITER and v3_iter < ev.MAX_ITER
-          and v4_iter < ev.MAX_ITER
-          and p40["persistent_fail"]["V3"]["replan"]
-          < p40["persistent_fail"]["V0"]["replan"],
-          f"V0/V3/V4 iter={v0_iter}/{v3_iter}/{v4_iter}, "
-          f"planner V0/V3={p40['persistent_fail']['V0']['replan']}/"
-          f"{p40['persistent_fail']['V3']['replan']}")
+    wf_iter = p40["persistent_fail"]["workflow"]["iterations"]
+    hs_iter = p40["persistent_fail"]["harness"]["iterations"]
+    check("H40. 无进展早停：harness 迭代 < workflow 盲跑满（不靠加大 max_iter）",
+          wf_iter == ev.MAX_ITER and hs_iter < ev.MAX_ITER
+          and p40["persistent_fail"]["harness"]["replan"]
+          < p40["persistent_fail"]["workflow"]["replan"],
+          f"workflow/harness iter={wf_iter}/{hs_iter}, "
+          f"planner workflow/harness="
+          f"{p40['persistent_fail']['workflow']['replan']}/"
+          f"{p40['persistent_fail']['harness']['replan']}")
 
-    # H41: 动态调度 —— 外部清除证据 → V4 直接终验跳过第 2 轮执行（V3 仍执行）
+    # H41: 动态调度 —— 外部清除证据 → harness 直接终验跳过第 2 轮执行（workflow 仍执行）
     scns41 = ev.make_scenarios(t40)
     # 手工构造 ledger_stale 注入（clearance=cleared 动作证据 + 第 2 轮 verify 成功）
     def _mk41():
@@ -1088,51 +1091,49 @@ def main() -> int:
                 "verify": _verify, "truth": lambda i: i >= 2}
 
     scn41 = _mk41()
-    f41_v3 = ev.run_version("V3", t40, scn41)
-    f41_v4 = ev.run_version("V4", t40, scn41)
-    log41_v3 = f41_v3["decision_log"]
-    log41_v4 = f41_v4["decision_log"]
-    check("H41. 外部清除直接终验：V4 跳过第 2 轮执行（V3 执行）",
-          f41_v4["decision"] == "STOP_SUCCESS" and f41_v3["decision"] == "STOP_SUCCESS"
-          and f41_v4["execute"] < f41_v3["execute"]
-          and "VERIFY" in log41_v4 and "EXECUTE_PLAN" not in log41_v4[-2:],
-          f"V4 exec={f41_v4['execute']}, V3 exec={f41_v3['execute']}, "
-          f"V4 log={log41_v4}, V3 log={log41_v3}")
+    f41_wf = ev.run_version("workflow", t40, scn41)
+    f41_hs = ev.run_version("harness", t40, scn41)
+    log41_wf = f41_wf["decision_log"]
+    log41_hs = f41_hs["decision_log"]
+    check("H41. 外部清除直接终验：harness 跳过第 2 轮执行（workflow 执行）",
+          f41_hs["decision"] == "STOP_SUCCESS" and f41_wf["decision"] == "STOP_SUCCESS"
+          and f41_hs["execute"] < f41_wf["execute"]
+          and "VERIFY" in log41_hs and "EXECUTE_PLAN" not in log41_hs[-2:],
+          f"harness exec={f41_hs['execute']}, workflow exec={f41_wf['execute']}, "
+          f"harness log={log41_hs}, workflow log={log41_wf}")
 
-    # H42: 故障注入 —— 相同动作连续失败 → V4 OBSERVE（V3 无）
+    # H42: 故障注入 —— 相同动作连续失败 → harness OBSERVE（workflow 无决策链）
     faults42 = ev.fault_injection(ev.load_tasks(limit=6))
     row42 = next(r for r in faults42
                  if r["fault"] == "same_action_repeat_fail")
-    log42_v3 = row42["versions"]["V3"]["decision_log"]
-    log42_v4 = row42["versions"]["V4"]["decision_log"]
-    check("H42. 工具连续失败：V4 先 OBSERVE 重新观察（V3 不 OBSERVE）",
-          "OBSERVE" in log42_v4 and "OBSERVE" not in log42_v3,
-          f"V4 log={log42_v4}, V3 log={log42_v3}")
+    log42_wf = row42["versions"]["workflow"]["decision_log"]
+    log42_hs = row42["versions"]["harness"]["decision_log"]
+    check("H42. 工具连续失败：harness 先 OBSERVE 重新观察（workflow 无 OBSERVE）",
+          "OBSERVE" in log42_hs and "OBSERVE" not in log42_wf,
+          f"harness log={log42_hs}, workflow log={log42_wf}")
 
-    # H43: 故障注入 —— 误将历史污染作为恢复目标 → V3/V4 授权拒绝不执行
+    # H43: 故障注入 —— 误将历史污染作为恢复目标 → harness 授权拒绝不执行
     row43 = next(r for r in faults42
                  if r["fault"] == "historical_pollution_target")
     v43 = row43["versions"]
-    check("H43. 越权目标授权拒绝：V3/V4 plan_rejected 且不执行",
-          v43["V3"]["termination_reason"] == "plan_rejected"
-          and v43["V4"]["termination_reason"] == "plan_rejected"
-          and v43["V3"]["execute"] == 0 and v43["V4"]["execute"] == 0
-          and v43["V0"]["execute"] == ev.MAX_ITER,
-          f"V3/V4={v43['V3']['termination_reason']}/"
-          f"{v43['V4']['termination_reason']}, "
-          f"exec V3/V4/V0={v43['V3']['execute']}/"
-          f"{v43['V4']['execute']}/{v43['V0']['execute']}")
+    check("H43. 越权目标授权拒绝：harness plan_rejected 且不执行",
+          v43["harness"]["termination_reason"] == "plan_rejected"
+          and v43["harness"]["execute"] == 0
+          and v43["workflow"]["execute"] == ev.MAX_ITER,
+          f"harness={v43['harness']['termination_reason']}, "
+          f"exec harness/workflow={v43['harness']['execute']}/"
+          f"{v43['workflow']['execute']}")
 
-    # H44: 动态开关消融 —— V3(dynamic=False) vs V4(dynamic=True) 行为差异存在
-    #      且 V4 不引入意外终止（max_rounds/replan_error）
+    # H44: 受控对照汇总 —— harness 不引入意外终止（max_rounds/replan_error）
     unexp44 = [r["termination_reason"] for r in
-               (f41_v3, f41_v4, *faults42[0]["versions"].values())
+               (f41_hs, f41_wf, *faults42[0]["versions"].values())
                if r["termination_reason"] in ("max_rounds", "replan_error")]
-    check("H44. 动态开关可消融且 V4 无意外终止",
+    check("H44. harness 无意外终止，且与 workflow 决策链显著不同",
           not unexp44
-          and f41_v3["decision_log"] != f41_v4["decision_log"],
-          f"unexpected={unexp44}, V3!=V4 log: "
-          f"{f41_v3['decision_log'] != f41_v4['decision_log']}")
+          and f41_hs["execute"] <= f41_wf["execute"]
+          and f41_hs["decision_log"] != f41_wf["decision_log"],
+          f"unexpected={unexp44}, exec harness/workflow="
+          f"{f41_hs['execute']}/{f41_wf['execute']}")
 
     print()
     if FAILED:

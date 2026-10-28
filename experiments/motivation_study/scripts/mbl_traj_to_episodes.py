@@ -11,7 +11,7 @@
     <task_id>/step_*.png/.xml   每步截图 + 元素树
     <task_id>/api_metrics.jsonl （可选，--metrics 补丁产出：延迟/token）
     <task_id>/step_timing.jsonl （可选，--metrics 补丁产出：每步起始时间）
-    run_manifest.json           （可选，run_mbl.ps1 产出：顺序模式/重置条件/任务顺序）
+    run_manifest.json           （可选，历史运行由旧包装脚本产出：顺序模式/重置条件/任务顺序）
 
 输出：episodes.jsonl，字段与 AndroidWorld 那条链路完全一致，额外多几个成本字段。
 

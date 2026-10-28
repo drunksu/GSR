@@ -3,14 +3,14 @@
 
 为什么需要
 ==========
-`mobile.env.ps1` 里用 `$env:MBL_API_KEY = '...'` 设置 key，而 `run_mbl.ps1` / `pilot.ps1`
-会 dot-source 它。但这两个诊断脚本（`mbl_api_probe.py`、`mbl_coord_convention_check.py`）
+`mobile.env.ps1` 里用 `$env:MBL_API_KEY = '...'` 设置 key，而旧的 PowerShell 包装脚本
+会 dot-source 它（这些脚本已移除）。但这两个诊断脚本（`mbl_api_probe.py`、`mbl_coord_convention_check.py`）
 是**纯标准库、直连托管 API**的，不经过 PowerShell —— 所以在新开的 cmd 窗口里直接跑
 `%PY% %S%\mbl_coord_convention_check.py ...` 会直接报：
 
     ❌ 未设置 MBL_API_KEY
 
-实测踩过（2026-09-24）：README 的「全量实验一键流程」块里第 0 段就会撞上这个，
+实测踩过（2026-09-24）：README 早期的一键全量流程块里第 0 段就会撞上这个，
 自检能过、坐标检测却挂掉。与其要求用户在每个新窗口手动 `set`（还要把 key 抄一遍、
 等于把密钥又复制到一个地方），不如让脚本自己去仓库根的 `mobile.env.ps1` 里读。
 

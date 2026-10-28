@@ -190,7 +190,7 @@ def main() -> int:
         print("   会让所有点击挤到左上角 —— 不是说你环境坏了。")
         print("   → 本仓库已处理：补丁 mbl_apply_api_patch.py --coord-norm 会在 process_response 里")
         print("     做 (x/1000*width, y/1000*height) 换算，并且要配合 MBL_COORD=norm。")
-        print("   → 这是**预期结果**，可以直接继续跑（run_all.cmd 就是这么做的）。")
+        print("   → 这是**预期结果**，可以直接继续跑（本仓库就是这么处理的）。")
         return 3
     print("\n[判定] ⚠️ 两种都不接近：模型可能没看准位置，或输出的是别的约定。")
     print("   建议换更靠边的目标再测一次（本脚本可改 BOX 常量）。")

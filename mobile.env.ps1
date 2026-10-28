@@ -2,8 +2,6 @@
 #  MobileBench-OL 运行环境配置
 #  用法（每个新开的终端里执行一次）：
 #      . 'D:\projects\GUI state recovery\mobile.env.ps1'
-#  或直接用配套脚本：
-#      & 'D:\projects\GUI state recovery\run_mbl.ps1' -TaskFile data/order_canonical.csv -Output results/o1
 #
 #  ★ 这个文件不放在 git 仓库里（在仓库外的上一级目录），避免被误提交。
 #     但请注意：写进文件的 key 仍是明文，别把本文件发给别人/上传。
@@ -39,7 +37,7 @@ $MBL_MODELS = [ordered]@{
     'qwen3-vl-max'               = 'norm'    # 百炼上 404，留着以防以后上线
 }
 
-$env:MBL_MODEL       = 'qwen3-vl-plus'                  # 默认模型；用 run_mbl.ps1 -Model 覆盖
+$env:MBL_MODEL       = 'qwen3-vl-plus'                  # 默认模型；可在运行前临时改这个变量覆盖
 $env:MBL_COORD       = $MBL_MODELS[$env:MBL_MODEL]      # ★ 自动按注册表取，别手改
 if (-not $env:MBL_COORD) {
     $env:MBL_COORD = ''

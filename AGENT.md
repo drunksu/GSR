@@ -22,12 +22,17 @@ agent's success rate (order-dependent / OD flaky tests)?**
   **Execute → Audit → Planner → Execute** closed loop that detects persistent state
   pollution from an execution trajectory (contamination list), generates grounded recovery
   tasks, and (Stage B, phone) executes them under a pre-check / verify / hard-gate state
-  machine. Stage A (offline inference + recovery-task generation) is complete; Stage B/C
-  require the phone.
+  machine. Two agent versions exist: **workflow** (original V0, fixed generate→execute→verify
+  loop; full 310-task run complete under `results/*/base_canonical_workflow/`) and **harness**
+  (original V4, action contract + Policy Engine; not yet run, will write
+  `base_canonical_harness/`). Entry point: `scripts/run_pipeline.py --mode workflow|harness`.
+  `evaluate_versions.py` compares only these two versions; V1/V2/V3 offline implementations
+  were removed.
 - **Side line (AndroidWorld):** an emulator-based route. Code and synthetic-data self-tests
-  passed historically, but the real-device path was never verified. The whole route
+  passed historically, but the real-device path was never verified. The route
   (`order_runner.py`, `task_catalog.py`, `make_sim_data.py`, `power_analysis.py` plus its
-  artifacts) is archived under `backup/androidworld/` with its own README — rarely touched.
+  artifacts) has been removed from the working tree; historical notes remain under
+  `experiments/motivation_study/docs/`.
 
 This is **scientific experiment code**: no change may silently shift the data pipeline or
 metric definitions. Fail loudly, never silently — pitfalls #10/#13/#19 in the README were all
@@ -42,16 +47,12 @@ state its cost first.
 
 | Path | What it is | Rules for changing it |
 |---|---|---|
-| `run_all.cmd` | The single entry point for the full experiment set (~28 h, needs the phone) | Pure ASCII; agents must not run it proactively |
-| `run_mbl.cmd` / `run_mbl.ps1` | One run: self-check → write manifest → execute → convert to `episodes.jsonl` | See §5 encoding rules |
-| `pilot.cmd` / `pilot.ps1` | Two order passes + automatic analysis | Same |
-| `run_repeats.cmd` / `sync.cmd` | Repeated-runs scheduler / one-command add-verify-commit-push | Same |
+| `experiments/state_recovery/scripts/run_pipeline.py` | **The only phone-run entry point**: `--mode workflow\|harness`, results split into `base_canonical_workflow/` / `base_canonical_harness/` | Agents must not run it proactively |
 | `mobile.env.ps1` | **Environment config**: API key (plaintext), model→coordinate registry, device serial, paths | See §6 security |
 | `experiments/selftest.py` | Regression self-check (statistics + encoding guards); no phone/key needed | Must stay green; run after any edit |
 | `experiments/common/` | Cross-experiment MobileBench-OL infrastructure: key lookup, API patch, endpoint/coord probes, app checklist | Reusable for future experiments |
 | `experiments/motivation_study/` | Code/docs for the completed motivation study (`docs/motivation_study.md`): analyzer, episode converter, CSV/purge/audit/forensics scripts | New experiments get sibling dirs, e.g. `experiments/<name>/{scripts,docs,results}` |
-| `experiments/state_recovery/` | **Phase 2 (current)**. `scripts/`: `infer_mutations.py` (trajectory → contamination list), `mutation_taxonomy.py` (schema/gate), `audit_grounding.py` (grounding + deterministic conservatism), `recovery_task.py` (recovery-task schema/validation), `generate_tasks.py` / `score_tasks.py`; `docs/design.md` is the authoritative design log, `docs/method.md` its Chinese narrative; `eval/` holds three files: `annotation_metadata.jsonl` (labeler working file), `golden_labels.json` (final human gold, 310 base_canonical cases, feeds `score_inference.py`), `ai_contamination_list.json` (AI inference output, for review comparison); `results/ledgers/` (lists on disk) and `results/recovery_tasks/` are evidence | Bump schema strings + versions when changing formats; rerun `score_inference.py` / `score_tasks.py` after prompt/validator changes; never hand-edit `results/` JSON to make scores pass — fix the generator |
-| `backup/` | Superseded/extra runs, CSVs, the AndroidWorld side line — never silently delete; see `backup/MANIFEST.md` | Archived evidence |
+| `experiments/state_recovery/` | **Phase 2 (current)**. `scripts/`: `infer_mutations.py` (trajectory → contamination list), `mutation_taxonomy.py` (schema/gate), `audit_grounding.py` (grounding + deterministic conservatism), `recovery_task.py` (recovery-task schema/validation), `generate_tasks.py` / `score_tasks.py`; `docs/design.md` is the authoritative design log, `docs/method.md` its Chinese narrative; `eval/` holds three main files: `annotation_metadata.jsonl` (labeler working file), `golden_labels.json` (final human gold, 310 base_canonical cases, feeds `score_inference.py`), `ai_contamination_list.json` (AI inference output, for review comparison), plus a dated gold-label backup; `results/{pipeline,ledgers,recovery_tasks}/base_canonical_workflow/` are the completed workflow run (harness pending), and the V1/V2/V3 result trees were removed | Bump schema strings + versions when changing formats; rerun `score_inference.py` / `score_tasks.py` after prompt/validator changes; never hand-edit `results/` JSON to make scores pass — fix the generator |
 | `third_party/mobilebench-ol-main/` | The **patched** benchmark: `run.py`, `config/`, `data/*.csv`, `results/` | See §4; never hand-edit generated patches |
 | `third_party/platform-tools/` | Bundled adb (3 committed files) | Do not touch |
 | `docs/` | Proposal, early-stage experiment notes (latest result conventions) | Documentation |
@@ -74,9 +75,8 @@ state its cost first.
 data/<order>.csv  ── row order IS execution order
                      (csv.DictReader reads sequentially; no sorting, no shuffling)
       │
-run_mbl.ps1 ── writes run_manifest.json (order / reset-condition / agent labels)
-      │
-third_party/mobilebench-ol-main/results/<run>/  (trajectory.json, result_list.txt, screenshots…)
+third_party/mobilebench-ol-main/results/<run>/  (run_manifest.json, trajectory.json,
+                                                 result_list.txt, screenshots…)
       │
 mbl_traj_to_episodes.py ──> episodes.jsonl   (one row per task: success / steps / duration)
       │
@@ -134,8 +134,9 @@ It guards both statistical correctness and this repository's own pitfalls (G1/G2
    `sys.stdout.reconfigure(encoding="utf-8", errors="replace")` as a fallback (a GBK console
    cannot even encode `✅`; pitfall #16).
 6. **Do not add one-off scripts to the repository root.** Single-round backfill scripts are
-   deleted after use (the README already removed `run_missing.cmd` and friends). The only
-   long-term entry points are `run_all.cmd`, `run_mbl.cmd`, and `pilot.cmd`.
+   deleted after use. The only long-term entry points are
+   `experiments/state_recovery/scripts/run_pipeline.py` for phone-side recovery runs and
+   `third_party/mobilebench-ol-main/run.py` for benchmark runs.
 7. Failure paths must **raise explicitly** (throw / non-zero exit / `[FATAL]`); never
    `except: print` and swallow — an API hiccup silently turned into an invalid action gets
    misread as an order effect.
@@ -151,10 +152,11 @@ It guards both statistical correctness and this repository's own pitfalls (G1/G2
 
 ## 7. Agent Behavior Boundaries
 
-- **Never start phone experiments on your own** (`run_all.cmd` / `run_mbl.cmd` /
-  `pilot.cmd` / adb commands): they need a physical phone, ~28 hours, millions of tokens, and
-  12 manual `pause` points where a human restores QQ state. Do so only when the user
-  explicitly asks. Phone-free rehearsal uses `-DryRun`.
+- **Never start phone experiments on your own** (`run_pipeline.py` / the benchmark's
+  `run.py` / adb commands): they need a physical phone, hours, and millions of tokens (the
+  completed motivation study alone was ~28 h with 12 manual QQ-state pauses; the harness run
+  is still pending). Do so only when the user explicitly asks. Phone-free checks are
+  `experiments/selftest.py` and the Stage A scripts' `--dry-run`.
 - State-recovery **Stage A scripts are phone-free** and may be run freely (they do call the
   text LLM API, so they cost tokens): `infer_mutations.py`, `generate_tasks.py`,
   `score_inference.py`, `score_tasks.py`, `audit_grounding.py`; `--dry-run` prints prompts
@@ -175,7 +177,8 @@ It guards both statistical correctness and this repository's own pitfalls (G1/G2
   norm/pixel convention means every click crowds into the top-left corner and every task fails
   with no visible cause (pitfall #1).
 - Do not `git commit` / `git push` unless the user explicitly asks. When an upload is needed,
-  use `sync.cmd` (it verifies that files under `results\` actually got staged).
+  use plain `git add` / `git commit` / `git push` and verify with `git diff --cached --stat`
+  that files under `results\` actually got staged.
 - The standard analysis-machine workflow is in README section "二、分析机": pull →
   `mbl_fix_condition_labels.py --dry-run` to verify labels → coordinate re-check →
   `analyze_order_effects.py` to rebuild reports → **read §0 before the tables**.
@@ -185,9 +188,6 @@ It guards both statistical correctness and this repository's own pitfalls (G1/G2
 ```powershell
 # Self-test (run after every code change)
 mobile\Scripts\python.exe experiments\selftest.py
-
-# Rehearse one run without touching the phone
-.\run_mbl.cmd -TaskFile data\smoke_2task.csv -Output results\_selftest -DryRun
 
 # Rebuild a report from episodes (CWD = third_party\mobilebench-ol-main)
 ..\..\mobile\Scripts\python.exe ..\..\experiments\motivation_study\scripts\analyze_order_effects.py `
@@ -199,7 +199,7 @@ mobile\Scripts\python.exe experiments\selftest.py
 ..\..\..\mobile\Scripts\python.exe generate_tasks.py --run base_canonical --task articlenews_16 --dry-run
 ```
 
-For the full command set (deployment, B1–B10, backfills, sync), see the corresponding README
+For the full command set (deployment, B1–B9, analysis, sync), see the corresponding README
 sections.
 
 ## 9. Terminology
