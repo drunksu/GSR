@@ -651,6 +651,8 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                        and final["iterations"] == 1),
             final_state=("clean" if final["decision"] == "STOP_SUCCESS"
                          else "pending" if final["decision"] == "STOP_NEEDS_HUMAN"
+                         else "error" if final.get("termination_reason") in
+                         ("execute_error", "verify_error", "replan_error")
                          else "contaminated"),
             failure_reason=(None if final["decision"] == "STOP_SUCCESS"
                             else final["reason"]),
@@ -887,7 +889,7 @@ def main() -> int:
     summary_path = PIPELINE_OUT / args.run / "pipeline_summary.json"
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump({"summary": summary, "results": results},
-                  f, ensure_ascii=False, indent=2)
+                  f, ensure_ascii=False, indent=2, default=str)
     print(f"\n汇总保存: {summary_path}")
     return 0
 

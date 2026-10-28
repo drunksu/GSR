@@ -425,6 +425,25 @@ def _go(dec, decision, phase_after, reason) -> dict:
     return dec
 
 
+def _str_or_none(v):
+    """Path 等非 JSON 原生对象转字符串，避免落盘时序列化失败。"""
+    return None if v is None else str(v)
+
+
+def _terminal_failure(termination_reason: str, reason: str, st,
+                      decision_log: list) -> dict:
+    """执行/验证异常 → Policy 的显式终止结果（保留现场与决策日志）。
+
+    不让异常冒泡到调用方被记成 "pipeline 出错"：否则该任务既不计入
+    "有污染"也不计入 "无污染"，会直接从统计口径里消失。
+    """
+    b = budget_from_state(st.policy_dict())
+    return {"decision": "STOP_FAILURE", "reason": reason,
+            "termination_reason": termination_reason,
+            "llm_calls": b["llm_calls"], "actions_total": b["actions_total"],
+            "iterations": len(st.iterations), "decision_log": decision_log}
+
+
 # ---------------------------------------------------------------- 注入式循环
 
 def run_loop(st, *, replan, execute, verify, observe=None, reaudit=None,
@@ -503,18 +522,40 @@ def run_loop(st, *, replan, execute, verify, observe=None, reaudit=None,
             reject_count = dec.get("reject_count", reject_count)
             repeat_count = dec.get("repeat_count", repeat_count)
         elif dec["decision"] == "EXECUTE_PLAN":
-            rec = execute()
+            try:
+                rec = execute()
+            except Exception as e:  # noqa: BLE001
+                # 执行器异常必须转成显式终止原因：不能冒泡到调用方被记成
+                # "pipeline 出错"，否则该任务既不算有污染也不算无污染，
+                # 直接从统计里消失（2026-10-28 真机 101 errors 的口径问题）。
+                st.record_execute(ok=False, error=e,
+                                  intent={"task_ref": _str_or_none(last_task_path)})
+                return _terminal_failure("execute_error", f"execute_error: {e}",
+                                         st, decision_log)
             last_rec = rec
             st.record_execute(ok=bool(rec and rec.get("final_img") is not None),
-                              rec=rec, intent={"task_ref": last_task_path})
+                              rec=rec,
+                              intent={"task_ref": _str_or_none(last_task_path)})
             phase = "executed"
             reject_count = repeat_count = 0
         elif dec["decision"] == "VERIFY":
-            v = verify()
+            try:
+                v = verify()
+            except Exception as e:  # noqa: BLE001
+                v = {"success": False, "reason": f"verify_error: {e}",
+                     "verdicts": []}
+                st.record_verify(v)
+                return _terminal_failure("verify_error", f"verify_error: {e}",
+                                         st, decision_log)
             st.record_verify(v)
             phase = "verified"
         elif dec["decision"] == "OBSERVE":
-            obs = observe() if observe is not None else {}
+            try:
+                obs = observe() if observe is not None else {}
+            except Exception as e:  # noqa: BLE001
+                # 补证失败本身不构成终止：如实记录，让 Policy 继续判定
+                obs = {"success": False, "reason": f"observe_error: {e}",
+                       "verdicts": []}
             ctx["last_observe"] = obs
             observe_count += 1
             st.emit_event("observe.result", st.iteration, obs)

@@ -490,8 +490,12 @@ class RecoveryState:
         return d
 
     def save(self, path, extended: bool = True) -> None:
+        # default=str 兜底：per_iteration.intent.task_ref / evidence_refs 等
+        # 字段可能带 Path 对象，不是 JSON 原生类型（2026-10-28 真机
+        # "Object of type WindowsPath is not JSON serializable" 的根因）。
         with open(path, "w", encoding="utf-8") as f:
-            json.dump(self.to_dict(extended), f, ensure_ascii=False, indent=2)
+            json.dump(self.to_dict(extended), f, ensure_ascii=False, indent=2,
+                      default=str)
 
     @classmethod
     def from_dict(cls, d: dict) -> "RecoveryState":
