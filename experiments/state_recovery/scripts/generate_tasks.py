@@ -37,6 +37,7 @@ import mbl_env  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import recovery_task as rt  # noqa: E402
+import recovery_state as rs  # noqa: E402
 import infer_mutations as infer  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -142,6 +143,9 @@ TASK_SYS_PROMPT = """你是移动 GUI 自动恢复系统的「恢复计划员」
 待填写字段与要求：
 1. recovery_goal：给 GUI agent 的中文操作指令，必须包含系统给出的 App 名、实体名
    （有硬标识时一并写上），说明要把状态恢复成什么样；不要写"检查一下"这类不确定措辞。
+   注意：恢复 = 撤销污染。recovery_goal 必须描述「污染被撤销后」的目标状态
+   （参考 target_clean_state 字段），严禁写成"确保存在 / 保留 / 置顶 / 巩固"等
+   维持或加强污染状态的指令。
 2. precondition.target：一句话说清检查什么状态。
 3. precondition.check_instruction：进入哪个页面、看哪个元素来判断当前状态，必须提到
    系统给出的实体名。
@@ -185,6 +189,10 @@ def build_task_prompt(ledger: dict, mutation: dict) -> str:
             "persistence": mutation.get("persistence"),
             "evidence_quote": mutation.get("evidence_quote"),
         },
+        # 确定性推导的「恢复后目标状态」：让 LLM 只需转述，不必自己推断
+        # 污染该往哪个方向撤销（2026-10-28 真机把 search_history 写成
+        # "确保存在且为最新"，与 expected_clean_state=no_search_entry 相反）。
+        "target_clean_state": rs.expected_clean_state(mutation),
         "grounding": {
             "app": mutation.get("app"),
             "entity_display": display,

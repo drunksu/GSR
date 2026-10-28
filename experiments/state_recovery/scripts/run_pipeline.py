@@ -584,6 +584,9 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
             plan_sig = {}
             for _t in pset.get("tasks") or []:
                 plan_sig[_t.get("mutation_id")] = _t.get("recovery_goal")
+            holder["max_actions"] = max(
+                (t.get("max_steps") or 20) for t in (pset.get("tasks") or [])) \
+                if pset.get("tasks") else 20
             holder["task_path"] = task_path
             return task_path, plan_sig, pset
 
@@ -646,12 +649,24 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
                 print(f"  重审计失败（保持原判断）: {e}")
                 return None
 
+        def _ctx_update(state_dict, phase, ctx):
+            """按实际恢复任务的动作上限推导 GUI 动作预算。
+
+            Policy 默认 actions_cap = max_iter*5，假设每轮 ≤5 个动作；但
+            search_history 等类型的 max_steps=8，两轮就到 16 > 15，导致
+            max_iter=3 的第 3 轮永远跑不到（2026-10-28 真机 budget_exhausted
+            16/15）。这里用本轮计划的 max_steps 覆盖。
+            """
+            ma = holder.get("max_actions") or 20
+            return {"actions_cap": max(st.budget["max_iter"] * ma, ma)}
+
         ledger_ro = rs.load_ledger_immutable(ledger_path)
         final = pe.run_loop(
             st,
             replan=_replan, execute=_execute, verify=_verify,
             observe=_verify, reaudit=_reaudit,
-            plan_validator=rt.validate_task_set, ledger=ledger_ro)
+            plan_validator=rt.validate_task_set, ledger=ledger_ro,
+            ctx_update=_ctx_update)
         st.finish(
             success=final["decision"] == "STOP_SUCCESS",
             first_try=(final["decision"] == "STOP_SUCCESS"
