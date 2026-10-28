@@ -47,6 +47,33 @@ REVERSIBILITY = ("ui_invert", "cancel_pending", "counterparty", "delete_created"
 # 风险高：只生成 packet，不自主执行；unknown 同理
 AUTONOMOUS_REVERSIBILITY = frozenset({"ui_invert", "cancel_pending", "delete_created"})
 
+# type → 可逆性默认值（模型常不确定 reversible，代码兜底）
+# 推断模型已明确判 irreversible/counterparty 的保留，unknown 用此表覆盖
+# 推断模型判 unknown 时按 mutation.type 确定性回填：
+#   settings_toggle → ui_invert（关开之间拨回）
+#   search_history → ui_invert（删搜索记录）
+#   social_reaction(collected/liked/followed) → ui_invert（取消收藏/取消关注）
+#   session_state → ui_invert（切回前台/退出）
+#   relationship_request(request_sent) → cancel_pending（取消待发送申请）
+#   membership_change(joined) → counterparty（退群可能影响对方）
+#   content_lifecycle(created) → delete_created（新建笔记可删）
+#   content_lifecycle(deleted) → irreversible（删了还原不回）
+#   message_send(sent) → irreversible（发出去撤回不可靠）
+#   login_session → ui_invert（登出）
+#   other → unknown（交给人工门控）
+TYPE_DEFAULT_REVERSIBILITY = {
+    "settings_toggle": "ui_invert",
+    "search_history": "ui_invert",
+    "social_reaction": "ui_invert",
+    "session_state": "ui_invert",
+    "relationship_request": "cancel_pending",
+    "membership_change": "counterparty",
+    "content_lifecycle": "delete_created",
+    "message_send": "irreversible",
+    "login_session": "ui_invert",
+    "other": "unknown",
+}
+
 DIRECTIONS = ("on", "off", "created", "deleted", "sent", "joined",
               "followed", "liked", "collected", "request_sent")
 
@@ -135,12 +162,46 @@ def validate_ledger(ledger: dict) -> list[str]:
     return errs
 
 
+def canonicalize_reversibility(ledger: dict) -> list[str]:
+    """把模型判 unknown 的 reversible 按 type-default 表确定性回填。
+
+    模型常不确定 reversible 字段（type 已知但可逆性逻辑对模型太复杂），
+    直接 unknown → gate halt → 全挂起。此函数原地覆盖 unknown，仅当
+    模型已明确判 irreversible/counterparty 时保留。
+
+    返回被覆盖的条目描述列表（用于日志）。
+    """
+    changed = []
+    for m in ledger.get("mutations", []):
+        cur = m.get("reversible", "unknown")
+        if cur != "unknown":
+            continue  # 模型已有明确判断，尊重
+        t = m.get("type")
+        default = TYPE_DEFAULT_REVERSIBILITY.get(t, "unknown")
+        if default != "unknown" and default != cur:
+            old = m["reversible"]
+            m["reversible"] = default
+            changed.append(f"{m.get('id')}: {t} reversible {old} → {default}")
+    if changed:
+        ledger.setdefault("_warnings", []).append(
+            f"确定性回填 unknown reversible 共 {len(changed)} 条: {changed}")
+    return changed
+
+
 def gate_decision(ledger: dict) -> dict:
     """根据污染清单给出每个变更的门控初判（design.md §5）。
 
     返回 {"autonomous": [id...], "halt": [{"id","reason"}...], "noop": bool}。
     阶段 A 只产出建议，真正的状态机在阶段 B 的执行器里实现。
+
+    2026-10-28: 自动先 canonicalize_reversibility——模型常不确定 reversible
+    字段（type 已知但可逆性逻辑对模型太复杂），直接 unknown → gate halt →
+    全挂起。代码回填能把 settings_toggle/search_history 等高频类型从
+    unknown 修正为 ui_invert，恢复 autonomous 资格。
     """
+    # 先确定性回填 unknown reversible，再做 gate 判定
+    canonicalize_reversibility(ledger)
+
     autonomous, halt = [], []
     for m in ledger.get("mutations", []):
         # 未完成 / 仅会话态（Home 即清）不产生恢复动作
