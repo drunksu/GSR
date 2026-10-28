@@ -148,7 +148,21 @@ class qwen2_5vl_message_handler(object):
         result = action_parser_tool.parse_agent_output(content)
         extracted_action = result["action"]
         try:
-            if "click" in extracted_action:
+            # 2026-10-28 真机 Bug：模型会输出 long_click(...)，但这里用子串
+            # 判断 "click" in extracted_action，会把 long_click 误当普通点击
+            # 执行（日志里 Action: long_click 实际执行 click），长按永远不生效。
+            # 必须先判长按，再判普通点击。
+            if "long_click" in extracted_action or "long_press" in extracted_action:
+                x, y = action_parser_tool.extract_xy_from_point(extracted_action)
+                x, y = _mbl_to_pixels(x, y, width, height)  # MBL API patch
+                result.update({
+                    "action": "long_press",
+                    "params": {"position": [x, y]},
+                    "normalized_params": {
+                        "position": [round(x / width, 2), round(y / height, 2)]
+                    }
+                })
+            elif "click" in extracted_action:
                 x, y = action_parser_tool.extract_xy_from_point(extracted_action)
                 x, y = _mbl_to_pixels(x, y, width, height)  # MBL API patch: 坐标约定换算
                 normalized_params = {
