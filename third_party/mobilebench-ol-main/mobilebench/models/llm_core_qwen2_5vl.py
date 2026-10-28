@@ -23,6 +23,7 @@ Action: ...
 ```
 ## Action Space
 click(point='<point>x1 y1</point>')
+long_press(point='<point>x1 y1</point>')
 type(content='')
 scroll(point='<point>x1 y1</point>', direction='down or up or right or left')
 press_home()
@@ -32,6 +33,9 @@ finished(content='xxx') # # Submit the task regardless of whether it succeeds or
 
 ## Note
 - Use Chinese in `Thought` part.
+- Only use the action names listed in Action Space. Do not invent new ones
+  (e.g. long_click, long_tap, double_click); unsupported names are silently
+  downgraded and the intended gesture will NOT happen.
 - Write a small plan and finally summarize your next action (with its target element) in one sentence in `Thought` part.
 
 ## User Instruction
