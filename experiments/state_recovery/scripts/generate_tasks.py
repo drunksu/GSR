@@ -173,8 +173,13 @@ HUMAN_GATE_SYS_PROMPT = """你是移动 GUI 自动恢复系统的「恢复计划
 """
 
 
-def build_task_prompt(ledger: dict, mutation: dict) -> str:
-    """为单个自动恢复任务构造用户 prompt，给出上下文与接地锚点。"""
+def build_task_prompt(ledger: dict, mutation: dict,
+                      feedback: dict | None = None) -> str:
+    """为单个自动恢复任务构造用户 prompt，给出上下文与接地锚点。
+
+    feedback 非空表示这是重规划：带上上一轮真实执行动作与验证结论，
+    让本轮输出与上一轮不同，而不是一字不差地重复生成。
+    """
     ent = mutation.get("entity") or {}
     display = _entity_display(mutation)
     ctx = {
@@ -206,6 +211,18 @@ def build_task_prompt(ledger: dict, mutation: dict) -> str:
         "```json",
         json.dumps(ctx, ensure_ascii=False, indent=1),
         "```",
+    ]
+    if feedback:
+        lines += [
+            "## 上一轮恢复尝试（未清除，本轮必须改进）",
+            "```json",
+            json.dumps(feedback, ensure_ascii=False, indent=1),
+            "```",
+            "说明：executed_actions 是执行器真实执行的动作序列（不是模型意图）。"
+            "如果上一轮在同一位置反复无效，本轮不要重复同样的路径："
+            "换入口、换交互方式，或先退回到能看清当前状态的页面再操作。",
+        ]
+    lines += [
         f"恢复目标里必须逐字包含：{display or mutation.get('app')}",
         "严格只输出 JSON 对象。",
     ]
@@ -274,10 +291,11 @@ def _parse_json(text: str) -> dict:
 
 
 def generate_task_fields(ledger: dict, mutation: dict, model: str,
-                         base_url: str, key: str) -> dict:
+                         base_url: str, key: str,
+                         feedback: dict | None = None) -> dict:
     """为单个自动恢复任务生成自然语言字段，返回填充后的 task dict。"""
     sys_prompt = TASK_SYS_PROMPT
-    user_prompt = build_task_prompt(ledger, mutation)
+    user_prompt = build_task_prompt(ledger, mutation, feedback=feedback)
     raw = _call_llm(sys_prompt, user_prompt, model, base_url, key)
     fields = _parse_json(raw)
 
@@ -383,7 +401,7 @@ def generate_human_gate_fields(ledger: dict, mutation: dict, gate_reason: str,
 # ----------------------------------------------------------------- 整任务生成
 
 def generate_one(ledger: dict, model: str, base_url: str, key: str,
-                 dry_run: bool = False) -> dict:
+                 dry_run: bool = False, feedback: dict | None = None) -> dict:
     """为单个污染清单生成恢复任务集：骨架预填 + 逐 mutation 生成 + 校验。"""
     skeleton = build_skeleton(ledger)
     midx = rt._mutation_index(ledger)
@@ -411,7 +429,8 @@ def generate_one(ledger: dict, model: str, base_url: str, key: str,
     n_call = 0
     for t in skeleton["tasks"]:
         m = midx[t["mutation_id"]]
-        fields = generate_task_fields(ledger, m, model, base_url, key)
+        fields = generate_task_fields(ledger, m, model, base_url, key,
+                                      feedback=feedback)
         t["recovery_goal"] = fields["recovery_goal"]
         t["precondition"] = fields["precondition"]
         t["expected_end_state"] = fields["expected_end_state"]
@@ -439,7 +458,8 @@ def generate_one(ledger: dict, model: str, base_url: str, key: str,
         task_errs = [e for e in errs
                      if e.startswith(f"tasks[{t['mutation_id']}]")]
         if task_errs:
-            fields = generate_task_fields(ledger, m, model, base_url, key)
+            fields = generate_task_fields(ledger, m, model, base_url, key,
+                                      feedback=feedback)
             t["recovery_goal"] = fields["recovery_goal"]
             t["precondition"] = fields["precondition"]
             t["expected_end_state"] = fields["expected_end_state"]

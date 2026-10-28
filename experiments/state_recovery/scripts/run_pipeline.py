@@ -254,7 +254,8 @@ def _build_harness_ctx(st, pset: dict) -> dict:
 # ----------------------------------------------------------------- Step 3: 生成恢复任务
 
 def run_generate(task_id: str, run: str, ledger_path: Path,
-                 skip_existing: bool = True) -> Path:
+                 skip_existing: bool = True,
+                 feedback: dict | None = None) -> Path:
     """生成恢复任务，返回 tasks.json 路径。"""
     _log(f"[Step 3] Planner 生成恢复任务 {task_id}")
 
@@ -271,7 +272,8 @@ def run_generate(task_id: str, run: str, ledger_path: Path,
 
     key = mbl_env.api_key()
     pset = gen.generate_one(
-        ledger, infer.DEFAULT_MODEL, infer.DEFAULT_BASE_URL, key or "")
+        ledger, infer.DEFAULT_MODEL, infer.DEFAULT_BASE_URL, key or "",
+        feedback=feedback)
     with open(task_path, "w", encoding="utf-8") as f:
         json.dump(pset, f, ensure_ascii=False, indent=2)
     print(f"  生成完成: {len(pset['tasks'])} 个任务, "
@@ -576,9 +578,53 @@ def run_pipeline_one(task_id: str, run: str, csv_path: Path,
     if harness_mode == "v3":
         holder = {"task_path": None, "last_rec": None, "executed_iter": 0}
 
+        def _build_replan_feedback():
+            """从已记录事实构造重规划反馈（确定性提取，不做任何推断）。
+
+            第 2 轮起 Planner 必须看到上一轮的真实结果，否则重规划只会
+            生成与上一轮一字不差的计划，被 repeated_plan 早停。
+            数据来源只有 RecoveryState 的 verify 记录与执行器实际动作。
+            """
+            prev = None
+            for it in reversed(st.iterations):
+                if it.get("verify"):
+                    prev = it
+                    break
+            if prev is None:
+                return None
+            v = prev.get("verify") or {}
+            acts = []
+            rec = holder.get("last_rec") or {}
+            for a in (rec.get("traj") or {}).get("history_action") or []:
+                if not isinstance(a, dict):
+                    continue
+                p = a.get("params") or {}
+                acts.append({
+                    "action": a.get("action"),
+                    "point": p.get("position"),
+                    "text": p.get("text"),
+                    "direction": p.get("direction"),
+                })
+            return {
+                "round": prev.get("iter"),
+                "verify": {
+                    "success": v.get("success"),
+                    "reason": v.get("reason"),
+                    "verdicts": [
+                        {"mutation_id": x.get("mutation_id"),
+                         "cleared": x.get("cleared"),
+                         "evidence_quote": str(
+                             x.get("evidence_quote") or "")[:200]}
+                        for x in (v.get("verdicts") or [])
+                    ],
+                },
+                "executed_actions": acts[-12:],
+            }
+
         def _replan():
+            feedback = _build_replan_feedback()
             task_path = run_generate(task_id, run, ledger_path,
-                                     skip_existing=False)
+                                     skip_existing=False, feedback=feedback)
             with open(task_path, encoding="utf-8") as f:
                 pset = json.load(f)
             plan_sig = {}
