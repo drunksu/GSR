@@ -56,9 +56,12 @@ def cover(part: str, whole_bigrams: set[str]) -> float:
     return len(bg & whole_bigrams) / len(bg) if bg else 1.0
 
 
-SEARCH_CTX_RE = re.compile(r"搜索框|搜索栏|搜索页|在搜索(?:框|栏|中)?"
-                           r"|输入.{0,24}(?:搜索|查找|找到|检索)"
-                           r"|(?:搜索|查找|检索).{0,24}输入")
+SEARCH_CTX_RE = re.compile(
+    r"搜索框|搜索栏|搜索页|在搜索(?:框|栏|中)?"
+    r"|输入.{0,24}(?:搜索|查找|找到|检索|搜一下|搜下|查询|查询一下)"
+    r"|(?:搜索|查找|检索|搜|查询|enter).{0,24}输入"
+    r"|(?:搜|查询|查找).{0,12}(?:一下|下|进去|进入)"
+)
 
 
 def trajectory_text(traj: dict) -> tuple[str, list[str], list[str]]:
@@ -88,6 +91,7 @@ def grounding_checks(ledger: dict, traj: dict) -> tuple[list[str], list[str]]:
     raw_bg = bigrams(raw)
     typed_n = norm(" ".join(typed))
     search_typed_n = norm(" ".join(search_typed))
+    typed_set = {norm(t) for t in typed}
     n_steps = len(traj.get("history_action", []) or [])
     violations, warnings = [], []
 
@@ -132,15 +136,22 @@ def grounding_checks(ledger: dict, traj: dict) -> tuple[list[str], list[str]]:
         # carried_over 的搜索词证据来自前序污染清单（本任务可能零输入），豁免本轨迹核验
         if has_carried_search and norm(term) not in search_typed_n:
             continue
-        if norm(term) not in raw_n:
+        nt = norm(term)
+        if nt not in raw_n:
             violations.append(f"search_term 未在轨迹中出现 → {term!r}")
-        elif norm(term) not in search_typed_n:
-            # 本任务新产生的搜索历史必须有**搜索框** type 动作；答题框文本、
-            # Thought 看到的旧词都不算新残留。推断阶段没有 carried 条目
-            # （结转在推断之后），直接判硬违规交修复/确定性清洗处理。
+        elif nt not in search_typed_n and nt not in typed_set:
+            # 既不在 SEARCH_CTX_RE 命中的搜索语境 type 里，也不在任何 type 动作里
+            # → 真幻觉。如果它在 typed_set 里（任何 type action 都精确输入过），
+            # 模型看到了 Action.params.text，就算 Thought 文本没说"搜索"，
+            # 也不算硬违规——SEARCH_CTX_RE 只是启发式正则，漏判是大概率
+            # （Thought 写"搜一下"、"查金价"未必包含"搜索"关键词）
             violations.append(
-                f"search_term 无搜索框 type 输入支撑（答题框文本或界面文案不得"
-                f"记为搜索历史）→ {term!r}")
+                f"search_term 无任何 type 输入支撑（真幻觉）→ {term!r}")
+        elif nt not in search_typed_n and nt in typed_set:
+            # 降级为 warning：有 type 输入但 Thought 没匹配到搜索语境关键词
+            warnings.append(
+                f"search_term 有 type 输入但 SEARCH_CTX_RE 未匹配 Thought "
+                f"→ {term!r}（确认不是答题框即可）")
 
     # 反向接地：搜索框里确实 type 过的词必须登记（模型最容易漏的一类）。
     resps = traj.get("history_response", []) or []
@@ -167,10 +178,24 @@ def scrub_untyped_terms(ledger: dict, traj: dict) -> list[str]:
     界面文案拼贴都不算。同步移除以该词为实体名的 search_history 条目。
     空名条目仅在它是唯一搜索条目且所有词都被剔除时才移除。
     返回被剔除词列表（用于记录）。
+
+    判定逻辑（2026-10-28 修复，真机 V4 199 个假无污染的根因）：
+      - search_typed（SEARCH_CTX_RE 命中 Thought 搜索语境的 type）→ 保留
+      - typed（任何 type action，不限 Thought 语境）→ 也保留——模型看到了
+        Action.params.text 里的真实输入，SEARCH_CTX_RE 只是启发式正则，
+        漏判是大概率（Thought 写"搜一下"、"查金价"未必包含"搜索"关键词）
+      - 只有既不在 search_typed 也不在 typed 的 term 才视为幻觉 → 剔除
+        （这类 term 根本没在轨迹的任何 type action 里出现过）
     """
-    _, _, search_typed = trajectory_text(traj)
-    typed_n = {norm(t) for t in search_typed}
-    dropped = [t for t in ledger.get("search_terms", []) if norm(t) not in typed_n]
+    _, typed, search_typed = trajectory_text(traj)
+    typed_n = {norm(t) for t in typed}
+    search_typed_n = {norm(t) for t in search_typed}
+    dropped = []
+    for t in ledger.get("search_terms", []):
+        nt = norm(t)
+        if nt in search_typed_n or nt in typed_n:
+            continue  # 真实 type 输入支撑，保留
+        dropped.append(t)  # 真幻觉：轨迹里任何 type 动作都没这个词
     if not dropped:
         return []
     dropped_n = {norm(t) for t in dropped}

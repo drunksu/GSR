@@ -726,19 +726,17 @@ def infer_one(traj_path: Path, run_dir: Path, run_id: str, model: str,
         errs = tax.validate_ledger(ledger)
         warnings: list[str] = []
         if not errs:
-            # 静态 schema 通过后，再放回轨迹原文做接地核验（标识符/引文必须有源）
-            errs, warnings = audit_grounding.grounding_checks(ledger, traj)
-            if errs and any("无搜索框 type 输入支撑" in e for e in errs):
-                # 修复回路可能对温度 0 的顽固幻觉无效：这类违规有确定性判据，
-                # 直接代码剔除再重验，不把脏数据带入下游
-                dropped = audit_grounding.scrub_untyped_terms(ledger, traj)
-                if dropped:
-                    errs = tax.validate_ledger(ledger)
-                    if not errs:
-                        errs, warnings = audit_grounding.grounding_checks(
-                            ledger, traj)
-                    warnings.append(
-                        f"确定性剔除无 type 输入支撑的搜索词 {dropped}")
+            # 静态 schema 通过后，先做**确定性 scrub**（不依赖 grounding_checks 报错），
+            # 剔除真幻觉搜索词。scrub 已放宽判定：只要 type action 里有该词就保留，
+            # 不再依赖 SEARCH_CTX_RE 在 Thought 文本里命中。
+            scrub_untyped = audit_grounding.scrub_untyped_terms(ledger, traj)
+            if scrub_untyped:
+                warnings.append(
+                    f"确定性剔除真幻觉搜索词 {scrub_untyped}")
+            # scrub 后再做接地核验——此时 violations 只剩真幻觉，
+            # 不会再出现 199 个假无污染那种 grounding 过度保守的误伤
+            errs, g_warnings = audit_grounding.grounding_checks(ledger, traj)
+            warnings.extend(g_warnings)
         if not errs:
             ledger["_gate"] = tax.gate_decision(ledger)
             ledger["_model"] = model
