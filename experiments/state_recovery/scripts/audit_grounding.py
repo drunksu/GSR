@@ -15,10 +15,10 @@ trajectory.json 原文里做机械核验：
 
 用法::
 
-    mobile\Scripts\python.exe audit_grounding.py --run q2_A_1
-    mobile\Scripts\python.exe audit_grounding.py --run base_canonical --task neteasemusic_19
-    mobile\Scripts\python.exe audit_grounding.py --ledger-root ..\results\ledgers \
-        --results-root ..\..\..\third_party\mobilebench-ol-main\results --run s3_A_1
+    mobile/Scripts/python.exe audit_grounding.py --run q2_A_1
+    mobile/Scripts/python.exe audit_grounding.py --run base_canonical --task neteasemusic_19
+    mobile/Scripts/python.exe audit_grounding.py --ledger-root ../results/ledgers \\
+        --results-root ../../../third_party/mobilebench-ol-main/results --run s3_A_1
 """
 
 from __future__ import annotations
