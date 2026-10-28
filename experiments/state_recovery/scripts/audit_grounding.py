@@ -64,8 +64,25 @@ SEARCH_CTX_RE = re.compile(
 )
 
 
+# Thought 里的搜索词提取：处理「搜索"X"」「搜《X》」「搜『X』」等
+# 真机轨迹里搜索经常通过点击历史记录完成（无 type 动作），Thought 里
+# 明确提到搜什么词 → 作为 search_typed 的补充
+THOUGHT_SEARCH_TERM_RE = re.compile(
+    r'(?:搜索|搜|查询|查找|检索).*?[""「『《]([^""」』》]{1,40})[""」』》]')
+
+
 def trajectory_text(traj: dict) -> tuple[str, list[str], list[str]]:
-    """返回 (拼接全文, 全部 type 输入, 搜索语境下的 type 输入)。"""
+    """返回 (拼接全文, 全部 type 输入, 搜索语境下的 type 输入)。
+
+    2026-10-28 真机 Bug 根因：很多搜索通过**点击搜索历史记录**完成
+    （history_action 里没有 type 动作，全是 click），但 Thought 文本
+    里明确说了搜什么词。scrub/grounding 之前只认 type action →
+    无搜索词支撑 → scrub 全删 → 假无污染。
+
+    修复：Thought 文本里提取引号/书名号/裸文本的搜索语义词，
+    作为 search_typed 的补充。Thought 里的"搜索黄金今日的价格"
+    等价于 type 动作输入了"黄金今日的价格"。
+    """
     chunks = [str(traj.get("task_goal", ""))]
     typed: list[str] = []
     search_typed: list[str] = []
@@ -79,8 +96,25 @@ def trajectory_text(traj: dict) -> tuple[str, list[str], list[str]]:
             if SEARCH_CTX_RE.search(ctx):
                 search_typed.append(txt)
         chunks.append(json.dumps(params, ensure_ascii=False))
+    # Thought 里提取搜索语境下的搜索词（点击历史/建议的场景）
+    # 关键洞察：真机轨迹里搜索经常是"点击搜索历史记录"完成的
+    # （history_action 全是 click，没有 type），但 Thought 文本里
+    # 明确说了搜什么词 → 直接从 Thought 提取，不需要 SEARCH_CTX_RE
+    # 前置条件（Thought 里说了"搜索X"就已经足够说明是搜索行为）
+    type_count = len(typed)
     for resp in resps:
         chunks.append(str(resp))
+        thought_match = re.search(r'Thought[:：]\s*(.*?)(?:\n|Action:|$)', str(resp),
+                                  re.DOTALL)
+        if not thought_match:
+            continue
+        thought = thought_match.group(1)
+        for m in THOUGHT_SEARCH_TERM_RE.finditer(thought):
+            word = m.group(1).strip()
+            if word and len(word) >= 2:
+                search_typed.append(word)
+                if type_count == 0:
+                    typed.append(word)
     return "\n".join(chunks), typed, search_typed
 
 
