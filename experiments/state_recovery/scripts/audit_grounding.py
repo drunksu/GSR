@@ -91,7 +91,6 @@ def grounding_checks(ledger: dict, traj: dict) -> tuple[list[str], list[str]]:
     raw_bg = bigrams(raw)
     typed_n = norm(" ".join(typed))
     search_typed_n = norm(" ".join(search_typed))
-    typed_set = {norm(t) for t in typed}
     n_steps = len(traj.get("history_action", []) or [])
     violations, warnings = [], []
 
@@ -112,16 +111,33 @@ def grounding_checks(ledger: dict, traj: dict) -> tuple[list[str], list[str]]:
                 and norm(name) in {norm(x) for x in CONTAINER_NAMES}:
             warnings.append(f"{mid}: settings_toggle 的 entity.name 疑似容器/页面名"
                             f"而非被切换选项 → {name!r}")
+        # 通用相似匹配：精确包含 + 子串 + 字组覆盖（防模型加省略号/标点）
+        def _in_raw_or_similar(nt: str, bg_threshold: float = 0.7) -> bool:
+            if nt in raw_n:
+                return True
+            # raw_n 里是否包含 term 的核心片段（去掉尾部省略号/标点后匹配）
+            for punct in ("...", "…", "。", "?", "？", "!", "！", ".", "·"):
+                core = nt.rstrip(punct)
+                if len(core) >= 2 and core in raw_n:
+                    return True
+            # 反向：term 是否是 raw_n 中某段的子串
+            if len(nt) >= 2:
+                # 截断 trailing punctuation 后检查
+                stripped = nt.rstrip("...…。???！！.·")
+                if stripped and len(stripped) >= 2 and stripped in raw_n:
+                    return True
+            return cover(nt, raw_bg) >= bg_threshold
+
         if name and len(norm(name)) >= 2:
-            if norm(name) not in raw_n:
-                c = cover(name, raw_bg)
-                if c >= NAME_BIGRAM_COVER:
-                    warnings.append(
-                        f"{mid}: entity.name 非逐字出现但字组覆盖 {c:.2f} → {name!r}")
-                else:
-                    violations.append(
-                        f"{mid}: entity.name 在轨迹文本中找不到（可能只在截图里）"
-                        f" cover={c:.2f} → {name!r}")
+            nn = norm(name)
+            if not _in_raw_or_similar(nn, NAME_BIGRAM_COVER):
+                violations.append(
+                    f"{mid}: entity.name 在轨迹文本中找不到（可能只在截图里）"
+                    f" cover={cover(nn, raw_bg):.2f} → {name!r}")
+            elif nn not in raw_n:
+                c = cover(nn, raw_bg)
+                warnings.append(
+                    f"{mid}: entity.name 非逐字出现但字组覆盖/子串匹配 {c:.2f} → {name!r}")
         quote = m.get("evidence_quote", "")
         if quote:
             c = cover(quote, raw_bg)
@@ -132,22 +148,83 @@ def grounding_checks(ledger: dict, traj: dict) -> tuple[list[str], list[str]]:
             if not isinstance(st, int) or st < 0 or st >= n_steps:
                 violations.append(f"{mid}: evidence_steps 越界 → {st} (共 {n_steps} 步)")
 
+    typed_set = {norm(t) for t in typed}
+    # 通用相似匹配：精确包含 + 子串 + 字组覆盖（防模型加省略号/标点）
+    def _in_raw_or_similar(nt: str, bg_threshold: float = 0.7) -> bool:
+        if nt in raw_n:
+            return True
+        # 去掉尾部省略号/标点后检查
+        stripped = nt.rstrip("...…。???！！.·")
+        if len(stripped) >= 2 and stripped in raw_n:
+            return True
+        # 反向：raw_n 的子串在 term 里也过
+        for punct in ("...", "…"):
+            core = nt.rstrip(punct)
+            if len(core) >= 2 and core in raw_n:
+                return True
+        return cover(nt, raw_bg) >= bg_threshold
+    # 子串/包含匹配 + 字组覆盖兜底（与 scrub 逻辑一致）
+    def _has_type_match(nt: str) -> bool:
+        if nt in typed_set:
+            return True
+        for tt in typed_set:
+            if len(nt) >= 2 and len(tt) >= 2 and (nt in tt or tt in nt):
+                return True
+        for tt in typed_set:
+            if cover(nt, bigrams(tt)) >= 0.7:
+                return True
+        return False
+    def _has_search_type_match(nt: str) -> bool:
+        if nt in search_typed_n:
+            return True
+        for tt in search_typed_n:
+            if len(nt) >= 2 and len(tt) >= 2 and (nt in tt or tt in nt):
+                return True
+        for tt in search_typed_n:
+            if cover(nt, bigrams(tt)) >= 0.7:
+                return True
+        return False
+
+    has_carried_search = any(
+        m.get("attribution") == "carried_over" and m.get("type") == "search_history"
+        for m in ledger.get("mutations", []))
+    for m in ledger.get("mutations", []):
+        mid = m.get("id", "?")
+        if m.get("attribution") == "carried_over":
+            # 结转条目以**前序污染清单**为证据，不接受当前轨迹的接地核验
+            continue
+        ent = m.get("entity") or {}
+        ident = ent.get("identifier")
+        if ident and norm(ident) not in raw_n:
+            violations.append(f"{mid}: identifier 未在轨迹中出现 → {ident!r}")
+        name = ent.get("name")
+        if m.get("type") == "settings_toggle" and isinstance(name, str) \
+                and norm(name) in {norm(x) for x in CONTAINER_NAMES}:
+            warnings.append(f"{mid}: settings_toggle 的 entity.name 疑似容器/页面名"
+                            f"而非被切换选项 → {name!r}")
+        if name and len(norm(name)) >= 2:
+            nn = norm(name)
+            if not _in_raw_or_similar(nn, NAME_BIGRAM_COVER):
+                violations.append(
+                    f"{mid}: entity.name 在轨迹文本中找不到（可能只在截图里）"
+                    f" cover={cover(nn, raw_bg):.2f} → {name!r}")
+            elif nn not in raw_n:
+                c = cover(nn, raw_bg)
+                warnings.append(
+                    f"{mid}: entity.name 非逐字出现但字组覆盖/子串匹配 {c:.2f} → {name!r}")
+
     for term in ledger.get("search_terms", []):
         # carried_over 的搜索词证据来自前序污染清单（本任务可能零输入），豁免本轨迹核验
-        if has_carried_search and norm(term) not in search_typed_n:
+        if has_carried_search and not _has_search_type_match(norm(term)):
             continue
         nt = norm(term)
-        if nt not in raw_n:
+        if not _in_raw_or_similar(nt):
             violations.append(f"search_term 未在轨迹中出现 → {term!r}")
-        elif nt not in search_typed_n and nt not in typed_set:
-            # 既不在 SEARCH_CTX_RE 命中的搜索语境 type 里，也不在任何 type 动作里
-            # → 真幻觉。如果它在 typed_set 里（任何 type action 都精确输入过），
-            # 模型看到了 Action.params.text，就算 Thought 文本没说"搜索"，
-            # 也不算硬违规——SEARCH_CTX_RE 只是启发式正则，漏判是大概率
-            # （Thought 写"搜一下"、"查金价"未必包含"搜索"关键词）
+        elif not _has_type_match(nt):
+            # 既不在精确/子串/字组覆盖的任何 type 里 → 真幻觉
             violations.append(
                 f"search_term 无任何 type 输入支撑（真幻觉）→ {term!r}")
-        elif nt not in search_typed_n and nt in typed_set:
+        elif not _has_search_type_match(nt) and _has_type_match(nt):
             # 降级为 warning：有 type 输入但 Thought 没匹配到搜索语境关键词
             warnings.append(
                 f"search_term 有 type 输入但 SEARCH_CTX_RE 未匹配 Thought "
@@ -156,13 +233,23 @@ def grounding_checks(ledger: dict, traj: dict) -> tuple[list[str], list[str]]:
     # 反向接地：搜索框里确实 type 过的词必须登记（模型最容易漏的一类）。
     resps = traj.get("history_response", []) or []
     terms_n = {norm(t) for t in ledger.get("search_terms", [])}
+    def _term_covers(norm_txt: str) -> bool:
+        if norm_txt in terms_n:
+            return True
+        for tn in terms_n:
+            if len(norm_txt) >= 2 and len(tn) >= 2 and (norm_txt in tn or tn in norm_txt):
+                return True
+        for tn in terms_n:
+            if cover(norm_txt, bigrams(tn)) >= 0.7:
+                return True
+        return False
     for i, act in enumerate(traj.get("history_action", []) or []):
         params = act.get("params", {}) or {}
         if act.get("action") != "type" or not params.get("text"):
             continue
         txt = str(params["text"])
         ctx = str(resps[i]) if i < len(resps) else ""
-        if not SEARCH_CTX_RE.search(ctx) or norm(txt) in terms_n:
+        if not SEARCH_CTX_RE.search(ctx) or _term_covers(norm(txt)):
             continue
         violations.append(
             f"第 {i} 步在搜索语境下输入了 {txt!r}，但 search_terms 未登记"
@@ -179,35 +266,54 @@ def scrub_untyped_terms(ledger: dict, traj: dict) -> list[str]:
     空名条目仅在它是唯一搜索条目且所有词都被剔除时才移除。
     返回被剔除词列表（用于记录）。
 
-    判定逻辑（2026-10-28 修复，真机 V4 199 个假无污染的根因）：
-      - search_typed（SEARCH_CTX_RE 命中 Thought 搜索语境的 type）→ 保留
-      - typed（任何 type action，不限 Thought 语境）→ 也保留——模型看到了
-        Action.params.text 里的真实输入，SEARCH_CTX_RE 只是启发式正则，
-        漏判是大概率（Thought 写"搜一下"、"查金价"未必包含"搜索"关键词）
-      - 只有既不在 search_typed 也不在 typed 的 term 才视为幻觉 → 剔除
-        （这类 term 根本没在轨迹的任何 type action 里出现过）
+    判定逻辑（2026-10-28 再修复，真机 V4 Bug 链条完整闭环）：
+      保留任一条件成立 → 真实 type 输入支撑：
+        a) norm(term) ∈ search_typed_n 或 typed_n（精确匹配）
+        b) ∃ t ∈ typed_set（或 search_typed_n）：term 包含 t 或 t 包含 term
+           （模型偶尔加省略号/标点，term='黄金今日的价格...' vs t='黄金今日的价格'
+            → t in term，应保留）
+        c) ∃ t ∈ typed_set：cover(term, bigrams(t)) ≥ 0.7
+           （字组覆盖兜底，防更多微差异）
+      以上都不成立 → 真幻觉，term 根本没在任何 type action 里出现过 → 剔除
     """
     _, typed, search_typed = trajectory_text(traj)
     typed_n = {norm(t) for t in typed}
     search_typed_n = {norm(t) for t in search_typed}
+    typed_set = typed_n | search_typed_n
+
+    def _has_input支撑(nt: str) -> bool:
+        # (a) 精确匹配
+        if nt in typed_set:
+            return True
+        # (b) 子串包含（防模型加省略号/标点如 '黄金今日的价格...'）
+        for tt in typed_set:
+            if len(nt) >= 2 and len(tt) >= 2 and (nt in tt or tt in nt):
+                return True
+        # (c) 字组覆盖兜底
+        for tt in typed_set:
+            if cover(nt, bigrams(tt)) >= 0.7:
+                return True
+        return False
+
     dropped = []
     for t in ledger.get("search_terms", []):
         nt = norm(t)
-        if nt in search_typed_n or nt in typed_n:
-            continue  # 真实 type 输入支撑，保留
-        dropped.append(t)  # 真幻觉：轨迹里任何 type 动作都没这个词
+        if _has_input支撑(nt):
+            continue  # 有真实 type 输入支撑，保留
+        dropped.append(t)  # 真幻觉
+
     if not dropped:
         return []
     dropped_n = {norm(t) for t in dropped}
     ledger["search_terms"] = [t for t in ledger.get("search_terms", [])
-                              if norm(t) not in dropped_n]
+                              if not _has_input支撑(norm(t))]
     keep_muts = []
     for m in ledger.get("mutations", []):
         if m.get("type") == "search_history":
             ename = (m.get("entity") or {}).get("name")
             unnamed = not ename
-            if ename and norm(ename) in dropped_n:
-                continue
+            if ename and not _has_input支撑(norm(ename)):
+                continue  # 实体名也被删
             if unnamed and not ledger["search_terms"]:
                 continue  # 唯一空名搜索条目失去了全部词
         keep_muts.append(m)
