@@ -856,8 +856,8 @@ def main() -> int:
 
         return replan, execute, verify, calls
 
-    # H34a: 动态调度——外部已清除（动作级 clearance=cleared 证据）→
-    #       v3 跳过第 2 轮执行直接终验；v1 固定循环仍要盲执行第 2 轮。
+    # H34a: 旧证据不重复终验——iter1 轨迹已被验证判过（cleared=False），
+    #       REPLAN 后不得拿同一轨迹再终验；harness 照常执行第 2 轮。
     s34 = _mk_ps()
     act_cleared34 = [{"action_id": "d.iter1.step1", "target_id": "m1",
                       "action_type": "click", "execution_status": "executed",
@@ -874,9 +874,9 @@ def main() -> int:
     wf_34 = pe._sim_workflow_loop(3, lambda i: True, lambda i: True,
                                   lambda i: i == 2)
     log34 = [d["decision"] for d in f34["decision_log"]]
-    check("H34a. 外部清除→直接终验：harness execute=1 < workflow execute=2（不再重复执行）",
+    check("H34a. 旧证据不重复终验：harness 第 2 轮照常执行（execute=2）后成功",
           f34["decision"] == "STOP_SUCCESS"
-          and cts34["execute"] == 1 and wf_34["execute_calls"] == 2
+          and cts34["execute"] == 2 and wf_34["execute_calls"] == 2
           and cts34["verify"] == 2,
           f"harness execute={cts34['execute']}, workflow execute={wf_34['execute_calls']}, "
           f"log={log34}")
@@ -1049,7 +1049,7 @@ def main() -> int:
           f"{p40['persistent_fail']['workflow']['replan']}/"
           f"{p40['persistent_fail']['harness']['replan']}")
 
-    # H41: 动态调度 —— 外部清除证据 → harness 直接终验跳过第 2 轮执行（workflow 仍执行）
+    # H41: 旧证据不重复终验 —— 第 2 轮照常执行，不用旧轨迹复读结论
     scns41 = ev.make_scenarios(t40)
     # 手工构造 ledger_stale 注入（clearance=cleared 动作证据 + 第 2 轮 verify 成功）
     def _mk41():
@@ -1095,10 +1095,10 @@ def main() -> int:
     f41_hs = ev.run_version("harness", t40, scn41)
     log41_wf = f41_wf["decision_log"]
     log41_hs = f41_hs["decision_log"]
-    check("H41. 外部清除直接终验：harness 跳过第 2 轮执行（workflow 执行）",
+    check("H41. 旧证据不重复终验：harness 第 2 轮执行后才终验（exec 与 workflow 相同）",
           f41_hs["decision"] == "STOP_SUCCESS" and f41_wf["decision"] == "STOP_SUCCESS"
-          and f41_hs["execute"] < f41_wf["execute"]
-          and "VERIFY" in log41_hs and "EXECUTE_PLAN" not in log41_hs[-2:],
+          and f41_hs["execute"] == 2 and f41_wf["execute"] == 2
+          and log41_hs.count("EXECUTE_PLAN") == 2,
           f"harness exec={f41_hs['execute']}, workflow exec={f41_wf['execute']}, "
           f"harness log={log41_hs}, workflow log={log41_wf}")
 

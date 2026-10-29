@@ -24,7 +24,7 @@ decide() + 注入式 run_loop() 实现即可（对齐阶段3提示词的最后�
 状态机（phase ∈ init/planned/executed/verified/terminal）：
   init     --(有污染)--> REPLAN -> planned
   planned  --(计划合法)--> EXECUTE_PLAN -> executed
-           --(计划合法但证据已足够)--> VERIFY -> verified（直接终验，不重复执行）
+           --(计划合法且本轮已执行未判定)--> VERIFY -> verified（直接终验，不重复执行）
            --(计划非法/越权)--> REPLAN(首次) / STOP_FAILURE(再次) / STOP_NEEDS_HUMAN(门控)
            --(计划重复)--> REPLAN(首次，要求改变策略) / STOP_FAILURE(再次)
   executed --(本轮执行完毕)--> VERIFY -> verified
@@ -384,12 +384,17 @@ def decide(st: dict, ctx: dict) -> dict:
                              "plan_rejected")
             return _go(dec, "REPLAN", "planned",
                        f"计划被拒（第 {n} 次）: " + " | ".join(vr["reasons"]))
-        # 证据已足够（目标已清除：外部清除/动作级 clearance 证据）→
-        # 跳过重复执行，直接最终验证（阶段4：避免过度保守）
-        if (dynamic and total > 0
+        # 证据已足够 → 跳过重复执行，直接最终验证。
+        # 限定额：只有当**本轮已执行、且该轨迹尚未被判定过**时才允许。
+        # 第 2 轮 REPLAN 之后直接终验，复核的是上一轮已被判定过的旧轨迹，
+        # 必然复读同一结论（真机 14 个任务因此白丢一次执行机会，2026-10-29）。
+        cur_it = (st.get("per_iteration") or [{}])[-1]
+        executed_unverified = (bool(cur_it.get("actions"))
+                               and cur_it.get("verify") is None)
+        if (dynamic and total > 0 and executed_unverified
                 and (cleared >= total or diag["stale_judgment_cleared"])):
             return _go(dec, "VERIFY", "verified",
-                       "证据已足够（目标已清除），直接进入最终验证（避免过度保守）")
+                       "本轮执行证据已足够（目标已清除），直接进入最终验证")
         return _go(dec, "EXECUTE_PLAN", "executed", "计划已接受，执行")
 
     # 7) executed：本轮执行完毕 → 验证
@@ -754,9 +759,10 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
                 "note": "计划各不相同但验证连续无进展 → 按 NO_PROGRESS_LIMIT "
                         "早停，不依赖加大 max_iter；workflow 会盲跑满 max_iter"})
 
-    # ---- 场景 5：动态调度 —— 外部已清除，证据足够 → 直接终验（不重复执行）----
-    # iter1 执行后动作级证据 clearance=cleared；iter2 计划不同但证据已足够：
-    # harness 跳过 EXECUTE 直接最终验证，workflow 仍会盲执行第 2 轮。
+    # ---- 场景 5：旧证据不重复终验 —— 已判定过的轨迹不再拿来终验 ----
+    # iter1 执行后动作级证据 clearance=cleared，但该轨迹已被 iter1 的验证判过
+    # （cleared=False）。iter2 REPLAN 后若直接终验，复核的仍是这条旧轨迹，只会
+    # 复读同一结论（真机 14 个任务因此白丢一次执行机会）→ 必须执行第 2 轮。
     act_cleared = [{"action_id": "d.iter1.step1", "target_id": "m1",
                     "action_type": "click", "execution_status": "executed",
                     "gui_changed": "unchanged", "clearance": "cleared",
@@ -772,11 +778,11 @@ def _demo_scenarios(max_iter: int = 3) -> list[dict]:
     final5 = run_loop(s5, replan=r5, execute=e5, verify=v5, ctx_update=c5)
     v5_sim = _sim_workflow_loop(max_iter, lambda i: True, lambda i: True,
                           lambda i: i == 2)
-    out.append({"scenario": "external_cleared_direct_final_verify",
+    out.append({"scenario": "prev_evidence_not_reverified",
                 "workflow": v5_sim, "harness": _harness_metrics(final5, cts5),
-                "note": "动作级证据（clearance=cleared）显示目标已清除 → harness 跳过 "
-                        "第 2 轮执行直接终验（execute=1 vs workflow 的 execute=2），"
-                        "避免过度保守"})
+                "note": "动作级证据 clearance=cleared 但该轨迹已被验证判定过 → "
+                        "harness 不再拿旧轨迹重复终验，照常执行第 2 轮"
+                        "（两边 execute 均为 2）"})
 
     # ---- 场景 6：动态调度 —— 工具执行失败 → 检查工具状态并重新观察 ----
     act_err = [{"action_id": "d.iter1.step1", "target_id": "m1",

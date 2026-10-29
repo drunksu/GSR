@@ -850,6 +850,35 @@ def _compute_summary(results: list) -> dict:
     }
 
 
+def _print_and_save_summary(results: list, run: str,
+                            skipped: int = 0, write: bool = True) -> dict:
+    """打印汇总；write=True 时落盘 pipeline_summary.json。"""
+    summary = _compute_summary(results)
+    print(f"\n{'='*60}")
+    print(f"Pipeline 汇总")
+    print(f"{'='*60}")
+    print(f"  总任务数:           {summary['total_tasks']}")
+    print(f"  有污染任务数:       {summary['tasks_with_contamination']}")
+    print(f"  无污染任务数:       {summary['tasks_without_contamination']}")
+    print(f"  出错任务数:         {summary['errors']}")
+    print(f"  恢复成功数:         {summary['recovery_success']}")
+    print(f"  恢复成功率:         {summary['recovery_rate']:.2%}")
+    print(f"  一次成功数:         {summary['first_try_success']}")
+    print(f"  一次成功率:         {summary['first_try_rate']:.2%}")
+    print(f"  平均迭代次数:       {summary['avg_iterations']}")
+    print(f"  失败原因分布:       {summary['failure_reasons']}")
+    if skipped:
+        print(f"  断点续传跳过:       {skipped}")
+    if not write:
+        return summary
+    summary_path = PIPELINE_OUT / run / "pipeline_summary.json"
+    with open(summary_path, "w", encoding="utf-8") as f:
+        json.dump({"summary": summary, "results": results},
+                  f, ensure_ascii=False, indent=2, default=str)
+    print(f"\n汇总保存: {summary_path}")
+    return summary
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(
         description=__doc__,
@@ -877,6 +906,8 @@ def main() -> int:
                     default="workflow",
                     help="workflow=固定循环基线（V0，已完成）；"
                          "harness=动作契约 + Policy Engine 动态控制闭环（V4）")
+    ap.add_argument("--summary-only", action="store_true",
+                    help="不跑任务，仅按已落盘的 *_pipeline.json 重建汇总")
     args = ap.parse_args()
 
     # ---- run 目录隔离（不同模式互不覆盖）----
@@ -887,6 +918,26 @@ def main() -> int:
     if args.run is None:
         args.run = f"{DEFAULT_RUN}_{args.mode}"
     print(f"结果目录 run = {args.run}（mode={args.mode}）")
+
+    # ---- 仅重建汇总：补跑部分任务后用它刷新总和，避免 --all 重跑已失败任务 ----
+    if args.summary_only:
+        results = []
+        for p in sorted((PIPELINE_OUT / args.run).glob("*_pipeline.json")):
+            try:
+                with open(p, encoding="utf-8") as f:
+                    results.append(json.load(f))
+            except Exception as e:
+                print(f"  跳过无法解析的结果 {p.name}: {e}")
+        # 补齐没有结果文件的任务（推断/执行期崩溃，按出错计入）
+        found = {r.get("task_id") for r in results}
+        with open(args.csv, encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                tid = row["task_identifier"]
+                if row.get("key_nodes") and tid not in found:
+                    results.append({"task_id": tid,
+                                    "error": "无结果文件（推断或执行期失败）"})
+        _print_and_save_summary(results, args.run, skipped=0)
+        return 0
 
     if not args.task and not args.all:
         ap.error("需要指定 --task 或 --all")
@@ -930,29 +981,9 @@ def main() -> int:
             print(f"\n✗ {tid} pipeline 失败: {e}")
             results.append({"task_id": tid, "error": str(e)})
 
-    # 汇总
-    summary = _compute_summary(results)
-    print(f"\n{'='*60}")
-    print(f"Pipeline 汇总")
-    print(f"{'='*60}")
-    print(f"  总任务数:           {summary['total_tasks']}")
-    print(f"  有污染任务数:       {summary['tasks_with_contamination']}")
-    print(f"  无污染任务数:       {summary['tasks_without_contamination']}")
-    print(f"  出错任务数:         {summary['errors']}")
-    print(f"  恢复成功数:         {summary['recovery_success']}")
-    print(f"  恢复成功率:         {summary['recovery_rate']:.2%}")
-    print(f"  一次成功数:         {summary['first_try_success']}")
-    print(f"  一次成功率:         {summary['first_try_rate']:.2%}")
-    print(f"  平均迭代次数:       {summary['avg_iterations']}")
-    print(f"  失败原因分布:       {summary['failure_reasons']}")
-    if skipped:
-        print(f"  断点续传跳过:       {skipped}")
-
-    summary_path = PIPELINE_OUT / args.run / "pipeline_summary.json"
-    with open(summary_path, "w", encoding="utf-8") as f:
-        json.dump({"summary": summary, "results": results},
-                  f, ensure_ascii=False, indent=2, default=str)
-    print(f"\n汇总保存: {summary_path}")
+    # 汇总（单任务补跑不覆盖整个 run 的汇总文件）
+    _print_and_save_summary(results, args.run, skipped=skipped,
+                            write=args.all)
     return 0
 
 
