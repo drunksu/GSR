@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "neteasemusic_19",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": false,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在网易云音乐中删除已发布的笔记“逢考必过”",
+      "recovery_goal": "在网易云音乐中确保笔记‘逢考必过’已成功发布并可见于动态流",
       "precondition": {
-        "target": "笔记‘逢考必过’是否仍存在于动态中",
-        "check_instruction": "进入网易云音乐首页，点击右下角‘我的’→‘动态’，查找标题为‘逢考必过’的笔记",
-        "clean_if_state": "当前动态中已无标题为‘逢考必过’的笔记"
+        "target": "检查笔记‘逢考必过’是否已发布并显示在用户动态中",
+        "check_instruction": "进入网易云音乐个人主页的‘动态’页面，查找标题为‘逢考必过’的笔记条目",
+        "clean_if_state": "当前已在动态页中看到标题为‘逢考必过’的笔记，且发布时间为‘刚刚’或近期，无编辑/草稿标识"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在网易云音乐‘我的’→‘动态’页面中，是否已不存在标题为‘逢考必过’的笔记？",
+        "question": "逢考必过的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "medium",
-      "max_steps": 12
+      "max_steps": 15
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

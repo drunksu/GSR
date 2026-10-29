@@ -5,16 +5,34 @@
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
-      "mutation_id": "m1",
-      "recovery_goal": "在番茄小说App中，确保搜索历史中已存在‘无女主’关键词，并完成对玄幻、无女主小说的筛选操作，使当前页面显示符合该条件的小说列表。",
+      "mutation_id": "m2",
+      "recovery_goal": "在番茄小说App中，确保搜索筛选条件已正确设置为包含‘无女主’标签的玄幻类小说",
       "precondition": {
-        "target": "确认当前页面是否已成功筛选出包含‘无女主’标签的玄幻类小说列表。",
-        "check_instruction": "进入番茄小说App首页或书城页，查看顶部筛选栏或搜索框下方的标签区域，确认是否存在‘玄幻’与‘无女主’两个标签同时被选中，且小说列表内容匹配该组合条件。",
-        "clean_if_state": "当前页面已显示‘玄幻’和‘无女主’双标签筛选下的小说列表，且列表中每本小说均明确标注‘无女主’属性。"
+        "target": "当前筛选状态是否已包含‘无女主’标签且分类为玄幻",
+        "check_instruction": "进入番茄小说首页→点击顶部搜索框→查看筛选栏中‘分类’是否为‘玄幻’、‘标签’中是否勾选‘无女主’",
+        "clean_if_state": "筛选栏中‘分类’显示为‘玄幻’且‘标签’中已勾选‘无女主’"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "番茄小说App中当前页面是否正显示同时满足‘玄幻’分类与‘无女主’标签的小说列表？",
+        "question": "无女主的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m4",
+      "recovery_goal": "在番茄小说App中，将搜索栏内容恢复为‘玄幻 无女主’，确保筛选条件准确生效",
+      "precondition": {
+        "target": "搜索栏当前输入内容是否为‘玄幻 无女主’",
+        "check_instruction": "进入番茄小说首页，查看顶部搜索栏中的文本内容是否显示为‘玄幻 无女主’",
+        "clean_if_state": "搜索栏已显示‘玄幻 无女主’且未被清空或覆盖"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "番茄小说App的搜索栏中是否完整显示‘玄幻 无女主’？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +42,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 1
+  "_llm_calls": 2
 }

@@ -1,0 +1,333 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "articlenews_15",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\articlenews_15_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_15_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_15_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中将深色模式关闭，使深色模式设置项恢复为未选中状态",
+        "m2": "在今日头条中将‘跟随系统’设置项恢复为开启状态，即撤销关闭操作，使‘跟随系统’开关处于on位置"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_15.base_canonical_harness.1793169520.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1097, 2582]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条的深色模式设置页面中，‘深色模式’选项右侧的圆点是否未被选中（即未显示红色）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "2445646093f2ea0d0243739542f281ec",
+            "xml_after_sig": "1a5db685f6a0ee6d50734046889051bf"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_15.base_canonical_harness.1793169520.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1111, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条的深色模式设置页面中，‘深色模式’选项右侧的圆点是否未被选中（即未显示红色）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 深色模式 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "1a5db685f6a0ee6d50734046889051bf",
+            "xml_after_sig": "86c92243b0050077d1ad85ac2d7de4b3"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1097,
+              2582
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1111,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_15_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "深色模式 已开启 >"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "深色模式 已开启 >"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_15_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中将深色模式关闭，使深色模式设置项恢复为未选中（off）状态",
+        "m2": "在今日头条中将‘跟随系统’设置项恢复为开启状态（即开关为绿色/ON）"
+      },
+      "verify": {
+        "success": false,
+        "reason": "no_new_evidence",
+        "verdicts": []
+      }
+    }
+  ],
+  "recovery_id": "articlenews_15.base_canonical_harness.1793169520",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "今日头条",
+        "entity": {
+          "kind": "setting",
+          "name": "深色模式",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "Thought: 在深色模式设置页面中，已关闭“跟随系统”，并看到“手动选择”区域下有“浅色模式”和“深色模式”两个选项。当前“深色模式”右侧的圆点为红色，表示已选中，说明夜间模式已经成功开启。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "深色模式",
+        "description": "设置项 深色模式 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "深色模式 已开启 >"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "settings_toggle",
+        "app": "今日头条",
+        "entity": {
+          "kind": "setting",
+          "name": "跟随系统",
+          "identifier": null
+        },
+        "direction": "off",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3,
+          4
+        ],
+        "evidence_quote": "Thought: 当前页面显示的是“浅色模式”设置，且“跟随系统”开关已开启（绿色）……ACTION: click([1087, 445])……Thought: 在深色模式设置页面中，已关闭“跟随系统”……",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_on",
+        "entity_name": "跟随系统",
+        "description": "设置项 跟随系统 应处于 on 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": false,
+          "evidence_quote": "深色模式 已开启 >"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_15\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在今日头条中将深色模式关闭，使深色模式设置项恢复为未选中状态",
+        "m2": "在今日头条中将‘跟随系统’设置项恢复为开启状态，即撤销关闭操作，使‘跟随系统’开关处于on位置"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在今日头条中将深色模式关闭，使深色模式设置项恢复为未选中（off）状态",
+        "m2": "在今日头条中将‘跟随系统’设置项恢复为开启状态（即开关为绿色/ON）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

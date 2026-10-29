@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_19",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作），确保勿扰模式处于off状态",
+      "precondition": {
+        "target": "确认勿扰模式当前是否已关闭",
+        "check_instruction": "进入钉钉「设置」→「免打扰」页面，查看「勿扰模式」开关是否为灰色（off）状态",
+        "clean_if_state": "勿扰模式开关显示为灰色（off），且无“通知已关闭”类提示弹窗或横幅"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "勿扰模式的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

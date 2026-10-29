@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_1",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中彻底清除搜索历史里的‘邓紫棋’条目，使搜索历史列表中不再显示任何包含‘邓紫棋’的记录",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘邓紫棋’相关条目",
+        "check_instruction": "进入网易云音乐首页，点击顶部搜索框，查看搜索历史区域中是否显示‘邓紫棋’或含‘邓紫棋’的条目",
+        "clean_if_state": "搜索历史列表中已无任何包含‘邓紫棋’字样的条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐的搜索历史列表中，是否存在任何包含‘邓紫棋’字样的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

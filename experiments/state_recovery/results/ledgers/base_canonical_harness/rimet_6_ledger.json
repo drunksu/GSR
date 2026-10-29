@@ -1,0 +1,67 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_6",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去钉钉添加15010284323为我的好友",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "relationship_request",
+      "app": "钉钉",
+      "entity": {
+        "kind": "friend",
+        "name": "**倬",
+        "identifier": "15010284323"
+      },
+      "direction": "request_sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "cancel_pending",
+      "evidence_steps": [
+        4,
+        5
+      ],
+      "evidence_quote": "THOUGHT: 已成功搜索到目标用户“**倬”，当前界面显示其信息，并提供“再次发送好友请求”按钮。……ACTION: click([614, 2538])\nTHOUGHT: 当前界面是好友请求发送前的确认页，已填写申请信息“我是苏思源”，……右上角的“发送”按钮是完成添加好友操作的关键步骤。点击它即可正式提交好友请求给15010284323对应的用户。ACTION: click([1087, 203])",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "钉钉",
+      "entity": {
+        "kind": "search",
+        "name": "15010284323",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "ACTION: type(text='15010284323')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "15010284323"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": true,
+  "_warnings": []
+}

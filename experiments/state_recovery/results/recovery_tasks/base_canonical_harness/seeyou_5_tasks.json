@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_5",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚中撤销今日症状记录，确保‘头痛’这一症状条目被完全删除，不再显示在10月29日的症状栏中",
+      "precondition": {
+        "target": "检查今日症状是否仍显示为‘头痛’",
+        "check_instruction": "进入美柚首页或健康日记页面，找到10月29日（今天）的‘症状’字段，查看其内容是否为‘头痛’",
+        "clean_if_state": "今日症状栏未显示‘头痛’，或显示为空/默认状态（如‘无’）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在美柚中，10月29日的症状栏是否已不显示‘头痛’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

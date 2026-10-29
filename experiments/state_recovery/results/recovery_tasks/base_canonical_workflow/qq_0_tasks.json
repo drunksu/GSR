@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在QQ应用中，确保搜索历史里存在‘中国矿业大学’这一条目，且该条目为最新一次搜索记录",
+      "recovery_goal": "在QQ中将搜索历史恢复为包含‘中国矿业大学’的条目，确保该关键词已成功存入搜索历史记录中",
       "precondition": {
-        "target": "检查QQ搜索历史中是否已存在‘中国矿业大学’条目且位于最近位置",
-        "check_instruction": "进入QQ首页，点击顶部搜索框，查看搜索历史列表，确认‘中国矿业大学’是否出现在列表中且为最上方条目",
-        "clean_if_state": "搜索历史中已存在‘中国矿业大学’且位于最新一条（即最近一次搜索记录）"
+        "target": "确认QQ搜索历史中是否存在‘中国矿业大学’条目",
+        "check_instruction": "进入QQ首页，点击顶部搜索框，查看搜索历史列表中是否显示‘中国矿业大学’",
+        "clean_if_state": "搜索历史列表中已存在‘中国矿业大学’条目，且为最近一次或可见位置的记录"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在QQ的搜索历史列表中，‘中国矿业大学’是否作为最新一条记录存在？",
+        "question": "中国矿业大学的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,

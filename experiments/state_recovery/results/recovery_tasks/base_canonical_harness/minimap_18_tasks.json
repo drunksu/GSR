@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_18",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中彻底清除搜索历史里的‘医院’条目，使搜索历史中不再存在任何与‘医院’相关的记录",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘医院’条目",
+        "check_instruction": "进入高德地图首页，点击搜索框，查看搜索框下方最近搜索记录区域是否显示‘医院’",
+        "clean_if_state": "搜索框下方最近搜索记录中未显示‘医院’条目，且无相关搜索建议或历史项包含‘医院’字样"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "医院的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

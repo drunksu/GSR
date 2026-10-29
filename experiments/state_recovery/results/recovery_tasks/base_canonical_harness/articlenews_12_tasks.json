@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_12",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中撤销已设置的头像变更，使用户头像恢复为非‘雪花图案’的默认状态，即确保‘雪花图案’不再作为当前头像显示",
+      "precondition": {
+        "target": "当前用户头像是否为‘雪花图案’",
+        "check_instruction": "进入今日头条个人主页，查看头像区域显示的图像是否为‘雪花图案’",
+        "clean_if_state": "当前头像不是‘雪花图案’，而是其他默认头像或原始头像"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条个人主页中，用户头像是否已不再是‘雪花图案’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

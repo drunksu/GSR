@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_27",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去58同城将我的性别修改为女",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "我是",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4,
+        5
+      ],
+      "evidence_quote": "Step 4: THOUGHT: 当前已进入性别选择弹窗，选项包括“男”、“女”和“取消”。用户目标是将性别修改为“女”，而“女”选项清晰可见且可点击。既然目标明确，直接点击“女”即可完成性别设置…… Step 5: THOUGHT: 性别已成功修改为“女”，当前页面显示“我是：女”，说明修改操作已完成。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_1",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中将搜索历史中的DND条目彻底清除，使搜索历史中不再存在DND条目",
+      "precondition": {
+        "target": "确认QQ搜索历史中是否存在DND条目",
+        "check_instruction": "进入QQ主界面，点击搜索框，查看搜索历史列表中是否显示DND",
+        "clean_if_state": "搜索历史列表中未显示DND条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "DND的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

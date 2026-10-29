@@ -6,33 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在拼多多App中，确保‘女鞋’搜索结果页已正确加载，并进入该搜索结果中第一款商品的详情页，点击关注其所属店铺",
+      "recovery_goal": "在拼多多App中，确保鸿星尔克官方旗舰店的状态为已关注（即店铺主页右上角显示‘已关注’而非‘+ 关注’）",
       "precondition": {
-        "target": "确认当前页面为‘女鞋’搜索结果页，且第一款商品已展示并可点击",
-        "check_instruction": "进入拼多多App首页，点击搜索框输入‘女鞋’并执行搜索，查看搜索结果列表顶部是否显示第一款商品及其店铺信息",
-        "clean_if_state": "当前已处于‘女鞋’搜索结果页，且第一款商品的店铺关注按钮可见且未被误操作隐藏或失效"
+        "target": "确认鸿星尔克官方旗舰店当前是否已被关注",
+        "check_instruction": "进入拼多多App，打开鸿星尔克官方旗舰店主页，查看页面右上角按钮文字是否为‘已关注’",
+        "clean_if_state": "页面右上角显示‘已关注’按钮，表示店铺已被成功关注，无需额外操作"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在拼多多App中，‘女鞋’搜索结果页的第一款商品所属店铺的关注按钮是否已显示为已关注状态？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m2",
-      "recovery_goal": "在拼多多App中，确保对商品‘禾简老人健步鞋’所属店铺的關注状态为已关注（即右上角显示‘已关注’而非‘+ 关注’）",
-      "precondition": {
-        "target": "确认当前页面中‘禾简老人健步鞋’商品所属店铺的关注按钮状态",
-        "check_instruction": "进入该商品详情页，查看右上角关注按钮的文字或图标状态，必须明确看到‘禾简老人健步鞋’对应的店铺关注控件",
-        "clean_if_state": "右上角显示‘已关注’字样或灰色不可点击状态，表示店铺已成功关注，无需操作"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "在拼多多App中，商品‘禾简老人健步鞋’详情页右上角是否显示‘已关注’？",
+        "question": "在拼多多App中，鸿星尔克官方旗舰店主页右上角是否显示‘已关注’？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -42,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

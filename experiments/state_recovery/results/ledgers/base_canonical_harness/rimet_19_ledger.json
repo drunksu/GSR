@@ -1,0 +1,42 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_19",
+  "run_id": "base_canonical_harness",
+  "task_goal": "我想在钉钉设置消息免打扰",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "勿扰模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: 我已经成功进入了钉钉的“勿扰模式”设置页面，并且看到勿扰模式的开关已经是开启状态（蓝色）。这意味着消息免打扰功能已经生效。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

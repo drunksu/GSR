@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_4",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中撤销对绕堤沙（1098074562）的好友申请，使其不再存在待处理的添加请求",
+      "precondition": {
+        "target": "确认当前是否存在针对绕堤沙（1098074562）的待处理好友申请",
+        "check_instruction": "进入QQ的「通讯录」→「新的朋友」页面，查找名为“绕堤沙”且QQ号为1098074562的条目，观察其状态是否显示为“等待验证”或类似待处理提示",
+        "clean_if_state": "在「新的朋友」列表中未找到绕堤沙（1098074562）的任何待处理申请条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "绕堤沙（1098074562）的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在QQ中清除搜索历史里残留的条目1098074562，确保该号码不再出现在任何搜索记录中",
+      "precondition": {
+        "target": "确认搜索历史中是否存在1098074562的记录",
+        "check_instruction": "进入QQ主界面，点击右上角‘+’号→选择‘添加好友’→进入搜索页面，查看搜索历史列表中是否显示1098074562",
+        "clean_if_state": "搜索历史列表中未显示1098074562条目，即已恢复干净状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在QQ的‘添加好友’搜索页面中，搜索历史列表里是否完全不存在1098074562这个条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

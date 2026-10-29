@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_9",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说App中，将搜索历史中的‘无女主’条目彻底删除，使搜索历史列表中不再出现‘无女主’这一项",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘无女主’条目",
+        "check_instruction": "进入番茄小说首页，点击顶部搜索框，查看搜索历史区域，确认是否存在文字为‘无女主’的条目",
+        "clean_if_state": "搜索历史列表中已无‘无女主’条目，仅显示其他历史记录或为空"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "无女主的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

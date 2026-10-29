@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "pinduoduo_15",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，将搜索历史恢复为包含‘小米手机’的记录，确保用户能通过搜索历史快速进入‘小米手机’类目页面",
+      "precondition": {
+        "target": "检查当前搜索历史中是否存在‘小米手机’条目",
+        "check_instruction": "进入拼多多App首页，点击搜索框，查看下拉搜索历史列表中是否显示‘小米手机’",
+        "clean_if_state": "搜索历史中已存在‘小米手机’条目，且该条目可点击跳转至对应类目页面"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "小米手机的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

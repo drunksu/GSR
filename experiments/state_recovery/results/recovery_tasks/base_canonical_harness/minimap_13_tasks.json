@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_13",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中撤销对西二旗地铁站的搜索历史记录，确保搜索历史中不再存在西二旗地铁站条目",
+      "precondition": {
+        "target": "确认高德地图搜索历史中是否存在西二旗地铁站的记录",
+        "check_instruction": "进入高德地图首页，点击搜索框，查看搜索历史列表中是否包含西二旗地铁站",
+        "clean_if_state": "搜索历史列表中已无西二旗地铁站条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "西二旗地铁站的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

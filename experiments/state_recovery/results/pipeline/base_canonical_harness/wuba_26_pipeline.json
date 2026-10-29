@@ -1,0 +1,80 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "wuba_26",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_26\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\wuba_26_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_26_tasks.json",
+  "has_contamination": true,
+  "iterations": 1,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续两次计划被拒: 计划不含任务（空任务集）",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_26_tasks.json",
+      "accepted_plan": {}
+    }
+  ],
+  "recovery_id": "wuba_26.base_canonical_harness.1793224653",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "session_state",
+        "app": "58同城",
+        "entity": {
+          "kind": "setting",
+          "name": "状态",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "session",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          2,
+          3
+        ],
+        "evidence_quote": "Thought: 在当前个人信息页面中，我注意到用户名“哥斯拉”下方已经显示了“随便看看”状态标签，且该标签为蓝色可点击样式。这说明当前状态可能已经是“随便看看”，但为了确认或重新设置，我需要点击这个标签进行操作。... Thought: 我注意到当前状态已经是“随便看看”，但为了确保这是用户想要的最终状态，我需要确认是否可以进一步操作或保存。通常，点击状态标签会弹出一个选择菜单，允许用户更改状态。",
+        "confidence": 0.8,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "session_closed",
+        "entity_name": "状态",
+        "description": "会话/页面状态已恢复（状态）"
+      },
+      "contamination_status": "present",
+      "recovery_status": "pending",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {},
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "plan_rejected"
+}

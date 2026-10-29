@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_7",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度浏览器中，将小说《剑来》从书架中移除，使其不再处于‘已加书架’状态",
+      "precondition": {
+        "target": "确认《剑来》当前是否仍显示为已加入书架",
+        "check_instruction": "进入百度浏览器小说频道完结榜，找到实体名‘剑来’的书籍卡片，观察其封面右上角或标题附近是否有‘已加书架’标识或类似提示文字",
+        "clean_if_state": "《剑来》卡片上无‘已加书架’字样、无书架图标、无收藏态视觉反馈（如心形填充/书架标记）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "剑来的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

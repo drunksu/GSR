@@ -6,33 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在百度浏览器中将通知栏消息的总开关关闭，确保通知栏消息功能被禁用",
+      "recovery_goal": "在百度App中将通知栏消息的总开关关闭，确保通知栏消息功能处于禁用状态",
       "precondition": {
-        "target": "确认通知栏消息总开关当前是否已处于关闭状态",
-        "check_instruction": "进入百度浏览器的设置页面，在‘通知栏消息’设置项中查看顶部总开关的颜色与位置，确认其是否为灰色且处于关闭位置",
-        "clean_if_state": "通知栏消息总开关已显示为灰色（关闭状态）"
+        "target": "确认通知栏消息的总开关当前是否已关闭",
+        "check_instruction": "进入百度App的设置页面，找到‘通知栏消息’选项并点击进入，查看顶部‘通知栏消息’总开关的状态",
+        "clean_if_state": "通知栏消息总开关显示为灰色（关闭）状态，即视为已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "通知栏消息的状态是否已恢复到目标状态？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m2",
-      "recovery_goal": "在百度浏览器中将通知权限设置为关闭状态，确保不再弹出与通知权限相关的请求对话框或推送通知",
-      "precondition": {
-        "target": "确认百度浏览器的通知权限当前处于开启状态或存在待处理的权限请求对话框",
-        "check_instruction": "进入百度浏览器的设置页面，找到‘通知权限’相关选项或观察是否弹出‘是否允许百度APP发送通知’的权限请求对话框",
-        "clean_if_state": "通知权限已明确关闭（如开关为灰色/关闭态），且无任何通知权限请求对话框弹出"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "百度浏览器的‘通知权限’是否已关闭，且当前未显示任何关于通知权限的请求对话框？",
+        "question": "在百度App的‘通知栏消息’设置页面中，顶部的‘通知栏消息’总开关是否为关闭（灰色）状态？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -42,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

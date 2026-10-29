@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在拼多多App中将搜索历史恢复为包含‘冰箱贴’的记录状态，确保‘冰箱贴’作为最近搜索词存在且可被检索到。",
+      "recovery_goal": "在拼多多App中将搜索状态恢复为已输入‘冰箱贴’并停留在搜索框待提交的状态",
       "precondition": {
-        "target": "确认拼多多App当前搜索历史中已存在‘冰箱贴’条目。",
-        "check_instruction": "进入拼多多首页，点击顶部搜索框，查看搜索历史列表中是否显示‘冰箱贴’。",
-        "clean_if_state": "搜索历史列表中已明确显示‘冰箱贴’条目（无需额外操作即视为已恢复）。"
+        "target": "确认搜索框中已显示‘冰箱贴’且未触发搜索结果页",
+        "check_instruction": "进入拼多多首页，查看顶部搜索框中的文字内容是否为‘冰箱贴’",
+        "clean_if_state": "搜索框中已显示‘冰箱贴’且光标仍在框内、未跳转至搜索结果页"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在拼多多App的搜索历史列表中，是否能清晰看到‘冰箱贴’这一条目？",
+        "question": "拼多多App的搜索框中是否已完整显示‘冰箱贴’且尚未执行搜索？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

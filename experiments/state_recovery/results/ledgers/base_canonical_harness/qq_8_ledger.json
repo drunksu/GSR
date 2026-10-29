@@ -1,0 +1,71 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_8",
+  "run_id": "base_canonical_harness",
+  "task_goal": "打开QQ给绕堤沙发送“恭喜发财”的表情包",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "QQ",
+      "entity": {
+        "kind": "message",
+        "name": "恭喜发财",
+        "identifier": "绕堤沙"
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        6,
+        7
+      ],
+      "evidence_quote": "Step 6: THOUGHT: 搜索结果中已经出现了多个“恭喜发财”相关的表情包，其中左上角第一个表情包（戴着帽子的卡通形象，手持金元宝，下方有“恭喜发财”文字）非常符合要求……ACTION: click([172, 949])\nStep 7: THOUGHT: 表情包已经成功发送到聊天窗口，显示在消息记录中，任务已完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "恭喜发财",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 搜索框已激活，现在需要输入关键词“恭喜发财”来查找对应的表情包。这是最直接有效的方式……ACTION: type(text='恭喜发财')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "恭喜发财"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m2"
+    ],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": true,
+  "_warnings": []
+}

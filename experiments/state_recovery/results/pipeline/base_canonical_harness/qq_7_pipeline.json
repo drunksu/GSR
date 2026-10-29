@@ -1,0 +1,63 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "qq_7",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_7\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\qq_7_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "qq_7.base_canonical_harness.1793210980",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "message_send",
+        "app": "QQ",
+        "entity": {
+          "kind": "friend",
+          "name": "事已至此，先吃饭吧",
+          "identifier": "绕堤沙"
+        },
+        "direction": "sent",
+        "persistence": "server",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          2,
+          3,
+          4
+        ],
+        "evidence_quote": "ACTION: type(text='事已至此，先吃饭吧')\n...\nTHOUGHT: 消息已输入完成，当前界面显示“发送”按钮处于可点击状态。为了完成任务，我需要点击“发送”按钮将消息发出。\nACTION: click([1027, 2555])\n...\nTHOUGHT: 消息“事已至此，先吃饭吧”已经成功发送给绕堤沙，任务已完成。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_sent",
+        "entity_name": "事已至此，先吃饭吧",
+        "description": "消息 事已至此，先吃饭吧 已不存在于会话"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

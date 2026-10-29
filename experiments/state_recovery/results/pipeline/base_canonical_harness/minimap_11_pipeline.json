@@ -1,0 +1,1247 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "minimap_11",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\minimap_11_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_11_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_11_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中撤销搜索历史污染，确保搜索历史中不再存在条目 北京丰台站到上海南站"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1044, 2519]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "93f66727303255538030e67ad47f814b",
+            "xml_after_sig": "2f3c75b3b0b6066f477a429900055c29"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1097, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "0411ee83c19b21a6487372cc41dcd603",
+            "xml_after_sig": "d6ca6c3363afc4158af0f9a16e9f6db9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[609, 1275]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "1982a71e20c0a9bacbee6f1d47097c8f",
+            "xml_after_sig": "3fe818a1895aa5a92fe76558c3a8a184"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[104, 195]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "3fe818a1895aa5a92fe76558c3a8a184",
+            "xml_after_sig": "3ffa75285197db5bc92288f0132ff830"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[104, 195]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "4c7d2f5d1e73463b9d39a378ede3caef",
+            "xml_after_sig": "b0652267dd9fcd00040a3655fe268897"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[174, 2519]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "7db12ed110aecd9d04e4675e6169aa93",
+            "xml_after_sig": "5b47c19822a22328c4939f24f4829ec5"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[348, 1595]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "5b47c19822a22328c4939f24f4829ec5",
+            "xml_after_sig": "1f345fa897e6dfdf58a6d27a60a0ab65"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1135, 941]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "1f345fa897e6dfdf58a6d27a60a0ab65",
+            "xml_after_sig": "f062eb66899cddfba909917726c8f8f3"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1044,
+              2519
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1097,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              609,
+              1275
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              104,
+              195
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              104,
+              195
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              174,
+              2519
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              348,
+              1595
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              1135,
+              941
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_11_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 7: THOUGHT: 在搜索历史记录中，我已找到目标条目“北京丰台站到上海南站”。要清除它，通常有两种方式：一是点击该条目右侧的编辑/删除图标（当前界面未明显显示，但可能需长按或进入管理）；二是点击右上角的“管理”按钮，进入批量管理模式，然后勾选并删除。观察界面，“管理”按钮位于历史记录区域右侧，是标准的进入编辑模式入口。因此，下一步应点击“管理”以进入可删除状态。 ACTION: click([1135, 941])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_11_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中彻底删除搜索历史里的条目“北京丰台站到上海南站”，使其不再出现在任何搜索历史列表中"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1038, 2517]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "6b692cdc79af050e36da486bffd6f59b",
+            "xml_after_sig": "5818422541377a6f24064b7866b7505e"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1093, 212]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "687e2630de6b7f1f361caf4bb704e42a",
+            "xml_after_sig": "69fb5a719f5c253ce4f00e59aa3a0b54"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[609, 1418]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "69fb5a719f5c253ce4f00e59aa3a0b54",
+            "xml_after_sig": "41c5a560ed18d0566fdfdbaaecb4956b"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step4",
+          "target_id": "m1",
+          "action_type": "back",
+          "target_description": "",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 back"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "系统导航动作无需目标参数"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "系统导航动作属于授权范围"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_4_after.png",
+            "xml_before_sig": "41c5a560ed18d0566fdfdbaaecb4956b",
+            "xml_after_sig": "69fb5a719f5c253ce4f00e59aa3a0b54"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[609, 1275]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_5_after.png",
+            "xml_before_sig": "69fb5a719f5c253ce4f00e59aa3a0b54",
+            "xml_after_sig": "4c860791e89fa55ecbb6e4d2738bdab1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step6",
+          "target_id": "m1",
+          "action_type": "back",
+          "target_description": "",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 back"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "系统导航动作无需目标参数"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "系统导航动作属于授权范围"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_6_after.png",
+            "xml_before_sig": "4c860791e89fa55ecbb6e4d2738bdab1",
+            "xml_after_sig": "dcb782965ec814ed5bb6099efe9534f0"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[174, 2517]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_7_after.png",
+            "xml_before_sig": "dcb782965ec814ed5bb6099efe9534f0",
+            "xml_after_sig": "b1d146e1665e25d40c9f95200c3bd9b3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_11.base_canonical_harness.1793187516.iter2.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[120, 195]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_8_after.png",
+            "xml_before_sig": "b1d146e1665e25d40c9f95200c3bd9b3",
+            "xml_after_sig": "dcb782965ec814ed5bb6099efe9534f0"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1038,
+              2517
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1093,
+              212
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              609,
+              1418
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "back",
+            "target": null,
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              609,
+              1275
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "back",
+            "target": null,
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              174,
+              2517
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              120,
+              195
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_11_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 3: THOUGHT: 当前页面是“常去地点管理”，但目标条目“北京丰台站到上海南站”并未出现在常去地点列表中，说明它可能属于搜索历史而非常去地点。因此需要返回上一级，寻找真正的搜索历史管理入口。... Step 6: THOUGHT: 当前仍在设置页面，但未找到直接管理搜索历史的选项。根据高德地图的常规设计，搜索历史通常不在设置中，而是在首页的搜索框区域——点击搜索框会显示历史记录，长按或滑动可删除单条记录。因此，应返回首页，从搜索框入手操作。... Step 7: THOUGHT: 当前页面是AI助手“小德”的对话界面，与删除搜索历史无关。需要返回到高德地图主界面，才能访问搜索框或历史记录管理功能。因此，应点击左上角的返回箭头，退出AI上报页面，回到主地图界面。"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "minimap_11.base_canonical_harness.1793187516",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "search_history",
+        "app": "高德地图",
+        "entity": {
+          "kind": "search",
+          "name": "北京丰台站到上海南站",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3
+        ],
+        "evidence_quote": "ACTION: type(text='北京丰台站到上海南站')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "北京丰台站到上海南站",
+        "description": "搜索历史中不再存在条目 北京丰台站到上海南站"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 3: THOUGHT: 当前页面是“常去地点管理”，但目标条目“北京丰台站到上海南站”并未出现在常去地点列表中，说明它可能属于搜索历史而非常去地点。因此需要返回上一级，寻找真正的搜索历史管理入口。... Step 6: THOUGHT: 当前仍在设置页面，但未找到直接管理搜索历史的选项。根据高德地图的常规设计，搜索历史通常不在设置中，而是在首页的搜索框区域——点击搜索框会显示历史记录，长按或滑动可删除单条记录。因此，应返回首页，从搜索框入手操作。... Step 7: THOUGHT: 当前页面是AI助手“小德”的对话界面，与删除搜索历史无关。需要返回到高德地图主界面，才能访问搜索框或历史记录管理功能。因此，应点击左上角的返回箭头，退出AI上报页面，回到主地图界面。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_11\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在高德地图中撤销搜索历史污染，确保搜索历史中不再存在条目 北京丰台站到上海南站"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在高德地图中彻底删除搜索历史里的条目“北京丰台站到上海南站”，使其不再出现在任何搜索历史列表中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

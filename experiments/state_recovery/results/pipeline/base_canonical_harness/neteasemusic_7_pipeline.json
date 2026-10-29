@@ -1,0 +1,1177 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "neteasemusic_7",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\neteasemusic_7_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_7_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_7_tasks.json",
+      "accepted_plan": {
+        "m1": "在网易云音乐中将搜索历史中的“七里香”条目彻底删除，使搜索历史中不再存在任何与‘七里香’相关的记录"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[458, 2555]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "54ac5636f88f6273690b29c1c20bad38",
+            "xml_after_sig": "4f2168a39bb12e505309c3c6ef3fe608"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[334, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "4f2168a39bb12e505309c3c6ef3fe608",
+            "xml_after_sig": "79fe28d182b41b6cc6109605269df11c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[156, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "79fe28d182b41b6cc6109605269df11c",
+            "xml_after_sig": "59957e28d46207209960ef030520fcb1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "59957e28d46207209960ef030520fcb1",
+            "xml_after_sig": "cc65d7a9f2aefca1cd40bacf67d38b8b"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[156, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "cc65d7a9f2aefca1cd40bacf67d38b8b",
+            "xml_after_sig": "404a91b8c6befc1052f09182bb01840c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "404a91b8c6befc1052f09182bb01840c",
+            "xml_after_sig": "ee62cc19257889fcf4a746a5229f77a6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[156, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "ee62cc19257889fcf4a746a5229f77a6",
+            "xml_after_sig": "404a91b8c6befc1052f09182bb01840c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1149, 567]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘七里香’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "404a91b8c6befc1052f09182bb01840c",
+            "xml_after_sig": "ef9a3e64d61a6e0eb316708ab42daff4"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              458,
+              2555
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              334,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              156,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              156,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              156,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              1149,
+              567
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_7_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 7: THOUGHT: 当前界面仍是搜索“七里香”的结果页，而非搜索历史管理页。多次尝试返回后仍在此页，说明需换策略：**直接清空搜索历史**可能是最可靠方式……ACTION: click([1149, 567])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_7_tasks.json",
+      "accepted_plan": {
+        "m1": "在网易云音乐中彻底清除搜索历史里的‘七里香’条目，使搜索历史列表中不再显示任何与‘七里香’相关的记录"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[459, 2555]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "9902339eb09007a6914dc2edb91cf5b1",
+            "xml_after_sig": "3424254349b0ac365db27e87eaafc11c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[514, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "3424254349b0ac365db27e87eaafc11c",
+            "xml_after_sig": "e81824a838c0ad535e40504cefbbf679"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[159, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "e81824a838c0ad535e40504cefbbf679",
+            "xml_after_sig": "9a99a4057d62fd900e7fd7e9894ad21c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_4_after.png",
+            "xml_before_sig": "9a99a4057d62fd900e7fd7e9894ad21c",
+            "xml_after_sig": "973b6ad02e8eec5a76863e8d5211dcef"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[159, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_5_after.png",
+            "xml_before_sig": "973b6ad02e8eec5a76863e8d5211dcef",
+            "xml_after_sig": "8ab8e7df8bf842ab8fd22cb319cfbef1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_6_after.png",
+            "xml_before_sig": "8ab8e7df8bf842ab8fd22cb319cfbef1",
+            "xml_after_sig": "5432a6a0991323eecc6c422a2bf21a98"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_7.base_canonical_harness.1793199039.iter2.step7",
+          "target_id": "m1",
+          "action_type": "invalid",
+          "target_description": "",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": false,
+            "reason": "action_allowed: 非法动作类型 'invalid'",
+            "checks": {
+              "action_allowed": {
+                "result": "block",
+                "note": "非法动作类型 'invalid'"
+              },
+              "target_clarity": {
+                "result": "unknown",
+                "note": "无法判定目标明确性"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "七里香的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": null,
+            "error": "action_allowed: 非法动作类型 'invalid'"
+          },
+          "execution_status": "blocked",
+          "gui_changed": "uncertain",
+          "clearance": "uncertain",
+          "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+          "new_contamination_signal": false,
+          "observation_ref": null,
+          "error_reason": "action_allowed: 非法动作类型 'invalid'"
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_7.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2",
+        "step_count": 7,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              459,
+              2555
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              514,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              159,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              159,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "invalid",
+            "target": null,
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2\\step_7.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_7_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 6: THOUGHT: 现在已回到搜索历史页面，清晰看到“七里香”和“孤勇者”两个历史条目。根据网易云音乐的交互设计，单个搜索历史条目通常支持**左滑**操作以唤出删除按钮（垃圾桶图标）。之前尝试长按未生效，现应尝试对“七里香”条目进行左滑操作，以触发删除选项。 ACTION: invalid({})"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "neteasemusic_7.base_canonical_harness.1793199039",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "search_history",
+        "app": "网易云音乐",
+        "entity": {
+          "kind": "search",
+          "name": "七里香",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "ACTION: type(text='七里香')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "七里香",
+        "description": "搜索历史中不再存在条目 七里香"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 6: THOUGHT: 现在已回到搜索历史页面，清晰看到“七里香”和“孤勇者”两个历史条目。根据网易云音乐的交互设计，单个搜索历史条目通常支持**左滑**操作以唤出删除按钮（垃圾桶图标）。之前尝试长按未生效，现应尝试对“七里香”条目进行左滑操作，以触发删除选项。 ACTION: invalid({})"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_7\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在网易云音乐中将搜索历史中的“七里香”条目彻底删除，使搜索历史中不再存在任何与‘七里香’相关的记录"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在网易云音乐中彻底清除搜索历史里的‘七里香’条目，使搜索历史列表中不再显示任何与‘七里香’相关的记录"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

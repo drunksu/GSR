@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在QQ中将搜索历史恢复为包含‘天气’的记录状态，确保用户可直接点击‘天气’进入相关页面",
+      "recovery_goal": "在QQ中将搜索历史恢复为包含‘天气’的记录状态，确保‘天气’作为最近搜索项存在",
       "precondition": {
-        "target": "检查QQ搜索历史中是否存在‘天气’条目",
-        "check_instruction": "进入QQ首页，点击搜索框，查看搜索历史列表中是否显示‘天气’实体名",
-        "clean_if_state": "搜索历史中已存在‘天气’条目且可点击跳转"
+        "target": "检查QQ搜索历史中是否已存在‘天气’条目",
+        "check_instruction": "进入QQ首页顶部搜索框，点击搜索框进入搜索历史页面，查看历史记录列表中是否存在‘天气’条目",
+        "clean_if_state": "当前搜索历史中已存在‘天气’条目，且位于最近搜索记录中"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "QQ搜索历史列表中是否明确显示‘天气’条目且该条目处于可点击状态？",
+        "question": "QQ搜索历史页面中是否明确显示有‘天气’这一条目？",
         "expected": "yes"
       },
       "idempotent": true,

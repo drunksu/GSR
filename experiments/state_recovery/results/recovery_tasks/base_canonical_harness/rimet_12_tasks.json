@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_12",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中确保搜索历史里不存在‘收藏’条目",
+      "precondition": {
+        "target": "检查钉钉搜索历史中是否还存在‘收藏’条目",
+        "check_instruction": "进入钉钉首页，点击搜索框，查看搜索历史列表中是否显示实体名‘收藏’",
+        "clean_if_state": "搜索历史列表中未显示‘收藏’条目，即已无该搜索记录"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "钉钉的搜索历史中是否已不存在名为‘收藏’的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

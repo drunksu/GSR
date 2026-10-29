@@ -1,0 +1,1034 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "rimet_17",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\rimet_17_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_17_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": true,
+  "first_try_success": false,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_17_tasks.json",
+      "accepted_plan": {
+        "m1": "在钉钉中将允许通知设置为关闭状态，即撤销开启语音和视频通话邀请通知的操作，使允许通知恢复为off状态",
+        "m2": "在钉钉中将发声设置项恢复为关闭状态，即撤销对发声的开启操作，使其处于off状态",
+        "m3": "在钉钉中将振动设置项恢复为关闭状态，即撤销对振动的开启操作，确保振动处于off状态",
+        "m4": "在钉钉中将语音和视频通话邀请通知的开关状态恢复为关闭（即撤销开启操作，使其处于off状态）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[105, 212]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的通知设置界面中，‘允许通知’开关是否处于关闭（灰色）状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "f12b34a54fcf63f5577228d00bf723e1",
+            "xml_after_sig": "4271eb38c862a95f1e22a44c84690581"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[693, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的通知设置界面中，‘允许通知’开关是否处于关闭（灰色）状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "4271eb38c862a95f1e22a44c84690581",
+            "xml_after_sig": "a3ec72af756ede2cb1a7d557e5cd66a9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[223, 1470]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的通知设置界面中，‘允许通知’开关是否处于关闭（灰色）状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "a3ec72af756ede2cb1a7d557e5cd66a9",
+            "xml_after_sig": "08476681ebd9e8b36b76ff33e1d023cc"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1066, 1386]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的通知设置界面中，‘允许通知’开关是否处于关闭（灰色）状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "08476681ebd9e8b36b76ff33e1d023cc",
+            "xml_after_sig": "fe13d0e17f6ba7d8d4b8604196dfe5ab"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[914, 1494]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的通知设置界面中，‘允许通知’开关是否处于关闭（灰色）状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "fe13d0e17f6ba7d8d4b8604196dfe5ab",
+            "xml_after_sig": "1c484eaaa1b49d7cb6ef2544933da9d0"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_6.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1",
+        "step_count": 6,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              105,
+              212
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              693,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              223,
+              1470
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              1066,
+              1386
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              914,
+              1494
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "terminate",
+            "target": "已在钉钉中将语音和视频通话邀请通知关闭，允许通知已恢复为off状态。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1\\step_6.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_17_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "新消息通知 开关仍为蓝色（on）；未见任何操作关闭该总开关或其子项‘允许通知’的明确动作。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "轨迹中未进入‘铃声及振动设置’页面，也未对‘发声’开关执行任何操作；截图中该选项仍处于可点击状态但无状态变更证据。"
+          },
+          {
+            "mutation_id": "m3",
+            "cleared": false,
+            "evidence_quote": "轨迹中未进入‘铃声及振动设置’页面，也未对‘振动’开关执行任何操作；截图中该选项仍处于可点击状态但无状态变更证据。"
+          },
+          {
+            "mutation_id": "m4",
+            "cleared": true,
+            "evidence_quote": "Step 3: THOUGHT: 在“新消息通知”设置页面中，我找到了目标选项：“语音和视频通话邀请通知”，其开关目前处于开启状态（蓝色）。根据任务要求，需要将其关闭，即点击该开关使其变为灰色（off状态）。这是完成任务的关键一步。 ACTION: click([1066, 1386])；Step 4: THOUGHT: 系统弹出了确认关闭语音和视频通话邀请通知的提示框，说明之前的点击操作已触发关闭流程。为了完成任务，我需要点击“确认关闭”按钮来最终生效设置，使该通知权限变为off状态。 ACTION: click([914, 1494])；Step 5: THOUGHT: 已成功将“语音和视频通话邀请通知”开关关闭（显示为灰色），符合任务要求——撤销开启该通知的操作，使允许通知恢复为off状态。当前界面确认设置已生效，无需进一步操作。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_17_tasks.json",
+      "accepted_plan": {
+        "m1": "在钉钉中将‘允许通知’开关恢复为关闭状态（灰色，off）",
+        "m2": "在钉钉中将‘发声’设置项的状态恢复为关闭（off）状态，即撤销此前将其开启的操作",
+        "m3": "在钉钉中将‘振动’设置项的状态恢复为关闭（off）状态，即撤销此前将其开启的操作",
+        "m4": "在钉钉中将语音和视频通话邀请通知的开关状态恢复为关闭（off）状态，即撤销此前开启该通知的操作"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[210, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的新消息通知设置页面中，‘允许通知’开关是否已变为灰色（即处于关闭状态）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "766478966e7bbf0d634cb048346adf00",
+            "xml_after_sig": "d2831d9e8df86b6b0b6d8b9baeaaf907"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[693, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的新消息通知设置页面中，‘允许通知’开关是否已变为灰色（即处于关闭状态）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "d2831d9e8df86b6b0b6d8b9baeaaf907",
+            "xml_after_sig": "2b0ac9f750392c89904be45219f82fe3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter2.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[223, 1470]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的新消息通知设置页面中，‘允许通知’开关是否已变为灰色（即处于关闭状态）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "2b0ac9f750392c89904be45219f82fe3",
+            "xml_after_sig": "278b76623d1e6c6a371f7abd2659cd77"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter2.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1059, 477]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的新消息通知设置页面中，‘允许通知’开关是否已变为灰色（即处于关闭状态）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_4_after.png",
+            "xml_before_sig": "278b76623d1e6c6a371f7abd2659cd77",
+            "xml_after_sig": "ff8cbdb7afec40f16db3230dd6788059"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_17.base_canonical_harness.1793212216.iter2.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[914, 1494]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在钉钉的新消息通知设置页面中，‘允许通知’开关是否已变为灰色（即处于关闭状态）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_5_after.png",
+            "xml_before_sig": "ff8cbdb7afec40f16db3230dd6788059",
+            "xml_after_sig": "f3b0a28b4768a0155f6ada161cacabf8"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_6.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2",
+        "step_count": 6,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              210,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              693,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              223,
+              1470
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              1059,
+              477
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              914,
+              1494
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "terminate",
+            "target": "已将‘允许通知’开关恢复为关闭状态",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2\\step_6.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_17_tasks.json"
+      },
+      "verify": {
+        "success": true,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "THOUGHT: 在“新消息通知”页面中，我看到“新消息通知”总开关目前是开启状态（蓝色），而任务要求将其恢复为关闭状态（灰色）。因此，我需要点击该开关，使其变为灰色，即关闭状态。这是最直接的操作来完成任务。 ACTION: click([1059, 477])"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": true,
+            "evidence_quote": "THOUGHT: 系统弹出了确认关闭通知的提示框，说明刚才点击开关后触发了确认流程。为了完成任务，需要点击“确认关闭”按钮，使“新消息通知”开关真正变为关闭状态（灰色）。这是最后一步操作。 ACTION: click([914, 1494])"
+          },
+          {
+            "mutation_id": "m3",
+            "cleared": true,
+            "evidence_quote": "THOUGHT: 系统弹出了确认关闭通知的提示框，说明刚才点击开关后触发了确认流程。为了完成任务，需要点击“确认关闭”按钮，使“新消息通知”开关真正变为关闭状态（灰色）。这是最后一步操作。 ACTION: click([914, 1494])"
+          },
+          {
+            "mutation_id": "m4",
+            "cleared": true,
+            "evidence_quote": "THOUGHT: 系统弹出了确认关闭通知的提示框，说明刚才点击开关后触发了确认流程。为了完成任务，需要点击“确认关闭”按钮，使“新消息通知”开关真正变为关闭状态（灰色）。这是最后一步操作。 ACTION: click([914, 1494])"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "rimet_17.base_canonical_harness.1793212216",
+  "phase": "success",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "钉钉",
+        "entity": {
+          "kind": "setting",
+          "name": "允许通知",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "Thought: 当前页面是钉钉的通知设置界面，最上方的“允许通知”开关处于关闭状态（灰色）……ACTION: click([1059, 578])",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "允许通知",
+        "description": "设置项 允许通知 应处于 off 状态"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": true,
+          "evidence_quote": "THOUGHT: 在“新消息通知”页面中，我看到“新消息通知”总开关目前是开启状态（蓝色），而任务要求将其恢复为关闭状态（灰色）。因此，我需要点击该开关，使其变为灰色，即关闭状态。这是最直接的操作来完成任务。 ACTION: click([1059, 477])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "settings_toggle",
+        "app": "钉钉",
+        "entity": {
+          "kind": "setting",
+          "name": "发声",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "Thought: ……且“发声”和“振动”也已开启……",
+        "confidence": 0.95,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "发声",
+        "description": "设置项 发声 应处于 off 状态"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": true,
+          "evidence_quote": "THOUGHT: 系统弹出了确认关闭通知的提示框，说明刚才点击开关后触发了确认流程。为了完成任务，需要点击“确认关闭”按钮，使“新消息通知”开关真正变为关闭状态（灰色）。这是最后一步操作。 ACTION: click([914, 1494])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m3",
+      "mutation_ref": {
+        "id": "m3",
+        "type": "settings_toggle",
+        "app": "钉钉",
+        "entity": {
+          "kind": "setting",
+          "name": "振动",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "Thought: ……且“发声”和“振动”也已开启……",
+        "confidence": 0.95,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "振动",
+        "description": "设置项 振动 应处于 off 状态"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m3",
+          "cleared": true,
+          "evidence_quote": "THOUGHT: 系统弹出了确认关闭通知的提示框，说明刚才点击开关后触发了确认流程。为了完成任务，需要点击“确认关闭”按钮，使“新消息通知”开关真正变为关闭状态（灰色）。这是最后一步操作。 ACTION: click([914, 1494])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m4",
+      "mutation_ref": {
+        "id": "m4",
+        "type": "settings_toggle",
+        "app": "钉钉",
+        "entity": {
+          "kind": "setting",
+          "name": "语音和视频通话邀请通知",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          8
+        ],
+        "evidence_quote": "Thought: 在当前页面中，我已找到关键选项“语音和视频通话邀请通知”，其开关状态为开启（蓝色），说明该功能已经启用。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "语音和视频通话邀请通知",
+        "description": "设置项 语音和视频通话邀请通知 应处于 off 状态"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 1,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m4",
+          "cleared": true,
+          "evidence_quote": "THOUGHT: 系统弹出了确认关闭通知的提示框，说明刚才点击开关后触发了确认流程。为了完成任务，需要点击“确认关闭”按钮，使“新消息通知”开关真正变为关闭状态（灰色）。这是最后一步操作。 ACTION: click([914, 1494])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_17\\recovery_iter2"
+      ],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在钉钉中将允许通知设置为关闭状态，即撤销开启语音和视频通话邀请通知的操作，使允许通知恢复为off状态",
+        "m2": "在钉钉中将发声设置项恢复为关闭状态，即撤销对发声的开启操作，使其处于off状态",
+        "m3": "在钉钉中将振动设置项恢复为关闭状态，即撤销对振动的开启操作，确保振动处于off状态",
+        "m4": "在钉钉中将语音和视频通话邀请通知的开关状态恢复为关闭（即撤销开启操作，使其处于off状态）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在钉钉中将‘允许通知’开关恢复为关闭状态（灰色，off）",
+        "m2": "在钉钉中将‘发声’设置项的状态恢复为关闭（off）状态，即撤销此前将其开启的操作",
+        "m3": "在钉钉中将‘振动’设置项的状态恢复为关闭（off）状态，即撤销此前将其开启的操作",
+        "m4": "在钉钉中将语音和视频通话邀请通知的开关状态恢复为关闭（off）状态，即撤销此前开启该通知的操作"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": true,
+      "error": null
+    }
+  ],
+  "termination_reason": "recovered"
+}

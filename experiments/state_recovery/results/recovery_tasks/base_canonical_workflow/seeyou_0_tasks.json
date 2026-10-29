@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在美柚App中确保搜索历史里存在‘祛湿方法’这一条目，且该条目为最新一次搜索记录。",
+      "recovery_goal": "在美柚App中搜索并确保‘祛湿方法’已作为搜索词出现在搜索框中且搜索结果页已加载完成",
       "precondition": {
-        "target": "检查美柚App的搜索历史中是否已包含‘祛湿方法’且位于最近位置。",
-        "check_instruction": "进入美柚App首页，点击搜索框，查看搜索历史列表，确认‘祛湿方法’是否出现在历史记录顶部。",
-        "clean_if_state": "搜索历史中已存在‘祛湿方法’且位于第一条（即最新搜索记录）时，视为已恢复。"
+        "target": "确认当前页面为美柚的搜索结果页，且搜索框中显示‘祛湿方法’",
+        "check_instruction": "进入美柚App的搜索页面，查看搜索框内文本是否为‘祛湿方法’，并确认下方有相关搜索结果列表",
+        "clean_if_state": "搜索框中已显示‘祛湿方法’且搜索结果列表已正常展示（非空、无错误提示）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在美柚App的搜索历史列表中，‘祛湿方法’是否作为最新一条记录存在？",
+        "question": "在美柚App中，搜索框内是否精确显示‘祛湿方法’且下方已加载出对应的搜索结果列表？",
         "expected": "yes"
       },
       "idempotent": true,

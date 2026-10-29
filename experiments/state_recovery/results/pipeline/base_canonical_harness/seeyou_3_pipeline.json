@@ -1,0 +1,919 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "seeyou_3",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\seeyou_3_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\seeyou_3_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": true,
+  "first_try_success": false,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\seeyou_3_tasks.json",
+      "accepted_plan": {
+        "m1": "在美柚中清除搜索历史中的‘运动减肥’条目，使搜索历史中不再存在‘运动减肥’这一记录"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[73, 198]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "2fea3091caa8dc7e7a252291c3c2230c",
+            "xml_after_sig": "8dfb916e246e52f7f80c768b27d60890"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[167, 472]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "1baa9f1dba45888cf0956bbb5abff814",
+            "xml_after_sig": "e4762bf533c74dce0dd490c73739534e"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[67, 198]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "e4762bf533c74dce0dd490c73739534e",
+            "xml_after_sig": "44dd2f6e621e46b58ad82a80b0d6b6fe"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[167, 472]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "44dd2f6e621e46b58ad82a80b0d6b6fe",
+            "xml_after_sig": "63d4d0fe3434a883beb1717bbeb04e84"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[67, 198]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "63d4d0fe3434a883beb1717bbeb04e84",
+            "xml_after_sig": "44dd2f6e621e46b58ad82a80b0d6b6fe"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[167, 472]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "44dd2f6e621e46b58ad82a80b0d6b6fe",
+            "xml_after_sig": "e38755cca3d94c6d6238a66d881bfaa1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[67, 198]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "5d87e408b18e75d0316e790db15e7ecd",
+            "xml_after_sig": "f26dc7aad7d58b07c7c834a924fd2c95"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[167, 472]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史中是否已不存在‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "f26dc7aad7d58b07c7c834a924fd2c95",
+            "xml_after_sig": "ad7933bf9bffa2c82c35c2b11979d1e8"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              73,
+              198
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              167,
+              472
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              67,
+              198
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              167,
+              472
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              67,
+              198
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              167,
+              472
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              67,
+              198
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              167,
+              472
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\seeyou_3_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "搜索历史\n运动减肥\n止咳化痰方法"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\seeyou_3_tasks.json",
+      "accepted_plan": {
+        "m1": "在美柚中彻底清除搜索历史中的‘运动减肥’条目，确保该条目不再出现在任何搜索历史列表中"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[73, 198]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史列表中，是否已完全找不到‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "36c453b9832624873de28f838dba121e",
+            "xml_after_sig": "90ab79a07c4f7677a8e53d8f816c624d"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1157, 353]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史列表中，是否已完全找不到‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "90ab79a07c4f7677a8e53d8f816c624d",
+            "xml_after_sig": "e7dccc44b224dbf6d9e6d9a182caeb5d"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "seeyou_3.base_canonical_harness.1793215727.iter2.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[287, 472]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在美柚的搜索历史列表中，是否已完全找不到‘运动减肥’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "e7dccc44b224dbf6d9e6d9a182caeb5d",
+            "xml_after_sig": "f45e042e709ee27761863f3a4264ca65"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_4.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2",
+        "step_count": 4,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              73,
+              198
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1157,
+              353
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              287,
+              472
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "terminate",
+            "target": "已在美柚中彻底清除搜索历史中的‘运动减肥’条目，该条目不再出现在搜索历史列表中。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2\\step_4.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\seeyou_3_tasks.json"
+      },
+      "verify": {
+        "success": true,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "Step 2: THOUGHT: 现在搜索历史中清晰显示了“运动减肥”条目，并且每个条目右侧都有一个“×”按钮，这表明可以直接点击该按钮删除特定条目。为了彻底清除“运动减肥”条目，我应该点击其右侧的“×”按钮进行删除。 ACTION: click([287, 472])"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "seeyou_3.base_canonical_harness.1793215727",
+  "phase": "success",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "search_history",
+        "app": "美柚",
+        "entity": {
+          "kind": "search",
+          "name": "运动减肥",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          8
+        ],
+        "evidence_quote": "ACTION: type(text='运动减肥')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "运动减肥",
+        "description": "搜索历史中不再存在条目 运动减肥"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": true,
+          "evidence_quote": "Step 2: THOUGHT: 现在搜索历史中清晰显示了“运动减肥”条目，并且每个条目右侧都有一个“×”按钮，这表明可以直接点击该按钮删除特定条目。为了彻底清除“运动减肥”条目，我应该点击其右侧的“×”按钮进行删除。 ACTION: click([287, 472])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\seeyou_3\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在美柚中清除搜索历史中的‘运动减肥’条目，使搜索历史中不再存在‘运动减肥’这一记录"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在美柚中彻底清除搜索历史中的‘运动减肥’条目，确保该条目不再出现在任何搜索历史列表中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": true,
+      "error": null
+    }
+  ],
+  "termination_reason": "recovered"
+}

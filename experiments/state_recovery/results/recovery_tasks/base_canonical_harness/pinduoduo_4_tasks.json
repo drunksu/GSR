@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_4",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多中彻底清除搜索历史里名为“白色Type-C数据线”的条目，使搜索历史中不再存在该关键词记录",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘白色Type-C数据线’条目",
+        "check_instruction": "进入拼多多首页，点击顶部搜索框，观察下拉建议列表或点击搜索框右侧‘X’图标进入搜索历史管理页面，查找是否存在‘白色Type-C数据线’条目",
+        "clean_if_state": "搜索框下拉建议中无‘白色Type-C数据线’，且搜索历史管理页面中未列出该条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多搜索框展开后的历史建议或搜索历史管理页面中，是否完全找不到‘白色Type-C数据线’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

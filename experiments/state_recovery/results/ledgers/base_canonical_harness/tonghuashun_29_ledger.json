@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "tonghuashun_29",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在同花顺设置主题为黑色",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "同花顺",
+      "entity": {
+        "kind": "setting",
+        "name": "主题换肤",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "Thought: 在主题换肤页面，我看到了三个选项：跟随系统外观、始终显示白色、始终显示黑色。当前选中的是“跟随系统外观”，而任务要求设置为黑色主题，因此我需要点击“始终显示黑色”选项来完成设置。... Thought: 我已经成功将主题设置为黑色，因为“始终显示黑色”选项已被选中（红色对勾标记），并且界面整体已变为深色模式。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

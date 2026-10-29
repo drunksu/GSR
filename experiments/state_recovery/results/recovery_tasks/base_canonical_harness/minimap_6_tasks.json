@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_6",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中彻底清除搜索历史里的‘颐和园’条目，使搜索历史列表中不再显示任何与‘颐和园’相关的记录",
+      "precondition": {
+        "target": "确认当前搜索历史中不存在‘颐和园’条目",
+        "check_instruction": "进入高德地图首页，点击搜索框右侧的‘历史’按钮，查看搜索历史列表中是否包含‘颐和园’",
+        "clean_if_state": "搜索历史列表中完全看不到‘颐和园’及其任何变体（如‘颐和园景区’‘颐和园地铁站’等）文字内容"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否已不存在任何包含‘颐和园’字样的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中彻底清除搜索历史里的‘北京大学’条目，使搜索历史列表中不再显示任何与‘北京大学’相关的记录",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘北京大学’条目",
+        "check_instruction": "进入高德地图主界面，点击搜索框右侧的‘历史’按钮（或类似入口），在搜索历史列表中查找是否包含‘北京大学’",
+        "clean_if_state": "搜索历史列表中已无‘北京大学’及其任何变体（如‘北京大学东门’‘北大’等）条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "北京大学的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

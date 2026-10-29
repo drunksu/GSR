@@ -6,15 +6,33 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在番茄小说App中进入“穿越”圈子页面，并确保该圈子处于已订阅状态",
+      "recovery_goal": "在番茄小说中进入‘求9.8分以上的穿越文’圈子详情页，并确保该圈子处于已订阅（已收藏）状态",
       "precondition": {
-        "target": "确认“穿越”圈子是否已订阅",
-        "check_instruction": "进入番茄小说App的‘穿越’圈子页面，查看页面右上角按钮文字是否为‘已订阅’",
-        "clean_if_state": "页面右上角按钮显示为‘已订阅’，即表示‘穿越’圈子已成功订阅，无需操作"
+        "target": "确认‘求9.8分以上的穿越文’圈子当前是否已订阅",
+        "check_instruction": "进入番茄小说，找到并打开‘求9.8分以上的穿越文’圈子的详情页，查看顶部按钮文字是否为‘已收藏’",
+        "clean_if_state": "顶部显示‘已收藏’，即表示该圈子已订阅，无需操作"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在番茄小说App中，“穿越”圈子页面右上角的按钮是否显示为‘已订阅’？",
+        "question": "在番茄小说中，‘求9.8分以上的穿越文’圈子详情页顶部是否显示‘已收藏’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在番茄小说App中进入“穿越”圈子页面，并完成对该圈子的订阅操作，确保“穿越”圈子处于已订阅状态",
+      "precondition": {
+        "target": "确认当前是否已成功订阅‘穿越’圈子",
+        "check_instruction": "进入番茄小说App的圈子页面，找到名为‘穿越’的圈子，查看其订阅按钮是否显示为‘已订阅’或类似表示已订阅状态的标识",
+        "clean_if_state": "‘穿越’圈子的订阅按钮已显示为‘已订阅’状态，无需额外操作"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "穿越的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +42,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 1
+  "_llm_calls": 2
 }

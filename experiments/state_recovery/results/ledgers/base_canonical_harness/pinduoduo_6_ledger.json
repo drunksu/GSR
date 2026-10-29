@@ -1,0 +1,66 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_6",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去拼多多收藏1个马克杯，要有卡通小狗图案的",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "卡通小狗马克杯卡通",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "当前页面底部显示“已收藏”（红色实心心形图标），说明收藏操作已完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "卡通小狗 马克杯",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "ACTION: type(text='卡通小狗 马克杯')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "卡通小狗 马克杯"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

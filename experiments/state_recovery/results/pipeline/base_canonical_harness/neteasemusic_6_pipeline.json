@@ -1,0 +1,1253 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "neteasemusic_6",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\neteasemusic_6_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_6_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_6_tasks.json",
+      "accepted_plan": {
+        "m1": "在网易云音乐中撤销对‘孤勇者’的搜索历史记录创建，使搜索历史中不再存在条目‘孤勇者’"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[458, 2555]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "22d7b858d0d8ba8186e89b282d421219",
+            "xml_after_sig": "94b646cdbe05df0b33e3b596f79e0376"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[614, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "94b646cdbe05df0b33e3b596f79e0376",
+            "xml_after_sig": "6b3ce723a8432931e699a76cf1120ed3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[154, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "6b3ce723a8432931e699a76cf1120ed3",
+            "xml_after_sig": "55f79ba7a55bb3907f941761fc9f46b4"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "55f79ba7a55bb3907f941761fc9f46b4",
+            "xml_after_sig": "6dc728636c96525186595202f5fa1d89"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[154, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "6dc728636c96525186595202f5fa1d89",
+            "xml_after_sig": "43264d0f2683b05139a087b2ced3d9ed"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "43264d0f2683b05139a087b2ced3d9ed",
+            "xml_after_sig": "00ef01c32fd7ba9ab3aabe1ba10322af"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[154, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "00ef01c32fd7ba9ab3aabe1ba10322af",
+            "xml_after_sig": "43264d0f2683b05139a087b2ced3d9ed"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "43264d0f2683b05139a087b2ced3d9ed",
+            "xml_after_sig": "27104ca6895643cb8206668f67efeb1d"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              458,
+              2555
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              614,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              154,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              154,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              154,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_6_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 4: THOUGHT: 当前界面显示了搜索历史，其中“孤勇者”条目清晰可见。根据网易云音乐的常见操作逻辑，长按搜索历史中的条目通常会弹出删除选项。因此，下一步应长按“孤勇者”条目以触发删除操作。 ACTION: click([154, 686])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_6_tasks.json",
+      "accepted_plan": {
+        "m1": "在网易云音乐中彻底清除搜索历史里的‘孤勇者’条目，使搜索历史列表中不再显示‘孤勇者’"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[458, 2555]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "0e3b2d37325c1aafaf96bcd7f4276f5b",
+            "xml_after_sig": "dfcf4e4d596ab138b28f0ed7f603c9dd"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[514, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "dfcf4e4d596ab138b28f0ed7f603c9dd",
+            "xml_after_sig": "0e3b6711fd05c68420dbfedbc137e35c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[156, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "0e3b6711fd05c68420dbfedbc137e35c",
+            "xml_after_sig": "cffefeaea791c033f6961f6027df6ca2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_4_after.png",
+            "xml_before_sig": "cffefeaea791c033f6961f6027df6ca2",
+            "xml_after_sig": "c7cdf0df92d5b2b999711a1a81d7c9e4"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[156, 686]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_5_after.png",
+            "xml_before_sig": "c7cdf0df92d5b2b999711a1a81d7c9e4",
+            "xml_after_sig": "cffefeaea791c033f6961f6027df6ca2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[87, 193]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_6_after.png",
+            "xml_before_sig": "cffefeaea791c033f6961f6027df6ca2",
+            "xml_after_sig": "f1fc53c44d4e9ca7757c48c469aef8bd"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1147, 567]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_7_after.png",
+            "xml_before_sig": "f1fc53c44d4e9ca7757c48c469aef8bd",
+            "xml_after_sig": "62f328acd2aeda4a31065946107bae6a"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "neteasemusic_6.base_canonical_harness.1793198424.iter2.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[406, 1340]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "网易云音乐的搜索历史列表中是否已不存在‘孤勇者’条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_8_after.png",
+            "xml_before_sig": "62f328acd2aeda4a31065946107bae6a",
+            "xml_after_sig": "0c4cfb86c14042525dc636bab7d4d300"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              458,
+              2555
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              514,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              156,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              156,
+              686
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              87,
+              193
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              1147,
+              567
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              406,
+              1340
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\neteasemusic_6_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 7: THOUGHT: 当前弹出的对话框是确认是否清空**全部**搜索历史的提示，但任务要求仅删除“孤勇者”条目，而非清空所有历史。因此，点击“清空”会过度操作，不符合需求；而“取消”可返回，继续寻找单独删除“孤勇者”的方法。... ACTION: click([406, 1340])"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "neteasemusic_6.base_canonical_harness.1793198424",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "search_history",
+        "app": "网易云音乐",
+        "entity": {
+          "kind": "search",
+          "name": "孤勇者",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3
+        ],
+        "evidence_quote": "ACTION: type(text='孤勇者')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "孤勇者",
+        "description": "搜索历史中不再存在条目 孤勇者"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 7: THOUGHT: 当前弹出的对话框是确认是否清空**全部**搜索历史的提示，但任务要求仅删除“孤勇者”条目，而非清空所有历史。因此，点击“清空”会过度操作，不符合需求；而“取消”可返回，继续寻找单独删除“孤勇者”的方法。... ACTION: click([406, 1340])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\neteasemusic_6\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在网易云音乐中撤销对‘孤勇者’的搜索历史记录创建，使搜索历史中不再存在条目‘孤勇者’"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在网易云音乐中彻底清除搜索历史里的‘孤勇者’条目，使搜索历史列表中不再显示‘孤勇者’"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

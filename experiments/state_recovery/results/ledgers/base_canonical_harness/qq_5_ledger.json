@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_5",
+  "run_id": "base_canonical_harness",
+  "task_goal": "打开QQ给绕堤沙发送“早上好”",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "QQ",
+      "entity": {
+        "kind": "friend",
+        "name": "绕堤沙",
+        "identifier": null
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: 消息“早上好”已成功发送并显示在聊天记录中，蓝色气泡表明消息已发出。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

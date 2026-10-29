@@ -8,9 +8,9 @@
       "mutation_id": "m1",
       "recovery_goal": "在网易云音乐中将相机权限恢复为开启状态，确保扫一扫功能可正常使用",
       "precondition": {
-        "target": "确认相机权限当前是否已开启",
-        "check_instruction": "进入网易云音乐的「设置」→「应用管理」→「权限管理」，查看「相机权限」的开关状态是否为开启",
-        "clean_if_state": "相机权限已处于开启状态（如显示‘允许’或开关为蓝色/绿色）"
+        "target": "确认网易云音乐的相机权限当前是否已开启",
+        "check_instruction": "进入手机设置 > 应用管理 > 网易云音乐 > 权限，查看‘相机权限’是否显示为‘允许’",
+        "clean_if_state": "相机权限已显示为‘允许’（或‘仅在使用中允许’）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",

@@ -1,0 +1,662 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "minimap_7",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\minimap_7_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_7_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "迭代预算耗尽 (0)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_7_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中撤销对北京南站的搜索历史记录，使搜索历史中不再存在条目北京南站",
+        "m2": "在高德地图中将搜索历史里关于北京丰台站的条目彻底删除，使搜索历史中不再存在北京丰台站的记录"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_7.base_canonical_harness.1793191901.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[451, 1595]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在北京南站的记录？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "3b591bcc2020dd72ab876744ebcd32b3",
+            "xml_after_sig": "e5da4e80a25edbe3c2e1c5a851c4882e"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_7.base_canonical_harness.1793191901.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1135, 941]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在北京南站的记录？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "e5da4e80a25edbe3c2e1c5a851c4882e",
+            "xml_after_sig": "137831b165525141f98e51a6363c60c3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_7.base_canonical_harness.1793191901.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[93, 445]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在北京南站的记录？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "137831b165525141f98e51a6363c60c3",
+            "xml_after_sig": "78cb92ab720c569cf0a02bfe1366950c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_7.base_canonical_harness.1793191901.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1103, 2571]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在北京南站的记录？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "78cb92ab720c569cf0a02bfe1366950c",
+            "xml_after_sig": "0d0ad5bae125e36d04d45673ee8f06bb"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_7.base_canonical_harness.1793191901.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[830, 1456]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在北京南站的记录？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "0d0ad5bae125e36d04d45673ee8f06bb",
+            "xml_after_sig": "14fbfc06569c4abc4e368fda03ec750a"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_6.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1",
+        "step_count": 6,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              451,
+              1595
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1135,
+              941
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              93,
+              445
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              1103,
+              2571
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              830,
+              1456
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "terminate",
+            "target": "已成功撤销对北京南站的搜索历史记录，搜索历史中不再存在该条目。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1\\step_6.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_7_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "Step 5: THOUGHT: 经过之前的步骤，已成功勾选并确认删除“北京南站”条目。当前界面显示的近期搜索记录中已无“北京南站”，说明该条目已被成功移除。任务目标已达成。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "恢复轨迹中未提及“北京丰台站”，所有操作均围绕“北京南站”展开，最终界面历史记录中也未出现“北京丰台站”被删除的证据。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_7_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中彻底清除搜索历史里的北京南站条目，使搜索历史列表中不再显示北京南站",
+        "m2": "在高德地图中彻底清除搜索历史里的‘北京丰台站’条目，使搜索历史中不再存在该实体的任何记录"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_7.base_canonical_harness.1793191901.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[289, 1595]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": false,
+            "reason": "authorized: 恢复目标 m1 不在本轮授权恢复范围",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "block",
+                "note": "恢复目标 m1 不在本轮授权恢复范围"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的近期搜索记录中是否已不存在北京南站条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": null,
+            "error": "authorized: 恢复目标 m1 不在本轮授权恢复范围"
+          },
+          "execution_status": "blocked",
+          "gui_changed": "uncertain",
+          "clearance": "uncertain",
+          "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+          "new_contamination_signal": false,
+          "observation_ref": null,
+          "error_reason": "authorized: 恢复目标 m1 不在本轮授权恢复范围"
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter2\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter2",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              289,
+              1595
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter2\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_7_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "为了彻底清除搜索历史中的“北京南站”条目，我需要先进入搜索历史页面。当前界面是高德地图的主界面，搜索框中显示的是“地铁站”，并未直接展示搜索历史。通常，搜索历史会出现在搜索框点击后展开的下拉列表中，或者在“我的”页面中找到相关设置。因此，我首先应该点击搜索框，查看是否能直接看到搜索历史并进行删除操作。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "为了彻底清除搜索历史中的“北京南站”条目，我需要先进入搜索历史页面。当前界面是高德地图的主界面，搜索框中显示的是“地铁站”，并未直接展示搜索历史。通常，搜索历史会出现在搜索框点击后展开的下拉列表中，或者在“我的”页面中找到相关设置。因此，我首先应该点击搜索框，查看是否能直接看到搜索历史并进行删除操作。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 3,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_7_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中彻底删除搜索历史里的‘北京南站’条目，使该实体不再出现在任何搜索历史记录中",
+        "m2": "在高德地图中彻底删除搜索历史里的北京丰台站条目，使搜索历史中不再存在北京丰台站的记录"
+      }
+    }
+  ],
+  "recovery_id": "minimap_7.base_canonical_harness.1793191901",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 1
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "search_history",
+        "app": "高德地图",
+        "entity": {
+          "kind": "search",
+          "name": "北京南站",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3,
+          4,
+          6,
+          10,
+          11,
+          15,
+          16
+        ],
+        "evidence_quote": "ACTION: type(text='北京南站')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "北京南站",
+        "description": "搜索历史中不再存在条目 北京南站"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "为了彻底清除搜索历史中的“北京南站”条目，我需要先进入搜索历史页面。当前界面是高德地图的主界面，搜索框中显示的是“地铁站”，并未直接展示搜索历史。通常，搜索历史会出现在搜索框点击后展开的下拉列表中，或者在“我的”页面中找到相关设置。因此，我首先应该点击搜索框，查看是否能直接看到搜索历史并进行删除操作。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "search_history",
+        "app": "高德地图",
+        "entity": {
+          "kind": "search",
+          "name": "北京丰台站",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          12,
+          16
+        ],
+        "evidence_quote": "ACTION: type(text='北京丰台站')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "北京丰台站",
+        "description": "搜索历史中不再存在条目 北京丰台站"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": false,
+          "evidence_quote": "为了彻底清除搜索历史中的“北京南站”条目，我需要先进入搜索历史页面。当前界面是高德地图的主界面，搜索框中显示的是“地铁站”，并未直接展示搜索历史。通常，搜索历史会出现在搜索框点击后展开的下拉列表中，或者在“我的”页面中找到相关设置。因此，我首先应该点击搜索框，查看是否能直接看到搜索历史并进行删除操作。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_7\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在高德地图中撤销对北京南站的搜索历史记录，使搜索历史中不再存在条目北京南站",
+        "m2": "在高德地图中将搜索历史里关于北京丰台站的条目彻底删除，使搜索历史中不再存在北京丰台站的记录"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在高德地图中彻底清除搜索历史里的北京南站条目，使搜索历史列表中不再显示北京南站",
+        "m2": "在高德地图中彻底清除搜索历史里的‘北京丰台站’条目，使搜索历史中不再存在该实体的任何记录"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 3,
+      "accepted_plan": {
+        "m1": "在高德地图中彻底删除搜索历史里的‘北京南站’条目，使该实体不再出现在任何搜索历史记录中",
+        "m2": "在高德地图中彻底删除搜索历史里的北京丰台站条目，使搜索历史中不再存在北京丰台站的记录"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "budget_exhausted"
+}

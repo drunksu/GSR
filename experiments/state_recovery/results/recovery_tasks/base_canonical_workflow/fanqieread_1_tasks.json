@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "fanqieread_1",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说App中打开小说《我在精神病院学斩神》的详情页，确保当前页面显示该小说的标题、封面及阅读入口",
+      "precondition": {
+        "target": "确认当前是否已处于《我在精神病院学斩神》的详情页或阅读页",
+        "check_instruction": "进入番茄小说首页或搜索页，查找并点击标题为‘我在精神病院学斩神’的小说条目，观察页面顶部标题是否完全匹配该名称",
+        "clean_if_state": "当前页面标题明确显示‘我在精神病院学斩神’且为小说详情页或章节阅读页，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "当前页面是否为番茄小说App中标题为‘我在精神病院学斩神’的小说详情页或阅读页？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

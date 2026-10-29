@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_19",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多中清除搜索历史中的‘垂钓装备’条目，使搜索历史中不再存在‘垂钓装备’这一记录",
+      "precondition": {
+        "target": "确认搜索历史中是否存在‘垂钓装备’条目",
+        "check_instruction": "进入拼多多首页，点击搜索框，查看搜索历史列表中是否包含‘垂钓装备’",
+        "clean_if_state": "搜索历史列表中已无‘垂钓装备’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "拼多多的搜索历史中是否已不存在‘垂钓装备’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

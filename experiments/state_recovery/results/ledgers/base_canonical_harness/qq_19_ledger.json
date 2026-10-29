@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_19",
+  "run_id": "base_canonical_harness",
+  "task_goal": "我要更换QQ模式到关怀模式",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "关怀模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4,
+        5
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 我已经进入了模式选择界面，看到了四个选项：普通模式、简洁模式、未成年人模式和关怀模式。根据任务要求，我需要选择“关怀模式”，其描述为“字体更大，设计更简明，看的更清晰”。现在我需要点击“关怀模式”选项来完成切换。 ACTION: click([614, 1215])\nStep 4: THOUGHT: 我已经成功进入关怀模式的确认页面，页面上明确显示了“关怀模式”的特点，并提供了一个蓝色的“开启关怀模式”按钮。为了完成任务，我需要点击这个按钮来正式启用关怀模式。 ACTION: click([609, 2232])\nStep 5: THOUGHT: 系统提示需要重启QQ才能使关怀模式生效，当前弹窗提供了“取消”和“确定”两个选项。为了完成更换到关怀模式的任务，我需要点击“确定”按钮确认设置，之后再重启QQ即可。 ACTION: click([836, 1549])",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

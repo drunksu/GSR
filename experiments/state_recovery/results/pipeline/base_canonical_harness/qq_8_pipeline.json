@@ -1,0 +1,647 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "qq_8",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\qq_8_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_8_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "迭代预算耗尽 (0)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_8_tasks.json",
+      "accepted_plan": {
+        "m2": "在QQ中清除搜索历史里名为“恭喜发财”的条目，使该关键词不再出现在搜索历史记录中"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_8.base_canonical_harness.1793211049.iter1.step1",
+          "target_id": "m2",
+          "action_type": "click",
+          "target_description": "position=[609, 420]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的搜索历史中是否已不存在名为‘恭喜发财’的条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "8aa9243f3eb011dcd68f1ac08cc5dd6f",
+            "xml_after_sig": "e9ecc5163672917f78c49f403bceca37"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_8.base_canonical_harness.1793211049.iter1.step2",
+          "target_id": "m2",
+          "action_type": "type",
+          "target_description": "恭喜发财",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 type"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "输入动作带非空 text"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "动作目标与恢复实体 恭喜发财 直接关联"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的搜索历史中是否已不存在名为‘恭喜发财’的条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "e9ecc5163672917f78c49f403bceca37",
+            "xml_after_sig": "6d585bbffc12f852b64dfba96d89f2a1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_8.base_canonical_harness.1793211049.iter1.step3",
+          "target_id": "m2",
+          "action_type": "click",
+          "target_description": "position=[915, 239]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的搜索历史中是否已不存在名为‘恭喜发财’的条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "6d585bbffc12f852b64dfba96d89f2a1",
+            "xml_after_sig": "6967d842d3d757b89aa4f6a9c0b4f456"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_8.base_canonical_harness.1793211049.iter1.step4",
+          "target_id": "m2",
+          "action_type": "click",
+          "target_description": "position=[1135, 976]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的搜索历史中是否已不存在名为‘恭喜发财’的条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "6967d842d3d757b89aa4f6a9c0b4f456",
+            "xml_after_sig": "c205b450c6f6df5ce081b526ff117fd1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_8.base_canonical_harness.1793211049.iter1.step5",
+          "target_id": "m2",
+          "action_type": "click",
+          "target_description": "position=[543, 1131]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的搜索历史中是否已不存在名为‘恭喜发财’的条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "c205b450c6f6df5ce081b526ff117fd1",
+            "xml_after_sig": "028d32029da5680e30fd8cf3af59f161"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_6.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1",
+        "step_count": 6,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              609,
+              420
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "type",
+            "target": "恭喜发财",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              915,
+              239
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              1135,
+              976
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              543,
+              1131
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "terminate",
+            "target": "已成功清除搜索历史中名为“恭喜发财”的条目，该关键词不再出现在搜索历史记录中。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1\\step_6.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_8_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 0: THOUGHT: 首先需要进入搜索界面，才能查看和管理搜索历史。当前界面是QQ的消息列表... ACTION: click([609, 420])"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": true,
+            "evidence_quote": "Step 5: THOUGHT: 当前界面显示“没有最近搜索内容”，说明搜索历史已被清空，包括目标关键词“恭喜发财”在内的所有条目均已不存在。结合之前的步骤，我们已通过点击垃圾桶图标和清除操作，成功移除了搜索历史中的内容。因此，任务已完成。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_8_tasks.json",
+      "accepted_plan": {
+        "m2": "在QQ中确保搜索历史里不存在名为“恭喜发财”的条目"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_8.base_canonical_harness.1793211049.iter2.step1",
+          "target_id": "m2",
+          "action_type": "click",
+          "target_description": "position=[614, 420]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": false,
+            "reason": "authorized: 恢复目标 m2 不在本轮授权恢复范围",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "block",
+                "note": "恢复目标 m2 不在本轮授权恢复范围"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "恭喜发财的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": null,
+            "error": "authorized: 恢复目标 m2 不在本轮授权恢复范围"
+          },
+          "execution_status": "blocked",
+          "gui_changed": "uncertain",
+          "clearance": "uncertain",
+          "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+          "new_contamination_signal": false,
+          "observation_ref": null,
+          "error_reason": "authorized: 恢复目标 m2 不在本轮授权恢复范围"
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter2\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter2",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              614,
+              420
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter2\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_8_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "为了确保搜索历史中不存在名为“恭喜发财”的条目，我需要先进入搜索界面。当前页面是QQ的消息列表，顶部有一个搜索栏，点击它应该可以进入搜索界面，从而查看和管理搜索历史。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "为了确保搜索历史中不存在名为“恭喜发财”的条目，我需要先进入搜索界面。当前页面是QQ的消息列表，顶部有一个搜索栏，点击它应该可以进入搜索界面，从而查看和管理搜索历史。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 3,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_8_tasks.json",
+      "accepted_plan": {
+        "m2": "在QQ中彻底清除搜索历史里名为“恭喜发财”的条目，使搜索历史中不再存在该条目"
+      }
+    }
+  ],
+  "recovery_id": "qq_8.base_canonical_harness.1793211049",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 1
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "message_send",
+        "app": "QQ",
+        "entity": {
+          "kind": "message",
+          "name": "恭喜发财",
+          "identifier": "绕堤沙"
+        },
+        "direction": "sent",
+        "persistence": "server",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          6,
+          7
+        ],
+        "evidence_quote": "Step 6: THOUGHT: 搜索结果中已经出现了多个“恭喜发财”相关的表情包，其中左上角第一个表情包（戴着帽子的卡通形象，手持金元宝，下方有“恭喜发财”文字）非常符合要求……ACTION: click([172, 949])\nStep 7: THOUGHT: 表情包已经成功发送到聊天窗口，显示在消息记录中，任务已完成。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_sent",
+        "entity_name": "恭喜发财",
+        "description": "消息 恭喜发财 已不存在于会话"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "为了确保搜索历史中不存在名为“恭喜发财”的条目，我需要先进入搜索界面。当前页面是QQ的消息列表，顶部有一个搜索栏，点击它应该可以进入搜索界面，从而查看和管理搜索历史。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "search_history",
+        "app": "QQ",
+        "entity": {
+          "kind": "search",
+          "name": "恭喜发财",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          5
+        ],
+        "evidence_quote": "Step 5: THOUGHT: 搜索框已激活，现在需要输入关键词“恭喜发财”来查找对应的表情包。这是最直接有效的方式……ACTION: type(text='恭喜发财')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "恭喜发财",
+        "description": "搜索历史中不再存在条目 恭喜发财"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": false,
+          "evidence_quote": "为了确保搜索历史中不存在名为“恭喜发财”的条目，我需要先进入搜索界面。当前页面是QQ的消息列表，顶部有一个搜索栏，点击它应该可以进入搜索界面，从而查看和管理搜索历史。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_8\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m2": "在QQ中清除搜索历史里名为“恭喜发财”的条目，使该关键词不再出现在搜索历史记录中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m2": "在QQ中确保搜索历史里不存在名为“恭喜发财”的条目"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 3,
+      "accepted_plan": {
+        "m2": "在QQ中彻底清除搜索历史里名为“恭喜发财”的条目，使搜索历史中不再存在该条目"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "budget_exhausted"
+}

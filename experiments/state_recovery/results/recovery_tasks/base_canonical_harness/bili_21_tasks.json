@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_21",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在哔哩哔哩中将头像恢复为未更换前的原始状态，即撤销‘随机更换头像’操作，使头像回退至系统默认或账户初始头像（非当前白色头发红眼睛卡通形象）",
+      "precondition": {
+        "target": "确认当前头像是否仍为被污染后的白色头发、红眼睛卡通形象",
+        "check_instruction": "进入哔哩哔哩‘我的’页面，查看顶部用户头像区域显示的头像图像是否为白色头发、红眼睛的卡通形象",
+        "clean_if_state": "头像已显示为原始默认头像（如蓝色卡通形象或其他非白色头发红眼睛样式）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "哔哩哔哩个人主页中显示的头像是否已不再是白色头发、红眼睛的卡通形象，而是恢复为原始默认头像？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

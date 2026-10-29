@@ -1,0 +1,723 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "pinduoduo_18",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\pinduoduo_18_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_18_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "迭代预算耗尽 (0)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_18_tasks.json",
+      "accepted_plan": {
+        "m1": "在拼多多中撤销对361度户外鞋服官方旗舰店的关注，使其恢复为未关注状态",
+        "m2": "在拼多多App中，确保搜索历史里已删除‘女鞋’条目，即恢复到搜索历史中不存在‘女鞋’的状态"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[622, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多中，361度户外鞋服官方旗舰店店铺主页顶部是否显示‘+ 关注’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "ecaeef136363496f313286bd800d1f43",
+            "xml_after_sig": "ce4fb9c6a0b742f421cf1b51f0aeb0c9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1116, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多中，361度户外鞋服官方旗舰店店铺主页顶部是否显示‘+ 关注’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "ce4fb9c6a0b742f421cf1b51f0aeb0c9",
+            "xml_after_sig": "47c22a8d6017843887b4c88bfb1b6cb8"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[300, 719]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多中，361度户外鞋服官方旗舰店店铺主页顶部是否显示‘+ 关注’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "47c22a8d6017843887b4c88bfb1b6cb8",
+            "xml_after_sig": "c5e5e86a109b83217b6873e47392b24a"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[102, 2571]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多中，361度户外鞋服官方旗舰店店铺主页顶部是否显示‘+ 关注’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "c5e5e86a109b83217b6873e47392b24a",
+            "xml_after_sig": "8c3fadfbf270761b7899d6eccb0dbab9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter1.step5",
+          "target_id": "m1",
+          "action_type": "scroll",
+          "target_description": "position=[610, 542]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 scroll"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "滑动/拖拽类动作带方向或起止位置"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多中，361度户外鞋服官方旗舰店店铺主页顶部是否显示‘+ 关注’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "6e70f8cef3b2e8221f379160243f625b",
+            "xml_after_sig": "83aa8be4dbb7eb5cda0d7b1c7c8beec5"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1087, 317]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多中，361度户外鞋服官方旗舰店店铺主页顶部是否显示‘+ 关注’按钮？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "83aa8be4dbb7eb5cda0d7b1c7c8beec5",
+            "xml_after_sig": "5c73e276d73bd64b3c54b5b6fdd0b63c"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_7.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1",
+        "step_count": 7,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              622,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1116,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              300,
+              719
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              102,
+              2571
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "scroll",
+            "target": [
+              610,
+              542
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              1087,
+              317
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "terminate",
+            "target": "已成功撤销对361度户外鞋服官方旗舰店的关注，当前显示为“+ 关注”，表示已恢复为未关注状态。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1\\step_7.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_18_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "Step 5: THOUGHT: 现在页面顶部清晰显示了店铺名称“361跑步鞋官方旗舰店”，右侧有一个橙色按钮写着“已关注”，这正是我要操作的目标——点击它即可撤销关注，恢复为未关注状态。该按钮位置明确，是标准的拼多多关注状态切换控件。 ACTION: click([1087, 317])\nStep 6: THOUGHT: 成功点击“已关注”按钮后，该按钮已变为“+ 关注”，说明关注状态已被撤销，店铺现在处于未关注状态。任务目标“撤销对361度户外鞋服官方旗舰店的关注，使其恢复为未关注状态”已完成。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "轨迹中未执行任何清除搜索历史‘女鞋’的操作；截图显示‘最近搜索’中仍存在‘女鞋’条目（如第3、4张截图），且无点击‘Clear Text’或删除该条目的动作。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_18_tasks.json",
+      "accepted_plan": {
+        "m1": "在拼多多App中，将361度户外鞋服官方旗舰店的关注状态恢复为未关注（即撤销关注操作，使店铺页顶部显示‘+ 关注’按钮而非‘已关注’）",
+        "m2": "在拼多多App中，将搜索历史中名为“女鞋”的条目彻底清除，确保该条目不再出现在最近搜索列表中"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_18.base_canonical_harness.1793202041.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[632, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": false,
+            "reason": "authorized: 恢复目标 m1 不在本轮授权恢复范围",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "block",
+                "note": "恢复目标 m1 不在本轮授权恢复范围"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多App中，361度户外鞋服官方旗舰店主页顶部是否显示‘+ 关注’按钮而非‘已关注’？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": null,
+            "error": "authorized: 恢复目标 m1 不在本轮授权恢复范围"
+          },
+          "execution_status": "blocked",
+          "gui_changed": "uncertain",
+          "clearance": "uncertain",
+          "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+          "new_contamination_signal": false,
+          "observation_ref": null,
+          "error_reason": "authorized: 恢复目标 m1 不在本轮授权恢复范围"
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter2\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter2",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              632,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter2\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_18_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "我需要进入“361度户外官方旗舰店”的店铺页面，才能找到关注/取消关注的按钮。当前界面是拼多多首页，搜索栏中已输入“361度户外官方旗舰店”，下一步应点击搜索栏或执行搜索操作，以进入该店铺页面。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "我需要进入“361度户外官方旗舰店”的店铺页面，才能找到关注/取消关注的按钮。当前界面是拼多多首页，搜索栏中已输入“361度户外官方旗舰店”，下一步应点击搜索栏或执行搜索操作，以进入该店铺页面。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 3,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_18_tasks.json",
+      "accepted_plan": {
+        "m1": "在拼多多中进入361度户外鞋服官方旗舰店的店铺主页，并点击‘已关注’按钮旁的‘取消关注’操作，使该店铺恢复为未关注状态",
+        "m2": "在拼多多App中，确保搜索历史里已彻底清除‘女鞋’条目，即该关键词不再出现在任何搜索历史记录中"
+      }
+    }
+  ],
+  "recovery_id": "pinduoduo_18.base_canonical_harness.1793202041",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 1
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "social_reaction",
+        "app": "拼多多",
+        "entity": {
+          "kind": "account",
+          "name": "361度户外鞋服官方旗舰店",
+          "identifier": null
+        },
+        "direction": "followed",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          6
+        ],
+        "evidence_quote": "Thought: 已进入“361度户外鞋服官方旗舰店”店铺主页，页面顶部清晰显示店铺名称及“+ 关注”按钮，说明当前尚未关注该店铺。根据任务要求“查看并关注拼多多女鞋第一款商品的所属店铺”，现在只需点击“+ 关注”按钮即可完成关注操作。 ACTION: click([1088, 317])",
+        "confidence": 0.95,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_reacted",
+        "entity_name": "361度户外鞋服官方旗舰店",
+        "description": "社交反应（关注/点赞/收藏）已取消（361度户外鞋服官方旗舰店）"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "我需要进入“361度户外官方旗舰店”的店铺页面，才能找到关注/取消关注的按钮。当前界面是拼多多首页，搜索栏中已输入“361度户外官方旗舰店”，下一步应点击搜索栏或执行搜索操作，以进入该店铺页面。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "search_history",
+        "app": "拼多多",
+        "entity": {
+          "kind": "search",
+          "name": "女鞋",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3
+        ],
+        "evidence_quote": "Thought: 搜索框中仍残留“橡皮泥”文字，虽然之前点击了 Clear Text，但可能未生效或需再次确认清空。为确保准确输入“女鞋”，我应先手动删除当前内容，再输入目标关键词。当前光标在搜索框内，直接 type 输入会覆盖原有内容，因此可直接输入“女鞋”。 ACTION: type(text='女鞋')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "女鞋",
+        "description": "搜索历史中不再存在条目 女鞋"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": false,
+          "evidence_quote": "我需要进入“361度户外官方旗舰店”的店铺页面，才能找到关注/取消关注的按钮。当前界面是拼多多首页，搜索栏中已输入“361度户外官方旗舰店”，下一步应点击搜索栏或执行搜索操作，以进入该店铺页面。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_18\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在拼多多中撤销对361度户外鞋服官方旗舰店的关注，使其恢复为未关注状态",
+        "m2": "在拼多多App中，确保搜索历史里已删除‘女鞋’条目，即恢复到搜索历史中不存在‘女鞋’的状态"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在拼多多App中，将361度户外鞋服官方旗舰店的关注状态恢复为未关注（即撤销关注操作，使店铺页顶部显示‘+ 关注’按钮而非‘已关注’）",
+        "m2": "在拼多多App中，将搜索历史中名为“女鞋”的条目彻底清除，确保该条目不再出现在最近搜索列表中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 3,
+      "accepted_plan": {
+        "m1": "在拼多多中进入361度户外鞋服官方旗舰店的店铺主页，并点击‘已关注’按钮旁的‘取消关注’操作，使该店铺恢复为未关注状态",
+        "m2": "在拼多多App中，确保搜索历史里已彻底清除‘女鞋’条目，即该关键词不再出现在任何搜索历史记录中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "budget_exhausted"
+}

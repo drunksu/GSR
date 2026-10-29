@@ -1,0 +1,69 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_4",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在58同城的二手房频道看看智学苑小区的绿化率",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "智学苑",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        12
+      ],
+      "evidence_quote": "THOUGHT: 我注意到在“历史搜索”中已经存在“智学苑”这个关键词……ACTION: click([161, 651])\nTHOUGHT: 当前已进入58同城二手房频道，搜索框处于激活状态……ACTION: type(text='智学苑')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "58同城",
+      "entity": {
+        "kind": "search",
+        "name": "合肥智学苑",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        17
+      ],
+      "evidence_quote": "THOUGHT: 历史搜索中已有“合肥 智学苑”和“智学苑”……ACTION: click([232, 502])\nTHOUGHT: 为提高精准度，应输入完整名称“合肥智学苑”……ACTION: type(text='合肥智学苑')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "智学苑",
+    "合肥智学苑"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

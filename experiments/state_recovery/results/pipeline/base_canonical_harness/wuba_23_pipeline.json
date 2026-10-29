@@ -1,0 +1,255 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "wuba_23",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\wuba_23_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_23_tasks.json",
+  "has_contamination": true,
+  "iterations": 1,
+  "success": true,
+  "first_try_success": true,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_23_tasks.json",
+      "accepted_plan": {
+        "m1": "在58同城中将长辈模式关闭，使长辈模式设置项恢复为关闭状态"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_23.base_canonical_harness.1793224159.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1015, 2549]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "58同城中是否已无‘返回普通版’按钮且未显示任何关于‘长辈模式’已开启的提示？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "9869f80a3e7bf9a868654b620e0ba28d",
+            "xml_after_sig": "19c666c74a314b0bc17380d255e2c8c1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_23.base_canonical_harness.1793224159.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[357, 1817]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "58同城中是否已无‘返回普通版’按钮且未显示任何关于‘长辈模式’已开启的提示？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 长辈模式 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "19c666c74a314b0bc17380d255e2c8c1",
+            "xml_after_sig": "e69dc1aebb1dea0399cb49e55a470991"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1015,
+              2549
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              357,
+              1817
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_23_tasks.json"
+      },
+      "verify": {
+        "success": true,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "ACTION: click([357, 1817])"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "wuba_23.base_canonical_harness.1793224159",
+  "phase": "success",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "58同城",
+        "entity": {
+          "kind": "setting",
+          "name": "长辈模式",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3,
+          4
+        ],
+        "evidence_quote": "Thought: 当前页面明确显示“长辈模式”的介绍，并提供了一个醒目的橙色按钮“开启长辈模式”。这正是完成任务所需的最后一步操作。点击该按钮即可启用长辈模式。... Thought: 从当前界面可以看出，页面顶部有“返回普通版”按钮，说明长辈模式已经成功开启（因为只有在长辈模式下才会显示该按钮）。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "长辈模式",
+        "description": "设置项 长辈模式 应处于 off 状态"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": true,
+          "evidence_quote": "ACTION: click([357, 1817])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_23\\recovery_iter1"
+      ],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在58同城中将长辈模式关闭，使长辈模式设置项恢复为关闭状态"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": true,
+      "error": null
+    }
+  ],
+  "termination_reason": "recovered"
+}

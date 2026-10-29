@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在网易云音乐App中，将搜索框内容恢复为‘七里香’，确保搜索关键词准确为七里香",
+      "recovery_goal": "在网易云音乐中，确保搜索历史里已存在‘七里香’的搜索记录，且该记录为最近一次搜索内容",
       "precondition": {
-        "target": "搜索框当前输入内容是否为‘七里香’",
-        "check_instruction": "进入网易云音乐首页，查看顶部搜索框中的文本内容是否显示为‘七里香’",
-        "clean_if_state": "搜索框中已显示‘七里香’且未被清空或替换为其他文字"
+        "target": "检查当前搜索历史中是否包含‘七里香’且为最新一条",
+        "check_instruction": "进入网易云音乐首页，点击顶部搜索框，查看搜索历史列表中的第一条记录是否为‘七里香’",
+        "clean_if_state": "搜索历史列表第一条已显示‘七里香’，且无其他干扰项（如重复或错误输入）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "网易云音乐App的搜索框中是否完整显示‘七里香’？",
+        "question": "在网易云音乐的搜索历史列表中，第一条记录是否精确为‘七里香’？",
         "expected": "yes"
       },
       "idempotent": true,

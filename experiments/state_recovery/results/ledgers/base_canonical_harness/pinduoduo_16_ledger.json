@@ -1,0 +1,42 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_16",
+  "run_id": "base_canonical_harness",
+  "task_goal": "收藏拼多多袜子第一款商品",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "content",
+        "name": "NATALYARO【新疆棉】袜子男款中筒袜男士四",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1
+      ],
+      "evidence_quote": "在商品信息下方有一个心形图标，标注为“收藏的商品”，说明该商品已经被收藏。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

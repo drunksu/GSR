@@ -1,0 +1,280 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "tonghuashun_29",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\tonghuashun_29_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\tonghuashun_29_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\tonghuashun_29_tasks.json",
+      "accepted_plan": {
+        "m1": "在同花顺中将主题换肤设置恢复为关闭状态，即取消‘始终显示黑色’选项，使主题不再强制为黑色"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "tonghuashun_29.base_canonical_harness.1793220258.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[85, 217]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "主题换肤的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "cb43716ad526067d31969a03a97851c4",
+            "xml_after_sig": "c996a14157f72a237960ec69eac31048"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "tonghuashun_29.base_canonical_harness.1793220258.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1138, 217]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "主题换肤的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 主题换肤 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "720019f6b012bb7106257d97e6c8d195",
+            "xml_after_sig": "1fb5946b240d49bfca54442b98670b0b"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              85,
+              217
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1138,
+              217
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\tonghuashun_29_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 1: THOUGHT: 当前页面是个人中心页，右上角有一个齿轮图标（设置入口），这是最可能找到主题换肤设置的地方。根据常规App设计，主题或显示设置通常位于“设置”菜单中。因此，下一步应点击右上角的齿轮图标进入设置页面。 ACTION: click([1138, 217])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\tonghuashun_29_tasks.json",
+      "accepted_plan": {
+        "m1": "在同花顺中将主题换肤设置恢复为关闭状态，即撤销‘始终显示黑色’的启用，使主题换肤功能回到未启用（off）的原始状态"
+      },
+      "verify": {
+        "success": false,
+        "reason": "no_new_evidence",
+        "verdicts": []
+      }
+    }
+  ],
+  "recovery_id": "tonghuashun_29.base_canonical_harness.1793220258",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "同花顺",
+        "entity": {
+          "kind": "setting",
+          "name": "主题换肤",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3,
+          4
+        ],
+        "evidence_quote": "Thought: 在主题换肤页面，我看到了三个选项：跟随系统外观、始终显示白色、始终显示黑色。当前选中的是“跟随系统外观”，而任务要求设置为黑色主题，因此我需要点击“始终显示黑色”选项来完成设置。... Thought: 我已经成功将主题设置为黑色，因为“始终显示黑色”选项已被选中（红色对勾标记），并且界面整体已变为深色模式。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "主题换肤",
+        "description": "设置项 主题换肤 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 1: THOUGHT: 当前页面是个人中心页，右上角有一个齿轮图标（设置入口），这是最可能找到主题换肤设置的地方。根据常规App设计，主题或显示设置通常位于“设置”菜单中。因此，下一步应点击右上角的齿轮图标进入设置页面。 ACTION: click([1138, 217])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在同花顺中将主题换肤设置恢复为关闭状态，即取消‘始终显示黑色’选项，使主题不再强制为黑色"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在同花顺中将主题换肤设置恢复为关闭状态，即撤销‘始终显示黑色’的启用，使主题换肤功能回到未启用（off）的原始状态"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

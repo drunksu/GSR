@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_22",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在番茄小说签到",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "content_lifecycle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "今日签到领6458金币",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "Thought: 当前页面已显示“今日签到领6458金币”且标注“已连续签到1天”，说明签到操作已完成或系统已识别今日签到状态；下方有“领 6458 金币”按钮，这是领取签到奖励的最后一步。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

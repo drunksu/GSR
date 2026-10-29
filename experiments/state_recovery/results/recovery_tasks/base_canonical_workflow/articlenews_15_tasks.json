@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "articlenews_15",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": false,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在今日头条App中，将‘深色模式’设置恢复为关闭状态（即浅色模式）",
+      "recovery_goal": "在今日头条中将深色模式开启，使界面切换为黑色背景的夜间模式状态",
       "precondition": {
-        "target": "今日头条App中‘深色模式’开关的当前状态",
-        "check_instruction": "进入今日头条App → 点击右下角‘我的’ → 点击右上角设置图标（齿轮）→ 进入‘通用设置’ → 查看‘深色模式’选项旁的开关状态及是否显示红色圆点",
-        "clean_if_state": "当前‘深色模式’开关处于关闭状态（灰色，无红色圆点）"
+        "target": "确认今日头条当前是否已处于深色模式开启状态",
+        "check_instruction": "进入今日头条的设置页面，在‘深色模式’选项处查看红色圆点是否位于‘深色模式’上，同时观察界面背景是否为黑色",
+        "clean_if_state": "界面背景为黑色，且‘深色模式’选项旁有红色圆点选中标识，即表示深色模式已开启，无需操作"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "今日头条App的‘深色模式’设置是否已恢复为关闭状态（界面为浅色背景，且‘深色模式’选项未被选中）？",
+        "question": "深色模式的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "low",
-      "max_steps": 10
+      "max_steps": 8
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

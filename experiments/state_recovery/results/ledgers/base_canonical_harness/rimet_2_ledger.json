@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_2",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去钉钉向钉钉小秘书发送“早上中午和晚上好”",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "钉钉",
+      "entity": {
+        "kind": "friend",
+        "name": "钉钉小秘书",
+        "identifier": null
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: 我已经成功向钉钉小秘书发送了“早上中午和晚上好”这条消息，从聊天记录中可以看到该消息已显示在对话中，且小秘书也已回复。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

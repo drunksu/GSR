@@ -6,15 +6,33 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在高德地图中将搜索历史恢复为包含‘三里屯 麦当劳’的记录状态，确保该搜索词明确存在于最近搜索历史列表中。",
+      "recovery_goal": "在高德地图中将搜索状态恢复为已输入‘三里屯’并处于搜索准备就绪状态，确保搜索框内明确显示‘三里屯’且未被清空或覆盖",
       "precondition": {
-        "target": "检查高德地图的搜索历史中是否已存在‘三里屯 麦当劳’条目。",
-        "check_instruction": "进入高德地图首页，点击搜索框，查看下拉搜索历史列表中是否存在‘三里屯 麦当劳’这一项。",
-        "clean_if_state": "当前搜索历史列表中已显示‘三里屯 麦当劳’条目，且位置在最近搜索项中（无需额外操作）。"
+        "target": "确认当前搜索框内容是否为‘三里屯’且未触发搜索结果页",
+        "check_instruction": "进入高德地图首页，查看顶部搜索框中的文本内容是否为‘三里屯’",
+        "clean_if_state": "搜索框中已显示‘三里屯’且光标未在输入状态、未跳转至结果页，即视为已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "高德地图的搜索历史列表中是否明确显示‘三里屯 麦当劳’这一条目？",
+        "question": "高德地图的搜索框中是否清晰显示‘三里屯’且未进入搜索结果页面？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中搜索‘三里屯附近的麦当劳’，确保搜索结果页正确显示麦当劳相关POI列表",
+      "precondition": {
+        "target": "确认当前是否已处于搜索‘三里屯附近的麦当劳’后的结果页面",
+        "check_instruction": "进入高德地图首页，输入框中查看是否已输入‘三里屯附近的麦当劳’并触发搜索，或结果列表顶部是否显示‘麦当劳’相关推荐项",
+        "clean_if_state": "当前页面已显示‘三里屯附近的麦当劳’搜索结果，且列表中包含多个麦当劳实体条目，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "麦当劳的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +42,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 1
+  "_llm_calls": 2
 }

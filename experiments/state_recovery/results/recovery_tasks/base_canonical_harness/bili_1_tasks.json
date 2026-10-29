@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_1",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站中彻底清除搜索历史里的‘沈腾’条目，使搜索历史中不再存在任何与‘沈腾’相关的记录",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘沈腾’条目",
+        "check_instruction": "进入B站首页，点击搜索框，下拉查看搜索历史列表，定位实体名‘沈腾’是否出现在其中",
+        "clean_if_state": "搜索历史列表中已无‘沈腾’条目，仅显示其他无关内容或为空列表"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "沈腾的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_15",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中将深色模式关闭，使深色模式设置项恢复为未选中（off）状态",
+      "precondition": {
+        "target": "确认当前深色模式是否处于开启状态",
+        "check_instruction": "进入今日头条的「设置」→「通用」→「深色模式」页面，查看「深色模式」选项右侧的圆点是否为红色（表示已选中）",
+        "clean_if_state": "深色模式选项右侧无红色圆点，即处于未选中状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条的深色模式设置页中，深色模式选项右侧的圆点是否未被点亮（即处于关闭状态）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在今日头条中将‘跟随系统’设置项恢复为开启状态（即开关为绿色/ON）",
+      "precondition": {
+        "target": "确认‘跟随系统’开关当前是否已处于开启状态",
+        "check_instruction": "进入今日头条的‘设置’→‘通用’→‘深色模式’页面，查看‘跟随系统’开关的视觉状态（绿色表示ON，灰色表示OFF）",
+        "clean_if_state": "‘跟随系统’开关已显示为绿色（ON）状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条的深色模式设置中，‘跟随系统’开关是否已处于开启（绿色）状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

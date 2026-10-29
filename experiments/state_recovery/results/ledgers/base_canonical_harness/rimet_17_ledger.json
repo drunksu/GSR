@@ -1,0 +1,108 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_17",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在钉钉开启语音和视频通话邀请通知",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "允许通知",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: 当前页面是钉钉的通知设置界面，最上方的“允许通知”开关处于关闭状态（灰色）……ACTION: click([1059, 578])",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "发声",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: ……且“发声”和“振动”也已开启……",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m3",
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "振动",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: ……且“发声”和“振动”也已开启……",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m4",
+      "type": "settings_toggle",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "语音和视频通话邀请通知",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "Thought: 在当前页面中，我已找到关键选项“语音和视频通话邀请通知”，其开关状态为开启（蓝色），说明该功能已经启用。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2",
+      "m3",
+      "m4"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

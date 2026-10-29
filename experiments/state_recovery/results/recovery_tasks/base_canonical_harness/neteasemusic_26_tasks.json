@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_26",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中将状态设置为关闭（即不显示任何自定义状态，恢复为默认无状态）",
+      "precondition": {
+        "target": "确认当前状态是否仍为‘许个愿’",
+        "check_instruction": "进入个人主页→点击头像下方的状态栏→进入状态选择界面，查看顶部标题或选中项是否显示‘许个愿’",
+        "clean_if_state": "状态选择界面中未选中任何自定义状态（如顶部无文字/图标，或显示‘无状态’‘关闭’等默认提示）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐中，用户个人主页头像下方的状态栏是否未显示‘许个愿’或其他自定义状态文字？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

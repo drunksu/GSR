@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_8",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中清除搜索历史里名为‘周杰伦’的条目，使搜索历史中不再存在该条目",
+      "precondition": {
+        "target": "确认当前是否已无‘周杰伦’的搜索历史记录",
+        "check_instruction": "进入网易云音乐的搜索页面，查看搜索历史列表中是否存在‘周杰伦’条目",
+        "clean_if_state": "搜索历史列表中已不存在‘周杰伦’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐的搜索历史中是否已找不到名为‘周杰伦’的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在网易云音乐中找到歌手周杰伦的个人主页，并点击‘取消关注’按钮，使页面上不再显示‘已关注’状态，恢复为未关注状态",
+      "precondition": {
+        "target": "确认当前是否处于周杰伦个人主页且显示‘已关注’",
+        "check_instruction": "进入网易云音乐，通过搜索或推荐进入周杰伦个人主页，查看页面顶部或头像下方是否有红色‘已关注’按钮或文字标识",
+        "clean_if_state": "页面上未显示‘已关注’字样，而是显示‘关注’按钮或无关注状态标识"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐中，周杰伦个人主页上是否已无‘已关注’标识，仅显示‘关注’按钮或类似未关注状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

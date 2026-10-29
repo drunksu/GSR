@@ -1,0 +1,42 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_21",
+  "run_id": "base_canonical_harness",
+  "task_goal": "打开哔哩哔哩，帮我更换一个随机头像",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "setting",
+        "name": "头像",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "Thought: 我观察到头像已经从之前的蓝色卡通形象变为了一个新的白色头发、红眼睛的卡通形象，这说明“随机”更换头像的操作已经成功执行。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

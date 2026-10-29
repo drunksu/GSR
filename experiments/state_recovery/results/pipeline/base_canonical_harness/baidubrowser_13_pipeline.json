@@ -1,0 +1,80 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "baidubrowser_13",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_13\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\baidubrowser_13_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\baidubrowser_13_tasks.json",
+  "has_contamination": true,
+  "iterations": 1,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续两次计划被拒: 计划不含任务（空任务集）",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\baidubrowser_13_tasks.json",
+      "accepted_plan": {}
+    }
+  ],
+  "recovery_id": "baidubrowser_13.base_canonical_harness.1793173032",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "session_state",
+        "app": "百度浏览器",
+        "entity": {
+          "kind": "other",
+          "name": "无痕浏览模式",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "session",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          6,
+          7
+        ],
+        "evidence_quote": "Thought: 我终于找到了无痕模式的入口！在当前弹出的菜单中，“常用功能”区域清晰地显示了“无痕模式”选项，图标是一个面具形状。这正是我需要点击的目标。点击它应该就能成功开启无痕浏览模式。\\nACTION: click([1042, 428])\\nThought: 从屏幕上的提示“已开启无痕浏览”可以看出，无痕浏览模式已经成功启动。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "session_closed",
+        "entity_name": "无痕浏览模式",
+        "description": "会话/页面状态已恢复（无痕浏览模式）"
+      },
+      "contamination_status": "present",
+      "recovery_status": "pending",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {},
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "plan_rejected"
+}

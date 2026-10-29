@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_9",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺App中彻底清除搜索历史里名为‘燕京啤酒’的条目，使其不再出现在搜索历史列表中",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘燕京啤酒’条目",
+        "check_instruction": "进入同花顺App首页，点击搜索框进入搜索页面，查看下方‘搜索历史’区域是否存在‘燕京啤酒’条目",
+        "clean_if_state": "搜索历史列表中已无‘燕京啤酒’条目，即该实体名未出现在任何历史记录行中"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺App的搜索历史列表中，是否已完全找不到‘燕京啤酒’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

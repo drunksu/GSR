@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_7",
+  "run_id": "base_canonical_harness",
+  "task_goal": "查看今日头条图片频道第一条新闻并点赞",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "昨天亚冠早场方向全部哇塞，今日足球比赛...",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "Thought: 我已经进入了第一条新闻的详情页，页面底部有点赞按钮（心形图标，当前显示4个赞）。根据任务要求，我需要为这条新闻点赞。现在只需点击心形图标即可完成点赞操作。... Thought: 我已经成功找到了今日头条图片频道的第一条新闻，并完成了点赞操作。点赞按钮（心形图标）已被点击，赞数从4增加到了5，说明点赞成功。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

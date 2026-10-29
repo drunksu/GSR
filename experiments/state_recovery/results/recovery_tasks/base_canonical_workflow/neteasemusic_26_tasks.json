@@ -8,13 +8,13 @@
       "mutation_id": "m1",
       "recovery_goal": "在网易云音乐中把我的状态设置为许个愿",
       "precondition": {
-        "target": "检查当前用户状态是否已显示为‘许个愿’",
-        "check_instruction": "进入网易云音乐个人主页，查看顶部状态栏中‘状态’字段的显示内容",
-        "clean_if_state": "顶部状态栏已显示‘🙏 许个愿’且下方有对应互动信息，即视为已恢复"
+        "target": "当前用户状态是否已为‘许个愿’",
+        "check_instruction": "进入个人主页→点击头像旁的状态区域→查看弹出的状态选择界面中‘许个愿’选项是否被高亮选中（带双手合十图标）",
+        "clean_if_state": "状态已显示为‘许个愿’（即状态区域文字为‘许个愿’或对应图标已激活）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在网易云音乐个人主页顶部，‘状态’字段是否显示为‘🙏 许个愿’？",
+        "question": "在网易云音乐个人主页中，用户当前状态是否已成功设置为‘许个愿’？",
         "expected": "yes"
       },
       "idempotent": true,

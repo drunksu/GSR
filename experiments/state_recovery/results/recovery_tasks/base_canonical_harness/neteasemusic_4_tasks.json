@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_4",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中彻底删除搜索历史里的条目“我是一个粉刷匠”，使其不再出现在任何搜索历史列表中",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘我是一个粉刷匠’条目",
+        "check_instruction": "进入网易云音乐的搜索页面，查看搜索历史区域是否显示实体名‘我是一个粉刷匠’",
+        "clean_if_state": "搜索历史中已无‘我是一个粉刷匠’条目，即该条目已被清除"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐的搜索历史列表中，是否完全找不到名为‘我是一个粉刷匠’的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_27",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中找到动态‘狠狠撕咬吧！’，将其点赞状态撤销，使该动态恢复为未点赞状态（即点赞图标为灰色/空心，无红色心形标识）",
+      "precondition": {
+        "target": "确认动态‘狠狠撕咬吧！’当前处于已点赞状态",
+        "check_instruction": "进入QQ动态页，定位到标题为‘狠狠撕咬吧！’的最新动态，观察其下方点赞图标是否为红色实心心形或蓝色高亮状态",
+        "clean_if_state": "动态‘狠狠撕咬吧！’下方点赞图标为灰色/空心、无高亮，且无红色心形标识，表示未点赞状态已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "狠狠撕咬吧！的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

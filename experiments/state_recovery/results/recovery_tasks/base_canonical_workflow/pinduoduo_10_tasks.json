@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "pinduoduo_10",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，将搜索历史恢复为包含‘手机’的记录，确保用户下次进入搜索页时能直接看到‘手机’作为历史搜索词。",
+      "precondition": {
+        "target": "检查拼多多App的搜索历史中是否已存在‘手机’条目。",
+        "check_instruction": "打开拼多多App，点击顶部搜索框进入搜索页，查看搜索历史列表中是否存在‘手机’这一项。",
+        "clean_if_state": "搜索历史列表中已显示‘手机’条目（无需额外操作）。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多App的搜索历史列表中，是否明确显示有‘手机’这一历史搜索词？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_11",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚中撤销已输入但尚未发布的提问‘经期腹痛应该怎么缓解？’，使其彻底不存在于当前编辑界面中",
+      "precondition": {
+        "target": "确认提问‘经期腹痛应该怎么缓解？’当前仍处于编辑状态、尚未提交",
+        "check_instruction": "进入美柚问医生的提问编辑页面，查看输入框中是否显示‘经期腹痛应该怎么缓解？’文字内容",
+        "clean_if_state": "输入框中已无‘经期腹痛应该怎么缓解？’文字，且右上角‘发布’按钮不可点击或已消失"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在美柚问医生的提问编辑界面中，输入框内是否已不存在‘经期腹痛应该怎么缓解？’这一问题内容？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在美柚中撤销已输入但尚未提交的问题‘经期腹痛应该怎么缓解？’，使其从输入框中完全清除，恢复至未输入该问题的初始状态",
+      "precondition": {
+        "target": "问题‘经期腹痛应该怎么缓解？’是否仍显示在输入框中",
+        "check_instruction": "进入美柚问医生页面，查看问题输入框内是否包含文字‘经期腹痛应该怎么缓解？’",
+        "clean_if_state": "输入框中不显示‘经期腹痛应该怎么缓解？’文字，且发送按钮处于不可点击或灰色状态（即无内容待提交）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在美柚问医生页面的输入框中，是否已不存在‘经期腹痛应该怎么缓解？’这段文字？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

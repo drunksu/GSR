@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_20",
+  "run_id": "base_canonical_harness",
+  "task_goal": "打开QQ的夜间模式",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "QQ",
+      "entity": {
+        "kind": "setting",
+        "name": "夜间",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 在个人主页界面中，我看到了底部有“设置”、“夜间”和“当地天气”三个选项。其中，“夜间”按钮正是用于切换夜间模式的入口。因此, 我应该直接点击“夜间”按钮来开启夜间模式。\\nACTION: click([314, 2481])\\nStep 4: THOUGHT: 从当前界面可以看到，QQ已经成功切换到了夜间模式，界面背景变为黑色，文字和图标也适配了深色主题。这说明之前的点击“夜间”按钮操作已经生效，任务完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

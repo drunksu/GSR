@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_17",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说中将‘求9.8分以上的穿越文’圈子的收藏与关注状态全部撤销，使其恢复为未收藏、未关注的初始状态",
+      "precondition": {
+        "target": "确认‘求9.8分以上的穿越文’圈子当前是否处于已收藏或已关注状态",
+        "check_instruction": "进入番茄小说App，搜索并打开‘求9.8分以上的穿越文’圈子页面，观察顶部按钮文字是否为‘已收藏’或‘已关注’",
+        "clean_if_state": "页面顶部显示‘收藏’和‘+ 关注’按钮（即未收藏且未关注）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说中，‘求9.8分以上的穿越文’圈子页面顶部是否同时显示‘收藏’和‘+ 关注’按钮？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在番茄小说中撤销对‘求9.8分以上的穿越文’圈子的订阅（即取消关注与取消收藏），使其恢复为未关注、未收藏状态",
+      "precondition": {
+        "target": "确认当前是否仍处于‘求9.8分以上的穿越文’圈子页面且显示‘已关注’或‘已收藏’",
+        "check_instruction": "进入番茄小说App，搜索并打开‘求9.8分以上的穿越文’圈子页面，观察顶部或评论区上方是否有‘已关注’或‘已收藏’标签",
+        "clean_if_state": "页面上显示的是‘+ 关注’和‘收藏’按钮（而非‘已关注’‘已收藏’）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "求9.8分以上的穿越文的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

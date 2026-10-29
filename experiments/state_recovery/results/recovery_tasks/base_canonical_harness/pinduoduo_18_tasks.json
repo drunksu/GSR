@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_18",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多中进入361度户外鞋服官方旗舰店的店铺主页，并点击‘已关注’按钮旁的‘取消关注’操作，使该店铺恢复为未关注状态",
+      "precondition": {
+        "target": "当前是否已关注361度户外鞋服官方旗舰店",
+        "check_instruction": "进入361度户外鞋服官方旗舰店的店铺主页，查看页面顶部店铺名称右侧的按钮文字是否为‘已关注’或‘+ 关注’",
+        "clean_if_state": "页面顶部显示‘+ 关注’按钮（即未关注状态）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "361度户外鞋服官方旗舰店的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在拼多多App中，确保搜索历史里已彻底清除‘女鞋’条目，即该关键词不再出现在任何搜索历史记录中",
+      "precondition": {
+        "target": "确认当前搜索历史中不存在‘女鞋’条目",
+        "check_instruction": "进入拼多多首页，点击搜索框右侧的‘历史’图标（或下拉搜索框展开历史记录），查看所有搜索历史条目中是否包含‘女鞋’",
+        "clean_if_state": "搜索历史列表中完全找不到‘女鞋’这一条目，包括模糊匹配或部分匹配的变体"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多App的搜索历史记录中，是否存在任何包含‘女鞋’字样的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

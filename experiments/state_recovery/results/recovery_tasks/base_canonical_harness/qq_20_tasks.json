@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_20",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "将QQ中的夜间设置项恢复为关闭状态，即确保夜间模式未启用",
+      "precondition": {
+        "target": "QQ中‘夜间’设置项当前是否处于开启状态",
+        "check_instruction": "进入QQ个人主页界面，查看底部是否存在‘夜间’按钮且其视觉样式表明已激活（如高亮、深色背景等）",
+        "clean_if_state": "QQ个人主页底部‘夜间’按钮未被激活，界面为常规浅色主题，表明夜间模式已关闭"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ个人主页界面是否为浅色主题，且‘夜间’按钮未处于激活状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

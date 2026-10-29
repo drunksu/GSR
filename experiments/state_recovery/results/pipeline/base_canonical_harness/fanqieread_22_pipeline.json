@@ -1,0 +1,61 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "fanqieread_22",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_22\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\fanqieread_22_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "fanqieread_22.base_canonical_harness.1793183268",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "content_lifecycle",
+        "app": "番茄小说",
+        "entity": {
+          "kind": "content",
+          "name": "今日签到领6458金币",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          7
+        ],
+        "evidence_quote": "Thought: 当前页面已显示“今日签到领6458金币”且标注“已连续签到1天”，说明签到操作已完成或系统已识别今日签到状态；下方有“领 6458 金币”按钮，这是领取签到奖励的最后一步。",
+        "confidence": 0.95,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "content_absent",
+        "entity_name": "今日签到领6458金币",
+        "description": "内容 今日签到领6458金币 已被删除/撤销"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

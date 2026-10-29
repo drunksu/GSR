@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_25",
+  "run_id": "base_canonical_harness",
+  "task_goal": "番茄切换成大字体",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "setting",
+        "name": "字体大小",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 在设置页面中，我找到了明确标有“字体大小”的选项……Step 4: THOUGHT: 当前页面是字体大小预览界面，底部有三个选项：“标准”、“大”、“超大”。任务要求将番茄切换成大字体，而“大”选项已被选中（高亮显示）……Step 7: THOUGHT: ……底部明确显示“大”被选中，且该设置会影响书城、分类、书架等页面字体，可以合理推断设置已完成。",
+      "confidence": 0.9,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

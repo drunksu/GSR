@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "fanqieread_3",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说App中，确保搜索框内已输入‘三体’并完成搜索，使搜索结果页正确展示‘三体’的作者信息",
+      "precondition": {
+        "target": "确认当前页面是否已显示‘三体’的搜索结果且包含作者信息",
+        "check_instruction": "进入番茄小说App的搜索页面，查看搜索框内容是否为‘三体’，并检查结果列表中是否存在标题为‘三体’的条目及其作者字段",
+        "clean_if_state": "搜索框中已输入‘三体’，且结果页中明确显示‘三体’的作者（如刘慈欣）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说App中，搜索结果页是否已显示标题为‘三体’的书籍条目，并在其详情中明确标注了作者姓名？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

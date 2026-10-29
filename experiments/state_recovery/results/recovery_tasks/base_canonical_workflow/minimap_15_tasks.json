@@ -6,28 +6,10 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在高德地图中将公司地址恢复为小米移动互联网产业园B栋，确保该地址明确显示并保存在‘公司’地址项下。",
-      "precondition": {
-        "target": "确认当前‘公司’地址项是否已正确设置为小米移动互联网产业园B栋。",
-        "check_instruction": "进入高德地图的‘我的’→‘设置’→‘地址管理’或‘常用地址’页面，查看‘公司’条目对应的地址文本是否为‘小米移动互联网产业园B栋’。",
-        "clean_if_state": "当前‘公司’地址项已显示为‘小米移动互联网产业园B栋’且无修改提示或待保存状态。"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "在高德地图的地址管理页面中，‘公司’地址项是否已稳定显示为‘小米移动互联网产业园B栋’？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "medium",
-      "max_steps": 15
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m2",
       "recovery_goal": "在高德地图中将公司地址设置为小米科技园B栋",
       "precondition": {
         "target": "确认公司地址当前是否已设为小米科技园B栋",
-        "check_instruction": "进入高德地图「我的」→「设置」→「公司地址」页面，查看地址字段是否显示‘小米科技园B栋’",
+        "check_instruction": "进入高德地图「我的」→「设置」→「公司地址」页面，查看地址字段中是否显示‘小米科技园B栋’",
         "clean_if_state": "公司地址已显示为小米科技园B栋，无需操作"
       },
       "expected_end_state": {
@@ -38,6 +20,24 @@
       "idempotent": true,
       "risk_level": "low",
       "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中将公司地址设置为小米移动互联网产业园B栋，并确保该地址已成功保存为当前公司地址",
+      "precondition": {
+        "target": "确认公司地址当前是否已正确设置为小米移动互联网产业园B栋",
+        "check_instruction": "进入高德地图「我的」→「设置」→「公司地址」页面，查看显示的公司地址文本是否为“小米移动互联网产业园B栋”",
+        "clean_if_state": "当前公司地址已显示为“小米移动互联网产业园B栋”，且无修改提示或待保存状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图中公司地址是否已稳定显示为小米移动互联网产业园B栋？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
     }
   ],
   "human_gate": [],

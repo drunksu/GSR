@@ -8,13 +8,13 @@
       "mutation_id": "m1",
       "recovery_goal": "在QQ中将联系人‘绕堤沙’的名片发送给‘绕堤沙’本人",
       "precondition": {
-        "target": "确认当前已进入QQ并能通过搜索定位到‘绕堤沙’联系人",
-        "check_instruction": "进入QQ主界面，点击顶部搜索框，输入‘绕堤沙’，查看搜索结果列表中是否出现名为‘绕堤沙’的联系人条目",
-        "clean_if_state": "已在QQ搜索结果中看到‘绕堤沙’联系人条目，且该条目可点击进入其个人资料页"
+        "target": "确认当前已进入QQ并定位到‘绕堤沙’的联系人详情页",
+        "check_instruction": "进入QQ联系人列表页面，查找并点击名为‘绕堤沙’的联系人，确认进入其个人资料页",
+        "clean_if_state": "已显示‘绕堤沙’的联系人详情页，且页面中可见‘发送名片’或类似操作按钮"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在QQ中是否已成功将联系人‘绕堤沙’的名片发送给了‘绕堤沙’本人？",
+        "question": "QQ中是否已成功打开‘绕堤沙’的联系人详情页，并可执行发送名片操作？",
         "expected": "yes"
       },
       "idempotent": true,

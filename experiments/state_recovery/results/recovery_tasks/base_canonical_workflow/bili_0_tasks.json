@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "bili_0",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站中确保搜索历史里存在‘喜羊羊与灰太狼’这一条目，若不存在则手动输入并搜索该关键词以生成对应历史记录",
+      "precondition": {
+        "target": "B站搜索历史中是否已存在‘喜羊羊与灰太狼’的记录",
+        "check_instruction": "进入B站首页，点击搜索框，查看搜索历史列表中是否存在‘喜羊羊与灰太狼’这一项",
+        "clean_if_state": "搜索历史列表中已显示‘喜羊羊与灰太狼’条目，且为最近一次搜索记录之一"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "喜羊羊与灰太狼的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

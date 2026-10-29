@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_17",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中删除搜索历史中的‘洗车 4S店’条目，使该条目不再出现在搜索历史列表中",
+      "precondition": {
+        "target": "确认‘洗车 4S店’是否仍存在于高德地图的搜索历史中",
+        "check_instruction": "进入高德地图首页，点击搜索框，查看下拉显示的搜索历史列表中是否包含‘洗车 4S店’",
+        "clean_if_state": "搜索历史列表中已不存在‘洗车 4S店’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否已不存在‘洗车 4S店’条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

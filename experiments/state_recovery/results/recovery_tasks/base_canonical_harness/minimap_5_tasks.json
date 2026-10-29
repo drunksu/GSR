@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_5",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中彻底删除搜索历史里所有与天坛公园相关的条目，使搜索历史中不再存在天坛公园",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在天坛公园条目",
+        "check_instruction": "进入高德地图主界面，点击搜索框进入搜索历史页面，查看历史记录列表中是否包含天坛公园",
+        "clean_if_state": "搜索历史页面中未显示任何含‘天坛公园’字样的条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否已不存在天坛公园这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中彻底删除搜索历史里的‘天安门广场’条目，使该实体不再出现在任何搜索历史记录中",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘天安门广场’条目",
+        "check_instruction": "进入高德地图首页，点击搜索框进入搜索界面，查看搜索历史列表中是否显示‘天安门广场’",
+        "clean_if_state": "搜索历史列表中已无‘天安门广场’条目，即该实体未出现在历史记录中"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否完全不存在‘天安门广场’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

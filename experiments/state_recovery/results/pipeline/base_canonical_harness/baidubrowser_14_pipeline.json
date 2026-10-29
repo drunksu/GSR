@@ -1,0 +1,280 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "baidubrowser_14",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\baidubrowser_14_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\baidubrowser_14_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\baidubrowser_14_tasks.json",
+      "accepted_plan": {
+        "m1": "在百度APP中将夜间模式设置为关闭状态，即撤销已开启的夜间模式，使界面恢复为日间模式（浅色主题）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "baidubrowser_14.base_canonical_harness.1793173147.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1086, 2587]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "百度APP中的夜间模式是否已关闭，界面呈现为浅色主题？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "174c45cfbc0549ad7cd588931dfd41db",
+            "xml_after_sig": "589e3c529ebab588c432c71fca79d78f"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "baidubrowser_14.base_canonical_harness.1793173147.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1143, 212]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "百度APP中的夜间模式是否已关闭，界面呈现为浅色主题？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 夜间模式 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "589e3c529ebab588c432c71fca79d78f",
+            "xml_after_sig": "6c532f4a18eaaa5329eb021f8466f9e6"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1086,
+              2587
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1143,
+              212
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\baidubrowser_14_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 1: THOUGHT: 在“我的”页面中，我找到了“自动跟随系统主题”选项，其开关目前处于关闭状态（灰色），说明夜间模式是手动开启的。要恢复为日间模式，最直接的方式是找到主题设置入口。通常，更详细的设置可能在右上角的“设置”图标中（齿轮图标），该图标在当前界面顶部右侧可见。点击它应能进入设置页面，在那里可以明确关闭夜间模式或切换为浅色主题。 ACTION: click([1143, 212])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\baidubrowser_14_tasks.json",
+      "accepted_plan": {
+        "m1": "在百度APP中将夜间模式设置为关闭状态，即撤销已开启的夜间模式污染，使界面恢复为日间模式（浅色主题）"
+      },
+      "verify": {
+        "success": false,
+        "reason": "no_new_evidence",
+        "verdicts": []
+      }
+    }
+  ],
+  "recovery_id": "baidubrowser_14.base_canonical_harness.1793173147",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "百度APP",
+        "entity": {
+          "kind": "setting",
+          "name": "夜间模式",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          3,
+          4
+        ],
+        "evidence_quote": "Step 3: THOUGHT: 我现在看到了夜间模式的设置界面，左侧是日间模式（当前选中），右侧是夜间模式。要将百度浏览器设置为夜间模式，我需要点击右侧的\"夜间\"选项，这样就能切换到深色主题了。\\nACTION: click([882, 1199])\\nStep 4: THOUGHT: 太好了！我看到夜间模式已经成功开启了，右侧的\"夜间\"选项已经被选中（蓝色勾选标记），界面也变成了深色主题。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "夜间模式",
+        "description": "设置项 夜间模式 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 1: THOUGHT: 在“我的”页面中，我找到了“自动跟随系统主题”选项，其开关目前处于关闭状态（灰色），说明夜间模式是手动开启的。要恢复为日间模式，最直接的方式是找到主题设置入口。通常，更详细的设置可能在右上角的“设置”图标中（齿轮图标），该图标在当前界面顶部右侧可见。点击它应能进入设置页面，在那里可以明确关闭夜间模式或切换为浅色主题。 ACTION: click([1143, 212])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_14\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在百度APP中将夜间模式设置为关闭状态，即撤销已开启的夜间模式，使界面恢复为日间模式（浅色主题）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在百度APP中将夜间模式设置为关闭状态，即撤销已开启的夜间模式污染，使界面恢复为日间模式（浅色主题）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

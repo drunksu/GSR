@@ -1,0 +1,460 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "rimet_16",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\rimet_16_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_16_tasks.json",
+  "has_contamination": true,
+  "iterations": 1,
+  "success": true,
+  "first_try_success": true,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_16_tasks.json",
+      "accepted_plan": {
+        "m1": "在钉钉中将当前会话状态恢复为未设置‘下班了’的状态，即撤销‘下班了’状态的激活"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_16.base_canonical_harness.1793212070.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1133, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "下班了的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "会话类污染依赖完整轨迹验证，XML 谓词不足",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "65f311858ef893d2c073536f27c97e54",
+            "xml_after_sig": "62b9023c354b1f71b9a46319633615c6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_16.base_canonical_harness.1793212070.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[104, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "下班了的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "会话类污染依赖完整轨迹验证，XML 谓词不足",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "62b9023c354b1f71b9a46319633615c6",
+            "xml_after_sig": "5f705dd1796a2800682a6258f74e91e0"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_16.base_canonical_harness.1793212070.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[287, 187]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "下班了的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "会话类污染依赖完整轨迹验证，XML 谓词不足",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "5f705dd1796a2800682a6258f74e91e0",
+            "xml_after_sig": "8aa97b178fa7ffc72d7eaa7124a6c2a9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_16.base_canonical_harness.1793212070.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[214, 483]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "下班了的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "会话类污染依赖完整轨迹验证，XML 谓词不足",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "8aa97b178fa7ffc72d7eaa7124a6c2a9",
+            "xml_after_sig": "3c88091531d6eb3c1615238d0dc0a0f2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_16.base_canonical_harness.1793212070.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1097, 1104]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "下班了的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "会话类污染依赖完整轨迹验证，XML 谓词不足",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "65c6319590bbbcee3f57cd626b7bef91",
+            "xml_after_sig": "1e57ca42bf09cf045eebeab68804eb41"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_5.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1",
+        "step_count": 5,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1133,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              104,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              287,
+              187
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              214,
+              483
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              1097,
+              1104
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1\\step_5.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_16_tasks.json"
+      },
+      "verify": {
+        "success": true,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "THOUGHT: 在“我的状态”页面中，我看到“下班了”状态已被选中（蓝色边框），并且右上角有一个“×”按钮。这个“×”按钮很可能是用于取消当前选中的状态。为了将状态恢复为未设置“下班了”的状态，我需要点击这个“×”按钮来取消“下班了”状态的激活。点击后，应该会回到未选择任何自定义状态的状态，然后可以选择“无状态”或其他状态。 ACTION: click([1097, 1104])"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "rimet_16.base_canonical_harness.1793212070",
+  "phase": "success",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "session_state",
+        "app": "钉钉",
+        "entity": {
+          "kind": "setting",
+          "name": "下班了",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          1,
+          2,
+          3
+        ],
+        "evidence_quote": "THOUGHT: 我已经进入了个人中心页面，看到了一个显示“下班了”的状态按钮，这正是我要设置的状态。点击这个按钮应该就能完成任务。... THOUGHT: 我已经成功选择了“下班了”状态，现在需要点击右上角的“确定”按钮来确认并保存这个状态设置。... THOUGHT: 我已经成功将状态设置为“下班了”，在消息列表中可以看到我的状态已经更新为“下班了”并带有金币图标，这表明操作已经完成。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "session_closed",
+        "entity_name": "下班了",
+        "description": "会话/页面状态已恢复（下班了）"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": true,
+          "evidence_quote": "THOUGHT: 在“我的状态”页面中，我看到“下班了”状态已被选中（蓝色边框），并且右上角有一个“×”按钮。这个“×”按钮很可能是用于取消当前选中的状态。为了将状态恢复为未设置“下班了”的状态，我需要点击这个“×”按钮来取消“下班了”状态的激活。点击后，应该会回到未选择任何自定义状态的状态，然后可以选择“无状态”或其他状态。 ACTION: click([1097, 1104])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_16\\recovery_iter1"
+      ],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在钉钉中将当前会话状态恢复为未设置‘下班了’的状态，即撤销‘下班了’状态的激活"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": true,
+      "error": null
+    }
+  ],
+  "termination_reason": "recovered"
+}

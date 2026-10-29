@@ -1,0 +1,61 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "qq_9",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_9\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\qq_9_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "qq_9.base_canonical_harness.1793211310",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "message_send",
+        "app": "QQ",
+        "entity": {
+          "kind": "message",
+          "name": "照片",
+          "identifier": "绕堤沙"
+        },
+        "direction": "sent",
+        "persistence": "server",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          5
+        ],
+        "evidence_quote": "Thought: 我已经成功选择了相册中的第一张图片，现在界面显示了该图片的预览，并提供了“发送”按钮。为了完成任务，我需要点击右下角的“发送”按钮，将这张图片发送给“绕堤沙”。\nACTION: click([1061, 2514])",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_sent",
+        "entity_name": "照片",
+        "description": "消息 照片 已不存在于会话"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

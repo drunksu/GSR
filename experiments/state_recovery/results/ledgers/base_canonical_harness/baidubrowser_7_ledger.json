@@ -1,0 +1,42 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_7",
+  "run_id": "base_canonical_harness",
+  "task_goal": "把百度浏览器小说频道的完结榜的第一本书加入书架",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "百度浏览器",
+      "entity": {
+        "kind": "content",
+        "name": "剑来",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "Thought: 我现在处于《剑来》的书籍详情页面，顶部显示“已加书架”，说明这本书已经被成功加入书架了。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

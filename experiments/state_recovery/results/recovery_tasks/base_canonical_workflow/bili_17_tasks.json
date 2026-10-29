@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在B站中，确保对用户‘第七翼刀’发布的动态完成点赞操作，使点赞按钮呈红色高亮且显示当前点赞数（如306）",
+      "recovery_goal": "在哔哩哔哩中，确保BuriedAlien发布的关于红包活动的动态处于已点赞状态（即点赞按钮呈高亮/填充状态，且点赞数已增加1）",
       "precondition": {
-        "target": "确认‘第七翼刀’的动态点赞状态是否已生效",
-        "check_instruction": "进入B站个人主页或动态流，找到‘第七翼刀’发布的动态，查看其下方点赞按钮的颜色与数字显示",
-        "clean_if_state": "点赞按钮为红色且显示具体点赞数（例如306），即表示已成功点赞，无需额外操作"
+        "target": "确认BuriedAlien发布的关于红包活动的动态是否已被点赞",
+        "check_instruction": "进入该动态的详情页，查看右下角点赞按钮的视觉状态（是否为实心/高亮）及显示的点赞数量是否较原始值+1（BuriedAlien发布的关于红包活动的动态）",
+        "clean_if_state": "点赞按钮为实心高亮状态，且点赞数已增加1（例如从142变为143）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在B站中，‘第七翼刀’发布的动态下方的点赞按钮是否为红色并显示具体点赞数量（如306）？",
+        "question": "在哔哩哔哩中，BuriedAlien发布的关于红包活动的动态的点赞按钮是否为实心高亮状态，且点赞数相比原始状态已增加1？",
         "expected": "yes"
       },
       "idempotent": true,

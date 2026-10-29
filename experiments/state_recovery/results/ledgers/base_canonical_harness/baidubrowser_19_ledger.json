@@ -1,0 +1,46 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_19",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在百度浏览器中清理缓存",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "other",
+      "app": "百度",
+      "entity": {
+        "kind": "setting",
+        "name": "缓存",
+        "identifier": null
+      },
+      "direction": "deleted",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "THOUGHT: 在“我的”页面中，我已找到“清理缓存”功能，系统显示检测到273MB缓存垃圾，并提供了一个蓝色的“清理”按钮。……ACTION: click([1037, 1383])\nTHOUGHT: 从当前界面可见，“清理缓存”功能已执行完成，状态显示为“已清理 273MB 缓存垃圾”，说明缓存清理操作成功。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": true,
+  "_warnings": []
+}

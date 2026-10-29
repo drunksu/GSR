@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "articlenews_8",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": true,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在今日头条App中，对标题为“重庆奇人刘星，天生两套生殖系统……”的新闻取消收藏",
+      "recovery_goal": "在今日头条App中，将标题为“如果你不了解艾滋病的可怕，不妨看看这个视频，也许你会明白”的新闻恢复为已收藏状态（即星形图标为黄色高亮且收藏数加1）",
       "precondition": {
-        "target": "标题为‘重庆奇人刘星，天生两套生殖系统……’的新闻的收藏状态",
-        "check_instruction": "进入今日头条App，打开健康频道第一条新闻详情页，查看标题为‘重庆奇人刘星，天生两套生殖系统……’的新闻底部星形图标及文字提示",
-        "clean_if_state": "当前星形图标未高亮、文字显示‘收藏’（或收藏数未增加），即表示该新闻未被收藏"
+        "target": "确认该新闻当前是否已被收藏",
+        "check_instruction": "进入该新闻详情页，查看右侧星形图标（★）是否为黄色高亮并显示收藏数量（如数字5）（如果你不了解艾滋病的可怕，不妨看看这个视频，也许你会明白）",
+        "clean_if_state": "星形图标为黄色高亮、显示收藏数且底部无‘收藏成功’提示弹窗，即表示已处于目标收藏状态"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在今日头条App中，标题为‘重庆奇人刘星，天生两套生殖系统……’的新闻详情页底部，星形收藏图标是否未高亮且文字显示为‘收藏’？",
+        "question": "在今日头条App中，标题为‘如果你不了解艾滋病的可怕，不妨看看这个视频，也许你会明白’的新闻，其右侧星形收藏图标是否为黄色高亮且显示收藏数量（如5）？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "low",
-      "max_steps": 15
+      "max_steps": 8
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

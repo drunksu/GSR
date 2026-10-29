@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "bili_17",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在哔哩哔哩，找到我关注的人的动态，并给里面的动态点赞",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "哔哩哔哩",
+      "entity": {
+        "kind": "content",
+        "name": "分享图片",
+        "identifier": null
+      },
+      "direction": "liked",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        2
+      ],
+      "evidence_quote": "第一条动态是用户“BuriedAlien”发布的，内容是“分享图片”，下方有点赞按钮（显示381个赞）……我已经成功点赞了第一条动态（BuriedAlien的动态），点赞数从381变为382，说明操作已生效。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

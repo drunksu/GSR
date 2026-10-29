@@ -1,0 +1,64 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "seeyou_11",
+  "run_id": "base_canonical_harness",
+  "task_goal": "帮我在美柚问医生里上问一下医生经期腹痛应该怎么缓解？",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "content_lifecycle",
+      "app": "美柚",
+      "entity": {
+        "kind": "content",
+        "name": "经期腹痛应该怎么缓解？",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "问题“经期腹痛应该怎么缓解？”已经输入完成，当前界面右上角有“发布”按钮，点击该按钮即可提交求助内容。……ACTION: click([1097, 198])",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "content_lifecycle",
+      "app": "美柚",
+      "entity": {
+        "kind": "content",
+        "name": "经期腹痛应该怎么缓解？",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "问题“经期腹痛应该怎么缓解？”已经输入完成，当前界面右下角有一个绿色的发送按钮（向上箭头图标），点击该按钮即可提交问题，进入下一步分诊或医生问诊流程。……ACTION: click([1100, 2552])",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

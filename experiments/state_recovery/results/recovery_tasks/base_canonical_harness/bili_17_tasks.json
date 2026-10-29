@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_17",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在哔哩哔哩中，找到用户BuriedAlien发布的标题为“分享图片”的动态，将其点赞状态撤销，使该动态的点赞数恢复为未点赞前的原始数值（即取消对该动态的点赞）",
+      "precondition": {
+        "target": "确认当前是否已对‘分享图片’动态完成取消点赞操作",
+        "check_instruction": "进入哔哩哔哩首页或动态页，搜索或滑动找到BuriedAlien发布的‘分享图片’动态，观察其下方点赞按钮图标是否为未点亮状态、点赞数是否与原始381一致",
+        "clean_if_state": "该动态的点赞按钮呈灰色未点亮状态，且显示点赞数为381（即未被点赞）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "分享图片的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

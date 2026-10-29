@@ -1,0 +1,74 @@
+{
+  "task_id": "baidubrowser_0",
+  "task_goal": "在百度浏览器里搜索北京今日的天气",
+  "history_action": [
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          451,
+          214
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.37,
+          0.08
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          455,
+          2593
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.37,
+          0.96
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "type",
+      "params": {
+        "text": "北京今日的天气"
+      },
+      "normalized_params": {
+        "text": "北京今日的天气"
+      }
+    },
+    {
+      "action": "terminate",
+      "params": {
+        "text": "已成功在百度浏览器中搜索并查看北京今日的天气信息。"
+      },
+      "normalized_params": {
+        "text": "已成功在百度浏览器中搜索并查看北京今日的天气信息。"
+      }
+    }
+  ],
+  "history_image_path": [
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_0\\step_1.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_0\\step_2.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_0\\step_3.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_0\\step_4.png"
+  ],
+  "history_response": [
+    "Thought: 我需要在百度浏览器中搜索“北京今日的天气”。当前页面是一个百度APP的新闻推荐页，顶部有一个搜索框，我可以直接点击搜索框输入关键词进行搜索。  \nAction: click(point='<point>370 79</point>')",
+    "Thought: 搜索框已激活，当前内容为“情侣亲密时遭遇维修工开窗”，需要清空并输入“北京今日的天气”。根据界面，我可以先点击“Clear Text”按钮清空输入框，再输入目标内容。  \nAction: click(point='<point>373 956</point>')",
+    "Thought: 搜索框中仍有旧内容，需要先清空。虽然之前点击了“Clear Text”，但可能未生效，我将直接使用 type 方法覆盖输入框内容为“北京今日的天气”。  \nAction: type(content='北京今日的天气')",
+    "Thought: 搜索已完成，当前页面已显示“北京今日的天气”结果，包括实时温度、天气状况、风力、空气质量及15天预报等详细信息，任务目标已达成。  \nAction: finished(content='已成功在百度浏览器中搜索并查看北京今日的天气信息。')"
+  ],
+  "summary": [
+    "Agent thinks the request has been completed."
+  ],
+  "success": true
+}

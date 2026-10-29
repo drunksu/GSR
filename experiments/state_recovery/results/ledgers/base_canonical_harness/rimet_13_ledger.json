@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_13",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在钉钉遇到问题，帮我找一下客服",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "钉钉",
+      "entity": {
+        "kind": "message",
+        "name": "我在钉钉遇到问题，需要客服帮助",
+        "identifier": "钉钉客服"
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "ACTION: click([1076, 2365])",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

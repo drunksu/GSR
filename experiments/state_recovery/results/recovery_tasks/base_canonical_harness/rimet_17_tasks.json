@@ -1,0 +1,82 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_17",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将‘允许通知’开关恢复为关闭状态（灰色，off）",
+      "precondition": {
+        "target": "确认‘允许通知’开关当前是否已处于关闭状态",
+        "check_instruction": "进入钉钉【设置】→【消息通知】→【新消息通知】页面，查看顶部‘允许通知’开关的视觉状态（灰色为off，蓝色为on）",
+        "clean_if_state": "‘允许通知’开关显示为灰色（off），且无弹窗或二次确认提示"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在钉钉的新消息通知设置页面中，‘允许通知’开关是否已变为灰色（即处于关闭状态）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在钉钉中将‘发声’设置项的状态恢复为关闭（off）状态，即撤销此前将其开启的操作",
+      "precondition": {
+        "target": "确认‘发声’当前是否已处于关闭状态",
+        "check_instruction": "进入钉钉的‘新消息通知’设置页，找到名为‘发声’的开关控件并观察其视觉状态",
+        "clean_if_state": "‘发声’开关显示为灰色（off）状态，且无任何弹窗或提示表明其被启用"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "发声的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m3",
+      "recovery_goal": "在钉钉中将‘振动’设置项的状态恢复为关闭（off）状态，即撤销此前将其开启的操作",
+      "precondition": {
+        "target": "确认当前‘振动’开关是否已处于关闭状态",
+        "check_instruction": "进入钉钉【设置】→【新消息通知】→【铃声及振动设置】页面，查看‘振动’选项右侧的开关控件状态",
+        "clean_if_state": "‘振动’开关显示为灰色（off）状态，且无任何提示或弹窗表明其被启用"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在钉钉的铃声及振动设置页面中，‘振动’选项的开关是否为灰色（off）状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m4",
+      "recovery_goal": "在钉钉中将语音和视频通话邀请通知的开关状态恢复为关闭（off）状态，即撤销此前开启该通知的操作",
+      "precondition": {
+        "target": "语音和视频通话邀请通知当前是否已处于关闭状态",
+        "check_instruction": "进入钉钉「设置」→「新消息通知」页面，查看「语音和视频通话邀请通知」右侧开关是否为灰色（off）",
+        "clean_if_state": "语音和视频通话邀请通知的开关显示为灰色（off），且无弹窗提示需确认关闭"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在钉钉的新消息通知设置中，语音和视频通话邀请通知的开关是否已变为灰色（off）状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 4
+}

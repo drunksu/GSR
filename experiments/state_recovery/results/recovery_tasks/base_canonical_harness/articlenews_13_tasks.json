@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_13",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中将性别设置项恢复为关闭状态，即性别不显示为‘女’也不显示为‘男’，而是处于未设置或隐藏状态",
+      "precondition": {
+        "target": "确认当前性别设置是否仍为‘女’",
+        "check_instruction": "进入今日头条个人主页的编辑资料页面，查看‘性别’字段的当前显示值是否为‘女’",
+        "clean_if_state": "性别字段显示为空、‘未设置’或被隐藏，不显示具体性别选项"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条的个人资料编辑页中，性别字段是否未显示‘女’或‘男’，而是处于未设置或隐藏状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

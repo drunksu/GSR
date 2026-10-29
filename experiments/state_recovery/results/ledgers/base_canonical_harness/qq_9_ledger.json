@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_9",
+  "run_id": "base_canonical_harness",
+  "task_goal": "打开QQ给绕堤沙发送相册里的第一张图片",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "QQ",
+      "entity": {
+        "kind": "message",
+        "name": "照片",
+        "identifier": "绕堤沙"
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "Thought: 我已经成功选择了相册中的第一张图片，现在界面显示了该图片的预览，并提供了“发送”按钮。为了完成任务，我需要点击右下角的“发送”按钮，将这张图片发送给“绕堤沙”。\nACTION: click([1061, 2514])",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

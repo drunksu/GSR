@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_4",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中将钉钉小秘书的置顶设置关闭，使其不再处于置顶状态",
+      "precondition": {
+        "target": "确认钉钉小秘书当前是否被置顶",
+        "check_instruction": "进入钉钉消息列表页面，查看‘钉钉小秘书’是否位于顶部固定区域（即置顶聊天区）",
+        "clean_if_state": "钉钉小秘书未出现在顶部固定聊天区，且其聊天条目与其他普通会话并列显示"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "钉钉消息列表中，钉钉小秘书是否未出现在顶部置顶区域？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "rimet_6",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在钉钉中撤销对**倬（15010284323）已发送的好友请求，使其不再存在任何待处理的好友申请",
+      "precondition": {
+        "target": "确认当前是否存在针对**倬（15010284323）的待处理好友请求",
+        "check_instruction": "进入钉钉【通讯录】→【好友请求】页面，查看‘我发出的’列表中是否包含**倬（15010284323）",
+        "clean_if_state": "在【好友请求】→【我发出的】列表中未找到**倬（15010284323）的请求记录"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "**倬（15010284323）的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在钉钉中清除搜索历史条目15010284323，确保该号码不再出现在任何搜索历史记录中",
+      "precondition": {
+        "target": "确认当前是否仍存在搜索历史中的15010284323条目",
+        "check_instruction": "进入钉钉主界面→点击底部【通讯录】→点击顶部搜索框，观察搜索历史列表中是否显示15010284323",
+        "clean_if_state": "搜索历史列表中已无15010284323条目，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在钉钉通讯录的搜索历史中，是否完全找不到15010284323这个条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

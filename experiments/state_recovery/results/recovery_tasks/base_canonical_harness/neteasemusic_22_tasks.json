@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_22",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中撤销对‘事已至此，先睡觉吧’的简介设置，使个人资料页面的简介字段恢复为空或原始默认内容（即不显示‘事已至此，先睡觉吧’）",
+      "precondition": {
+        "target": "简介字段当前是否显示‘事已至此，先睡觉吧’",
+        "check_instruction": "进入网易云音乐‘我的’→‘我的资料’页面，查看‘简介’一栏的文本内容是否为‘事已至此，先睡觉吧’",
+        "clean_if_state": "简介字段未显示‘事已至此，先睡觉吧’，即为空或为其他非目标文本"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐‘我的资料’页面中，简介字段是否未显示‘事已至此，先睡觉吧’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

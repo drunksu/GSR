@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_3",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚中彻底清除搜索历史中的‘运动减肥’条目，确保该条目不再出现在任何搜索历史列表中",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘运动减肥’条目",
+        "check_instruction": "进入美柚首页，点击搜索框，查看下拉搜索历史列表中是否显示‘运动减肥’",
+        "clean_if_state": "搜索历史列表中已无‘运动减肥’条目，仅剩其他条目（如‘止咳化痰方法’）或为空"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在美柚的搜索历史列表中，是否已完全找不到‘运动减肥’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "pinduoduo_18",
+  "run_id": "base_canonical_harness",
+  "task_goal": "查看并关注拼多多女鞋第一款商品的所属店铺",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "拼多多",
+      "entity": {
+        "kind": "account",
+        "name": "361度户外鞋服官方旗舰店",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        6
+      ],
+      "evidence_quote": "Thought: 已进入“361度户外鞋服官方旗舰店”店铺主页，页面顶部清晰显示店铺名称及“+ 关注”按钮，说明当前尚未关注该店铺。根据任务要求“查看并关注拼多多女鞋第一款商品的所属店铺”，现在只需点击“+ 关注”按钮即可完成关注操作。 ACTION: click([1088, 317])",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "拼多多",
+      "entity": {
+        "kind": "search",
+        "name": "女鞋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "Thought: 搜索框中仍残留“橡皮泥”文字，虽然之前点击了 Clear Text，但可能未生效或需再次确认清空。为确保准确输入“女鞋”，我应先手动删除当前内容，再输入目标关键词。当前光标在搜索框内，直接 type 输入会覆盖原有内容，因此可直接输入“女鞋”。 ACTION: type(text='女鞋')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "女鞋"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

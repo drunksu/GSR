@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "qq_27",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": false,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在QQ中找到动态内容为“西单华威 😄😅（没钱买18pro）肥鸡牛逼！？”的那条动态，将其点赞状态恢复为未点赞（即点击该动态下方的蓝色实心拇指图标使其变为空心）",
+      "recovery_goal": "在QQ中找到最新动态‘西单华威 😄😅（没钱买18pro）肥鸡牛逼！？’，并确保其点赞状态为已点赞（即点赞按钮显示为蓝色实心拇指图标）",
       "precondition": {
-        "target": "该动态的点赞按钮当前是否为蓝色实心拇指图标",
-        "check_instruction": "进入QQ动态首页，找到内容为“西单华威 😄😅（没钱买18pro）肥鸡牛逼！？”的最新动态，观察其下方点赞按钮样式",
-        "clean_if_state": "点赞按钮为空心拇指图标（即未点赞状态）"
+        "target": "该动态的点赞按钮是否已变为蓝色实心拇指图标",
+        "check_instruction": "进入QQ动态首页，定位到最新一条动态‘西单华威 😄😅（没钱买18pro）肥鸡牛逼！？’，查看其下方点赞按钮的样式",
+        "clean_if_state": "点赞按钮已显示为蓝色实心拇指图标，表示该动态已被成功点赞"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "QQ中内容为“西单华威 😄😅（没钱买18pro）肥鸡牛逼！？”的动态下方的点赞按钮是否已恢复为空心拇指图标？",
+        "question": "动态‘西单华威 😄😅（没钱买18pro）肥鸡牛逼！？’的点赞按钮是否为蓝色实心拇指图标？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "low",
-      "max_steps": 15
+      "max_steps": 8
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

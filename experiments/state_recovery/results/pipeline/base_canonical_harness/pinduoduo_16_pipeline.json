@@ -1,0 +1,1052 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "pinduoduo_16",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\pinduoduo_16_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_16_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": true,
+  "first_try_success": false,
+  "final_state": "clean",
+  "failure_reason": null,
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_16_tasks.json",
+      "accepted_plan": {
+        "m1": "在拼多多中，将NATALYARO【新疆棉】袜子男款中筒袜男士四的商品收藏状态撤销，使其不再处于已收藏状态"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[609, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "eb828db261516a2d7b51fc26a2372e3f",
+            "xml_after_sig": "787bf1c6edb47e41b5cff9a2fe178513"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[458, 2598]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "787bf1c6edb47e41b5cff9a2fe178513",
+            "xml_after_sig": "edeb272cb9b65684e1c8ffb1720da47a"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[458, 2598]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "edeb272cb9b65684e1c8ffb1720da47a",
+            "xml_after_sig": "edeb272cb9b65684e1c8ffb1720da47a"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1143, 377]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "edeb272cb9b65684e1c8ffb1720da47a",
+            "xml_after_sig": "f2e3fb027a80f7eef5c56e9a97b56aea"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[370, 1473]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "f2e3fb027a80f7eef5c56e9a97b56aea",
+            "xml_after_sig": "edeb272cb9b65684e1c8ffb1720da47a"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[948, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "edeb272cb9b65684e1c8ffb1720da47a",
+            "xml_after_sig": "78b7f5b2499137805c2848529076c124"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[78, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "78b7f5b2499137805c2848529076c124",
+            "xml_after_sig": "561cc4c8d50db1f12369c7cf06534fc3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[948, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多商品详情页中，NATALYARO【新疆棉】袜子男款中筒袜男士四下方的心形图标是否为灰色空心且无‘收藏的商品’标注？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "561cc4c8d50db1f12369c7cf06534fc3",
+            "xml_after_sig": "4ec774db06451992fc41dc336255df5d"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              609,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              458,
+              2598
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              458,
+              2598
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              1143,
+              377
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              370,
+              1473
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              948,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              78,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              948,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_16_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "THOUGHT: 我需要找到“NATALYARO【新疆棉】袜子男款中筒袜男士四”这个商品。当前页面展示的是推荐商品，但没有看到目标商品。我应该先通过搜索功能来查找该商品。搜索框中目前显示的是“小狗马克杯”，需要清空并输入目标商品名称进行搜索。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_16_tasks.json",
+      "accepted_plan": {
+        "m1": "在拼多多App中，将商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’的收藏状态撤销，使其不再显示为已收藏（即心形图标未填充、无‘已收藏’提示）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[549, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多App中，商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’详情页下方的心形图标是否为空心且未显示‘已收藏’？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "9f6fe1285797ef491d070a501cae8757",
+            "xml_after_sig": "3d78c21264285f52cda47d834472dfb9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[454, 2593]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多App中，商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’详情页下方的心形图标是否为空心且未显示‘已收藏’？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "3d78c21264285f52cda47d834472dfb9",
+            "xml_after_sig": "3d78c21264285f52cda47d834472dfb9"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter2.step3",
+          "target_id": "m1",
+          "action_type": "type",
+          "target_description": "NATALYARO【新疆棉】袜子男款中筒袜男士四",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 type"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "输入动作带非空 text"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "动作目标与恢复实体 NATALYARO【新疆棉】袜子男款中筒袜男士四 直接关联"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多App中，商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’详情页下方的心形图标是否为空心且未显示‘已收藏’？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "3d78c21264285f52cda47d834472dfb9",
+            "xml_after_sig": "daf28fdda59e2f79b7d50488d94534f8"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter2.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[300, 719]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多App中，商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’详情页下方的心形图标是否为空心且未显示‘已收藏’？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_4_after.png",
+            "xml_before_sig": "daf28fdda59e2f79b7d50488d94534f8",
+            "xml_after_sig": "6d2d8348be57c18686a96b7760fa3adc"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "pinduoduo_16.base_canonical_harness.1793201581.iter2.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[265, 2571]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在拼多多App中，商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’详情页下方的心形图标是否为空心且未显示‘已收藏’？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_5_after.png",
+            "xml_before_sig": "bcde358006ab03eb85128a381a6c0b6a",
+            "xml_after_sig": "bc16cf8536a9008d493979c1ef66b963"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_6.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2",
+        "step_count": 6,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              549,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              454,
+              2593
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "type",
+            "target": "NATALYARO【新疆棉】袜子男款中筒袜男士四",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              300,
+              719
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              265,
+              2571
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "terminate",
+            "target": "商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’的收藏状态已撤销，心形图标未填充，无‘已收藏’提示。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2\\step_6.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\pinduoduo_16_tasks.json"
+      },
+      "verify": {
+        "success": true,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "Step 4: THOUGHT: 进入商品详情页后，观察底部导航栏，发现“已收藏”按钮（红色心形图标）处于激活状态，说明该商品当前为已收藏状态。根据任务要求，需要撤销收藏，使其变为未收藏状态（心形空心、无“已收藏”提示）。因此，下一步应点击该“已收藏”按钮进行取消收藏操作。 ACTION: click([265, 2571])\nStep 5: THOUGHT: 观察当前页面底部导航栏，“收藏”按钮（心形图标）为灰色空心状态，且无“已收藏”文字提示，说明该商品已成功取消收藏。结合上一步操作（点击“已收藏”按钮），可确认撤销收藏已完成。任务目标达成。"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_id": "pinduoduo_16.base_canonical_harness.1793201581",
+  "phase": "success",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "social_reaction",
+        "app": "拼多多",
+        "entity": {
+          "kind": "content",
+          "name": "NATALYARO【新疆棉】袜子男款中筒袜男士四",
+          "identifier": null
+        },
+        "direction": "collected",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          1
+        ],
+        "evidence_quote": "在商品信息下方有一个心形图标，标注为“收藏的商品”，说明该商品已经被收藏。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_reacted",
+        "entity_name": "NATALYARO【新疆棉】袜子男款中筒袜男士四",
+        "description": "社交反应（关注/点赞/收藏）已取消（NATALYARO【新疆棉】袜子男款中筒袜男士四）"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": true,
+          "evidence_quote": "Step 4: THOUGHT: 进入商品详情页后，观察底部导航栏，发现“已收藏”按钮（红色心形图标）处于激活状态，说明该商品当前为已收藏状态。根据任务要求，需要撤销收藏，使其变为未收藏状态（心形空心、无“已收藏”提示）。因此，下一步应点击该“已收藏”按钮进行取消收藏操作。 ACTION: click([265, 2571])\nStep 5: THOUGHT: 观察当前页面底部导航栏，“收藏”按钮（心形图标）为灰色空心状态，且无“已收藏”文字提示，说明该商品已成功取消收藏。结合上一步操作（点击“已收藏”按钮），可确认撤销收藏已完成。任务目标达成。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\pinduoduo_16\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在拼多多中，将NATALYARO【新疆棉】袜子男款中筒袜男士四的商品收藏状态撤销，使其不再处于已收藏状态"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在拼多多App中，将商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’的收藏状态撤销，使其不再显示为已收藏（即心形图标未填充、无‘已收藏’提示）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": true,
+      "error": null
+    }
+  ],
+  "termination_reason": "recovered"
+}

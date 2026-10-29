@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在B站中确保搜索历史里存在‘李健’的记录，并打开B站搜索‘李健’，进入搜索结果页后定位到图文栏查看其中的图片",
+      "recovery_goal": "在B站中将搜索历史恢复为包含‘李健’的记录，确保搜索框输入后能直接调出含‘李健’的搜索历史项",
       "precondition": {
-        "target": "确认B站搜索历史中已存在‘李健’条目",
-        "check_instruction": "进入B站首页点击搜索框，观察搜索历史列表中是否显示‘李健’",
-        "clean_if_state": "搜索历史中已存在‘李健’条目，且当前页面为B站搜索结果页并已展示图文栏内容"
+        "target": "检查B站搜索历史中是否存在‘李健’条目",
+        "check_instruction": "进入B站首页，点击搜索框，查看下拉搜索历史列表中是否显示实体名‘李健’",
+        "clean_if_state": "搜索历史中已存在‘李健’条目，且该条目可被点击触发搜索"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "李健的状态是否已恢复到目标状态？",
+        "question": "B站搜索框展开后的搜索历史列表中是否明确显示了实体名‘李健’？",
         "expected": "yes"
       },
       "idempotent": true,

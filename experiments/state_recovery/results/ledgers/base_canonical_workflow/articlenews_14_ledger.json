@@ -4,109 +4,15 @@
   "run_id": "base_canonical",
   "task_goal": "打开今日头条里面我的书架",
   "judged_success": false,
-  "mutations": [
-    {
-      "type": "settings_toggle",
-      "app": "今日头条",
-      "entity": {
-        "kind": "setting",
-        "name": "性别",
-        "identifier": null
-      },
-      "direction": "on",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        5
-      ],
-      "evidence_quote": "我已经成功将性别设置为“女”，在编辑资料页面可以看到“性别”一栏已经显示为“女”。",
-      "confidence": 1.0,
-      "attribution": "carried_over",
-      "carried_over_from_task": "articlenews_13",
-      "id": "c1"
-    },
-    {
-      "type": "settings_toggle",
-      "app": "今日头条",
-      "entity": {
-        "kind": "setting",
-        "name": "头像",
-        "identifier": null
-      },
-      "direction": "on",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        6
-      ],
-      "evidence_quote": "我已经成功更换了头像，现在个人主页的头像已经变成了艺术类的蓝色波浪形图案，与任务要求一致。",
-      "confidence": 1.0,
-      "attribution": "carried_over",
-      "carried_over_from_task": "articlenews_12",
-      "id": "c2"
-    },
-    {
-      "type": "search_history",
-      "app": "今日头条",
-      "entity": {
-        "kind": "search",
-        "name": "哪吒 票房",
-        "identifier": null
-      },
-      "direction": "created",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        8
-      ],
-      "evidence_quote": "ACTION: type(text='哪吒 票房')",
-      "confidence": 1.0,
-      "attribution": "carried_over",
-      "carried_over_from_task": "articlenews_1",
-      "id": "c3"
-    },
-    {
-      "type": "search_history",
-      "app": "今日头条",
-      "entity": {
-        "kind": "search",
-        "name": "黄金今日的价格",
-        "identifier": null
-      },
-      "direction": "created",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        2
-      ],
-      "evidence_quote": "ACTION: type(text='黄金今日的价格')",
-      "confidence": 1.0,
-      "attribution": "carried_over",
-      "carried_over_from_task": "articlenews_0",
-      "id": "c4"
-    }
-  ],
-  "search_terms": [
-    "哪吒 票房",
-    "黄金今日的价格"
-  ],
+  "mutations": [],
+  "search_terms": [],
   "_gate": {
-    "autonomous": [
-      "c1",
-      "c2",
-      "c3",
-      "c4"
-    ],
+    "autonomous": [],
     "halt": [],
-    "noop": false
+    "noop": true
   },
   "_model": "qwen3-vl-plus",
+  "_modality": "text",
   "_repair_used": false,
-  "_warnings": [
-    "确定性结转补录 4 条 carried_over（前序仍开放的残留）"
-  ]
+  "_warnings": []
 }

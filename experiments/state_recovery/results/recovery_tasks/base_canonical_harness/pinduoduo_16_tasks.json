@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_16",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，将商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’的收藏状态撤销，使其不再显示为已收藏（即心形图标未填充、无‘已收藏’提示）",
+      "precondition": {
+        "target": "确认该商品当前处于已收藏状态",
+        "check_instruction": "进入该商品详情页，查看商品信息下方的心形图标是否为实心红色（或标注‘已收藏’）（NATALYARO【新疆棉】袜子男款中筒袜男士四）",
+        "clean_if_state": "心形图标为空心/灰色，且无‘已收藏’文字提示，说明商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’未被收藏，已恢复干净状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多App中，商品‘NATALYARO【新疆棉】袜子男款中筒袜男士四’详情页下方的心形图标是否为空心且未显示‘已收藏’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

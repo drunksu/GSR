@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "fanqieread_5",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在番茄小说中清除搜索历史里名为明朝那些事儿的条目，使其不再出现在搜索历史列表中",
+      "precondition": {
+        "target": "确认当前页面为搜索历史页面，且其中存在‘明朝那些事儿’条目",
+        "check_instruction": "进入番茄小说App，点击底部导航栏‘我的’→右上角设置图标→‘搜索历史’，查看列表中是否包含实体名‘明朝那些事儿’",
+        "clean_if_state": "搜索历史列表中已无‘明朝那些事儿’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说的搜索历史页面中，是否已不存在名为明朝那些事儿的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在番茄小说中找到书评作者‘得道高仙’的那条评论，将其已点赞状态撤销，使该评论的点赞数恢复为未点赞前的原始数值（即取消对该评论的点赞）",
+      "precondition": {
+        "target": "确认‘得道高仙’的书评当前处于已点赞状态",
+        "check_instruction": "进入《明朝那些事儿》的书评页面，找到作者名为‘得道高仙’的评论，观察其下方心形图标是否为红色填充且旁边数字比原始值多1",
+        "clean_if_state": "‘得道高仙’的书评下方心形图标为灰色未填充状态，点赞数与原始截图一致（即未被点赞）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在番茄小说中，作者‘得道高仙’的书评下方心形图标是否为灰色未填充状态，且点赞数未增加？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

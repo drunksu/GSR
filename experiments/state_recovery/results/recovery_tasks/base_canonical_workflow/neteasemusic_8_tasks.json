@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在网易云音乐中找到歌手周杰伦的个人主页并确保已关注他",
+      "recovery_goal": "在网易云音乐中确保歌手周杰伦的个人主页处于已关注状态",
       "precondition": {
-        "target": "确认当前是否已成功关注周杰伦",
-        "check_instruction": "在网易云音乐中，进入周杰伦的个人主页，查看其头像下方的关注按钮状态（如显示‘已关注’或按钮呈高亮/灰色不可点状态）",
-        "clean_if_state": "已在周杰伦个人主页上看到‘已关注’标识或关注按钮处于不可点击状态"
+        "target": "确认当前是否已关注周杰伦",
+        "check_instruction": "进入周杰伦的个人主页，查看页面上是否显示‘已关注’按钮或文字标识",
+        "clean_if_state": "页面上明确显示‘已关注’字样，且无‘关注’按钮存在"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在网易云音乐中，周杰伦的个人主页上是否明确显示‘已关注’状态？",
+        "question": "在网易云音乐中，周杰伦的个人主页是否显示‘已关注’状态？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,15 +24,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m2",
-      "recovery_goal": "在网易云音乐中找到歌手周杰伦的个人主页，并确保其关注状态为已关注（即页面显示‘已关注’按钮）",
+      "recovery_goal": "在网易云音乐中找到歌手周杰伦的个人主页并确保已关注他",
       "precondition": {
-        "target": "确认当前用户是否已关注周杰伦",
-        "check_instruction": "在网易云音乐中，进入周杰伦的个人主页，查看页面中是否显示‘已关注’按钮",
-        "clean_if_state": "页面中已显示‘已关注’按钮，表明周杰伦已被关注，无需额外操作"
+        "target": "确认当前是否已成功关注周杰伦",
+        "check_instruction": "进入周杰伦的个人主页，查看关注按钮状态（如显示‘已关注’或按钮呈高亮/灰色不可点状态）",
+        "clean_if_state": "已在周杰伦个人主页上看到‘已关注’标识或关注按钮处于不可点击状态"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在网易云音乐中，周杰伦的个人主页上是否显示‘已关注’按钮？",
+        "question": "在网易云音乐中，周杰伦的个人主页上是否显示‘已关注’？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -42,5 +42,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 3
+  "_llm_calls": 2
 }

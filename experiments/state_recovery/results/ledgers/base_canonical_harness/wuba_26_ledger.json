@@ -1,0 +1,41 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_26",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去58同城将我目前的状态更换为随便看看",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "session_state",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "状态",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "session",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "Thought: 在当前个人信息页面中，我注意到用户名“哥斯拉”下方已经显示了“随便看看”状态标签，且该标签为蓝色可点击样式。这说明当前状态可能已经是“随便看看”，但为了确认或重新设置，我需要点击这个标签进行操作。... Thought: 我注意到当前状态已经是“随便看看”，但为了确保这是用户想要的最终状态，我需要确认是否可以进一步操作或保存。通常，点击状态标签会弹出一个选择菜单，允许用户更改状态。",
+      "confidence": 0.8,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

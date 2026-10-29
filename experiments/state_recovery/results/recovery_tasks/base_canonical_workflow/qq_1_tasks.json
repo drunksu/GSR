@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在QQ应用中，将搜索历史恢复为包含‘DND’关键词的记录状态，确保‘DND’作为搜索词已存在且可被检索到",
+      "recovery_goal": "在QQ中搜索并确保DND群组的搜索历史已存在，即搜索框中曾输入过'DND'并完成搜索操作",
       "precondition": {
-        "target": "检查QQ搜索历史中是否存在‘DND’条目",
-        "check_instruction": "进入QQ主界面，点击顶部搜索框，查看搜索历史列表中是否显示实体名‘DND’",
-        "clean_if_state": "搜索历史中已存在‘DND’条目，且该条目清晰可见、未被清除或隐藏"
+        "target": "确认QQ中已存在DND的搜索历史记录",
+        "check_instruction": "进入QQ主界面，点击顶部搜索框，查看搜索历史列表中是否包含'DND'条目",
+        "clean_if_state": "搜索历史中已显示'DND'条目（含文字或缩略图）即视为已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在QQ的搜索历史列表中，能否明确看到实体名‘DND’作为一条独立的搜索记录存在？",
+        "question": "QQ搜索历史列表中是否明确显示有'DND'条目？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,15 +24,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m3",
-      "recovery_goal": "在QQ中将DND5版萌新跑团冒险指南群组的状态恢复为已成功加入（即显示为‘已加入’或群内聊天界面可正常访问）",
+      "recovery_goal": "在QQ中将‘DND5版萌新跑团冒险指南’群组的加入状态恢复为已成功加入（即显示为‘已加入’或群内聊天界面可正常访问）",
       "precondition": {
-        "target": "确认当前DND5版萌新跑团冒险指南群组的申请状态是否仍为‘等待验证’",
-        "check_instruction": "进入QQ搜索页面，输入‘DND5版萌新跑团冒险指南’并点击进入该群详情页，查看群头像下方或申请记录中的状态文字",
-        "clean_if_state": "当前已显示‘已加入’或已进入该群的聊天界面，无需进一步操作"
+        "target": "确认当前是否已成功加入‘DND5版萌新跑团冒险指南’群组",
+        "check_instruction": "进入QQ搜索页面，输入‘DND5版萌新跑团冒险指南’并点击进入该群详情页，查看群成员状态标识或底部操作按钮（如‘退出群聊’‘发送消息’等）",
+        "clean_if_state": "当前已显示为‘已加入’状态，或可直接进入群聊界面并正常发送消息"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在QQ中，DND5版萌新跑团冒险指南群组是否已显示为‘已加入’状态或可正常进入群聊界面？",
+        "question": "DND5版萌新跑团冒险指南的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,

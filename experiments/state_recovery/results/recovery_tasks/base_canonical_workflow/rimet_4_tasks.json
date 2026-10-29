@@ -6,11 +6,11 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在钉钉里将钉钉小秘书的置顶功能开启，使其处于已启用状态",
+      "recovery_goal": "在钉钉里将钉钉小秘书的置顶功能开启，使其处于已启用状态（开关为蓝色）",
       "precondition": {
-        "target": "确认钉钉小秘书的置顶开关当前是否为开启状态",
-        "check_instruction": "进入钉钉小秘书的设置页面，查看‘置顶’选项右侧的开关按钮颜色是否为蓝色",
-        "clean_if_state": "‘置顶’开关已显示为蓝色（开启状态）"
+        "target": "确认钉钉小秘书的置顶开关当前是否已开启",
+        "check_instruction": "进入钉钉小秘书的设置页面，查看‘置顶’选项右侧的开关按钮颜色状态",
+        "clean_if_state": "‘置顶’开关显示为蓝色（开启状态）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",

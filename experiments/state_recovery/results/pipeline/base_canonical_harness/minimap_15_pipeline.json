@@ -1,0 +1,926 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "minimap_15",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\minimap_15_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_15_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "迭代预算耗尽 (0)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_15_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中撤销对‘小米科技园B栋’的搜索历史记录，确保搜索历史中不再存在‘小米科技园B栋’这一条目",
+        "m2": "在高德地图中撤销搜索历史中新增的‘小米科技园’条目，使搜索历史中不再存在‘小米科技园’这一记录",
+        "m3": "在高德地图中撤销对‘小米移动互联网产业园’的搜索历史记录，确保该词条不再出现在搜索历史中",
+        "m4": "在高德地图中撤销对小米移动互联网产业园B栋（海淀区西二旗中路33号）的地址设置，使其不再作为公司地址存在"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[451, 1595]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "33f6464d6737c0c4fb7d1469c4668442",
+            "xml_after_sig": "abad83726456f6925e20baec7a3d082c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1135, 941]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "abad83726456f6925e20baec7a3d082c",
+            "xml_after_sig": "fe2cc4cf7a1bdf6c598b7157cd3e45ff"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[98, 195]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "fe2cc4cf7a1bdf6c598b7157cd3e45ff",
+            "xml_after_sig": "77ea6722e616620b9cda0c193da955b7"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1135, 941]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "77ea6722e616620b9cda0c193da955b7",
+            "xml_after_sig": "fbff05e8a1c10adfd153c8ebdc6e98a2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[98, 195]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "fbff05e8a1c10adfd153c8ebdc6e98a2",
+            "xml_after_sig": "958452aa418bdcd7e29de8d0af76e7a3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter1.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1135, 941]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史中是否已不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "c54c44e22139dfeb1b64b0691b76ec65",
+            "xml_after_sig": "f68257b5ccc14ce0420a8c60df286189"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_7.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1",
+        "step_count": 7,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              451,
+              1595
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1135,
+              941
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              98,
+              195
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              1135,
+              941
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              98,
+              195
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              1135,
+              941
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "terminate",
+            "target": "经多次检查，当前搜索历史中未发现“小米科技园B栋”条目，推测该记录已被清除，任务已完成。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1\\step_7.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_15_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "当前界面显示了搜索历史记录，但未看到“小米科技园B栋”这一条目。...由于当前历史记录中没有该条目，可能它已被删除，或者需要进一步检查“管理”功能是否包含更完整的搜索历史。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "当前界面显示了搜索历史记录，但未看到“小米科技园B栋”这一条目。...由于当前历史记录中没有该条目，可能它已被删除，或者需要进一步检查“管理”功能是否包含更完整的搜索历史。"
+          },
+          {
+            "mutation_id": "m3",
+            "cleared": false,
+            "evidence_quote": "当前界面显示了搜索历史记录，但未看到“小米科技园B栋”这一条目。...由于当前历史记录中没有该条目，可能它已被删除，或者需要进一步检查“管理”功能是否包含更完整的搜索历史。"
+          },
+          {
+            "mutation_id": "m4",
+            "cleared": false,
+            "evidence_quote": "当前界面显示了搜索历史记录，但未看到“小米科技园B栋”这一条目。...由于当前历史记录中没有该条目，可能它已被删除，或者需要进一步检查“管理”功能是否包含更完整的搜索历史。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_15_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中确保搜索历史里不存在‘小米科技园B栋’这一条目",
+        "m2": "在高德地图中确保搜索历史里不存在‘小米科技园’条目",
+        "m3": "在高德地图中彻底清除搜索历史里名为‘小米移动互联网产业园’的条目，确保该条目不再出现在任何搜索历史列表中",
+        "m4": "在高德地图中撤销已创建的‘小米移动互联网产业园B栋（海淀区西二旗中路33号）’地址记录，使其不再作为公司地址或任何用户保存地点存在"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[316, 1595]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史列表中是否已彻底不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "36f424c7b8b136d2eeb93f576714cfbc",
+            "xml_after_sig": "e998813ae09022e47d3c7b283e89ba3b"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "minimap_15.base_canonical_harness.1793188355.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1136, 941]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "高德地图的搜索历史列表中是否已彻底不存在‘小米科技园B栋’这一条目？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "搜索历史需看列表完整状态，XML 谓词不足（交 VLM verify 裁决）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "e998813ae09022e47d3c7b283e89ba3b",
+            "xml_after_sig": "3b5af6c2fa6675638ab4dd785cae9719"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_3.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2",
+        "step_count": 3,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              316,
+              1595
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1136,
+              941
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "terminate",
+            "target": "搜索历史中不存在‘小米科技园B栋’这一条目，任务已完成。",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2\\step_3.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_15_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": true,
+            "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+          },
+          {
+            "mutation_id": "m3",
+            "cleared": true,
+            "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+          },
+          {
+            "mutation_id": "m4",
+            "cleared": false,
+            "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 3,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\minimap_15_tasks.json",
+      "accepted_plan": {
+        "m1": "在高德地图中彻底清除搜索历史里新增的‘小米科技园B栋’条目，使该实体不再出现在任何搜索历史记录中",
+        "m2": "在高德地图中清除搜索历史里所有与‘小米科技园’相关的条目，确保搜索历史列表中不再出现‘小米科技园’这一项",
+        "m3": "在高德地图中彻底清除搜索历史里名为‘小米移动互联网产业园’的条目，使其不再出现在任何搜索历史记录中",
+        "m4": "在高德地图中撤销对‘小米移动互联网产业园B栋（海淀区西二旗中路33号）’的公司地址设置，使其不再作为公司地址存在"
+      }
+    }
+  ],
+  "recovery_id": "minimap_15.base_canonical_harness.1793188355",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 1
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "search_history",
+        "app": "高德地图",
+        "entity": {
+          "kind": "search",
+          "name": "小米科技园B栋",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          5
+        ],
+        "evidence_quote": "Step 5: THOUGHT: 我已经输入了“小米科技园B栋”，但搜索结果中并没有显示相关地址... ACTION: type(text='小米科技园B栋')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "小米科技园B栋",
+        "description": "搜索历史中不再存在条目 小米科技园B栋"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": true,
+          "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "search_history",
+        "app": "高德地图",
+        "entity": {
+          "kind": "search",
+          "name": "小米科技园",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          7,
+          8
+        ],
+        "evidence_quote": "Step 7: THOUGHT: ...我应该重新输入更准确的关键词“小米科技园”进行搜索。 ACTION: type(text='小米科技园')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "小米科技园",
+        "description": "搜索历史中不再存在条目 小米科技园"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": true,
+          "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m3",
+      "mutation_ref": {
+        "id": "m3",
+        "type": "search_history",
+        "app": "高德地图",
+        "entity": {
+          "kind": "search",
+          "name": "小米移动互联网产业园",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          9
+        ],
+        "evidence_quote": "Step 9: THOUGHT: ...我应该输入更完整的名称“小米移动互联网产业园”来搜索... ACTION: type(text='小米移动互联网产业园')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "小米移动互联网产业园",
+        "description": "搜索历史中不再存在条目 小米移动互联网产业园"
+      },
+      "contamination_status": "absent",
+      "recovery_status": "verified_cleared",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m3",
+          "cleared": true,
+          "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m4",
+      "mutation_ref": {
+        "id": "m4",
+        "type": "content_lifecycle",
+        "app": "高德地图",
+        "entity": {
+          "kind": "content",
+          "name": "小米移动互联网产业园B栋",
+          "identifier": "海淀区西二旗中路33号"
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "delete_created",
+        "evidence_steps": [
+          10,
+          11
+        ],
+        "evidence_quote": "Step 10: THOUGHT: 太好了，搜索结果中出现了“小米移动互联网产业园B栋”，地址是“海淀区西二旗中路33号”，这正是我们需要设置的公司地址。... Step 11: THOUGHT: 系统提示“已添加过该地点，确定重新添加？”，说明这个地址之前已经被设置过，现在需要确认是否要重新设置为公司地址。... ACTION: click([836, 1494])",
+        "confidence": 0.95,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "content_absent",
+        "entity_name": "小米移动互联网产业园B栋",
+        "description": "内容 小米移动互联网产业园B栋 已被删除/撤销"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m4",
+          "cleared": false,
+          "evidence_quote": "当前界面显示了近期搜索记录，经过检查，列表中并没有“小米科技园B栋”这一条目。因此，任务已经完成，无需进一步操作。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_15\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在高德地图中撤销对‘小米科技园B栋’的搜索历史记录，确保搜索历史中不再存在‘小米科技园B栋’这一条目",
+        "m2": "在高德地图中撤销搜索历史中新增的‘小米科技园’条目，使搜索历史中不再存在‘小米科技园’这一记录",
+        "m3": "在高德地图中撤销对‘小米移动互联网产业园’的搜索历史记录，确保该词条不再出现在搜索历史中",
+        "m4": "在高德地图中撤销对小米移动互联网产业园B栋（海淀区西二旗中路33号）的地址设置，使其不再作为公司地址存在"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在高德地图中确保搜索历史里不存在‘小米科技园B栋’这一条目",
+        "m2": "在高德地图中确保搜索历史里不存在‘小米科技园’条目",
+        "m3": "在高德地图中彻底清除搜索历史里名为‘小米移动互联网产业园’的条目，确保该条目不再出现在任何搜索历史列表中",
+        "m4": "在高德地图中撤销已创建的‘小米移动互联网产业园B栋（海淀区西二旗中路33号）’地址记录，使其不再作为公司地址或任何用户保存地点存在"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 3,
+      "accepted_plan": {
+        "m1": "在高德地图中彻底清除搜索历史里新增的‘小米科技园B栋’条目，使该实体不再出现在任何搜索历史记录中",
+        "m2": "在高德地图中清除搜索历史里所有与‘小米科技园’相关的条目，确保搜索历史列表中不再出现‘小米科技园’这一项",
+        "m3": "在高德地图中彻底清除搜索历史里名为‘小米移动互联网产业园’的条目，使其不再出现在任何搜索历史记录中",
+        "m4": "在高德地图中撤销对‘小米移动互联网产业园B栋（海淀区西二旗中路33号）’的公司地址设置，使其不再作为公司地址存在"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "budget_exhausted"
+}

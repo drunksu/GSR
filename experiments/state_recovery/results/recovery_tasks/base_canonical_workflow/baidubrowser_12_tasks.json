@@ -6,33 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在百度浏览器中，确保已成功执行‘用“快乐最重要”生成个性签名’的操作，并使AI生成的个性签名结果可见于当前页面",
+      "recovery_goal": "在百度APP中，确保搜索历史里已存在‘快乐最重要’这一条目，使其可用于后续生成个性签名操作",
       "precondition": {
-        "target": "确认当前页面是否已显示由‘用“快乐最重要”生成个性签名’触发的AI生成结果",
-        "check_instruction": "进入百度浏览器首页或搜索结果页，查看是否存在与‘用“快乐最重要”生成个性签名’相关的AI生成内容区域或结果卡片",
-        "clean_if_state": "当前页面已清晰展示AI生成的个性签名内容，且该内容明确关联到‘用“快乐最重要”生成个性签名’这一请求"
+        "target": "检查‘快乐最重要’是否已存在于百度APP的搜索历史中",
+        "check_instruction": "进入百度APP首页，点击搜索框，查看下拉搜索历史列表中是否存在‘快乐最重要’条目",
+        "clean_if_state": "搜索历史列表中已显示‘快乐最重要’条目，且该条目可被点击选中"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "当前页面是否已显示由‘用“快乐最重要”生成个性签名’触发并生成的AI个性签名结果？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m2",
-      "recovery_goal": "在百度浏览器中，确保搜索历史里已存在‘快乐最重要’这一条目，且该条目为最新一次搜索记录",
-      "precondition": {
-        "target": "检查‘快乐最重要’是否已存在于百度浏览器的搜索历史中，并且是最近一次搜索项",
-        "check_instruction": "进入百度浏览器首页或搜索框下拉历史列表，查看是否存在文本为‘快乐最重要’的搜索记录项",
-        "clean_if_state": "搜索历史中已存在‘快乐最重要’且位于历史列表最顶部（即最新搜索项）"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "在百度浏览器的搜索历史列表中，‘快乐最重要’是否作为最新一条搜索记录清晰可见？",
+        "question": "在百度APP的搜索历史列表中，能否看到明确显示为‘快乐最重要’的条目？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -42,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

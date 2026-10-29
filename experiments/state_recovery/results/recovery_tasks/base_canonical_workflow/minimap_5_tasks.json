@@ -6,15 +6,33 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在高德地图中，将搜索历史恢复为包含‘天坛公园到天安门广场’的记录，确保该路线查询条目存在且可点击",
+      "recovery_goal": "在高德地图中将搜索框内容恢复为‘天坛公园’，确保当前搜索目标明确为天坛公园",
       "precondition": {
-        "target": "检查高德地图搜索历史中是否存在‘天坛公园到天安门广场’的记录",
-        "check_instruction": "进入高德地图首页，点击搜索框，下拉查看搜索历史列表，确认其中是否显示‘天坛公园到天安门广场’",
-        "clean_if_state": "搜索历史中已存在‘天坛公园到天安门广场’的记录，且该条目清晰可见、未被删除或覆盖"
+        "target": "搜索框中是否已显示‘天坛公园’",
+        "check_instruction": "进入高德地图首页，查看顶部搜索框中的文本内容是否为‘天坛公园’",
+        "clean_if_state": "搜索框中已显示‘天坛公园’且未处于输入状态（即光标未闪烁、无键盘弹出）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "高德地图的搜索历史列表中是否明确显示‘天坛公园到天安门广场’这一条目？",
+        "question": "高德地图首页的搜索框中是否精确显示‘天坛公园’且未处于编辑状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中，将搜索目标恢复为‘天安门广场’，确保当前搜索框内已输入‘天安门广场’且未被其他内容覆盖或清空。",
+      "precondition": {
+        "target": "确认当前搜索框中显示的内容是否为‘天安门广场’。",
+        "check_instruction": "进入高德地图首页，查看顶部搜索框中的文本内容，确认是否包含实体名‘天安门广场’。",
+        "clean_if_state": "当前搜索框中已准确显示‘天安门广场’，且无多余字符或光标处于编辑状态。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图首页的搜索框中是否完整、准确地显示着‘天安门广场’？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +42,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 1
+  "_llm_calls": 2
 }

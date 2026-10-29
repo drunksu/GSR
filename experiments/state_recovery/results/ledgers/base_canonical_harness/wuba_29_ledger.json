@@ -1,0 +1,47 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_29",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去58同城打开任务中心",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "长辈模式",
+        "identifier": null
+      },
+      "direction": "off",
+      "persistence": "device_local",
+      "status": "attempted_unknown",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        8
+      ],
+      "evidence_quote": "Thought: 当前页面提示“长辈模式已开启”，并提供“关闭长辈模式”按钮。由于长辈模式通常会简化界面、隐藏部分功能（如任务中心），因此必须先关闭该模式才能继续查找任务中心。ACTION: click([609, 2511])",
+      "confidence": 0.4,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "confidence<0.7"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": [
+    "m1: 证据步后仍明确没找到目标开关/模式 → settings_toggle 降为 attempted_unknown 并强制门控"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "fanqieread_17",
+  "run_id": "base_canonical_harness",
+  "task_goal": "进入番茄小说的“穿越”圈子并订阅它",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "求9.8分以上的穿越文",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Thought: 我已经进入了“求9.8分以上的穿越文”这个圈子页面，页面上显示了“已收藏”，说明我可能已经订阅（关注）了该圈子。... ACTION: click([969, 1562])\nThought: 我已经成功进入了“求9.8分以上的穿越文”这个圈子页面，并且看到“已收藏”和“已关注”的状态，说明该圈子已经被订阅。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "social_reaction",
+      "app": "番茄小说",
+      "entity": {
+        "kind": "content",
+        "name": "求9.8分以上的穿越文",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5,
+        6
+      ],
+      "evidence_quote": "Thought: 我已经进入了“求9.8分以上的穿越文”这个圈子页面，页面上显示了“已收藏”，说明我可能已经订阅（关注）了该圈子。... ACTION: click([969, 1562])\nThought: 我已经成功进入了“求9.8分以上的穿越文”这个圈子页面，并且看到“已收藏”和“已关注”的状态，说明该圈子已经被订阅。",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": true,
+  "_warnings": []
+}

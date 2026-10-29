@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "neteasemusic_21",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在网易云音乐中将性别设置恢复为关闭状态，即撤销‘性别’被设为‘女’的变更，使该设置项处于未选中（off）状态",
+      "precondition": {
+        "target": "确认当前性别设置是否仍为‘女’",
+        "check_instruction": "进入‘我的’页面 → 点击头像进入个人资料页 → 查看‘性别’字段的显示值或右侧箭头入口对应的选项状态",
+        "clean_if_state": "性别字段显示为空、‘保密’或‘未设置’，且点击进入后无任何选项被选中（即‘男’‘女’均未打勾）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在网易云音乐的个人资料编辑页面中，‘性别’选项是否处于未选中状态（即‘男’和‘女’均无勾选）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

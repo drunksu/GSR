@@ -6,33 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在拼多多App中，将商品‘猫人 10A级抗菌防臭袜’的状态恢复为已收藏（即心形图标为红色并显示‘已收藏’）",
+      "recovery_goal": "在拼多多App中，将商品NATALYARO【新疆棉】袜子男款中筒袜男士四的状态恢复为已收藏（即心形图标为红色并显示“已收藏”）",
       "precondition": {
-        "target": "确认商品‘猫人 10A级抗菌防臭袜’当前是否处于已收藏状态",
-        "check_instruction": "进入该商品详情页，查看页面底部心形图标颜色及文字提示是否为红色且显示‘已收藏’（猫人 10A级抗菌防臭袜）",
-        "clean_if_state": "心形图标为红色且显示‘已收藏’文字，表明商品‘猫人 10A级抗菌防臭袜’已被成功收藏"
+        "target": "确认商品NATALYARO【新疆棉】袜子男款中筒袜男士四当前是否处于已收藏状态",
+        "check_instruction": "进入该商品详情页，查看页面底部心形图标是否为红色且文字显示为“已收藏”（NATALYARO【新疆棉】袜子男款中筒袜男士四）",
+        "clean_if_state": "心形图标为红色且显示“已收藏”"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在拼多多App中，商品‘猫人 10A级抗菌防臭袜’的详情页底部心形图标是否为红色且显示‘已收藏’？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m2",
-      "recovery_goal": "在拼多多App中，确保“袜子”搜索结果页的第一款商品处于已收藏状态",
-      "precondition": {
-        "target": "确认“袜子”搜索结果页第一款商品是否已被收藏",
-        "check_instruction": "进入拼多多App，搜索“袜子”，在搜索结果页找到第一款商品，查看其商品卡片右上角是否有红色心形收藏图标或“已收藏”文字标识",
-        "clean_if_state": "第一款商品右上角显示红色心形图标或“已收藏”字样，即视为已恢复"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "在拼多多App中搜索“袜子”后，第一款商品的右上角是否显示红色心形收藏图标或‘已收藏’文字？",
+        "question": "在拼多多App中，商品NATALYARO【新疆棉】袜子男款中筒袜男士四的收藏按钮是否为红色并显示“已收藏”？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -42,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

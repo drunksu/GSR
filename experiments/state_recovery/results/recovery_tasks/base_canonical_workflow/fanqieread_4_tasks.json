@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在番茄小说中确保搜索历史里存在‘红楼梦’这一条目，即用户已成功搜索过‘红楼梦’",
+      "recovery_goal": "在番茄小说App中搜索‘红楼梦’，确保搜索框内已输入‘红楼梦’且搜索结果页已正确展示该书目",
       "precondition": {
-        "target": "检查当前搜索历史中是否包含‘红楼梦’",
-        "check_instruction": "进入番茄小说首页，点击搜索框，查看下拉搜索历史列表中是否存在‘红楼梦’条目",
-        "clean_if_state": "搜索历史中已显示‘红楼梦’条目，且该条目可被正常点击"
+        "target": "确认当前是否已处于搜索‘红楼梦’后的结果页面或搜索框中已包含‘红楼梦’",
+        "check_instruction": "进入番茄小说App首页，查看顶部搜索框内容及下方推荐/搜索结果区域是否显示‘红楼梦’相关条目",
+        "clean_if_state": "搜索框中已显示‘红楼梦’文字，且搜索结果列表中已出现标题为‘红楼梦’的书籍条目（含封面、书名、作者等信息）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "在番茄小说的搜索历史列表中，能否看到明确标有‘红楼梦’字样的历史记录条目？",
+        "question": "红楼梦的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

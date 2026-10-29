@@ -1,0 +1,62 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "rimet_3",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_3\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\rimet_3_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "rimet_3.base_canonical_harness.1793212816",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "message_send",
+        "app": "钉钉",
+        "entity": {
+          "kind": "message",
+          "name": "微笑",
+          "identifier": "钉钉小秘书"
+        },
+        "direction": "sent",
+        "persistence": "server",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          2,
+          3
+        ],
+        "evidence_quote": "Step 2: THOUGHT: 表情面板已经打开，我可以看到“最近使用”区域中有多个表情，其中包括一个微笑的emoji（黄色笑脸）……ACTION: click([106, 2216])\nStep 3: THOUGHT: 微笑的emoji已经成功输入到消息框中，接下来需要点击“发送”按钮将其发送出去……ACTION: click([1077, 2362])",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_sent",
+        "entity_name": "微笑",
+        "description": "消息 微笑 已不存在于会话"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

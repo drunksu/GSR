@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在同花顺App中，确保云南白药的搜索历史已存在，并进入其个股页面查看周K线图",
+      "recovery_goal": "在同花顺App中，将界面恢复至能清晰显示‘云南白药’的周K线图状态",
       "precondition": {
-        "target": "确认云南白药是否已在同花顺的搜索历史中存在",
-        "check_instruction": "进入同花顺首页，点击搜索框，查看搜索历史列表中是否包含‘云南白药’条目",
-        "clean_if_state": "搜索历史中已存在‘云南白药’条目，且可点击进入其个股页面"
+        "target": "确认当前页面是否已正确加载‘云南白药’的周K线图",
+        "check_instruction": "进入同花顺App的股票详情页，查看标题或K线图上方是否明确显示‘云南白药’字样及周K线切换选项",
+        "clean_if_state": "当前页面已显示‘云南白药’的周K线图，且图表周期为‘周’"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "同花顺App的搜索历史中是否明确显示‘云南白药’条目，且当前页面为云南白药的个股详情页并展示周K线图？",
+        "question": "云南白药的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,

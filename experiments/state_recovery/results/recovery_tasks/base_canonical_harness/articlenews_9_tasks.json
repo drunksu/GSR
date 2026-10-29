@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_9",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中，将作者‘乘风破浪的梦想’的社交状态恢复为未关注状态，即确保其主页上显示红色‘关注’按钮而非‘私信·打招呼’按钮",
+      "precondition": {
+        "target": "作者‘乘风破浪的梦想’当前是否处于已关注状态",
+        "check_instruction": "进入今日头条，搜索并打开作者‘乘风破浪的梦想’的个人主页, 观察页面中部按钮文字是否为‘私信·打招呼’",
+        "clean_if_state": "页面上显示红色‘关注’按钮，且关注数未因本次操作增加（即未被关注）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "乘风破浪的梦想的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

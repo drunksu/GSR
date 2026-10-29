@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_6",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多中取消对‘卡通小狗马克杯卡通’商品的收藏，使其不再显示‘已收藏’状态（即红色实心心形图标消失，变为未收藏的空心心形或无收藏标识）",
+      "precondition": {
+        "target": "确认‘卡通小狗马克杯卡通’当前处于已收藏状态",
+        "check_instruction": "进入拼多多搜索页面，输入‘卡通小狗马克杯卡通’并搜索，找到该商品卡片，观察其底部收藏图标是否为红色实心心形",
+        "clean_if_state": "商品卡片底部显示为空心心形或无收藏标识，即未收藏状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多中，‘卡通小狗马克杯卡通’商品卡片底部是否不再显示红色实心心形图标（即已取消收藏）？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在拼多多App中，将搜索历史中名为“卡通小狗 马克杯”的条目彻底删除，确保该条目不再出现在任何搜索历史记录中",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘卡通小狗 马克杯’条目",
+        "check_instruction": "进入拼多多首页，点击搜索栏，查看下拉展示的搜索历史列表中是否包含‘卡通小狗 马克杯’",
+        "clean_if_state": "搜索历史列表中已无‘卡通小狗 马克杯’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多App的搜索历史列表中，是否完全找不到‘卡通小狗 马克杯’这一条记录？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

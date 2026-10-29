@@ -1,0 +1,852 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "articlenews_8",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\articlenews_8_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_8_tasks.json",
+  "has_contamination": true,
+  "iterations": 3,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "迭代预算耗尽 (0)",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_8_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中，将新闻“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的收藏状态撤销，使其恢复为未收藏状态（即收藏按钮为灰色空心星星，收藏数减少1）",
+        "m2": "在今日头条中撤销搜索历史中‘健康’条目的创建，使搜索历史中不再存在‘健康’条目"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[606, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "d83115af72cde0aea3a6f541004404da",
+            "xml_after_sig": "4a4c931265f734818339d833bc7ef274"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[454, 2601]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "4a4c931265f734818339d833bc7ef274",
+            "xml_after_sig": "ac1d5c3113492f3213044af18d095ac6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[454, 2601]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "ac1d5c3113492f3213044af18d095ac6",
+            "xml_after_sig": "ac1d5c3113492f3213044af18d095ac6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[534, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_4_after.png",
+            "xml_before_sig": "ac1d5c3113492f3213044af18d095ac6",
+            "xml_after_sig": "ac1d5c3113492f3213044af18d095ac6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[454, 2601]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "unchanged",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_5_after.png",
+            "xml_before_sig": "ac1d5c3113492f3213044af18d095ac6",
+            "xml_after_sig": "ac1d5c3113492f3213044af18d095ac6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step6",
+          "target_id": "m1",
+          "action_type": "type",
+          "target_description": "轻养生",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 type"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "输入动作带非空 text"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "pass",
+                "note": "动作目标与恢复实体 2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用 直接关联"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_6_after.png",
+            "xml_before_sig": "ac1d5c3113492f3213044af18d095ac6",
+            "xml_after_sig": "af5c7b435a297d9fe75bc81d940d9628"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[609, 2338]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "5acfc71d3aba27a18f12514e57460662",
+            "xml_after_sig": "cabebc7f302885c01f68369a1e04c3f5"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1025, 2576]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "污染类型 social_reaction 无可靠确定性验证手段（需 VLM verify）",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "cabebc7f302885c01f68369a1e04c3f5",
+            "xml_after_sig": "dd210d83cf60dde81efc426fdb8619ec"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              606,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              454,
+              2601
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              454,
+              2601
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              534,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              454,
+              2601
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "type",
+            "target": "轻养生",
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              609,
+              2338
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              1025,
+              2576
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_8_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": true,
+            "evidence_quote": "页面底部显示收藏数为80，且收藏按钮为**实心黄色星星**，说明当前处于已收藏状态。根据任务要求，我需要点击该收藏按钮将其撤销为未收藏（灰色空心星星），使收藏数减1。 ACTION: click([1025, 2576])"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "搜索历史中仍存在“健康”条目（带‘置顶’标签），轨迹中未执行任何删除该历史项的操作。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_8_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中，将标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻的收藏状态撤销，使其变为未收藏（即收藏按钮为灰色空心星星，收藏数减少1）",
+        "m2": "在今日头条App中，将搜索历史中的实体“健康”条目彻底删除，确保其不再出现在搜索历史列表中"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_8.base_canonical_harness.1793171278.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[606, 214]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": false,
+            "reason": "authorized: 恢复目标 m1 不在本轮授权恢复范围",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "block",
+                "note": "恢复目标 m1 不在本轮授权恢复范围"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": null,
+            "error": "authorized: 恢复目标 m1 不在本轮授权恢复范围"
+          },
+          "execution_status": "blocked",
+          "gui_changed": "uncertain",
+          "clearance": "uncertain",
+          "clearance_basis": "动作被执行前检查拦截，未产生执行后观察",
+          "new_contamination_signal": false,
+          "observation_ref": null,
+          "error_reason": "authorized: 恢复目标 m1 不在本轮授权恢复范围"
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter2\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter2",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              606,
+              214
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter2\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_8_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "我需要找到标题为“2026最火‘轻养生’：不花钱、不内卷，坚持28天气色回春，全家用”的新闻。当前屏幕显示的新闻列表中并没有这篇文章，因此我需要通过搜索功能来定位它。顶部的搜索栏已经显示了之前的搜索内容，我应该点击搜索栏进行新的搜索。"
+          },
+          {
+            "mutation_id": "m2",
+            "cleared": false,
+            "evidence_quote": "我需要找到标题为“2026最火‘轻养生’：不花钱、不内卷，坚持28天气色回春，全家用”的新闻。当前屏幕显示的新闻列表中并没有这篇文章，因此我需要通过搜索功能来定位它。顶部的搜索栏已经显示了之前的搜索内容，我应该点击搜索栏进行新的搜索。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 3,
+      "phase": "plan",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_8_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中找到标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻，确保其收藏状态被撤销——即收藏按钮为未填充的灰色星星图标，且收藏数比当前显示值少1（恢复至未收藏前状态）",
+        "m2": "在今日头条App中，将搜索历史中名为“健康”的条目彻底清除，确保该条目不再出现在任何搜索历史记录中"
+      }
+    }
+  ],
+  "recovery_id": "articlenews_8.base_canonical_harness.1793171278",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 1
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "social_reaction",
+        "app": "今日头条",
+        "entity": {
+          "kind": "content",
+          "name": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用",
+          "identifier": null
+        },
+        "direction": "collected",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          7,
+          8,
+          9
+        ],
+        "evidence_quote": "Step 7: THOUGHT: ...在页面底部，我看到收藏按钮（黄色星星图标）... Step 8: THOUGHT: 我刚刚点击了收藏按钮，发现收藏数从103变为102...因此我需要再次点击星星图标来完成收藏。 Step 9: THOUGHT: 现在屏幕显示“收藏成功”提示，且收藏按钮已变为黄色星星（填充状态），数字为103，说明收藏操作已完成。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "not_reacted",
+        "entity_name": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用",
+        "description": "社交反应（关注/点赞/收藏）已取消（2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用）"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "我需要找到标题为“2026最火‘轻养生’：不花钱、不内卷，坚持28天气色回春，全家用”的新闻。当前屏幕显示的新闻列表中并没有这篇文章，因此我需要通过搜索功能来定位它。顶部的搜索栏已经显示了之前的搜索内容，我应该点击搜索栏进行新的搜索。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    },
+    {
+      "mutation_id": "m2",
+      "mutation_ref": {
+        "id": "m2",
+        "type": "search_history",
+        "app": "今日头条",
+        "entity": {
+          "kind": "search",
+          "name": "健康",
+          "identifier": null
+        },
+        "direction": "created",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          5
+        ],
+        "evidence_quote": "Step 5: THOUGHT: 现在搜索框已激活，光标在输入框内，我可以直接输入“健康”来查找健康频道。 ACTION: type(text='健康')",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "no_search_entry",
+        "entity_name": "健康",
+        "description": "搜索历史中不再存在条目 健康"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 2,
+      "last_verify": {
+        "round": 2,
+        "verdict": {
+          "mutation_id": "m2",
+          "cleared": false,
+          "evidence_quote": "我需要找到标题为“2026最火‘轻养生’：不花钱、不内卷，坚持28天气色回春，全家用”的新闻。当前屏幕显示的新闻列表中并没有这篇文章，因此我需要通过搜索功能来定位它。顶部的搜索栏已经显示了之前的搜索内容，我应该点击搜索栏进行新的搜索。"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_8\\recovery_iter2"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在今日头条中，将新闻“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的收藏状态撤销，使其恢复为未收藏状态（即收藏按钮为灰色空心星星，收藏数减少1）",
+        "m2": "在今日头条中撤销搜索历史中‘健康’条目的创建，使搜索历史中不再存在‘健康’条目"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在今日头条中，将标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻的收藏状态撤销，使其变为未收藏（即收藏按钮为灰色空心星星，收藏数减少1）",
+        "m2": "在今日头条App中，将搜索历史中的实体“健康”条目彻底删除，确保其不再出现在搜索历史列表中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 3,
+      "accepted_plan": {
+        "m1": "在今日头条中找到标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻，确保其收藏状态被撤销——即收藏按钮为未填充的灰色星星图标，且收藏数比当前显示值少1（恢复至未收藏前状态）",
+        "m2": "在今日头条App中，将搜索历史中名为“健康”的条目彻底清除，确保该条目不再出现在任何搜索历史记录中"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": null,
+      "error": null
+    }
+  ],
+  "termination_reason": "budget_exhausted"
+}

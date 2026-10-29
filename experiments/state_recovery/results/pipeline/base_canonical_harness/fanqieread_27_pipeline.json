@@ -1,0 +1,347 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "fanqieread_27",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\fanqieread_27_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\fanqieread_27_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\fanqieread_27_tasks.json",
+      "accepted_plan": {
+        "m1": "在番茄小说中将清理缓存设置项恢复为关闭状态，即撤销已开启的清理缓存功能，使其不再处于可一键清理的状态"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_27.base_canonical_harness.1793184004.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1077, 2579]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "清理缓存的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "61c2696c8638aa1eaa92245aaaf90425",
+            "xml_after_sig": "897601ff4fe519341bc96afa13d2b0e2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_27.base_canonical_harness.1793184004.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1131, 201]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "清理缓存的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "897601ff4fe519341bc96afa13d2b0e2",
+            "xml_after_sig": "258664831deb1183a848f2308d08d9d4"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "fanqieread_27.base_canonical_harness.1793184004.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1126, 201]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "清理缓存的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 清理缓存 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "258664831deb1183a848f2308d08d9d4",
+            "xml_after_sig": "e500f5c8f1909213e8255c0675fa939a"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_3.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1",
+        "step_count": 3,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1077,
+              2579
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1131,
+              201
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              1126,
+              201
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1\\step_3.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\fanqieread_27_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 0: THOUGHT: 我需要找到并进入“我的”页面，因为清理缓存的设置通常位于个人中心或设置菜单中。当前界面是番茄小说的首页推荐页，底部导航栏有“我的”选项，点击它应该能进入个人中心。 ACTION: click([1077, 2579])\nStep 1: THOUGHT: 我现在在“我的”页面，但尚未看到清理缓存的设置项。通常这类功能会放在设置菜单中，而设置入口往往通过右上角的三横线菜单（更多选项）进入。因此，下一步应点击右上角的菜单图标，以查找设置或相关功能选项。 ACTION: click([1131, 201])\nStep 2: THOUGHT: 当前页面是“我的”页面的侧边菜单，但仍未看到“设置”或“清理缓存”相关选项。根据常见App设计逻辑，设置入口可能在顶部用户信息区域的右上角齿轮图标处（即个人主页右上角的设置按钮）。该图标通常代表“设置”，点击后应进入设置页面，在其中可找到缓存管理相关选项。 ACTION: click([1126, 201])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\fanqieread_27_tasks.json",
+      "accepted_plan": {
+        "m1": "在番茄小说中将‘清理缓存’设置项恢复为关闭状态（即撤销一键清理缓存的操作，确保该功能未被激活）"
+      },
+      "verify": {
+        "success": false,
+        "reason": "no_new_evidence",
+        "verdicts": []
+      }
+    }
+  ],
+  "recovery_id": "fanqieread_27.base_canonical_harness.1793184004",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "番茄小说",
+        "entity": {
+          "kind": "setting",
+          "name": "清理缓存",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "Thought: 在“清理缓存”页面中，我看到了明确标有“854.47 MB 可清理的缓存”，右侧有一个橙色的“一键清理”按钮，这正是用户要求的“一键清理缓存”功能。点击该按钮即可执行清理操作。",
+        "confidence": 0.95,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "清理缓存",
+        "description": "设置项 清理缓存 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 0: THOUGHT: 我需要找到并进入“我的”页面，因为清理缓存的设置通常位于个人中心或设置菜单中。当前界面是番茄小说的首页推荐页，底部导航栏有“我的”选项，点击它应该能进入个人中心。 ACTION: click([1077, 2579])\nStep 1: THOUGHT: 我现在在“我的”页面，但尚未看到清理缓存的设置项。通常这类功能会放在设置菜单中，而设置入口往往通过右上角的三横线菜单（更多选项）进入。因此，下一步应点击右上角的菜单图标，以查找设置或相关功能选项。 ACTION: click([1131, 201])\nStep 2: THOUGHT: 当前页面是“我的”页面的侧边菜单，但仍未看到“设置”或“清理缓存”相关选项。根据常见App设计逻辑，设置入口可能在顶部用户信息区域的右上角齿轮图标处（即个人主页右上角的设置按钮）。该图标通常代表“设置”，点击后应进入设置页面，在其中可找到缓存管理相关选项。 ACTION: click([1126, 201])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\fanqieread_27\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在番茄小说中将清理缓存设置项恢复为关闭状态，即撤销已开启的清理缓存功能，使其不再处于可一键清理的状态"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在番茄小说中将‘清理缓存’设置项恢复为关闭状态（即撤销一键清理缓存的操作，确保该功能未被激活）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

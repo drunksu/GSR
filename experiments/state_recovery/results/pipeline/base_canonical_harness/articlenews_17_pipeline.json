@@ -1,0 +1,281 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "articlenews_17",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\articlenews_17_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至清除前的非零状态（即缓存大小大于0.0B，且‘清理’按钮为可点击红色状态）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_17.base_canonical_harness.1793169725.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1097, 2587]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条的设置中，‘清除缓存’对应的缓存文件大小是否大于0.0B且‘清理’按钮为红色可点击状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "0ce429e962858877ccbf07f787ab38a1",
+            "xml_after_sig": "1be02745b91dd4ed4541d7c87dc3975a"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_17.base_canonical_harness.1793169725.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1111, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条的设置中，‘清除缓存’对应的缓存文件大小是否大于0.0B且‘清理’按钮为红色可点击状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 清除缓存 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "1be02745b91dd4ed4541d7c87dc3975a",
+            "xml_after_sig": "7fbc11b1ac208f82864c16115ae0937e"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1097,
+              2587
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1111,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 0: THOUGHT: 要完成“撤销清除缓存”操作，首先需要进入今日头条的个人中心或设置页面，找到缓存管理相关选项。当前界面是首页推荐流，底部导航栏有“我的”入口，点击可进入个人中心，这是通往缓存设置的必经之路。因此，下一步应点击“我的”按钮。 Step 1: THOUGHT: 当前在“我的”页面，但未看到缓存管理或设置入口。根据常见App设计，“全部功能”通常包含更多系统设置选项，可能藏有缓存相关功能；另外右上角的齿轮图标（设置）也极可能是进入设置的快捷入口。优先尝试点击右上角的设置图标（齿轮），因为这是最标准的进入设置页的路径，有望找到“存储”或“缓存管理”。 ACTION: click([1111, 203])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至被清理前的状态（即缓存文件大小非零、‘清理’按钮为红色可点击状态）"
+      },
+      "verify": {
+        "success": false,
+        "reason": "no_new_evidence",
+        "verdicts": []
+      }
+    }
+  ],
+  "recovery_id": "articlenews_17.base_canonical_harness.1793169725",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "今日头条",
+        "entity": {
+          "kind": "setting",
+          "name": "清除缓存",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          2,
+          3,
+          4
+        ],
+        "evidence_quote": "Step 2: THOUGHT: 我在设置页面中找到了“清除缓存”选项，旁边显示当前缓存大小为35.6MB……Step 3: THOUGHT: 我已经进入了清理缓存界面，看到“缓存文件”部分显示386.7MB，并有一个红色的“清理”按钮……Step 4: THOUGHT: 从当前界面可以看到，缓存文件已显示为0.0B，且“清理”按钮变为灰色不可点击状态，说明缓存已经成功清除。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "清除缓存",
+        "description": "设置项 清除缓存 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 0: THOUGHT: 要完成“撤销清除缓存”操作，首先需要进入今日头条的个人中心或设置页面，找到缓存管理相关选项。当前界面是首页推荐流，底部导航栏有“我的”入口，点击可进入个人中心，这是通往缓存设置的必经之路。因此，下一步应点击“我的”按钮。 Step 1: THOUGHT: 当前在“我的”页面，但未看到缓存管理或设置入口。根据常见App设计，“全部功能”通常包含更多系统设置选项，可能藏有缓存相关功能；另外右上角的齿轮图标（设置）也极可能是进入设置的快捷入口。优先尝试点击右上角的设置图标（齿轮），因为这是最标准的进入设置页的路径，有望找到“存储”或“缓存管理”。 ACTION: click([1111, 203])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至清除前的非零状态（即缓存大小大于0.0B，且‘清理’按钮为可点击红色状态）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至被清理前的状态（即缓存文件大小非零、‘清理’按钮为红色可点击状态）"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

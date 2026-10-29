@@ -2,16 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "articlenews_17",
   "run_id": "base_canonical",
-  "tasks": [],
-  "human_gate": [
+  "tasks": [
     {
+      "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "title": "今日头条应用中的缓存残留",
-      "gate_reason": "reversible=unknown → human gate",
-      "reason": "系统无法确认缓存是否被彻底清除，因‘清理完成’提示可能仅表示界面反馈，实际文件系统中仍可能存在残留数据或未同步的缓存条目，需人工验证与干预。",
-      "suggested_manual_action": "进入今日头条App → 点击右下角‘我的’ → 点击右上角设置图标（⚙️）→ 进入‘设置’页面 → 点击‘清除缓存’，观察缓存大小是否确实为0.0B；若仍显示非零值，可尝试重启App后再次操作。"
+      "recovery_goal": "在今日头条App中，将‘清除缓存’功能恢复至已执行清理完成的状态，即缓存大小显示为0.0B。",
+      "precondition": {
+        "target": "确认缓存是否已被清空",
+        "check_instruction": "进入今日头条的设置页面，找到‘清除缓存’相关区域，查看缓存文件大小是否显示为0.0B。",
+        "clean_if_state": "缓存文件大小已显示为0.0B，且无‘清理’按钮或提示待清理数据。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条App的设置页面中，‘清除缓存’对应的缓存文件大小是否已显示为0.0B？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
     }
   ],
+  "human_gate": [],
   "_model": "qwen3-vl-plus",
   "_llm_calls": 1
 }

@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_12",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去今日头条更换头像，从默认头像的艺术类中选一个",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "content_lifecycle",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "雪花图案",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        4,
+        5,
+        6
+      ],
+      "evidence_quote": "Step 4: THOUGHT: ...我将点击第一个艺术类头像（雪花图案）作为选择。\\nStep 5: THOUGHT: 我已经从“艺术”分类中选择了第一个头像（雪花图案），该头像已被高亮选中。现在需要点击右下角的“选取并发布”按钮来确认并完成头像更换操作。\\nStep 6: THOUGHT: 头像已成功更换为艺术类默认头像（雪花图案），页面显示“发布中”进度条，说明系统正在同步更新。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

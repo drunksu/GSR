@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "pinduoduo_12",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，将搜索状态恢复为已输入‘豆干辣条’并显示对应商品列表的页面",
+      "precondition": {
+        "target": "确认当前搜索框中已输入‘豆干辣条’且商品列表已加载",
+        "check_instruction": "进入拼多多首页，查看顶部搜索框内容是否为‘豆干辣条’，并确认下方展示的商品列表与该关键词相关",
+        "clean_if_state": "搜索框中已显示‘豆干辣条’且下方已列出豆干辣条类商品列表，即视为已恢复"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "拼多多App当前页面的搜索框中是否显示‘豆干辣条’，且下方商品列表是否为豆干辣条相关商品？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

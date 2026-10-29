@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_8",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺App中彻底清除搜索历史里的“青岛啤酒”条目，使搜索历史列表中不再显示该条目",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘青岛啤酒’条目",
+        "check_instruction": "进入同花顺首页，点击顶部搜索框，查看下拉的搜索历史列表，定位‘青岛啤酒’条目是否存在",
+        "clean_if_state": "搜索历史列表中已无‘青岛啤酒’条目，仅显示其他历史记录或为空列表"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺App的搜索历史列表中，是否已不存在‘青岛啤酒’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "qq_15",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在QQ中将‘听歌中’状态关闭，使其恢复为未选中（off）状态",
+      "precondition": {
+        "target": "确认当前QQ状态是否仍为‘听歌中’",
+        "check_instruction": "进入QQ个人主页或状态设置页，查看‘听歌中’选项是否处于蓝色高亮（选中）状态",
+        "clean_if_state": "‘听歌中’选项未被选中（无高亮、无勾选、状态显示为‘在线’或其他非听歌状态）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "QQ中‘听歌中’状态是否已关闭，即该选项未被选中且用户状态不再显示为听歌相关？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

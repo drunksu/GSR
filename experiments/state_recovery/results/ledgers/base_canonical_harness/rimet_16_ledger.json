@@ -1,0 +1,44 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "rimet_16",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去钉钉添加我的状态为下班了",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "session_state",
+      "app": "钉钉",
+      "entity": {
+        "kind": "setting",
+        "name": "下班了",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        1,
+        2,
+        3
+      ],
+      "evidence_quote": "THOUGHT: 我已经进入了个人中心页面，看到了一个显示“下班了”的状态按钮，这正是我要设置的状态。点击这个按钮应该就能完成任务。... THOUGHT: 我已经成功选择了“下班了”状态，现在需要点击右上角的“确定”按钮来确认并保存这个状态设置。... THOUGHT: 我已经成功将状态设置为“下班了”，在消息列表中可以看到我的状态已经更新为“下班了”并带有金币图标，这表明操作已经完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "articlenews_16",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": false,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在今日头条 App 中，将‘自动开启阅读模式’的开关状态恢复为开启（即开关变为绿色）",
+      "recovery_goal": "在今日头条中将‘自动开启阅读模式’的开关状态恢复为开启（即绿色开关）",
       "precondition": {
-        "target": "‘自动开启阅读模式’开关当前状态",
-        "check_instruction": "进入今日头条 App → 我 → 设置 → 阅读设置，查看‘自动开启阅读模式’开关的颜色",
-        "clean_if_state": "开关为绿色（表示已开启）"
+        "target": "确认‘自动开启阅读模式’当前是否已处于开启状态",
+        "check_instruction": "进入今日头条的设置页面，找到‘自动开启阅读模式’选项，观察其开关颜色是否为绿色",
+        "clean_if_state": "‘自动开启阅读模式’的开关显示为绿色，表示已开启"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "今日头条 App 的‘自动开启阅读模式’开关是否已恢复为绿色（开启状态）？",
+        "question": "在今日头条的设置中，‘自动开启阅读模式’的开关是否为绿色并处于开启状态？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "low",
-      "max_steps": 10
+      "max_steps": 8
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

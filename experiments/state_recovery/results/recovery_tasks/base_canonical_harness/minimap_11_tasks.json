@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_11",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中彻底删除搜索历史里的条目“北京丰台站到上海南站”，使其不再出现在任何搜索历史列表中",
+      "precondition": {
+        "target": "确认搜索历史中是否存在‘北京丰台站到上海南站’条目",
+        "check_instruction": "打开高德地图首页，点击搜索框进入搜索历史页面，查看历史记录列表中是否包含‘北京丰台站到上海南站’",
+        "clean_if_state": "搜索历史列表中已无‘北京丰台站到上海南站’条目，即该条目已被清除"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "北京丰台站到上海南站的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

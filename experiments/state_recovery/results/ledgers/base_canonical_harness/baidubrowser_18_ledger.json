@@ -1,0 +1,67 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_18",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在百度浏览器设置应用安装后删除安装包",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "百度App",
+      "entity": {
+        "kind": "search",
+        "name": "安装包",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7
+      ],
+      "evidence_quote": "Thought: 搜索框已激活，且搜索历史中出现了“安装包”关键词，说明系统已记录相关查询...",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "百度App",
+      "entity": {
+        "kind": "search",
+        "name": "下载",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        11
+      ],
+      "evidence_quote": "ACTION: type(text='下载')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "安装包",
+    "下载"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

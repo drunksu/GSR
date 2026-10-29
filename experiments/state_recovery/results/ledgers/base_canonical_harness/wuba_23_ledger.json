@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_23",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去58同城打开长辈模式",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "settings_toggle",
+      "app": "58同城",
+      "entity": {
+        "kind": "setting",
+        "name": "长辈模式",
+        "identifier": null
+      },
+      "direction": "on",
+      "persistence": "device_local",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "Thought: 当前页面明确显示“长辈模式”的介绍，并提供了一个醒目的橙色按钮“开启长辈模式”。这正是完成任务所需的最后一步操作。点击该按钮即可启用长辈模式。... Thought: 从当前界面可以看出，页面顶部有“返回普通版”按钮，说明长辈模式已经成功开启（因为只有在长辈模式下才会显示该按钮）。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

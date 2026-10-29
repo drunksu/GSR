@@ -6,51 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在高德地图中打开附近页，并确保搜索关键词为‘4S店’，使界面显示与‘4S店’相关的附近地点列表",
+      "recovery_goal": "在高德地图中打开附近页，搜索并确保‘洗车4S店’的搜索结果已正确显示在列表中",
       "precondition": {
-        "target": "确认当前搜索关键词是否为‘4S店’且位于附近页",
-        "check_instruction": "进入高德地图的附近页，查看搜索框中输入的文本是否为‘4S店’",
-        "clean_if_state": "当前页面已是高德地图附近页，且搜索框中已显示‘4S店’并列出相关结果"
+        "target": "确认当前页面是否已展示‘洗车4S店’的搜索结果列表",
+        "check_instruction": "进入高德地图的附近页，查看搜索框中是否输入了‘洗车4S店’且下方结果列表中存在相关条目",
+        "clean_if_state": "当前页面已显示‘洗车4S店’的搜索结果列表，且顶部搜索框内容为‘洗车4S店’"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "高德地图附近页的搜索框中是否显示‘4S店’且下方已列出相关4S店地点？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m2",
-      "recovery_goal": "在高德地图中打开附近页，并确保搜索关键词为‘洗车’，使界面显示与‘洗车’相关的 nearby POI 列表",
-      "precondition": {
-        "target": "确认当前搜索关键词是否为‘洗车’且位于附近页",
-        "check_instruction": "进入高德地图的附近页，查看搜索框中输入的文本是否为‘洗车’",
-        "clean_if_state": "搜索框中已显示‘洗车’且页面正在展示与洗车相关的周边地点列表"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "高德地图附近页的搜索框中是否显示‘洗车’且页面正展示与洗车相关的周边地点？",
-        "expected": "yes"
-      },
-      "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
-    },
-    {
-      "schema": "recovery-task/v0.1",
-      "mutation_id": "m3",
-      "recovery_goal": "在高德地图中打开附近页，并确保搜索框中已输入‘4S店 洗车’且搜索结果已加载显示相关地点",
-      "precondition": {
-        "target": "确认当前页面为高德地图附近页，且搜索框内容为‘4S店 洗车’并已展示搜索结果",
-        "check_instruction": "进入高德地图的附近页，查看顶部搜索框中的文本是否为‘4S店 洗车’，并确认下方列表中已出现与该关键词匹配的地点条目",
-        "clean_if_state": "搜索框中已显示‘4S店 洗车’且下方已列出相关4S店洗车服务地点，即视为已恢复"
-      },
-      "expected_end_state": {
-        "kind": "vlm_judge",
-        "question": "高德地图附近页的搜索框中是否显示‘4S店 洗车’，且下方已展示与该关键词匹配的4S店洗车地点？",
+        "question": "高德地图附近页的搜索框中是否显示‘洗车4S店’，且下方结果列表中已列出相关洗车4S店？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -60,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 3
+  "_llm_calls": 1
 }

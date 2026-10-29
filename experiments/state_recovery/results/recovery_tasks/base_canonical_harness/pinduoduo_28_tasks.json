@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_28",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多中将头像恢复为更换前的原始头像，确保蓝发动漫角色的图像已被完全移除，不再作为头像显示",
+      "precondition": {
+        "target": "确认当前头像是否仍为蓝发动漫角色的图像",
+        "check_instruction": "进入拼多多个人中心页面，查看头像区域显示的图像是否为蓝发动漫角色的图像",
+        "clean_if_state": "当前头像不是蓝发动漫角色的图像，即已恢复为原始头像或其他非该图像的头像"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "拼多多个人中心页面的头像是否已不再是蓝发动漫角色的图像？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

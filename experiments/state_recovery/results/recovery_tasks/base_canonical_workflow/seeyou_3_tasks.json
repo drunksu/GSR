@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在美柚App中打开‘运动减肥’的健康百科页面，确保当前显示的是标题为‘运动减肥’的健康百科详情页",
+      "recovery_goal": "在美柚App中打开‘运动减肥’的健康百科页面，确保当前显示的是标题为‘运动减肥’的健康百科内容页",
       "precondition": {
-        "target": "确认当前页面是否已是‘运动减肥’健康百科详情页",
-        "check_instruction": "进入美柚App的健康百科模块，查找并确认页面顶部或标题区域显示有‘运动减肥’字样",
-        "clean_if_state": "当前页面标题明确显示‘运动减肥’且内容为健康百科详情，即视为已恢复"
+        "target": "确认当前页面是否已正确显示‘运动减肥’的健康百科内容",
+        "check_instruction": "进入美柚App的健康百科模块，查找并确认页面顶部或标题区域明确显示‘运动减肥’字样",
+        "clean_if_state": "当前页面标题或主内容区已清晰显示‘运动减肥’且属于健康百科类内容，即视为已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "运动减肥的状态是否已恢复到目标状态？",
+        "question": "当前美柚App页面是否正显示标题为‘运动减肥’的健康百科内容？",
         "expected": "yes"
       },
       "idempotent": true,

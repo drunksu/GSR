@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_9",
+  "run_id": "base_canonical_harness",
+  "task_goal": "去关注今日头条体育频道第一条新闻的作者",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "account",
+        "name": "乘风破浪的梦想",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3,
+        4
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 我已进入作者“乘风破浪的梦想”的个人主页，页面上清晰显示了红色的“关注”按钮。……点击该按钮即可完成关注操作。\\nStep 4: THOUGHT: 从当前界面看，作者“乘风破浪的梦想”的关注数已从35变为36（原文显示“35 关注”现在应为36），说明刚才的点击操作已成功完成关注。同时，“关注”按钮已消失，取而代之的是“私信·打招呼”按钮，这是关注后的典型状态变化。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

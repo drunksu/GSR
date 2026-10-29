@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "wuba_23",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": false,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在58同城App中将‘长辈模式’设置为关闭状态",
+      "recovery_goal": "在58同城App中将长辈模式开启至启用状态，确保界面显示为长辈模式风格（字体变大、布局简化、顶部有‘返回普通版’按钮）",
       "precondition": {
-        "target": "58同城App中‘长辈模式’的当前开关状态",
-        "check_instruction": "进入58同城App → 点击右下角‘我的’ → 进入‘设置’页面 → 查看‘长辈模式’选项旁是否有‘返回普通版’按钮或显示‘已开启’字样",
-        "clean_if_state": "当前界面显示‘开启长辈模式’按钮，且无‘返回普通版’按钮，表明长辈模式已关闭"
+        "target": "确认当前是否已处于长辈模式启用状态",
+        "check_instruction": "进入58同城首页，观察顶部导航栏是否存在‘返回普通版’按钮，并检查整体UI是否呈现长辈模式特征（如大字体、简化布局），以判断长辈模式是否已开启",
+        "clean_if_state": "当前页面顶部已显示‘返回普通版’按钮，且界面元素符合长辈模式特征（字体较大、布局简洁），即视为已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "58同城App的设置页面中，‘长辈模式’选项旁是否显示‘开启长辈模式’按钮，且无‘返回普通版’按钮？",
+        "question": "58同城App当前界面是否已成功启用长辈模式，表现为顶部有‘返回普通版’按钮且整体UI为大字体简化布局？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "low",
-      "max_steps": 15
+      "max_steps": 8
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

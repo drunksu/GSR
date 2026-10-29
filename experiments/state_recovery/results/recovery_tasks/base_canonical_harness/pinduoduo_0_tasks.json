@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "pinduoduo_0",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在拼多多App中，将搜索历史里名为iPhone 16 promax的条目彻底删除，使该条目不再出现在‘最近搜索’列表中",
+      "precondition": {
+        "target": "确认当前处于拼多多搜索界面且能看到‘最近搜索’区域",
+        "check_instruction": "进入拼多多首页，点击顶部搜索框，查看下方‘最近搜索’列表中是否显示实体名iPhone 16 promax",
+        "clean_if_state": "‘最近搜索’列表中已无iPhone 16 promax条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在拼多多App的搜索界面中，‘最近搜索’列表里是否完全不存在iPhone 16 promax这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

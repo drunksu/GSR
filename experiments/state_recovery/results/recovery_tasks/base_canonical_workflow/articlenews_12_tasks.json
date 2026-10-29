@@ -6,20 +6,20 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在今日头条App中将头像恢复为默认头像（即非艺术类蓝色波浪形图案的原始默认样式）",
+      "recovery_goal": "在今日头条中将用户头像恢复为油画风格的船只图像",
       "precondition": {
-        "target": "确认当前头像是否已为默认头像",
-        "check_instruction": "进入今日头条个人主页，查看头像区域显示的图像是否为系统默认头像（非艺术类蓝色波浪形图案）",
-        "clean_if_state": "头像已显示为系统默认样式（非艺术类蓝色波浪形图案）"
+        "target": "确认当前头像是否已是油画风格的船只图像",
+        "check_instruction": "进入今日头条个人主页，查看头像区域显示的图像是否为油画风格的船只图像",
+        "clean_if_state": "头像已显示为油画风格的船只图像，且无‘发布中’等中间状态提示"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "今日头条个人主页中的头像是否已恢复为系统默认头像（而非艺术类蓝色波浪形图案）？",
+        "question": "今日头条个人主页的头像是否已稳定显示为油画风格的船只图像？",
         "expected": "yes"
       },
       "idempotent": true,
-      "risk_level": "low",
-      "max_steps": 8
+      "risk_level": "medium",
+      "max_steps": 15
     }
   ],
   "human_gate": [],

@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_14",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度APP中将夜间模式设置为关闭状态，即撤销已开启的夜间模式污染，使界面恢复为日间模式（浅色主题）",
+      "precondition": {
+        "target": "确认当前夜间模式是否仍处于开启状态",
+        "check_instruction": "进入百度APP的‘我的’页面，点击右上角齿轮图标进入设置，找到‘夜间模式’选项，观察其开关状态或选中项是否为‘夜间’",
+        "clean_if_state": "夜间模式开关处于关闭状态，或‘日间’选项被选中，界面为浅色主题"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "夜间模式的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

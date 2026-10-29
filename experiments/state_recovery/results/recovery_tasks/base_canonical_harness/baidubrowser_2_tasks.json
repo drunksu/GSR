@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_2",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度App中彻底清除搜索历史里的‘西二旗 邮政编码’条目，使其不再出现在任何历史记录列表中",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘西二旗 邮政编码’条目",
+        "check_instruction": "进入百度App首页，点击搜索框，下拉查看搜索历史列表，定位是否存在‘西二旗 邮政编码’文字条目",
+        "clean_if_state": "搜索历史列表中已无‘西二旗 邮政编码’条目，即该条目已被完全删除"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在百度App的搜索历史列表中，是否已不存在‘西二旗 邮政编码’这一条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

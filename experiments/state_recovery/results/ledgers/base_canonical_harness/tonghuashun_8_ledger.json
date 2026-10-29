@@ -1,0 +1,46 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "tonghuashun_8",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在同花顺看一下青岛啤酒的综合诊断",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "同花顺",
+      "entity": {
+        "kind": "search",
+        "name": "青岛啤酒",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3,
+        6
+      ],
+      "evidence_quote": "ACTION: type(text='青岛啤酒')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "青岛啤酒"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

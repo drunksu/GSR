@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在拼多多App中将用户头像恢复为LTL图标（即相册第一张照片），确保头像显示为LTL图标且界面出现“头像设置成功”提示",
+      "recovery_goal": "在拼多多App中将用户头像恢复为蓝发卡通形象，确保头像显示为该图像且无异常提示。",
       "precondition": {
-        "target": "确认当前头像是否已为LTL图标并显示设置成功提示",
-        "check_instruction": "进入拼多多个人中心页面，查看头像区域是否显示LTL图标及是否有‘头像设置成功’提示文字",
-        "clean_if_state": "头像已显示为LTL图标，且界面上有‘头像设置成功’提示文字"
+        "target": "确认当前头像是否已正确显示为蓝发卡通形象且无错误或待处理状态。",
+        "check_instruction": "进入拼多多个人中心页面，查看头像区域显示的图像是否为蓝发卡通形象。",
+        "clean_if_state": "当前头像已显示为蓝发卡通形象，且页面无‘头像设置中’‘上传失败’等异常提示。"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "拼多多App个人中心页面的头像是否已显示为LTL图标，并伴有‘头像设置成功’提示文字？",
+        "question": "拼多多App个人中心页面的头像是否已稳定显示为蓝发卡通形象？",
         "expected": "yes"
       },
       "idempotent": true,

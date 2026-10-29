@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_8",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中找到标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻，确保其收藏状态被撤销——即收藏按钮为未填充的灰色星星图标，且收藏数比当前显示值少1（恢复至未收藏前状态）",
+      "precondition": {
+        "target": "该新闻当前是否处于已收藏状态",
+        "check_instruction": "进入今日头条健康频道，定位到标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻条目，观察其下方收藏按钮图标颜色及数字",
+        "clean_if_state": "收藏按钮为灰色空心星星图标，且收藏数显示为原始未操作前的数值（例如102而非103）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条健康频道中，标题为“2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用”的新闻下方，收藏按钮是否为灰色空心星星图标且收藏数未增加？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在今日头条App中，将搜索历史中名为“健康”的条目彻底清除，确保该条目不再出现在任何搜索历史记录中",
+      "precondition": {
+        "target": "确认搜索历史中是否存在‘健康’条目",
+        "check_instruction": "进入今日头条App首页，点击顶部搜索栏，查看搜索历史列表中是否包含实体名‘健康’",
+        "clean_if_state": "搜索历史列表中已无‘健康’条目，即该条目已被删除或从未存在"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条App的搜索历史列表中，是否完全找不到名为‘健康’的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

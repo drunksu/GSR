@@ -8,13 +8,13 @@
       "mutation_id": "m1",
       "recovery_goal": "在58同城App中打开房贷计算器页面，确保当前界面为房贷计算器功能主界面",
       "precondition": {
-        "target": "确认当前页面是否已正确显示房贷计算器功能界面",
-        "check_instruction": "进入58同城首页后，查找并确认页面中是否存在标题为‘房贷计算器’的模块或入口，且已进入其功能页面",
-        "clean_if_state": "当前页面已显示‘房贷计算器’标题及对应的输入框、计算按钮等核心交互元素，即视为已恢复"
+        "target": "确认当前是否已处于房贷计算器页面",
+        "check_instruction": "进入58同城首页后，查看页面顶部或搜索结果中是否存在明确标有“房贷计算器”的功能入口或标题区域",
+        "clean_if_state": "当前页面标题或核心区域已显示‘房贷计算器’字样且可进行贷款金额、利率等参数输入操作"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "当前58同城App界面是否已成功显示房贷计算器功能主界面？",
+        "question": "房贷计算器的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

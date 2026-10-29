@@ -8,13 +8,13 @@
       "mutation_id": "m1",
       "recovery_goal": "在同花顺App中搜索并确保‘新发基金’页面已正确加载并显示最新基金列表",
       "precondition": {
-        "target": "确认当前页面是否已成功展示‘新发基金’相关结果",
-        "check_instruction": "进入同花顺App首页，点击搜索框输入‘新发基金’并查看搜索结果页是否出现‘新发基金’标题及对应基金列表",
-        "clean_if_state": "当前页面已显示‘新发基金’标题及至少一条新发基金条目，即视为已恢复"
+        "target": "确认当前是否已进入‘新发基金’相关页面且内容非空",
+        "check_instruction": "进入同花顺App首页，点击搜索框输入‘新发基金’并查看搜索结果页，确认页面标题或列表中包含‘新发基金’字样及基金条目",
+        "clean_if_state": "当前页面已显示‘新发基金’标题及至少一条新发基金记录，即视为已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "同花顺App中是否已成功显示‘新发基金’标题及其对应的最新基金列表？",
+        "question": "同花顺App中当前页面是否明确显示‘新发基金’标题及最新发行的基金列表？",
         "expected": "yes"
       },
       "idempotent": true,
@@ -24,5 +24,5 @@
   ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 2
+  "_llm_calls": 1
 }

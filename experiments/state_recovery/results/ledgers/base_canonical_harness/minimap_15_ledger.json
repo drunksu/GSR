@@ -1,0 +1,114 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "minimap_15",
+  "run_id": "base_canonical_harness",
+  "task_goal": "高德设置一下公司的地址为小米科技园B栋",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园B栋",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 我已经输入了“小米科技园B栋”，但搜索结果中并没有显示相关地址... ACTION: type(text='小米科技园B栋')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米科技园",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8
+      ],
+      "evidence_quote": "Step 7: THOUGHT: ...我应该重新输入更准确的关键词“小米科技园”进行搜索。 ACTION: type(text='小米科技园')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m3",
+      "type": "search_history",
+      "app": "高德地图",
+      "entity": {
+        "kind": "search",
+        "name": "小米移动互联网产业园",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        9
+      ],
+      "evidence_quote": "Step 9: THOUGHT: ...我应该输入更完整的名称“小米移动互联网产业园”来搜索... ACTION: type(text='小米移动互联网产业园')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m4",
+      "type": "content_lifecycle",
+      "app": "高德地图",
+      "entity": {
+        "kind": "content",
+        "name": "小米移动互联网产业园B栋",
+        "identifier": "海淀区西二旗中路33号"
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "delete_created",
+      "evidence_steps": [
+        10,
+        11
+      ],
+      "evidence_quote": "Step 10: THOUGHT: 太好了，搜索结果中出现了“小米移动互联网产业园B栋”，地址是“海淀区西二旗中路33号”，这正是我们需要设置的公司地址。... Step 11: THOUGHT: 系统提示“已添加过该地点，确定重新添加？”，说明这个地址之前已经被设置过，现在需要确认是否要重新设置为公司地址。... ACTION: click([836, 1494])",
+      "confidence": 0.95,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "小米科技园B栋",
+    "小米科技园",
+    "小米移动互联网产业园"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2",
+      "m3",
+      "m4"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": true,
+  "_warnings": []
+}

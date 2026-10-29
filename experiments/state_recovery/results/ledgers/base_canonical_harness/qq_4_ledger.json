@@ -1,0 +1,68 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "qq_4",
+  "run_id": "base_canonical_harness",
+  "task_goal": "打开QQ添加1098074562为好友",
+  "judged_success": true,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "relationship_request",
+      "app": "QQ",
+      "entity": {
+        "kind": "friend",
+        "name": "绕堤沙",
+        "identifier": "1098074562"
+      },
+      "direction": "request_sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "cancel_pending",
+      "evidence_steps": [
+        4,
+        5,
+        6
+      ],
+      "evidence_quote": "Step 4: THOUGHT: 搜索结果已经显示了QQ号码为1098074562的用户，用户名是“绕堤沙”，并且右侧有一个“添加”按钮。…… Step 5: THOUGHT: 现在已经进入添加好友的确认界面，用户信息显示正确，且“发送”按钮已就绪。…… Step 6: THOUGHT: 从界面上看，“添加成功”提示已经出现，说明QQ号码1098074562的好友已成功添加。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "QQ",
+      "entity": {
+        "kind": "search",
+        "name": "1098074562",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        3
+      ],
+      "evidence_quote": "Step 3: THOUGHT: 搜索框已经处于激活状态，光标闪烁，等待输入。为了找到目标用户，我需要输入QQ号码1098074562进行搜索。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "1098074562"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": true,
+  "_warnings": []
+}

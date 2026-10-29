@@ -1,0 +1,45 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "baidubrowser_8",
+  "run_id": "base_canonical_harness",
+  "task_goal": "在百度浏览器推荐的第一个视频评论泰酷辣",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "message_send",
+      "app": "百度浏览器",
+      "entity": {
+        "kind": "content",
+        "name": "微视频｜永远在路上",
+        "identifier": null
+      },
+      "direction": "sent",
+      "persistence": "server",
+      "status": "done",
+      "reversible": "irreversible",
+      "evidence_steps": [
+        4
+      ],
+      "evidence_quote": "Thought: 评论“泰酷辣”已成功发布，显示在评论区顶部，并标注为“刚刚”发布，说明操作已完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [],
+    "halt": [
+      {
+        "id": "m1",
+        "reason": "reversible=irreversible → human gate"
+      }
+    ],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

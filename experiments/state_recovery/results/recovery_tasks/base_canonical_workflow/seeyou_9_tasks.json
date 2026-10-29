@@ -2,27 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "seeyou_9",
   "run_id": "base_canonical",
-  "human_gate": [],
-  "_model": "qwen3-vl-plus",
-  "_repair_used": false,
   "tasks": [
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在美柚 App 中将‘备孕模式’设置为关闭状态",
+      "recovery_goal": "在美柚App中开启备孕模式，确保备孕模式处于已启用状态",
       "precondition": {
-        "target": "美柚中备孕模式的当前开关状态",
-        "check_instruction": "进入美柚首页，查看底部是否有醒目的粉色按钮‘开启备孕模式’；若无该按钮且显示‘已开启备孕模式’或类似提示，则说明当前为开启状态",
-        "clean_if_state": "当前已处于关闭状态（即底部显示‘开启备孕模式’按钮）"
+        "target": "确认备孕模式当前是否已开启",
+        "check_instruction": "进入美柚的设置或个人中心页面，查找‘备孕模式’相关入口或状态提示区域，观察其开关状态或文字说明是否显示‘已开启’或类似标识",
+        "clean_if_state": "界面中已明确显示‘备孕模式已开启’或对应开关处于开启位置（如蓝色/高亮状态）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "美柚 App 底部是否显示‘开启备孕模式’的粉色按钮，表明备孕模式当前为关闭状态？",
+        "question": "备孕模式的状态是否已恢复到目标状态？",
         "expected": "yes"
       },
       "idempotent": true,
       "risk_level": "low",
-      "max_steps": 15
+      "max_steps": 8
     }
-  ]
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
 }

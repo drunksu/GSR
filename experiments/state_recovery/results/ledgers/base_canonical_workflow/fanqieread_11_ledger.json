@@ -25,44 +25,20 @@
       "confidence": 1.0,
       "attribution": "this_task",
       "carried_over_from_task": null
-    },
-    {
-      "type": "search_history",
-      "app": "番茄小说",
-      "entity": {
-        "kind": "search",
-        "name": "三体",
-        "identifier": null
-      },
-      "direction": "created",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        4
-      ],
-      "evidence_quote": "ACTION: type(text='三体')",
-      "confidence": 1.0,
-      "attribution": "carried_over",
-      "carried_over_from_task": "fanqieread_0",
-      "id": "c2"
     }
   ],
   "search_terms": [
-    "美食 种田 系统",
-    "三体"
+    "美食 种田 系统"
   ],
   "_gate": {
     "autonomous": [
-      "m1",
-      "c2"
+      "m1"
     ],
     "halt": [],
     "noop": false
   },
   "_model": "qwen3-vl-plus",
+  "_modality": "text",
   "_repair_used": false,
-  "_warnings": [
-    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
-  ]
+  "_warnings": []
 }

@@ -1,0 +1,211 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "rimet_19",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\rimet_19_ledger.json",
+  "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json",
+  "has_contamination": true,
+  "iterations": 2,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "contaminated",
+  "failure_reason": "连续 2 轮验证无进展",
+  "per_iteration": [
+    {
+      "iter": 1,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json",
+      "accepted_plan": {
+        "m1": "在钉钉中将勿扰模式设置为关闭状态，即撤销已开启的勿扰模式污染，使消息免打扰功能失效"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_19.base_canonical_harness.1793212627.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[274, 759]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "钉钉中勿扰模式的开关是否处于关闭（灰色）状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 勿扰模式 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "e6c1659686753748a9f2745ba596b4e1",
+            "xml_after_sig": "2370957c11836e7b05b68bae16b8ba4b"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+        "step_count": 1,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              274,
+              759
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 0: THOUGHT: 从当前界面来看，钉钉首页显示了一条提示：“你可能错过重要信息，通知已关闭，你将无法收到任何消息通知”，并提供了一个“去设置中打开”的按钮。这说明勿扰模式（或消息免打扰）目前是开启状态，需要进入设置进行关闭。为了关闭勿扰模式，最直接的路径是点击该提示中的“去设置中打开”按钮，它应该会跳转到相关设置页面，在那里可以关闭勿扰模式。因此，下一步操作是点击“去设置中打开”按钮。 ACTION: click([274, 759])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json",
+      "accepted_plan": {
+        "m1": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作），确保勿扰模式处于off状态"
+      },
+      "verify": {
+        "success": false,
+        "reason": "no_new_evidence",
+        "verdicts": []
+      }
+    }
+  ],
+  "recovery_id": "rimet_19.base_canonical_harness.1793212627",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 2
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "钉钉",
+        "entity": {
+          "kind": "setting",
+          "name": "勿扰模式",
+          "identifier": null
+        },
+        "direction": "on",
+        "persistence": "account",
+        "status": "done",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          4
+        ],
+        "evidence_quote": "Thought: 我已经成功进入了钉钉的“勿扰模式”设置页面，并且看到勿扰模式的开关已经是开启状态（蓝色）。这意味着消息免打扰功能已经生效。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_off",
+        "entity_name": "勿扰模式",
+        "description": "设置项 勿扰模式 应处于 off 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "failed",
+      "attempts": 1,
+      "last_verify": {
+        "round": 1,
+        "verdict": {
+          "mutation_id": "m1",
+          "cleared": false,
+          "evidence_quote": "Step 0: THOUGHT: 从当前界面来看，钉钉首页显示了一条提示：“你可能错过重要信息，通知已关闭，你将无法收到任何消息通知”，并提供了一个“去设置中打开”的按钮。这说明勿扰模式（或消息免打扰）目前是开启状态，需要进入设置进行关闭。为了关闭勿扰模式，最直接的路径是点击该提示中的“去设置中打开”按钮，它应该会跳转到相关设置页面，在那里可以关闭勿扰模式。因此，下一步操作是点击“去设置中打开”按钮。 ACTION: click([274, 759])"
+        }
+      },
+      "evidence_refs": [
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1"
+      ],
+      "last_failure_reason": "VLM 判定污染仍存在/无法确认"
+    }
+  ],
+  "context": [],
+  "attempt_history": [
+    {
+      "iteration": 1,
+      "accepted_plan": {
+        "m1": "在钉钉中将勿扰模式设置为关闭状态，即撤销已开启的勿扰模式污染，使消息免打扰功能失效"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": true,
+      "verify_success": false,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "accepted_plan": {
+        "m1": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作），确保勿扰模式处于off状态"
+      },
+      "plan_reason": null,
+      "generate_ok": true,
+      "execute_ok": null,
+      "verify_success": false,
+      "error": null
+    }
+  ],
+  "termination_reason": "no_progress"
+}

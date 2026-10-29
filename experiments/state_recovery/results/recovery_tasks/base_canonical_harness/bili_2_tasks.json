@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_2",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在B站中将搜索历史里的‘王者荣耀官方赛事’条目彻底删除，确保该条目不再出现在搜索历史列表中",
+      "precondition": {
+        "target": "确认搜索历史中是否存在‘王者荣耀官方赛事’条目",
+        "check_instruction": "进入B站首页，点击搜索框，查看下拉的搜索历史列表中是否包含‘王者荣耀官方赛事’",
+        "clean_if_state": "搜索历史列表中已无‘王者荣耀官方赛事’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "王者荣耀官方赛事的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

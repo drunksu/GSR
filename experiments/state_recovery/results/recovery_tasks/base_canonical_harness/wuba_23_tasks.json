@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_23",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城中将长辈模式关闭，使长辈模式设置项恢复为关闭状态",
+      "precondition": {
+        "target": "确认长辈模式当前处于开启状态",
+        "check_instruction": "进入58同城首页或设置页，查看是否存在‘返回普通版’按钮或明确显示‘长辈模式已开启’的提示文字，其中包含实体名‘长辈模式’",
+        "clean_if_state": "页面未显示‘返回普通版’按钮，且无任何表明‘长辈模式’已开启的提示，即长辈模式处于关闭状态"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "58同城中是否已无‘返回普通版’按钮且未显示任何关于‘长辈模式’已开启的提示？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

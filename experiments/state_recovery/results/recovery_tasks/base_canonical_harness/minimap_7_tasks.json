@@ -1,0 +1,46 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "minimap_7",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在高德地图中彻底删除搜索历史里的‘北京南站’条目，使该实体不再出现在任何搜索历史记录中",
+      "precondition": {
+        "target": "确认当前搜索历史中是否存在‘北京南站’条目",
+        "check_instruction": "点击高德地图顶部搜索框，展开搜索历史列表，查看其中是否包含‘北京南站’",
+        "clean_if_state": "搜索历史列表中已无‘北京南站’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否已不存在‘北京南站’条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    },
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m2",
+      "recovery_goal": "在高德地图中彻底删除搜索历史里的北京丰台站条目，使搜索历史中不再存在北京丰台站的记录",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在北京丰台站条目",
+        "check_instruction": "进入高德地图主界面，点击搜索框，展开搜索历史列表，查看是否存在‘北京丰台站’条目",
+        "clean_if_state": "搜索历史列表中已无‘北京丰台站’条目"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "高德地图的搜索历史列表中是否已不存在北京丰台站条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 2
+}

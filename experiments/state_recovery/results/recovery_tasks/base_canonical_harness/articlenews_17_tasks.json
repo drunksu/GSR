@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_17",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至被清理前的状态（即缓存文件大小非零、‘清理’按钮为红色可点击状态）",
+      "precondition": {
+        "target": "确认当前缓存文件大小是否为0.0B且‘清理’按钮为灰色不可点击",
+        "check_instruction": "进入今日头条→点击‘我的’→点击右上角设置图标→进入‘通用设置’或‘存储与缓存’页面，查看‘缓存文件’条目及其下方‘清理’按钮状态，必须提及实体名‘清除缓存’",
+        "clean_if_state": "缓存文件显示非零值（如35.6MB或386.7MB等），且‘清理’按钮为红色可点击状态，说明‘清除缓存’未被执行或已恢复，视为已清洁"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条的缓存管理界面中，‘清除缓存’对应的缓存文件大小是否大于0.0B且‘清理’按钮为红色可点击状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

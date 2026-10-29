@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "bili_12",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在哔哩哔哩中彻底清除搜索历史中的‘牧神记’条目，使搜索历史列表里不再显示‘牧神记’",
+      "precondition": {
+        "target": "确认当前搜索历史中仍存在‘牧神记’条目",
+        "check_instruction": "进入哔哩哔哩首页，点击搜索框进入搜索页面，查看‘搜索历史’区域是否显示‘牧神记’",
+        "clean_if_state": "搜索历史列表中已无‘牧神记’条目，即该实体未出现在任何历史记录位置"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在哔哩哔哩的搜索历史列表中，是否完全找不到名为‘牧神记’的条目？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

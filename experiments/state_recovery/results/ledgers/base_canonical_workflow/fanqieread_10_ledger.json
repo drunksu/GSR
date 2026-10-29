@@ -4,42 +4,17 @@
   "run_id": "base_canonical",
   "task_goal": "在番茄里面筛选历史、搞笑轻松小说",
   "judged_success": false,
-  "mutations": [
-    {
-      "type": "search_history",
-      "app": "番茄小说",
-      "entity": {
-        "kind": "search",
-        "name": "三体",
-        "identifier": null
-      },
-      "direction": "created",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        4
-      ],
-      "evidence_quote": "ACTION: type(text='三体')",
-      "confidence": 1.0,
-      "attribution": "carried_over",
-      "carried_over_from_task": "fanqieread_0",
-      "id": "c1"
-    }
-  ],
-  "search_terms": [
-    "三体"
-  ],
+  "mutations": [],
+  "search_terms": [],
   "_gate": {
-    "autonomous": [
-      "c1"
-    ],
+    "autonomous": [],
     "halt": [],
-    "noop": false
+    "noop": true
   },
   "_model": "qwen3-vl-plus",
-  "_repair_used": false,
+  "_modality": "text",
+  "_repair_used": true,
   "_warnings": [
-    "确定性结转补录 1 条 carried_over（前序仍开放的残留）"
+    "确定性剔除无 type 输入支撑的搜索词 ['历史']"
   ]
 }

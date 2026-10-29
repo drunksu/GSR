@@ -1,0 +1,43 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "wuba_14",
+  "run_id": "base_canonical_harness",
+  "task_goal": "关注58同城中社区广场第一条帖子",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "58同城",
+      "entity": {
+        "kind": "account",
+        "name": "余先生",
+        "identifier": null
+      },
+      "direction": "followed",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        2,
+        3
+      ],
+      "evidence_quote": "Thought: 在当前帖子详情页中，我可以看到右上角有一个绿色的“+关注”按钮，这是用于关注发帖人“余先生”的操作入口。……ACTION: click([1093, 382])\nThought: ……现在显示为“已关注”，说明关注操作已完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [],
+  "_gate": {
+    "autonomous": [
+      "m1"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": []
+}

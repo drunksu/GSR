@@ -1,0 +1,61 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "wuba_29",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_29\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\wuba_29_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "wuba_29.base_canonical_harness.1793224987",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "settings_toggle",
+        "app": "58同城",
+        "entity": {
+          "kind": "setting",
+          "name": "长辈模式",
+          "identifier": null
+        },
+        "direction": "off",
+        "persistence": "device_local",
+        "status": "attempted_unknown",
+        "reversible": "ui_invert",
+        "evidence_steps": [
+          8
+        ],
+        "evidence_quote": "Thought: 当前页面提示“长辈模式已开启”，并提供“关闭长辈模式”按钮。由于长辈模式通常会简化界面、隐藏部分功能（如任务中心），因此必须先关闭该模式才能继续查找任务中心。ACTION: click([609, 2511])",
+        "confidence": 0.4,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "setting_on",
+        "entity_name": "长辈模式",
+        "description": "设置项 长辈模式 应处于 on 状态"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

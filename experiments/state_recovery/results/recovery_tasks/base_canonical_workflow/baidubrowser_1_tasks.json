@@ -2,8 +2,27 @@
   "schema": "recovery-task-set/v0.1",
   "task_id": "baidubrowser_1",
   "run_id": "base_canonical",
-  "tasks": [],
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度浏览器中确保搜索历史里存在‘今日大盘点数’这一条目，且其为最近一次搜索记录。",
+      "precondition": {
+        "target": "检查百度浏览器的搜索历史中是否已包含‘今日大盘点数’且为最新一条。",
+        "check_instruction": "进入百度浏览器首页或搜索框界面，点击搜索框右侧历史图标（或下拉历史列表），查看搜索历史列表顶部是否显示‘今日大盘点数’。",
+        "clean_if_state": "搜索历史列表最上方已显示‘今日大盘点数’，且无其他更近的搜索记录。"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "百度浏览器的搜索历史列表顶部是否为‘今日大盘点数’？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
   "human_gate": [],
   "_model": "qwen3-vl-plus",
-  "_llm_calls": 0
+  "_llm_calls": 1
 }

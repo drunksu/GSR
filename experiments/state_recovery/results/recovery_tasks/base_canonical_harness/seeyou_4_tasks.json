@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "seeyou_4",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在美柚中彻底删除今日经期记录，使其完全不存在于经期日历与症状记录中",
+      "precondition": {
+        "target": "确认今日经期记录当前仍存在且未被清除",
+        "check_instruction": "进入美柚首页的经期日历页面，查看今日日期（如10月29日）是否显示为经期状态，并检查下方是否有‘今日经期记录’相关症状条目或编辑入口",
+        "clean_if_state": "今日经期记录已不可见，今日日期在日历中不标记为经期，且无任何症状填写界面或记录卡片残留"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "今日经期记录的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "medium",
+      "max_steps": 15
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

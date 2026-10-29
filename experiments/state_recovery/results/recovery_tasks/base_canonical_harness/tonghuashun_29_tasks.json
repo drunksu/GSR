@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "tonghuashun_29",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在同花顺中将主题换肤设置恢复为关闭状态，即撤销‘始终显示黑色’的启用，使主题换肤功能回到未启用（off）的原始状态",
+      "precondition": {
+        "target": "确认当前主题换肤设置是否已处于关闭状态",
+        "check_instruction": "进入同花顺的设置页面，找到‘主题换肤’选项，观察其当前选中项是否为‘跟随系统外观’或‘始终显示白色’（即非‘始终显示黑色’）",
+        "clean_if_state": "‘主题换肤’选项未选中‘始终显示黑色’，界面为浅色模式或跟随系统外观模式，且无红色对勾标记在‘始终显示黑色’上"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在同花顺的设置中，‘主题换肤’是否未启用‘始终显示黑色’选项，且界面未呈现深色主题？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

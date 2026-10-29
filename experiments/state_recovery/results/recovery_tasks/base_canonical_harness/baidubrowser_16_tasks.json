@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "baidubrowser_16",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在百度App中将‘通知栏消息’设置项恢复为开启状态（即总开关为蓝色/绿色on状态），撤销此前将其关闭的操作",
+      "precondition": {
+        "target": "确认当前‘通知栏消息’总开关是否已处于开启状态",
+        "check_instruction": "进入百度App的‘设置’→‘消息设置’页面，查看标题为‘通知栏消息’的开关控件当前颜色与位置状态",
+        "clean_if_state": "‘通知栏消息’开关显示为蓝色/绿色（on状态），且无灰色遮罩或禁用标识"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "通知栏消息的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

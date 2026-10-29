@@ -1,0 +1,71 @@
+{
+  "schema": "contamination-list/v0.1",
+  "task_id": "articlenews_8",
+  "run_id": "base_canonical_harness",
+  "task_goal": "查看今日头条健康频道第一条新闻并收藏",
+  "judged_success": false,
+  "mutations": [
+    {
+      "id": "m1",
+      "type": "social_reaction",
+      "app": "今日头条",
+      "entity": {
+        "kind": "content",
+        "name": "2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用",
+        "identifier": null
+      },
+      "direction": "collected",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        7,
+        8,
+        9
+      ],
+      "evidence_quote": "Step 7: THOUGHT: ...在页面底部，我看到收藏按钮（黄色星星图标）... Step 8: THOUGHT: 我刚刚点击了收藏按钮，发现收藏数从103变为102...因此我需要再次点击星星图标来完成收藏。 Step 9: THOUGHT: 现在屏幕显示“收藏成功”提示，且收藏按钮已变为黄色星星（填充状态），数字为103，说明收藏操作已完成。",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    },
+    {
+      "id": "m2",
+      "type": "search_history",
+      "app": "今日头条",
+      "entity": {
+        "kind": "search",
+        "name": "健康",
+        "identifier": null
+      },
+      "direction": "created",
+      "persistence": "account",
+      "status": "done",
+      "reversible": "ui_invert",
+      "evidence_steps": [
+        5
+      ],
+      "evidence_quote": "Step 5: THOUGHT: 现在搜索框已激活，光标在输入框内，我可以直接输入“健康”来查找健康频道。 ACTION: type(text='健康')",
+      "confidence": 1.0,
+      "attribution": "this_task",
+      "carried_over_from_task": null
+    }
+  ],
+  "search_terms": [
+    "健康"
+  ],
+  "_gate": {
+    "autonomous": [
+      "m1",
+      "m2"
+    ],
+    "halt": [],
+    "noop": false
+  },
+  "_model": "qwen3-vl-plus",
+  "_modality": "text",
+  "_repair_used": false,
+  "_warnings": [
+    "m1: entity.name 非逐字出现但字组覆盖/子串匹配 0.88 → '2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用'",
+    "m1: entity.name 非逐字出现但字组覆盖/子串匹配 0.88 → '2026最火“轻养生”：不花钱、不内卷，坚持28天气色回春，全家用'"
+  ]
+}

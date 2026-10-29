@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "articlenews_7",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在今日头条中找到标题为“昨天亚冠早场方向全部哇塞，今日足球比赛...”的新闻，确保其点赞状态已撤销（即心形图标未填充、赞数未增加）",
+      "precondition": {
+        "target": "该新闻当前是否处于已点赞状态",
+        "check_instruction": "进入今日头条首页或图片频道列表页，找到标题为“昨天亚冠早场方向全部哇塞，今日足球比赛...”的新闻条目，观察其下方点赞按钮（心形图标）是否为实心及对应赞数",
+        "clean_if_state": "该新闻的点赞按钮为线框空心状态，且赞数未因本次操作而增加（例如仍显示原始4个赞）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "在今日头条中，标题为‘昨天亚冠早场方向全部哇塞，今日足球比赛...’的新闻，其点赞按钮是否为空心状态且赞数未被修改？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}

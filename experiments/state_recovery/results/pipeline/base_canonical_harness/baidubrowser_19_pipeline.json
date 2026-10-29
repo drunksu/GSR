@@ -1,0 +1,62 @@
+{
+  "schema": "recovery-state/v0.1",
+  "task_id": "baidubrowser_19",
+  "run": "base_canonical_harness",
+  "trajectory": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\baidubrowser_19\\trajectory.json",
+  "ledger": "D:\\GSR\\experiments\\state_recovery\\results\\ledgers\\base_canonical_harness\\baidubrowser_19_ledger.json",
+  "recovery_task": null,
+  "has_contamination": true,
+  "iterations": 0,
+  "success": false,
+  "first_try_success": false,
+  "final_state": "pending",
+  "failure_reason": "全部目标被人工门控挂起，无法自主推进",
+  "per_iteration": [],
+  "recovery_id": "baidubrowser_19.base_canonical_harness.1793174188",
+  "phase": "halt",
+  "budget": {
+    "max_iter": 3,
+    "remaining": 3
+  },
+  "targets": [
+    {
+      "mutation_id": "m1",
+      "mutation_ref": {
+        "id": "m1",
+        "type": "other",
+        "app": "百度",
+        "entity": {
+          "kind": "setting",
+          "name": "缓存",
+          "identifier": null
+        },
+        "direction": "deleted",
+        "persistence": "device_local",
+        "status": "done",
+        "reversible": "irreversible",
+        "evidence_steps": [
+          1,
+          2
+        ],
+        "evidence_quote": "THOUGHT: 在“我的”页面中，我已找到“清理缓存”功能，系统显示检测到273MB缓存垃圾，并提供了一个蓝色的“清理”按钮。……ACTION: click([1037, 1383])\nTHOUGHT: 从当前界面可见，“清理缓存”功能已执行完成，状态显示为“已清理 273MB 缓存垃圾”，说明缓存清理操作成功。",
+        "confidence": 1.0,
+        "attribution": "this_task",
+        "carried_over_from_task": null
+      },
+      "initial_expected_state": {
+        "kind": "manual_check",
+        "entity_name": "缓存",
+        "description": "需人工确认的清理目标（缓存）"
+      },
+      "contamination_status": "present",
+      "recovery_status": "halted",
+      "attempts": 0,
+      "last_verify": null,
+      "evidence_refs": [],
+      "last_failure_reason": null
+    }
+  ],
+  "context": [],
+  "attempt_history": [],
+  "termination_reason": "needs_human"
+}

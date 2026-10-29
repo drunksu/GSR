@@ -1,0 +1,28 @@
+{
+  "schema": "recovery-task-set/v0.1",
+  "task_id": "wuba_27",
+  "run_id": "base_canonical_harness",
+  "tasks": [
+    {
+      "schema": "recovery-task/v0.1",
+      "mutation_id": "m1",
+      "recovery_goal": "在58同城中将‘我是’的性别设置恢复为关闭状态，即撤销‘女’的显示，使‘我是’不再显示具体性别值",
+      "precondition": {
+        "target": "检查‘我是’当前是否仍显示为‘女’",
+        "check_instruction": "进入58同城个人主页或个人信息编辑页, 查看‘我是’字段下方是否显示‘女’字样",
+        "clean_if_state": "‘我是’字段未显示任何性别值（如仅显示‘我是’或为空）"
+      },
+      "expected_end_state": {
+        "kind": "vlm_judge",
+        "question": "我是的状态是否已恢复到目标状态？",
+        "expected": "yes"
+      },
+      "idempotent": true,
+      "risk_level": "low",
+      "max_steps": 8
+    }
+  ],
+  "human_gate": [],
+  "_model": "qwen3-vl-plus",
+  "_llm_calls": 1
+}
