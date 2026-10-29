@@ -6,7 +6,7 @@
       "action": "click",
       "params": {
         "position": [
-          85,
+          87,
           217
         ],
         "click_times": 1
@@ -23,14 +23,48 @@
       "action": "click",
       "params": {
         "position": [
-          1138,
-          214
+          1107,
+          786
         ],
         "click_times": 1
       },
       "normalized_params": {
         "position": [
-          0.93,
+          0.91,
+          0.29
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          87,
+          217
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.07,
+          0.08
+        ],
+        "click_times": 1
+      }
+    },
+    {
+      "action": "click",
+      "params": {
+        "position": [
+          1141,
+          217
+        ],
+        "click_times": 1
+      },
+      "normalized_params": {
+        "position": [
+          0.94,
           0.08
         ],
         "click_times": 1
@@ -54,29 +88,12 @@
       }
     },
     {
-      "action": "click",
-      "params": {
-        "position": [
-          983,
-          2284
-        ],
-        "click_times": 1
-      },
-      "normalized_params": {
-        "position": [
-          0.81,
-          0.84
-        ],
-        "click_times": 1
-      }
-    },
-    {
       "action": "terminate",
       "params": {
-        "text": "同花顺主题已成功设置为黑色"
+        "text": "同花顺主题已设置为黑色"
       },
       "normalized_params": {
-        "text": "同花顺主题已成功设置为黑色"
+        "text": "同花顺主题已设置为黑色"
       }
     }
   ],
@@ -85,14 +102,16 @@
     "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\step_2.png",
     "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\step_3.png",
     "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\step_4.png",
-    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\step_5.png"
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\step_5.png",
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\tonghuashun_29\\step_6.png"
   ],
   "history_response": [
-    "Thought: 我需要在同花顺App中将主题设置为黑色。首先，我需要找到设置入口。通常，设置选项会在个人中心或右上角的菜单中。从当前界面看，左上角有一个用户头像图标，这很可能是进入个人中心的入口，而个人中心里一般会有设置选项。因此,我应该先点击左上角的用户头像图标。\nAction: click(point='<point>70 80</point>')",
-    "Thought: 我现在在个人中心页面，需要找到设置选项来更改主题为黑色。观察页面顶部，右上角有一个齿轮图标，这通常是设置的入口。点击这个齿轮图标应该能进入设置页面，在那里我可以找到主题设置选项。\nAction: click(point='<point>933 79</point>')",
-    "Thought: 我在系统设置页面中找到了“主题换肤”选项，这正是我需要用来更改主题为黑色的功能。接下来，我应该点击这个选项进入主题设置界面，在那里选择黑色主题。\nAction: click(point='<point>143 962</point>')",
-    "Thought: 在主题换肤页面，我看到了三个选项：跟随系统外观、始终显示白色、始终显示黑色。当前选中的是“跟随系统外观”，而任务要求设置为黑色主题，因此我需要点击“始终显示黑色”选项来完成设置。\nAction: click(point='<point>806 842</point>')",
-    "Thought: 我已经成功将主题设置为黑色，因为“始终显示黑色”选项已被选中（红色对勾标记），并且界面整体已变为深色模式。任务已完成。\nAction: finished(content='同花顺主题已成功设置为黑色')"
+    "Thought: 我需要在同花顺App中将主题设置为黑色。当前界面是首页，右上角有一个用户头像图标，通常个人设置或主题设置会在个人中心里。我应该先点击右上角的用户头像进入个人中心，然后寻找设置选项来修改主题。\n\nAction: click(point='<point>71 80</point>')",
+    "Thought: 当前界面弹出了一个“新股批量申购”的浮窗，遮挡了主界面，而我需要进入个人中心设置主题为黑色。这个浮窗必须先关闭，才能继续操作。右上角有一个“×”按钮，点击它可以关闭该浮窗，露出底层界面，之后我就可以点击用户头像进入个人中心了\n\nAction: click(point='<point>907 290</point>')",
+    "Thought: 当前界面仍被顶部的“菜鸟驿站”通知浮窗遮挡，虽然不影响底部导航栏操作，但为避免干扰并确保后续操作准确，应先关闭该通知。观察到浮窗右上角有“已读”按钮，点击它可标记为已读并可能收起通知；若不行，再考虑其他方式。不过更稳妥的是直接点击浮窗右上角的关闭区域（通常在通知气泡右上角有×或可点击区域），但当前截图中未明确显示×，而“已读”是可见按钮，优先尝试点击“已读”来消除干扰。不过根据经验，同花顺的通知浮窗常需点击右上角空白处或“已读”右侧区域才能关闭，但此处最可靠的是——回到最初目标：进入个人中心。底部导航栏有“自选”“交易”等，而用户头像在左上角，虽被部分遮挡，但依然可见且可点击100%位置。因此，我应直接点击左上角用户头像（VIP图标处）进入个人中心，这是最直接路径。\n\nAction: click(point='<point>71 80</point>')",
+    "Thought: 我已成功进入个人中心页面，当前界面为深色主题（接近黑色），但任务要求是“设置主题为黑色”，说明可能需要主动进入设置确认或切换。观察右上角有三个图标：消息、分组、设置（齿轮图标）。通常主题设置在“设置”中，因此下一步应点击右上角的齿轮图标（设置按钮）进入设置菜单。\n\nAction: click(point='<point>935 80</point>')",
+    "Thought: 我已进入“系统设置”页面，当前界面为深色背景，但任务要求是“设置主题为黑色”，需确认是否已启用黑色主题或是否存在更明确的“深色模式”选项。在列表底部找到了“主题换肤”选项，这正是用于切换应用主题的功能入口，点击它应能进入主题选择界面，从而设置为黑色主题。\n\nAction: click(point='<point>143 962</point>')",
+    "Thought: 在“主题换肤”界面中，我看到了三个选项：“跟随系统外观”、“始终显示白色”和“始终显示黑色”。当前“始终显示黑色”已被选中（右下角有红色对勾），说明黑色主题已经生效。任务目标是“设置主题为黑色”，而当前状态已满足要求，因此任务已完成。\n\nAction: finished(content='同花顺主题已设置为黑色')"
   ],
   "summary": [
     "Agent thinks the request has been completed."

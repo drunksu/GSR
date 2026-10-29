@@ -20,9 +20,10 @@
       "reversible": "ui_invert",
       "evidence_steps": [
         4,
-        5
+        5,
+        6
       ],
-      "evidence_quote": "Step 4: THOUGHT: 我已经成功进入了“我的资料”编辑页面，可以看到当前性别显示为“女”，并且右侧有一个箭头图标，表明这是一个可点击的选项。……ACTION: click([1111, 1123])\nStep 5: THOUGHT: 性别选择弹窗已经打开，当前“女”选项已被选中（有红色对勾），说明性别已设置为女。为了确认并保存这个设置，我需要点击弹窗外的区域或关闭按钮来退出弹窗，从而完成性别设置操作。",
+      "evidence_quote": "Step 4: THOUGHT: 当前界面是“我的资料”页面，可以看到“性别”一栏显示为“女”，并且右侧有一个箭头，说明可以点击进入修改。…… ACTION: click([1107, 1123])\nStep 5: THOUGHT: 当前界面显示性别选择弹窗，其中“女”已被选中（右侧有红色对勾），说明性别已设置为女。…… ACTION: click([609, 1627])\nStep 6: THOUGHT: 当前界面显示“我的资料”页面，其中“性别”一栏明确显示为“女”，说明性别已成功设置为女。",
       "confidence": 0.95,
       "attribution": "this_task",
       "carried_over_from_task": null

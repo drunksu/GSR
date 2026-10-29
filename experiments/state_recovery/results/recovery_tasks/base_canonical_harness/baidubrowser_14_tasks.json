@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在百度APP中将夜间模式设置为关闭状态，即撤销已开启的夜间模式污染，使界面恢复为日间模式（浅色主题）",
+      "recovery_goal": "在百度App中将夜间模式设置项恢复为关闭状态，即确保夜间模式处于off状态",
       "precondition": {
-        "target": "确认当前夜间模式是否仍处于开启状态",
-        "check_instruction": "进入百度APP的‘我的’页面，点击右上角齿轮图标进入设置，找到‘夜间模式’选项，观察其开关状态或选中项是否为‘夜间’",
-        "clean_if_state": "夜间模式开关处于关闭状态，或‘日间’选项被选中，界面为浅色主题"
+        "target": "确认当前夜间模式是否已关闭",
+        "check_instruction": "进入百度App的‘设置’页面，找到‘夜间模式’选项，观察其开关状态或选中项",
+        "clean_if_state": "夜间模式开关显示为灰色（off）或‘日间’选项被选中，界面为浅色主题"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "夜间模式的状态是否已恢复到目标状态？",
+        "question": "百度App中的夜间模式设置项是否已处于关闭状态，即未启用夜间模式？",
         "expected": "yes"
       },
       "idempotent": true,

@@ -4,57 +4,12 @@
   "run_id": "base_canonical_harness",
   "task_goal": "高德设置一下家的地址为北京大学东门",
   "judged_success": true,
-  "mutations": [
-    {
-      "id": "m1",
-      "type": "settings_toggle",
-      "app": "高德地图",
-      "entity": {
-        "kind": "setting",
-        "name": "常去地点管理",
-        "identifier": null
-      },
-      "direction": "on",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        6
-      ],
-      "evidence_quote": "Thought: 在设置页面中，我找到了“常去地点管理”这一项，这正是用来管理常用地址（如家、公司）的功能入口。点击它应该可以进入添加或修改“家”地址的界面。",
-      "confidence": 0.95,
-      "attribution": "this_task"
-    },
-    {
-      "id": "m2",
-      "type": "content_lifecycle",
-      "app": "高德地图",
-      "entity": {
-        "kind": "content",
-        "name": "北京大学(东门)",
-        "identifier": null
-      },
-      "direction": "created",
-      "persistence": "account",
-      "status": "done",
-      "reversible": "delete_created",
-      "evidence_steps": [
-        7,
-        8
-      ],
-      "evidence_quote": "Thought: 我已进入“常去地点管理”页面，看到“家”已经显示为“北京大学(东门)”，说明设置已完成。... 弹出菜单显示“修改地点”和“删除地点”，说明当前“家”地址已存在且为“北京大学(东门)”。",
-      "confidence": 0.9,
-      "attribution": "this_task"
-    }
-  ],
+  "mutations": [],
   "search_terms": [],
   "_gate": {
-    "autonomous": [
-      "m1",
-      "m2"
-    ],
+    "autonomous": [],
     "halt": [],
-    "noop": false
+    "noop": true
   },
   "_model": "qwen3-vl-plus",
   "_modality": "text",

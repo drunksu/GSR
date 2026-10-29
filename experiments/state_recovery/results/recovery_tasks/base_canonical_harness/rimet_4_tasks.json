@@ -8,13 +8,13 @@
       "mutation_id": "m1",
       "recovery_goal": "在钉钉中将钉钉小秘书的置顶设置关闭，使其不再处于置顶状态",
       "precondition": {
-        "target": "确认钉钉小秘书当前是否被置顶",
-        "check_instruction": "进入钉钉消息列表页面，查看‘钉钉小秘书’是否位于顶部固定区域（即置顶聊天区）",
-        "clean_if_state": "钉钉小秘书未出现在顶部固定聊天区，且其聊天条目与其他普通会话并列显示"
+        "target": "钉钉小秘书当前是否被置顶",
+        "check_instruction": "进入钉钉消息列表页面，观察‘钉钉小秘书’对话条目是否位于顶部固定区域（即置顶区）",
+        "clean_if_state": "钉钉小秘书对话条目未出现在消息列表顶部固定区域，即未被置顶"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "钉钉消息列表中，钉钉小秘书是否未出现在顶部置顶区域？",
+        "question": "钉钉消息列表中，钉钉小秘书的对话条目是否未出现在顶部置顶区域？",
         "expected": "yes"
       },
       "idempotent": true,

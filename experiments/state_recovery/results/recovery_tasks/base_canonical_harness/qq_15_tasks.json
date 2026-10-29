@@ -6,15 +6,15 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在QQ中将‘听歌中’状态关闭，使其恢复为未选中（off）状态",
+      "recovery_goal": "在QQ中将‘听歌中’状态设置为关闭（即撤销‘听歌中’状态，使其不再显示）",
       "precondition": {
         "target": "确认当前QQ状态是否仍为‘听歌中’",
-        "check_instruction": "进入QQ个人主页或状态设置页，查看‘听歌中’选项是否处于蓝色高亮（选中）状态",
-        "clean_if_state": "‘听歌中’选项未被选中（无高亮、无勾选、状态显示为‘在线’或其他非听歌状态）"
+        "check_instruction": "进入QQ个人主页，查看顶部状态区域是否显示‘听歌中’文字或带耳机笑脸图标的状态按钮处于高亮/选中态",
+        "clean_if_state": "QQ个人主页顶部状态区域未显示‘听歌中’文字，且对应状态按钮未高亮（即状态为默认或其它非听歌中状态）"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
-        "question": "QQ中‘听歌中’状态是否已关闭，即该选项未被选中且用户状态不再显示为听歌相关？",
+        "question": "QQ个人主页顶部状态区域是否已不再显示‘听歌中’文字或相关高亮图标？",
         "expected": "yes"
       },
       "idempotent": true,

@@ -11,7 +11,7 @@
       "app": "58同城",
       "entity": {
         "kind": "setting",
-        "name": "我是",
+        "name": "性别",
         "identifier": null
       },
       "direction": "on",
@@ -19,10 +19,11 @@
       "status": "done",
       "reversible": "ui_invert",
       "evidence_steps": [
-        4,
-        5
+        5,
+        6,
+        7
       ],
-      "evidence_quote": "Step 4: THOUGHT: 当前已进入性别选择弹窗，选项包括“男”、“女”和“取消”。用户目标是将性别修改为“女”，而“女”选项清晰可见且可点击。既然目标明确，直接点击“女”即可完成性别设置…… Step 5: THOUGHT: 性别已成功修改为“女”，当前页面显示“我是：女”，说明修改操作已完成。",
+      "evidence_quote": "Step 5: THOUGHT: 当前页面已弹出性别选择框，选项包括“男”、“女”和“取消”。任务要求将性别修改为“女”，而“女”选项清晰可见且可点击。此时应直接选择“女”以完成性别修改操作。 ACTION: click([609, 2395])\nStep 6: THOUGHT: 性别已成功修改为“女”，当前页面显示“我是：女”，说明修改操作已完成。\nStep 7: THOUGHT: 从当前页面可见，个人信息中“女”标签已明确显示，且头像也更新为女性形象，说明性别修改操作已成功生效。",
       "confidence": 0.95,
       "attribution": "this_task",
       "carried_over_from_task": null

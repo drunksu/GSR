@@ -18,15 +18,15 @@
       "generate_ok": true,
       "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_4_tasks.json",
       "accepted_plan": {
-        "m1": "在钉钉里将钉钉小秘书的置顶设置关闭，使置顶处于关闭状态"
+        "m1": "在钉钉里将钉钉小秘书的置顶设置关闭，使其不再置顶"
       },
       "actions": [
         {
           "schema": "action-contract/v0.1",
-          "action_id": "rimet_4.base_canonical_harness.1793212885.iter1.step1",
+          "action_id": "rimet_4.base_canonical_harness.1793244701.iter1.step1",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[605, 1172]",
+          "target_description": "position=[609, 1172]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -60,7 +60,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "钉钉小秘书的置顶开关是否已处于关闭状态？",
+            "question": "钉钉小秘书的置顶设置是否已关闭，即‘置顶’开关显示为灰色未开启状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -75,17 +75,17 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1\\step_1.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1\\step_1_after.png",
-            "xml_before_sig": "c15d599112e3e8bfc63578a55f4dd270",
-            "xml_after_sig": "e09dafc1c8d6615a0b1821954974089d"
+            "xml_before_sig": "599b626ce3ce93c0f4bb8a01ba9b6991",
+            "xml_after_sig": "7bd5e40b6bbdde78d92e126969494bd4"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "rimet_4.base_canonical_harness.1793212885.iter1.step2",
+          "action_id": "rimet_4.base_canonical_harness.1793244701.iter1.step2",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[1126, 206]",
+          "target_description": "position=[1124, 206]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -119,7 +119,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "钉钉小秘书的置顶开关是否已处于关闭状态？",
+            "question": "钉钉小秘书的置顶设置是否已关闭，即‘置顶’开关显示为灰色未开启状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -134,8 +134,8 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1\\step_2.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1\\step_2_after.png",
-            "xml_before_sig": "e09dafc1c8d6615a0b1821954974089d",
-            "xml_after_sig": "80706f314d4a3bdfce6c40714372f0cd"
+            "xml_before_sig": "7bd5e40b6bbdde78d92e126969494bd4",
+            "xml_after_sig": "c5f0900afeacec35b261293d41c1f44f"
           },
           "error_reason": null
         }
@@ -151,7 +151,7 @@
             "step_index": 0,
             "action": "click",
             "target": [
-              605,
+              609,
               1172
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1\\step_1.png"
@@ -160,7 +160,7 @@
             "step_index": 1,
             "action": "click",
             "target": [
-              1126,
+              1124,
               206
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1\\step_2.png"
@@ -178,7 +178,7 @@
           {
             "mutation_id": "m1",
             "cleared": false,
-            "evidence_quote": "Step 0: THOUGHT: 我需要找到钉钉小秘书的置顶设置并关闭它。当前界面显示了消息列表，其中“钉钉小秘书”在列表中可见。通常，长按某个联系人或聊天条目会弹出操作菜单，其中包括置顶选项。因此，我应该先长按“钉钉小秘书”的聊天条目，以查看是否有置顶相关的设置选项。 ACTION: click([605, 1172])\nStep 1: THOUGHT: 我现在处于“钉钉小秘书”的聊天界面，需要关闭其置顶设置。通常，置顶设置的开关会在聊天界面的右上角菜单中。当前屏幕右上角有一个“更多”按钮（三个点图标），点击它应该会弹出一个菜单，其中可能包含“置顶聊天”选项。如果该选项当前是开启状态（例如显示为已勾选或有特殊标识），我需要点击它来关闭置顶。 ACTION: click([1126, 206])"
+            "evidence_quote": "Step 0: THOUGHT: 我需要找到钉钉小秘书的置顶设置并关闭它。当前界面是消息列表，钉钉小秘书的对话条目清晰可见。通常，在聊天列表中长按某个对话可以唤出更多操作选项，其中包括置顶设置。因此，我应该先长按“钉钉小秘书”的对话条目，看看是否会出现相关设置选项。 ACTION: click([609, 1172])\nStep 1: THOUGHT: 我现在处于“钉钉小秘书”的聊天界面，需要关闭其置顶设置。通常，置顶设置的开关会在聊天窗口的更多选项中。右上角的三个点图标（...）一般是进入更多设置的入口，点击它应该能打开一个菜单，其中可能包含“置顶聊天”或类似选项。因此，我下一步应该点击右上角的三个点图标。 ACTION: click([1124, 206])"
           }
         ]
       }
@@ -191,14 +191,171 @@
       "accepted_plan": {
         "m1": "在钉钉中将钉钉小秘书的置顶设置关闭，使其不再处于置顶状态"
       },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_4.base_canonical_harness.1793244701.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[609, 1172]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "钉钉消息列表中，钉钉小秘书的对话条目是否未出现在顶部置顶区域？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "698227c37295e80b9c154ac1053c47d3",
+            "xml_after_sig": "aba4016a5848bb7fe87f9b6b38a26c7f"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_4.base_canonical_harness.1793244701.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1124, 206]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "钉钉消息列表中，钉钉小秘书的对话条目是否未出现在顶部置顶区域？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 置顶 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "aba4016a5848bb7fe87f9b6b38a26c7f",
+            "xml_after_sig": "e972e549f886578104b57f9f05034d4c"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              609,
+              1172
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1124,
+              206
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_4_tasks.json"
+      },
       "verify": {
         "success": false,
-        "reason": "no_new_evidence",
-        "verdicts": []
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 1: THOUGHT: 我现在处于“钉钉小秘书”的聊天界面，需要关闭其置顶状态。根据钉钉的操作逻辑，通常在聊天界面的右上角点击“更多”（三个点图标），会弹出一个菜单，其中包含“置顶聊天”选项。如果当前是置顶状态，该选项会显示为“取消置顶”。因此, 我应该点击右上角的三个点图标来打开菜单。 ACTION: click([1124, 206])"
+          }
+        ]
       }
     }
   ],
-  "recovery_id": "rimet_4.base_canonical_harness.1793212885",
+  "recovery_id": "rimet_4.base_canonical_harness.1793244701",
   "phase": "halt",
   "budget": {
     "max_iter": 3,
@@ -221,9 +378,9 @@
         "status": "done",
         "reversible": "ui_invert",
         "evidence_steps": [
-          4
+          2
         ],
-        "evidence_quote": "Thought: 我已经进入了“钉钉小秘书”的设置页面，看到“置顶”选项的开关已经是蓝色开启状态，说明它已经被成功设为置顶。",
+        "evidence_quote": "Thought: 我已经进入了“钉钉小秘书”的设置页面，看到“置顶”选项的开关已经是蓝色开启状态，说明它已经被成功置顶了。",
         "confidence": 0.95,
         "attribution": "this_task",
         "carried_over_from_task": null
@@ -235,17 +392,18 @@
       },
       "contamination_status": "present",
       "recovery_status": "failed",
-      "attempts": 1,
+      "attempts": 2,
       "last_verify": {
-        "round": 1,
+        "round": 2,
         "verdict": {
           "mutation_id": "m1",
           "cleared": false,
-          "evidence_quote": "Step 0: THOUGHT: 我需要找到钉钉小秘书的置顶设置并关闭它。当前界面显示了消息列表，其中“钉钉小秘书”在列表中可见。通常，长按某个联系人或聊天条目会弹出操作菜单，其中包括置顶选项。因此，我应该先长按“钉钉小秘书”的聊天条目，以查看是否有置顶相关的设置选项。 ACTION: click([605, 1172])\nStep 1: THOUGHT: 我现在处于“钉钉小秘书”的聊天界面，需要关闭其置顶设置。通常，置顶设置的开关会在聊天界面的右上角菜单中。当前屏幕右上角有一个“更多”按钮（三个点图标），点击它应该会弹出一个菜单，其中可能包含“置顶聊天”选项。如果该选项当前是开启状态（例如显示为已勾选或有特殊标识），我需要点击它来关闭置顶。 ACTION: click([1126, 206])"
+          "evidence_quote": "Step 1: THOUGHT: 我现在处于“钉钉小秘书”的聊天界面，需要关闭其置顶状态。根据钉钉的操作逻辑，通常在聊天界面的右上角点击“更多”（三个点图标），会弹出一个菜单，其中包含“置顶聊天”选项。如果当前是置顶状态，该选项会显示为“取消置顶”。因此, 我应该点击右上角的三个点图标来打开菜单。 ACTION: click([1124, 206])"
         }
       },
       "evidence_refs": [
-        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1"
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_4\\recovery_iter2"
       ],
       "last_failure_reason": "VLM 判定污染仍存在/无法确认"
     }
@@ -255,7 +413,7 @@
     {
       "iteration": 1,
       "accepted_plan": {
-        "m1": "在钉钉里将钉钉小秘书的置顶设置关闭，使置顶处于关闭状态"
+        "m1": "在钉钉里将钉钉小秘书的置顶设置关闭，使其不再置顶"
       },
       "plan_reason": null,
       "generate_ok": true,
@@ -270,7 +428,7 @@
       },
       "plan_reason": null,
       "generate_ok": true,
-      "execute_ok": null,
+      "execute_ok": true,
       "verify_success": false,
       "error": null
     }

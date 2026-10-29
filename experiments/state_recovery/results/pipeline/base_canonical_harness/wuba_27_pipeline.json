@@ -18,15 +18,15 @@
       "generate_ok": true,
       "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_27_tasks.json",
       "accepted_plan": {
-        "m1": "在58同城中将‘我是’的设置状态恢复为关闭（即撤销性别设置，使其不显示具体性别）"
+        "m1": "在58同城中将性别恢复为关闭状态，即撤销将性别设为‘女’的变更，使性别设置项回到未选中（off）状态"
       },
       "actions": [
         {
           "schema": "action-contract/v0.1",
-          "action_id": "wuba_27.base_canonical_harness.1793224720.iter1.step1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step1",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[1015, 2549]",
+          "target_description": "position=[1093, 2571]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -60,7 +60,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在58同城个人中心页面中，‘我是’字段是否未显示具体性别（如‘女’）？",
+            "question": "性别的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -75,17 +75,17 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_1.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_1_after.png",
-            "xml_before_sig": "114e05667dafb47fc57535ee2efa40f7",
-            "xml_after_sig": "3a2dd309293c9055f2ee41407839ccd5"
+            "xml_before_sig": "c17603c5428aa1a3bde7d602d12763a1",
+            "xml_after_sig": "28319608f7f7919785759019f27b34eb"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "wuba_27.base_canonical_harness.1793224720.iter1.step2",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step2",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[251, 564]",
+          "target_description": "position=[1142, 190]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -104,8 +104,8 @@
                 "note": "无显式 id（position 型），无法确定性验证可达性"
               },
               "precondition": {
-                "result": "unknown",
-                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
               },
               "authorized": {
                 "result": "unknown",
@@ -119,7 +119,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在58同城个人中心页面中，‘我是’字段是否未显示具体性别（如‘女’）？",
+            "question": "性别的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -134,17 +134,17 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_2.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_2_after.png",
-            "xml_before_sig": "3a2dd309293c9055f2ee41407839ccd5",
-            "xml_after_sig": "60b09c324a0431da2a2c07e7d5f4630f"
+            "xml_before_sig": "28319608f7f7919785759019f27b34eb",
+            "xml_after_sig": "ec72543646a6524708b7a7179589889a"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "wuba_27.base_canonical_harness.1793224720.iter1.step3",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step3",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[1107, 1931]",
+          "target_description": "position=[183, 353]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -163,8 +163,8 @@
                 "note": "无显式 id（position 型），无法确定性验证可达性"
               },
               "precondition": {
-                "result": "unknown",
-                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
               },
               "authorized": {
                 "result": "unknown",
@@ -178,7 +178,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在58同城个人中心页面中，‘我是’字段是否未显示具体性别（如‘女’）？",
+            "question": "性别的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -193,17 +193,17 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_3.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_3_after.png",
-            "xml_before_sig": "60b09c324a0431da2a2c07e7d5f4630f",
-            "xml_after_sig": "3bd2ab882bf94788ff2845dc46bf238b"
+            "xml_before_sig": "ec72543646a6524708b7a7179589889a",
+            "xml_after_sig": "0a0ea59f7367fad97b4c39cf380c5abf"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "wuba_27.base_canonical_harness.1793224720.iter1.step4",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step4",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[87, 201]",
+          "target_description": "position=[1108, 1934]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -237,7 +237,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在58同城个人中心页面中，‘我是’字段是否未显示具体性别（如‘女’）？",
+            "question": "性别的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -252,17 +252,17 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_4.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_4_after.png",
-            "xml_before_sig": "4ae5729dc19778613cc69f62394d02cc",
-            "xml_after_sig": "b3298b1fc3350ffc9ec1872f89b905fd"
+            "xml_before_sig": "0a0ea59f7367fad97b4c39cf380c5abf",
+            "xml_after_sig": "659ab4d9f3e1c4f72a393678198649df"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "wuba_27.base_canonical_harness.1793224720.iter1.step5",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step5",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[1116, 293]",
+          "target_description": "position=[87, 201]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -296,7 +296,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在58同城个人中心页面中，‘我是’字段是否未显示具体性别（如‘女’）？",
+            "question": "性别的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -311,17 +311,17 @@
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_5.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_5_after.png",
-            "xml_before_sig": "b3298b1fc3350ffc9ec1872f89b905fd",
-            "xml_after_sig": "bc6c3f4325b63fb4010e0e0a722d42f4"
+            "xml_before_sig": "01197a09fc361e0855d8ca3d2b80ae39",
+            "xml_after_sig": "ec72543646a6524708b7a7179589889a"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "wuba_27.base_canonical_harness.1793224720.iter1.step6",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step6",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[1075, 561]",
+          "target_description": "position=[1093, 2571]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -355,7 +355,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在58同城个人中心页面中，‘我是’字段是否未显示具体性别（如‘女’）？",
+            "question": "性别的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -364,31 +364,149 @@
           },
           "execution_status": "executed",
           "gui_changed": "changed",
-          "clearance": "cleared",
-          "clearance_basis": "设置项 我是 已关闭",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
           "new_contamination_signal": false,
           "observation_ref": {
             "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_6.png",
             "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_6_after.png",
-            "xml_before_sig": "bc6c3f4325b63fb4010e0e0a722d42f4",
-            "xml_after_sig": "c89704f10e55e04cb8fd2f06703330c3"
+            "xml_before_sig": "ec72543646a6524708b7a7179589889a",
+            "xml_after_sig": "0f9b994bcfc6f1f47d7031bb591b41fc"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step7",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[83, 201]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "性别的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_7_after.png",
+            "xml_before_sig": "0f9b994bcfc6f1f47d7031bb591b41fc",
+            "xml_after_sig": "b35053f2264bcfc5078695b2cb87c5a3"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter1.step8",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[128, 393]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "性别的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_8_after.png",
+            "xml_before_sig": "b35053f2264bcfc5078695b2cb87c5a3",
+            "xml_after_sig": "3f7a4ab83567dbd86f5cfe2514410ecd"
           },
           "error_reason": null
         }
       ],
       "execute_ok": true,
-      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_6.png",
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_8.png",
       "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1",
       "trajectory": {
         "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1",
-        "step_count": 6,
+        "step_count": 8,
         "steps": [
           {
             "step_index": 0,
             "action": "click",
             "target": [
-              1015,
-              2549
+              1093,
+              2571
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_1.png"
           },
@@ -396,8 +514,8 @@
             "step_index": 1,
             "action": "click",
             "target": [
-              251,
-              564
+              1142,
+              190
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_2.png"
           },
@@ -405,8 +523,8 @@
             "step_index": 2,
             "action": "click",
             "target": [
-              1107,
-              1931
+              183,
+              353
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_3.png"
           },
@@ -414,8 +532,8 @@
             "step_index": 3,
             "action": "click",
             "target": [
-              87,
-              201
+              1108,
+              1934
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_4.png"
           },
@@ -423,8 +541,8 @@
             "step_index": 4,
             "action": "click",
             "target": [
-              1116,
-              293
+              87,
+              201
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_5.png"
           },
@@ -432,10 +550,28 @@
             "step_index": 5,
             "action": "click",
             "target": [
-              1075,
-              561
+              1093,
+              2571
             ],
             "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "click",
+            "target": [
+              83,
+              201
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "click",
+            "target": [
+              128,
+              393
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1\\step_8.png"
           }
         ],
         "executor_success_flag": true
@@ -450,7 +586,7 @@
           {
             "mutation_id": "m1",
             "cleared": false,
-            "evidence_quote": "Step 5: THOUGHT: 在当前“个人信息”页面中，已看到用户名“哥斯拉”下方显示“女”和“随便看看”，其中“女”即为“我是”的性别设置（当前为开启状态）。旁边有一个铅笔图标，明显是编辑按钮。点击该编辑按钮应可进入资料编辑界面，在那里可以修改或关闭性别显示设置。 ACTION: click([1075, 561])"
+            "evidence_quote": "THOUGHT: 要将性别设置恢复为关闭状态，首先需要进入个人中心或设置页面。当前界面是58同城的首页，底部导航栏中有“我的”选项，点击它应该可以进入个人中心，在那里找到性别设置并进行修改。"
           }
         ]
       }
@@ -461,16 +597,581 @@
       "generate_ok": true,
       "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_27_tasks.json",
       "accepted_plan": {
-        "m1": "在58同城中将‘我是’的性别设置恢复为关闭状态，即撤销‘女’的显示，使‘我是’不再显示具体性别值"
+        "m1": "在58同城中将性别设置恢复为关闭状态，即撤销‘女’的选中，使性别字段不再显示‘女’或任何已选中的性别标识"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1097, 2571]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "5f081c92552eae92c146272400593ce0",
+            "xml_after_sig": "bdda985981b9a77ea3c2dd5bdb9124c2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1143, 187]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "bdda985981b9a77ea3c2dd5bdb9124c2",
+            "xml_after_sig": "19900aa8411e82b2e60e2ae247a29c18"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[83, 201]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_3_after.png",
+            "xml_before_sig": "19900aa8411e82b2e60e2ae247a29c18",
+            "xml_after_sig": "31b96f1389e1966df33e68bf329cd607"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step4",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[126, 2571]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 5"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_4.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_4_after.png",
+            "xml_before_sig": "31b96f1389e1966df33e68bf329cd607",
+            "xml_after_sig": "dfa7398a7c86a999931ec0b7476c328c"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step5",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[131, 564]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 4"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_5.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_5_after.png",
+            "xml_before_sig": "d7e36a0e85b81d1aed4a0812c3d110ba",
+            "xml_after_sig": "353721dd8c02c1680be5293d2d93dbe6"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step6",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1087, 833]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 3"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_6.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_6_after.png",
+            "xml_before_sig": "c16e62dab9c509fe67674451e91ebb54",
+            "xml_after_sig": "bdb34168bbff2bd2df0f78fe37bf75d1"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step7",
+          "target_id": "m1",
+          "action_type": "scroll",
+          "target_description": "position=[609, 2031]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 scroll"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "滑动/拖拽类动作带方向或起止位置"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 2"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_7.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_7_after.png",
+            "xml_before_sig": "6efc1d4f31bb299ec0f7266d7d53f818",
+            "xml_after_sig": "e191e73b1a437dc58e9eda7821cba6d8"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "wuba_27.base_canonical_harness.1793245153.iter2.step8",
+          "target_id": "m1",
+          "action_type": "scroll",
+          "target_description": "position=[609, 2031]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 scroll"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "滑动/拖拽类动作带方向或起止位置"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "仅点击类检查控件可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 1"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在58同城的个人资料页中，‘性别’字段是否未显示‘女’且无任何选中状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_8.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_8_after.png",
+            "xml_before_sig": "0afd546bac455e6097b7c1ee784a7cce",
+            "xml_after_sig": "d85378a0a7b5e83c3e950a12f76c3b0f"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_8.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2",
+        "step_count": 8,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1097,
+              2571
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1143,
+              187
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              83,
+              201
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_3.png"
+          },
+          {
+            "step_index": 3,
+            "action": "click",
+            "target": [
+              126,
+              2571
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_4.png"
+          },
+          {
+            "step_index": 4,
+            "action": "click",
+            "target": [
+              131,
+              564
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_5.png"
+          },
+          {
+            "step_index": 5,
+            "action": "click",
+            "target": [
+              1087,
+              833
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_6.png"
+          },
+          {
+            "step_index": 6,
+            "action": "scroll",
+            "target": [
+              609,
+              2031
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_7.png"
+          },
+          {
+            "step_index": 7,
+            "action": "scroll",
+            "target": [
+              609,
+              2031
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2\\step_8.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\wuba_27_tasks.json"
       },
       "verify": {
         "success": false,
-        "reason": "no_new_evidence",
-        "verdicts": []
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 6: THOUGHT: 当前页面是职位筛选界面，显示了福利待遇、工作年限、作息和学历要求等选项，但未看到性别筛选字段。根据任务目标，需要撤销“女”的选中状态，说明性别筛选可能在更下方或需滑动查看。因此，下一步应向下滚动页面，寻找性别选项。"
+          }
+        ]
       }
     }
   ],
-  "recovery_id": "wuba_27.base_canonical_harness.1793224720",
+  "recovery_id": "wuba_27.base_canonical_harness.1793245153",
   "phase": "halt",
   "budget": {
     "max_iter": 3,
@@ -485,7 +1186,7 @@
         "app": "58同城",
         "entity": {
           "kind": "setting",
-          "name": "我是",
+          "name": "性别",
           "identifier": null
         },
         "direction": "on",
@@ -493,32 +1194,34 @@
         "status": "done",
         "reversible": "ui_invert",
         "evidence_steps": [
-          4,
-          5
+          5,
+          6,
+          7
         ],
-        "evidence_quote": "Step 4: THOUGHT: 当前已进入性别选择弹窗，选项包括“男”、“女”和“取消”。用户目标是将性别修改为“女”，而“女”选项清晰可见且可点击。既然目标明确，直接点击“女”即可完成性别设置…… Step 5: THOUGHT: 性别已成功修改为“女”，当前页面显示“我是：女”，说明修改操作已完成。",
+        "evidence_quote": "Step 5: THOUGHT: 当前页面已弹出性别选择框，选项包括“男”、“女”和“取消”。任务要求将性别修改为“女”，而“女”选项清晰可见且可点击。此时应直接选择“女”以完成性别修改操作。 ACTION: click([609, 2395])\nStep 6: THOUGHT: 性别已成功修改为“女”，当前页面显示“我是：女”，说明修改操作已完成。\nStep 7: THOUGHT: 从当前页面可见，个人信息中“女”标签已明确显示，且头像也更新为女性形象，说明性别修改操作已成功生效。",
         "confidence": 0.95,
         "attribution": "this_task",
         "carried_over_from_task": null
       },
       "initial_expected_state": {
         "kind": "setting_off",
-        "entity_name": "我是",
-        "description": "设置项 我是 应处于 off 状态"
+        "entity_name": "性别",
+        "description": "设置项 性别 应处于 off 状态"
       },
       "contamination_status": "present",
       "recovery_status": "failed",
-      "attempts": 1,
+      "attempts": 2,
       "last_verify": {
-        "round": 1,
+        "round": 2,
         "verdict": {
           "mutation_id": "m1",
           "cleared": false,
-          "evidence_quote": "Step 5: THOUGHT: 在当前“个人信息”页面中，已看到用户名“哥斯拉”下方显示“女”和“随便看看”，其中“女”即为“我是”的性别设置（当前为开启状态）。旁边有一个铅笔图标，明显是编辑按钮。点击该编辑按钮应可进入资料编辑界面，在那里可以修改或关闭性别显示设置。 ACTION: click([1075, 561])"
+          "evidence_quote": "Step 6: THOUGHT: 当前页面是职位筛选界面，显示了福利待遇、工作年限、作息和学历要求等选项，但未看到性别筛选字段。根据任务目标，需要撤销“女”的选中状态，说明性别筛选可能在更下方或需滑动查看。因此，下一步应向下滚动页面，寻找性别选项。"
         }
       },
       "evidence_refs": [
-        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1"
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\wuba_27\\recovery_iter2"
       ],
       "last_failure_reason": "VLM 判定污染仍存在/无法确认"
     }
@@ -528,7 +1231,7 @@
     {
       "iteration": 1,
       "accepted_plan": {
-        "m1": "在58同城中将‘我是’的设置状态恢复为关闭（即撤销性别设置，使其不显示具体性别）"
+        "m1": "在58同城中将性别恢复为关闭状态，即撤销将性别设为‘女’的变更，使性别设置项回到未选中（off）状态"
       },
       "plan_reason": null,
       "generate_ok": true,
@@ -539,11 +1242,11 @@
     {
       "iteration": 2,
       "accepted_plan": {
-        "m1": "在58同城中将‘我是’的性别设置恢复为关闭状态，即撤销‘女’的显示，使‘我是’不再显示具体性别值"
+        "m1": "在58同城中将性别设置恢复为关闭状态，即撤销‘女’的选中，使性别字段不再显示‘女’或任何已选中的性别标识"
       },
       "plan_reason": null,
       "generate_ok": true,
-      "execute_ok": null,
+      "execute_ok": true,
       "verify_success": false,
       "error": null
     }

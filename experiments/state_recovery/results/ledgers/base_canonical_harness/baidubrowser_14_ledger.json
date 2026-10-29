@@ -8,7 +8,7 @@
     {
       "id": "m1",
       "type": "settings_toggle",
-      "app": "百度APP",
+      "app": "百度App",
       "entity": {
         "kind": "setting",
         "name": "夜间模式",
@@ -19,10 +19,10 @@
       "status": "done",
       "reversible": "ui_invert",
       "evidence_steps": [
-        3,
-        4
+        4,
+        5
       ],
-      "evidence_quote": "Step 3: THOUGHT: 我现在看到了夜间模式的设置界面，左侧是日间模式（当前选中），右侧是夜间模式。要将百度浏览器设置为夜间模式，我需要点击右侧的\"夜间\"选项，这样就能切换到深色主题了。\\nACTION: click([882, 1199])\\nStep 4: THOUGHT: 太好了！我看到夜间模式已经成功开启了，右侧的\"夜间\"选项已经被选中（蓝色勾选标记），界面也变成了深色主题。",
+      "evidence_quote": "Step 4: THOUGHT: 当前界面是百度浏览器的夜间模式设置页面，左侧为“日间”模式（已选中），右侧为“夜间”模式（未选中）。任务目标是将百度浏览器设置为夜间模式，因此需要点击右侧的“夜间”选项以启用该模式。 ACTION: click([882, 1196])\nStep 5: THOUGHT: 夜间模式已成功启用，界面显示为深色主题，且“夜间”选项已被选中。",
       "confidence": 1.0,
       "attribution": "this_task",
       "carried_over_from_task": null

@@ -18,15 +18,186 @@
       "generate_ok": true,
       "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_19_tasks.json",
       "accepted_plan": {
-        "m1": "在QQ中将关怀模式关闭，使关怀模式设置项恢复为关闭状态"
+        "m1": "在QQ中将关怀模式关闭，使其恢复为未启用状态"
       },
       "actions": [
         {
           "schema": "action-contract/v0.1",
-          "action_id": "qq_19.base_canonical_harness.1793208218.iter1.step1",
+          "action_id": "qq_19.base_canonical_harness.1793244295.iter1.step1",
           "target_id": "m1",
           "action_type": "click",
           "target_description": "position=[124, 217]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的模式选择界面中，关怀模式是否未被选中（右侧无蓝色对勾）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "dfde1a96619dee021e08d5e054684d35",
+            "xml_after_sig": "16667e9b96a5a7730e5111fa734ab2db"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_19.base_canonical_harness.1793244295.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[120, 2490]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "QQ的模式选择界面中，关怀模式是否未被选中（右侧无蓝色对勾）？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 关怀模式 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "16667e9b96a5a7730e5111fa734ab2db",
+            "xml_after_sig": "c1e63497a49240d8207ac80736eefc70"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              124,
+              217
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              120,
+              2490
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_19_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "THOUGHT: 我需要关闭QQ中的关怀模式。当前界面是QQ的消息列表页，要找到关怀模式的设置，通常需要进入个人主页或设置菜单。点击左上角的头像可以进入个人主页，那里可能会有设置入口。 ACTION: click([124, 217])"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_19_tasks.json",
+      "accepted_plan": {
+        "m1": "在QQ中将关怀模式的开关状态恢复为关闭（即撤销开启操作），确保关怀模式处于off状态"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "qq_19.base_canonical_harness.1793244295.iter2.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[128, 220]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -73,19 +244,19 @@
           "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
           "new_contamination_signal": false,
           "observation_ref": {
-            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_1.png",
-            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_1_after.png",
-            "xml_before_sig": "6c26ca9f4ad639d21bd623598518efff",
-            "xml_after_sig": "9fc4bc040ccdde8988130ed0fa57f395"
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "3697df2568d4dc1be220967dff07bd1e",
+            "xml_after_sig": "cc9ca93eb91faa5b5c5c6823a888ed18"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "qq_19.base_canonical_harness.1793208218.iter1.step2",
+          "action_id": "qq_19.base_canonical_harness.1793244295.iter2.step2",
           "target_id": "m1",
           "action_type": "click",
-          "target_description": "position=[124, 2471]",
+          "target_description": "position=[120, 2490]",
           "preconditions": {
             "schema": "action-contract/v0.1",
             "allow": true,
@@ -132,38 +303,38 @@
           "clearance_basis": "设置项 关怀模式 已关闭",
           "new_contamination_signal": false,
           "observation_ref": {
-            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2.png",
-            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2_after.png",
-            "xml_before_sig": "608c8a3380f4c0890c7b83ea7ee41249",
-            "xml_after_sig": "21ae22c9a3aba9a71c9db968a00ceac8"
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "cc9ca93eb91faa5b5c5c6823a888ed18",
+            "xml_after_sig": "658ab41d4243440141a846f09a36cb2e"
           },
           "error_reason": null
         }
       ],
       "execute_ok": true,
-      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2.png",
-      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1",
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2",
       "trajectory": {
-        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1",
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2",
         "step_count": 2,
         "steps": [
           {
             "step_index": 0,
             "action": "click",
             "target": [
-              124,
-              217
+              128,
+              220
             ],
-            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_1.png"
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_1.png"
           },
           {
             "step_index": 1,
             "action": "click",
             "target": [
-              124,
-              2471
+              120,
+              2490
             ],
-            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1\\step_2.png"
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2\\step_2.png"
           }
         ],
         "executor_success_flag": true
@@ -178,27 +349,13 @@
           {
             "mutation_id": "m1",
             "cleared": false,
-            "evidence_quote": "THOUGHT: 我已经进入了个人主页，看到了底部的“设置”选项。要关闭关怀模式，必须先进入设置界面，因为关怀模式属于系统功能设置的一部分。现在点击“设置”按钮是合理的下一步操作，这将带我进入QQ的设置菜单，在那里我可以找到与关怀模式相关的选项。"
+            "evidence_quote": "Step 1: THOUGHT: 我现在位于QQ的个人主页界面，底部有“设置”选项（齿轮图标），这是进入QQ设置中心的入口。关怀模式的开关应该在设置菜单中，因此下一步应点击“设置”进入设置页面。"
           }
         ]
       }
-    },
-    {
-      "iter": 2,
-      "phase": "verify",
-      "generate_ok": true,
-      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\qq_19_tasks.json",
-      "accepted_plan": {
-        "m1": "在QQ中将关怀模式关闭，使设置项‘关怀模式’处于off状态"
-      },
-      "verify": {
-        "success": false,
-        "reason": "no_new_evidence",
-        "verdicts": []
-      }
     }
   ],
-  "recovery_id": "qq_19.base_canonical_harness.1793208218",
+  "recovery_id": "qq_19.base_canonical_harness.1793244295",
   "phase": "halt",
   "budget": {
     "max_iter": 3,
@@ -217,16 +374,14 @@
           "identifier": null
         },
         "direction": "on",
-        "persistence": "device_local",
+        "persistence": "account",
         "status": "done",
         "reversible": "ui_invert",
         "evidence_steps": [
-          3,
-          4,
-          5
+          3
         ],
-        "evidence_quote": "Step 3: THOUGHT: 我已经进入了模式选择界面，看到了四个选项：普通模式、简洁模式、未成年人模式和关怀模式。根据任务要求，我需要选择“关怀模式”，其描述为“字体更大，设计更简明，看的更清晰”。现在我需要点击“关怀模式”选项来完成切换。 ACTION: click([614, 1215])\nStep 4: THOUGHT: 我已经成功进入关怀模式的确认页面，页面上明确显示了“关怀模式”的特点，并提供了一个蓝色的“开启关怀模式”按钮。为了完成任务，我需要点击这个按钮来正式启用关怀模式。 ACTION: click([609, 2232])\nStep 5: THOUGHT: 系统提示需要重启QQ才能使关怀模式生效，当前弹窗提供了“取消”和“确定”两个选项。为了完成更换到关怀模式的任务，我需要点击“确定”按钮确认设置，之后再重启QQ即可。 ACTION: click([836, 1549])",
-        "confidence": 0.95,
+        "evidence_quote": "Thought: 我已经进入了模式选择界面，并且看到“关怀模式”已经被选中（右侧有蓝色对勾），这说明QQ模式已经成功切换到关怀模式。",
+        "confidence": 1.0,
         "attribution": "this_task",
         "carried_over_from_task": null
       },
@@ -237,17 +392,18 @@
       },
       "contamination_status": "present",
       "recovery_status": "failed",
-      "attempts": 1,
+      "attempts": 2,
       "last_verify": {
-        "round": 1,
+        "round": 2,
         "verdict": {
           "mutation_id": "m1",
           "cleared": false,
-          "evidence_quote": "THOUGHT: 我已经进入了个人主页，看到了底部的“设置”选项。要关闭关怀模式，必须先进入设置界面，因为关怀模式属于系统功能设置的一部分。现在点击“设置”按钮是合理的下一步操作，这将带我进入QQ的设置菜单，在那里我可以找到与关怀模式相关的选项。"
+          "evidence_quote": "Step 1: THOUGHT: 我现在位于QQ的个人主页界面，底部有“设置”选项（齿轮图标），这是进入QQ设置中心的入口。关怀模式的开关应该在设置菜单中，因此下一步应点击“设置”进入设置页面。"
         }
       },
       "evidence_refs": [
-        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1"
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\qq_19\\recovery_iter2"
       ],
       "last_failure_reason": "VLM 判定污染仍存在/无法确认"
     }
@@ -257,7 +413,7 @@
     {
       "iteration": 1,
       "accepted_plan": {
-        "m1": "在QQ中将关怀模式关闭，使关怀模式设置项恢复为关闭状态"
+        "m1": "在QQ中将关怀模式关闭，使其恢复为未启用状态"
       },
       "plan_reason": null,
       "generate_ok": true,
@@ -268,11 +424,11 @@
     {
       "iteration": 2,
       "accepted_plan": {
-        "m1": "在QQ中将关怀模式关闭，使设置项‘关怀模式’处于off状态"
+        "m1": "在QQ中将关怀模式的开关状态恢复为关闭（即撤销开启操作），确保关怀模式处于off状态"
       },
       "plan_reason": null,
       "generate_ok": true,
-      "execute_ok": null,
+      "execute_ok": true,
       "verify_success": false,
       "error": null
     }

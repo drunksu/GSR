@@ -6,49 +6,15 @@
       "action": "click",
       "params": {
         "position": [
-          1046,
-          2519
+          1038,
+          2517
         ],
         "click_times": 1
       },
       "normalized_params": {
         "position": [
-          0.86,
+          0.85,
           0.93
-        ],
-        "click_times": 1
-      }
-    },
-    {
-      "action": "click",
-      "params": {
-        "position": [
-          165,
-          369
-        ],
-        "click_times": 1
-      },
-      "normalized_params": {
-        "position": [
-          0.14,
-          0.14
-        ],
-        "click_times": 1
-      }
-    },
-    {
-      "action": "click",
-      "params": {
-        "position": [
-          118,
-          195
-        ],
-        "click_times": 1
-      },
-      "normalized_params": {
-        "position": [
-          0.1,
-          0.07
         ],
         "click_times": 1
       }
@@ -74,7 +40,7 @@
       "action": "click",
       "params": {
         "position": [
-          93,
+          98,
           195
         ],
         "click_times": 1
@@ -91,7 +57,7 @@
       "action": "click",
       "params": {
         "position": [
-          1093,
+          1092,
           212
         ],
         "click_times": 1
@@ -108,7 +74,7 @@
       "action": "click",
       "params": {
         "position": [
-          218,
+          214,
           1421
         ],
         "click_times": 1
@@ -122,29 +88,12 @@
       }
     },
     {
-      "action": "click",
-      "params": {
-        "position": [
-          1127,
-          466
-        ],
-        "click_times": 1
-      },
-      "normalized_params": {
-        "position": [
-          0.92,
-          0.17
-        ],
-        "click_times": 1
-      }
-    },
-    {
       "action": "terminate",
       "params": {
-        "text": "高德地图中家的地址已设置为北京大学东门"
+        "text": "高德地图中“家”的地址已设置为“北京大学东门”。"
       },
       "normalized_params": {
-        "text": "高德地图中家的地址已设置为北京大学东门"
+        "text": "高德地图中“家”的地址已设置为“北京大学东门”。"
       }
     }
   ],
@@ -154,21 +103,15 @@
     "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_3.png",
     "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_4.png",
     "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_5.png",
-    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_6.png",
-    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_7.png",
-    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_8.png",
-    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_9.png"
+    "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\minimap_16\\step_6.png"
   ],
   "history_response": [
-    "Thought: 我需要设置家的地址为“北京大学东门”。首先，我应该进入个人中心页面，因为通常地址管理功能会在“我的”或个人设置中。当前界面是高德地图的主界面，右下角有“我的”选项，点击它应该能进入个人中心。\nAction: click(point='<point>857 929</point>')",
-    "Thought: 在“我的”页面中，我找到了“家人地图”选项，这很可能是管理家庭地址的地方。不过，更直接的地址设置可能在设置或常用地址管理中。观察页面顶部，有头像、消息图标、添加联系人图标和设置齿轮图标。通常，地址设置会在设置中，或者在个人资料编辑里。点击头像区域可能会进入个人资料页面，在那里可以编辑常用地址（如家、公司）。\nAction: click(point='<point>135 136</point>')",
-    "Thought: 当前页面是个人主页，虽然有编辑图标（铅笔），但这是用于编辑个人简介，不是设置家庭地址的地方。我需要返回上一级，寻找更合适的入口。回想高德地图的常规路径：设置家/公司地址通常在“我的”页面的下方功能区，或者通过搜索框附近的功能入口。之前在“我的”主界面看到过“家人地图”，也可能有“常用地址”类选项。现在这个页面没有直接入口，应点击左上角返回按钮，回到“我的”主界面。\nAction: click(point='<point>97 72</point>')",
-    "Thought: 我现在在“我的”主界面，需要找到设置“家”的地址入口。常见路径是：进入“家人地图”或“常用地址”管理。观察屏幕，有一个“家人地图”图标（红心+人形），这很可能是管理家庭成员和家庭地址的地方；另外，也可能在设置中。但更直接的是——高德地图通常在“我的”页面底部或中部有“常用地址”或通过搜索框长按/点击进入地址管理。不过当前界面没有明显“常用地址”按钮。再仔细看：右上角有设置齿轮图标，点进去可能有“地址管理”或“我的地址”。或者，另一种经典路径：点击顶部头像区域右侧的“主页 >”可能不是，但更可靠的是尝试点击“家人地图”，因为任务明确是“设家的地址”，而“家人地图”正是为此设计的功能模块。\nAction: click(point='<point>499 612</point>')",
-    "Thought: 当前页面是“家人地图”功能介绍页，主要功能是共享位置和创建家庭地图，但并没有直接设置“家的地址”的入口。我需要返回上一级，寻找更通用的地址管理功能。在高德地图中，设置“家”或“公司”等常用地址，通常是在主界面的搜索框附近，或通过“我的”→“设置”→“地址管理”，或者更常见的是：在首页点击搜索框，输入地址后，长按该地址可设为“家”或“公司”。但当前我在深层页面，应先返回“我的”主界面，再找“设置”或尝试从首页操作。左上角有返回箭头，点击返回。\nAction: click(point='<point>76 72</point>')",
-    "Thought: 我现在回到“我的”主界面，仍需找到设置“家的地址”的入口。回顾高德地图的典型操作路径：常用地址（如家、公司）通常在“设置”中管理，或者通过首页搜索后保存为常用地址。右上角有设置齿轮图标，这是最可能包含“地址管理”或“常用地址”选项的地方。因此，下一步应点击设置图标进入设置页面。\nAction: click(point='<point>896 78</point>')",
-    "Thought: 在设置页面中，我找到了“常去地点管理”这一项，这正是用来管理常用地址（如家、公司）的功能入口。点击它应该可以进入添加或修改“家”地址的界面。这是完成任务的关键步骤。\nAction: click(point='<point>179 524</point>')",
-    "Thought: 我已进入“常去地点管理”页面，看到“家”已经显示为“北京大学(东门)”，说明设置已完成。但为了确认是否是用户指定的“北京大学东门”（注意括号是中文还是英文、是否有空格等细节），可以点击该条目查看或编辑以确保完全匹配。不过从当前显示看，内容一致，任务基本达成。但按严谨性，应点击“家”右侧的三点菜单，检查是否可确认或微调地址。\nAction: click(point='<point>924 172</point>')",
-    "Thought: 弹出菜单显示“修改地点”和“删除地点”，说明当前“家”地址已存在且为“北京大学(东门)”。用户要求设为“北京大学东门”，当前显示是“北京大学(东门)”，括号为中文全角，基本一致，属于合理表达。若需严格匹配“东门”无括号，可点“修改地点”重新输入；但通常高德会自动标准化地址，且“（东门）”即指东门，已满足需求。任务目标是“设置家的地址为北京大学东门”，当前状态已达成，无需进一步修改。因此，可结束任务。\nAction: finished(content='高德地图中家的地址已设置为北京大学东门')"
+    "Thought: 我需要将高德地图中的“家”地址设置为“北京大学东门”。首先，我应该进入个人中心或设置页面，找到地址管理相关选项。从当前界面看，底部导航栏的“我的”按钮应该是进入个人中心的入口，点击它应该可以找到设置家庭地址的功能。\nAction: click(point='<point>851 928</point>')",
+    "Thought: 在“我的”页面中，我找到了“家人地图”这个选项，它很可能与设置家庭地址相关。不过，更直接的路径可能是通过设置图标（右上角齿轮图标）进入设置页面，或者查看是否有“常用地址”或“地址管理”类的功能。但根据高德地图的常见布局，“家人地图”通常是用来管理家庭成员位置和设置家庭地址的地方，因此点击“家人地图”是一个合理的选择。\nAction: click(point='<point>499 612</point>')",
+    "Thought: 我现在在“家人地图”页面，这个页面主要是用于家庭成员间共享位置的功能，而不是设置“家”的地址。要设置“家”的地址为“北京大学东门”，我需要返回上一级菜单，寻找更通用的地址管理或设置选项。通常，“家”和“公司”等常用地址是在主界面的搜索栏下方或个人中心的设置中配置的。因此，我应该点击左上角的返回按钮，回到之前的“我的”页面，再寻找相关设置。\nAction: click(point='<point>80 72</point>')",
+    "Thought: 我现在回到了“我的”页面，需要找到设置“家”地址的入口。通常高德地图会将常用地址（如家、公司）放在个人中心的设置里，或者在页面顶部的用户信息区域附近。我注意到右上角有一个齿轮图标，这是典型的“设置”入口，点击它应该能进入设置页面，在那里可以找到地址管理或常用地址的选项。\nAction: click(point='<point>895 78</point>')",
+    "Thought: 在设置页面中，我找到了“常去地点管理”这一项，这正是用来管理常用地址（如家、公司等）的功能入口。点击它应该可以进入地址列表，然后添加或修改“家”的地址为“北京大学东门”。\nAction: click(point='<point>175 524</point>')",
+    "Thought: 我已经进入了“常去地点管理”页面，看到“家”地址已经是“北京大学(东门)”，这说明任务已经完成。不过为了确认是否是用户指定的“北京大学东门”（注意括号是中文还是英文，以及是否有其他细微差别），我可以点击该条目查看详细信息或编辑确认。但根据当前显示，“北京大学(东门)”与“北京大学东门”在高德地图中通常视为同一地点，且格式一致，因此可以认为设置成功。\nAction: finished(content='高德地图中“家”的地址已设置为“北京大学东门”。')"
   ],
   "summary": [
     "Agent thinks the request has been completed."

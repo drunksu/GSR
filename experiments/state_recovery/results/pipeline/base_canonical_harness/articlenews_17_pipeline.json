@@ -18,12 +18,183 @@
       "generate_ok": true,
       "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json",
       "accepted_plan": {
-        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至清除前的非零状态（即缓存大小大于0.0B，且‘清理’按钮为可点击红色状态）"
+        "m1": "在今日头条中将‘清除缓存’设置项恢复为关闭状态（即撤销已执行的缓存清除操作，使该选项处于未触发/未激活的off状态）"
       },
       "actions": [
         {
           "schema": "action-contract/v0.1",
-          "action_id": "articlenews_17.base_canonical_harness.1793169725.iter1.step1",
+          "action_id": "articlenews_17.base_canonical_harness.1793242494.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1102, 2579]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条设置页面中，‘清除缓存’选项是否处于关闭状态且缓存大小未归零？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "d18e372c63607d22545c26d40f4c9a02",
+            "xml_after_sig": "6172a0df68447e65a9bf9231660c5372"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_17.base_canonical_harness.1793242494.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[1111, 203]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "在今日头条设置页面中，‘清除缓存’选项是否处于关闭状态且缓存大小未归零？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 清除缓存 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "6172a0df68447e65a9bf9231660c5372",
+            "xml_after_sig": "c670e4ce597b9c50d8e9633c51aae928"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+        "step_count": 2,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              1102,
+              2579
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              1111,
+              203
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "Step 0: THOUGHT: 要将“清除缓存”设置项恢复为关闭状态，首先需要进入今日头条的设置页面。当前界面是首页信息流，底部导航栏有“我的”入口，点击可进入个人中心，再找到设置选项。因此，下一步应点击底部导航栏的“我的”图标。 Step 1: THOUGHT: 当前界面是“我的”个人中心页面，右上角有一个齿轮图标，这通常是进入设置的入口。为了找到“清除缓存”选项，我需要先进入设置页面。因此，下一步应点击右上角的齿轮图标进入设置。"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json",
+      "accepted_plan": {
+        "m1": "在今日头条中将‘清除缓存’设置项恢复为关闭状态，即确保该选项未被触发、缓存未被清空（缓存大小应显示为非零值，如28.8MB或297.9MB等原始值）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "articlenews_17.base_canonical_harness.1793242494.iter2.step1",
           "target_id": "m1",
           "action_type": "click",
           "target_description": "position=[1097, 2587]",
@@ -45,8 +216,8 @@
                 "note": "无显式 id（position 型），无法确定性验证可达性"
               },
               "precondition": {
-                "result": "unknown",
-                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
               },
               "authorized": {
                 "result": "unknown",
@@ -60,7 +231,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在今日头条的设置中，‘清除缓存’对应的缓存文件大小是否大于0.0B且‘清理’按钮为红色可点击状态？",
+            "question": "在今日头条设置中，‘清除缓存’选项旁是否显示非零缓存大小（例如28.8MB或297.9MB），而非0.0B或‘已清理’状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -73,16 +244,16 @@
           "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
           "new_contamination_signal": false,
           "observation_ref": {
-            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1.png",
-            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1_after.png",
-            "xml_before_sig": "0ce429e962858877ccbf07f787ab38a1",
-            "xml_after_sig": "1be02745b91dd4ed4541d7c87dc3975a"
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "4ec1b8cc375b30d9d47b3ba12e2b3a89",
+            "xml_after_sig": "af5c7f8f9ae53465edc53e75151154f1"
           },
           "error_reason": null
         },
         {
           "schema": "action-contract/v0.1",
-          "action_id": "articlenews_17.base_canonical_harness.1793169725.iter1.step2",
+          "action_id": "articlenews_17.base_canonical_harness.1793242494.iter2.step2",
           "target_id": "m1",
           "action_type": "click",
           "target_description": "position=[1111, 203]",
@@ -119,7 +290,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "在今日头条的设置中，‘清除缓存’对应的缓存文件大小是否大于0.0B且‘清理’按钮为红色可点击状态？",
+            "question": "在今日头条设置中，‘清除缓存’选项旁是否显示非零缓存大小（例如28.8MB或297.9MB），而非0.0B或‘已清理’状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -132,19 +303,19 @@
           "clearance_basis": "设置项 清除缓存 已关闭",
           "new_contamination_signal": false,
           "observation_ref": {
-            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png",
-            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2_after.png",
-            "xml_before_sig": "1be02745b91dd4ed4541d7c87dc3975a",
-            "xml_after_sig": "7fbc11b1ac208f82864c16115ae0937e"
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_2_after.png",
+            "xml_before_sig": "af5c7f8f9ae53465edc53e75151154f1",
+            "xml_after_sig": "a9afac5d9c51e0a0e0a66d000cb7bba8"
           },
           "error_reason": null
         }
       ],
       "execute_ok": true,
-      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png",
-      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_2.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2",
       "trajectory": {
-        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2",
         "step_count": 2,
         "steps": [
           {
@@ -154,7 +325,7 @@
               1097,
               2587
             ],
-            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_1.png"
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_1.png"
           },
           {
             "step_index": 1,
@@ -163,7 +334,7 @@
               1111,
               203
             ],
-            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1\\step_2.png"
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2\\step_2.png"
           }
         ],
         "executor_success_flag": true
@@ -178,27 +349,13 @@
           {
             "mutation_id": "m1",
             "cleared": false,
-            "evidence_quote": "Step 0: THOUGHT: 要完成“撤销清除缓存”操作，首先需要进入今日头条的个人中心或设置页面，找到缓存管理相关选项。当前界面是首页推荐流，底部导航栏有“我的”入口，点击可进入个人中心，这是通往缓存设置的必经之路。因此，下一步应点击“我的”按钮。 Step 1: THOUGHT: 当前在“我的”页面，但未看到缓存管理或设置入口。根据常见App设计，“全部功能”通常包含更多系统设置选项，可能藏有缓存相关功能；另外右上角的齿轮图标（设置）也极可能是进入设置的快捷入口。优先尝试点击右上角的设置图标（齿轮），因为这是最标准的进入设置页的路径，有望找到“存储”或“缓存管理”。 ACTION: click([1111, 203])"
+            "evidence_quote": "Step 0: THOUGHT: 为了完成“将‘清除缓存’设置项恢复为关闭状态”的任务，我需要先进入今日头条的“我的”页面，然后找到设置选项，再进入缓存管理相关界面。当前界面是首页，右下角有“我的”入口，点击它可进入个人中心。 ACTION: click([1097, 2587]) Step 1: THOUGHT: 当前在“我的”页面，我需要找到设置入口以进入缓存管理。右上角有一个齿轮图标，这通常是“设置”的入口。点击它应该能进入设置页面，在那里我可以查找与缓存相关的选项。 ACTION: click([1111, 203])"
           }
         ]
       }
-    },
-    {
-      "iter": 2,
-      "phase": "verify",
-      "generate_ok": true,
-      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\articlenews_17_tasks.json",
-      "accepted_plan": {
-        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至被清理前的状态（即缓存文件大小非零、‘清理’按钮为红色可点击状态）"
-      },
-      "verify": {
-        "success": false,
-        "reason": "no_new_evidence",
-        "verdicts": []
-      }
     }
   ],
-  "recovery_id": "articlenews_17.base_canonical_harness.1793169725",
+  "recovery_id": "articlenews_17.base_canonical_harness.1793242494",
   "phase": "halt",
   "budget": {
     "max_iter": 3,
@@ -225,7 +382,7 @@
           3,
           4
         ],
-        "evidence_quote": "Step 2: THOUGHT: 我在设置页面中找到了“清除缓存”选项，旁边显示当前缓存大小为35.6MB……Step 3: THOUGHT: 我已经进入了清理缓存界面，看到“缓存文件”部分显示386.7MB，并有一个红色的“清理”按钮……Step 4: THOUGHT: 从当前界面可以看到，缓存文件已显示为0.0B，且“清理”按钮变为灰色不可点击状态，说明缓存已经成功清除。",
+        "evidence_quote": "Step 2: THOUGHT: 我在设置页面中找到了“清除缓存”选项，旁边显示当前缓存大小为28.8MB。…… Step 3: THOUGHT: 我已经进入了“清理缓存”页面，看到缓存文件大小为297.9MB，右侧有一个红色的“清理”按钮。…… Step 4: THOUGHT: 从截图来看，缓存文件已经显示为0.0B，说明缓存已被成功清除。",
         "confidence": 1.0,
         "attribution": "this_task",
         "carried_over_from_task": null
@@ -237,17 +394,18 @@
       },
       "contamination_status": "present",
       "recovery_status": "failed",
-      "attempts": 1,
+      "attempts": 2,
       "last_verify": {
-        "round": 1,
+        "round": 2,
         "verdict": {
           "mutation_id": "m1",
           "cleared": false,
-          "evidence_quote": "Step 0: THOUGHT: 要完成“撤销清除缓存”操作，首先需要进入今日头条的个人中心或设置页面，找到缓存管理相关选项。当前界面是首页推荐流，底部导航栏有“我的”入口，点击可进入个人中心，这是通往缓存设置的必经之路。因此，下一步应点击“我的”按钮。 Step 1: THOUGHT: 当前在“我的”页面，但未看到缓存管理或设置入口。根据常见App设计，“全部功能”通常包含更多系统设置选项，可能藏有缓存相关功能；另外右上角的齿轮图标（设置）也极可能是进入设置的快捷入口。优先尝试点击右上角的设置图标（齿轮），因为这是最标准的进入设置页的路径，有望找到“存储”或“缓存管理”。 ACTION: click([1111, 203])"
+          "evidence_quote": "Step 0: THOUGHT: 为了完成“将‘清除缓存’设置项恢复为关闭状态”的任务，我需要先进入今日头条的“我的”页面，然后找到设置选项，再进入缓存管理相关界面。当前界面是首页，右下角有“我的”入口，点击它可进入个人中心。 ACTION: click([1097, 2587]) Step 1: THOUGHT: 当前在“我的”页面，我需要找到设置入口以进入缓存管理。右上角有一个齿轮图标，这通常是“设置”的入口。点击它应该能进入设置页面，在那里我可以查找与缓存相关的选项。 ACTION: click([1111, 203])"
         }
       },
       "evidence_refs": [
-        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1"
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\articlenews_17\\recovery_iter2"
       ],
       "last_failure_reason": "VLM 判定污染仍存在/无法确认"
     }
@@ -257,7 +415,7 @@
     {
       "iteration": 1,
       "accepted_plan": {
-        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至清除前的非零状态（即缓存大小大于0.0B，且‘清理’按钮为可点击红色状态）"
+        "m1": "在今日头条中将‘清除缓存’设置项恢复为关闭状态（即撤销已执行的缓存清除操作，使该选项处于未触发/未激活的off状态）"
       },
       "plan_reason": null,
       "generate_ok": true,
@@ -268,11 +426,11 @@
     {
       "iteration": 2,
       "accepted_plan": {
-        "m1": "在今日头条中将‘清除缓存’操作撤销，使缓存恢复至被清理前的状态（即缓存文件大小非零、‘清理’按钮为红色可点击状态）"
+        "m1": "在今日头条中将‘清除缓存’设置项恢复为关闭状态，即确保该选项未被触发、缓存未被清空（缓存大小应显示为非零值，如28.8MB或297.9MB等原始值）"
       },
       "plan_reason": null,
       "generate_ok": true,
-      "execute_ok": null,
+      "execute_ok": true,
       "verify_success": false,
       "error": null
     }

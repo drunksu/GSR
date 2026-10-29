@@ -18,12 +18,251 @@
       "generate_ok": true,
       "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json",
       "accepted_plan": {
-        "m1": "在钉钉中将勿扰模式设置为关闭状态，即撤销已开启的勿扰模式污染，使消息免打扰功能失效"
+        "m1": "在钉钉中将勿扰模式的开关关闭，使其恢复为关闭状态（即勿扰模式未启用）"
       },
       "actions": [
         {
           "schema": "action-contract/v0.1",
-          "action_id": "rimet_19.base_canonical_harness.1793212627.iter1.step1",
+          "action_id": "rimet_19.base_canonical_harness.1793244492.iter1.step1",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[112, 212]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "pass",
+                "note": "前置条件检查对象在当前页面可见"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 8"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "勿扰模式的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1_after.png",
+            "xml_before_sig": "9a0ff201b2da78e5163d4c06e3b55923",
+            "xml_after_sig": "55fe01c11248d6e68c6d605ed37154d2"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_19.base_canonical_harness.1793244492.iter1.step2",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[693, 678]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 7"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "勿扰模式的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "uncertain",
+          "clearance_basis": "设置控件不在当前页面，无法用 XML 判定开关状态",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_2.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_2_after.png",
+            "xml_before_sig": "55fe01c11248d6e68c6d605ed37154d2",
+            "xml_after_sig": "9b5729b650b52afcc548aca82457d42b"
+          },
+          "error_reason": null
+        },
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_19.base_canonical_harness.1793244492.iter1.step3",
+          "target_id": "m1",
+          "action_type": "click",
+          "target_description": "position=[228, 1470]",
+          "preconditions": {
+            "schema": "action-contract/v0.1",
+            "allow": true,
+            "reason": "precheck passed",
+            "checks": {
+              "action_allowed": {
+                "result": "pass",
+                "note": "允许的动作类型 click"
+              },
+              "target_clarity": {
+                "result": "pass",
+                "note": "点击类动作带明确 position"
+              },
+              "target_found": {
+                "result": "unknown",
+                "note": "无显式 id（position 型），无法确定性验证可达性"
+              },
+              "precondition": {
+                "result": "unknown",
+                "note": "前置条件无法确定性确认（自由文本，可能需先导航）"
+              },
+              "authorized": {
+                "result": "unknown",
+                "note": "动作目标与实体的语义关联无法确定性判定（不拦截）"
+              },
+              "budget": {
+                "result": "pass",
+                "note": "剩余动作配额 6"
+              }
+            }
+          },
+          "expected_effect": {
+            "kind": "vlm_judge",
+            "question": "勿扰模式的状态是否已恢复到目标状态？",
+            "expected": "yes"
+          },
+          "tool_result": {
+            "adb_ok": true,
+            "error": null
+          },
+          "execution_status": "executed",
+          "gui_changed": "changed",
+          "clearance": "cleared",
+          "clearance_basis": "设置项 勿扰模式 已关闭",
+          "new_contamination_signal": false,
+          "observation_ref": {
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_3.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_3_after.png",
+            "xml_before_sig": "9b5729b650b52afcc548aca82457d42b",
+            "xml_after_sig": "41602b17ee4e65989d4385047b2e3830"
+          },
+          "error_reason": null
+        }
+      ],
+      "execute_ok": true,
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_3.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+      "trajectory": {
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+        "step_count": 3,
+        "steps": [
+          {
+            "step_index": 0,
+            "action": "click",
+            "target": [
+              112,
+              212
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png"
+          },
+          {
+            "step_index": 1,
+            "action": "click",
+            "target": [
+              693,
+              678
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_2.png"
+          },
+          {
+            "step_index": 2,
+            "action": "click",
+            "target": [
+              228,
+              1470
+            ],
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_3.png"
+          }
+        ],
+        "executor_success_flag": true
+      },
+      "intent": {
+        "task_ref": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json"
+      },
+      "verify": {
+        "success": false,
+        "reason": "reaudit",
+        "verdicts": [
+          {
+            "mutation_id": "m1",
+            "cleared": false,
+            "evidence_quote": "勿扰模式\n22:00 - 次日 08:00 >"
+          }
+        ]
+      }
+    },
+    {
+      "iter": 2,
+      "phase": "verify",
+      "generate_ok": true,
+      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json",
+      "accepted_plan": {
+        "m1": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作，使勿扰模式处于off状态）"
+      },
+      "actions": [
+        {
+          "schema": "action-contract/v0.1",
+          "action_id": "rimet_19.base_canonical_harness.1793244492.iter2.step1",
           "target_id": "m1",
           "action_type": "click",
           "target_description": "position=[274, 759]",
@@ -60,7 +299,7 @@
           },
           "expected_effect": {
             "kind": "vlm_judge",
-            "question": "钉钉中勿扰模式的开关是否处于关闭（灰色）状态？",
+            "question": "勿扰模式的状态是否已恢复到目标状态？",
             "expected": "yes"
           },
           "tool_result": {
@@ -73,19 +312,19 @@
           "clearance_basis": "设置项 勿扰模式 已关闭",
           "new_contamination_signal": false,
           "observation_ref": {
-            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png",
-            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1_after.png",
-            "xml_before_sig": "e6c1659686753748a9f2745ba596b4e1",
-            "xml_after_sig": "2370957c11836e7b05b68bae16b8ba4b"
+            "img_before": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2\\step_1.png",
+            "img_after": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2\\step_1_after.png",
+            "xml_before_sig": "7f82c21f49df7e8465484a01fb25731e",
+            "xml_after_sig": "a84d3a3a458e7d27755f50283f8df47d"
           },
           "error_reason": null
         }
       ],
       "execute_ok": true,
-      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png",
-      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+      "final_screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2\\step_1.png",
+      "recovery_task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2",
       "trajectory": {
-        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+        "task_dir": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2",
         "step_count": 1,
         "steps": [
           {
@@ -95,7 +334,7 @@
               274,
               759
             ],
-            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1\\step_1.png"
+            "screenshot": "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2\\step_1.png"
           }
         ],
         "executor_success_flag": true
@@ -110,27 +349,13 @@
           {
             "mutation_id": "m1",
             "cleared": false,
-            "evidence_quote": "Step 0: THOUGHT: 从当前界面来看，钉钉首页显示了一条提示：“你可能错过重要信息，通知已关闭，你将无法收到任何消息通知”，并提供了一个“去设置中打开”的按钮。这说明勿扰模式（或消息免打扰）目前是开启状态，需要进入设置进行关闭。为了关闭勿扰模式，最直接的路径是点击该提示中的“去设置中打开”按钮，它应该会跳转到相关设置页面，在那里可以关闭勿扰模式。因此，下一步操作是点击“去设置中打开”按钮。 ACTION: click([274, 759])"
+            "evidence_quote": "Step 0: THOUGHT: 我需要找到钉钉中勿扰模式的设置入口。当前界面是消息列表页，顶部有“苏思源”的个人空间信息，右上角有一个加号按钮，可能用于进入更多功能或设置。另外，页面中间有一条提示“通知已关闭，你将无法收到任何消息通知”，并提供了一个“去设置中打开”的按钮，这说明当前通知确实被关闭了（即勿扰模式开启），而我们要将其关闭，所以需要点击这个按钮进入设置页面进行调整。 ACTION: click([274, 759])"
           }
         ]
       }
-    },
-    {
-      "iter": 2,
-      "phase": "verify",
-      "generate_ok": true,
-      "recovery_task": "D:\\GSR\\experiments\\state_recovery\\results\\recovery_tasks\\base_canonical_harness\\rimet_19_tasks.json",
-      "accepted_plan": {
-        "m1": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作），确保勿扰模式处于off状态"
-      },
-      "verify": {
-        "success": false,
-        "reason": "no_new_evidence",
-        "verdicts": []
-      }
     }
   ],
-  "recovery_id": "rimet_19.base_canonical_harness.1793212627",
+  "recovery_id": "rimet_19.base_canonical_harness.1793244492",
   "phase": "halt",
   "budget": {
     "max_iter": 3,
@@ -149,13 +374,13 @@
           "identifier": null
         },
         "direction": "on",
-        "persistence": "account",
+        "persistence": "device_local",
         "status": "done",
         "reversible": "ui_invert",
         "evidence_steps": [
           4
         ],
-        "evidence_quote": "Thought: 我已经成功进入了钉钉的“勿扰模式”设置页面，并且看到勿扰模式的开关已经是开启状态（蓝色）。这意味着消息免打扰功能已经生效。",
+        "evidence_quote": "Thought: 我已经成功进入“勿扰模式”设置页面，看到开关已开启（蓝色），说明消息免打扰功能当前处于启用状态。",
         "confidence": 1.0,
         "attribution": "this_task",
         "carried_over_from_task": null
@@ -167,17 +392,18 @@
       },
       "contamination_status": "present",
       "recovery_status": "failed",
-      "attempts": 1,
+      "attempts": 2,
       "last_verify": {
-        "round": 1,
+        "round": 2,
         "verdict": {
           "mutation_id": "m1",
           "cleared": false,
-          "evidence_quote": "Step 0: THOUGHT: 从当前界面来看，钉钉首页显示了一条提示：“你可能错过重要信息，通知已关闭，你将无法收到任何消息通知”，并提供了一个“去设置中打开”的按钮。这说明勿扰模式（或消息免打扰）目前是开启状态，需要进入设置进行关闭。为了关闭勿扰模式，最直接的路径是点击该提示中的“去设置中打开”按钮，它应该会跳转到相关设置页面，在那里可以关闭勿扰模式。因此，下一步操作是点击“去设置中打开”按钮。 ACTION: click([274, 759])"
+          "evidence_quote": "Step 0: THOUGHT: 我需要找到钉钉中勿扰模式的设置入口。当前界面是消息列表页，顶部有“苏思源”的个人空间信息，右上角有一个加号按钮，可能用于进入更多功能或设置。另外，页面中间有一条提示“通知已关闭，你将无法收到任何消息通知”，并提供了一个“去设置中打开”的按钮，这说明当前通知确实被关闭了（即勿扰模式开启），而我们要将其关闭，所以需要点击这个按钮进入设置页面进行调整。 ACTION: click([274, 759])"
         }
       },
       "evidence_refs": [
-        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1"
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter1",
+        "D:\\GSR\\experiments\\state_recovery\\results\\pipeline\\base_canonical_harness\\rimet_19\\recovery_iter2"
       ],
       "last_failure_reason": "VLM 判定污染仍存在/无法确认"
     }
@@ -187,7 +413,7 @@
     {
       "iteration": 1,
       "accepted_plan": {
-        "m1": "在钉钉中将勿扰模式设置为关闭状态，即撤销已开启的勿扰模式污染，使消息免打扰功能失效"
+        "m1": "在钉钉中将勿扰模式的开关关闭，使其恢复为关闭状态（即勿扰模式未启用）"
       },
       "plan_reason": null,
       "generate_ok": true,
@@ -198,11 +424,11 @@
     {
       "iteration": 2,
       "accepted_plan": {
-        "m1": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作），确保勿扰模式处于off状态"
+        "m1": "在钉钉中将勿扰模式的开关状态恢复为关闭（即撤销开启操作，使勿扰模式处于off状态）"
       },
       "plan_reason": null,
       "generate_ok": true,
-      "execute_ok": null,
+      "execute_ok": true,
       "verify_success": false,
       "error": null
     }

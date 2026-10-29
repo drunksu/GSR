@@ -4,36 +4,12 @@
   "run_id": "base_canonical_harness",
   "task_goal": "关闭百度浏览器的通知栏消息",
   "judged_success": true,
-  "mutations": [
-    {
-      "id": "m1",
-      "type": "settings_toggle",
-      "app": "百度",
-      "entity": {
-        "kind": "setting",
-        "name": "通知栏消息",
-        "identifier": null
-      },
-      "direction": "off",
-      "persistence": "device_local",
-      "status": "done",
-      "reversible": "ui_invert",
-      "evidence_steps": [
-        9
-      ],
-      "evidence_quote": "Thought: 当前页面为“通知栏消息”设置页，顶部的“通知栏消息”总开关已处于关闭状态（灰色），说明所有子类通知（如新闻热点、兴趣推送等）均已禁用。",
-      "confidence": 1.0,
-      "attribution": "this_task",
-      "carried_over_from_task": null
-    }
-  ],
+  "mutations": [],
   "search_terms": [],
   "_gate": {
-    "autonomous": [
-      "m1"
-    ],
+    "autonomous": [],
     "halt": [],
-    "noop": false
+    "noop": true
   },
   "_model": "qwen3-vl-plus",
   "_modality": "text",

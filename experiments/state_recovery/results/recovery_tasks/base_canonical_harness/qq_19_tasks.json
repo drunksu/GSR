@@ -6,11 +6,11 @@
     {
       "schema": "recovery-task/v0.1",
       "mutation_id": "m1",
-      "recovery_goal": "在QQ中将关怀模式关闭，使设置项‘关怀模式’处于off状态",
+      "recovery_goal": "在QQ中将关怀模式的开关状态恢复为关闭（即撤销开启操作），确保关怀模式处于off状态",
       "precondition": {
-        "target": "确认当前QQ是否处于关怀模式已开启状态",
-        "check_instruction": "进入QQ个人主页→点击‘设置’→进入‘通用’→找到‘关怀模式’选项，观察其开关状态或是否有‘已开启’提示文字",
-        "clean_if_state": "‘关怀模式’开关显示为灰色（off）或无‘已开启’标识，即视为已恢复"
+        "target": "确认当前QQ中关怀模式的开关是否已关闭",
+        "check_instruction": "进入QQ设置→通用→模式选择页面，查看‘关怀模式’右侧的开关或对勾标识状态",
+        "clean_if_state": "关怀模式右侧无蓝色对勾、开关处于灰色关闭位置，即表示已恢复"
       },
       "expected_end_state": {
         "kind": "vlm_judge",
