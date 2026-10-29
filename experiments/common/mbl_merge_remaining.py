@@ -47,6 +47,12 @@ HEADER = [
 ]
 LEVEL_COL = HEADER[7]
 
+# 官方各子集 CSV 的列名不统一，这里做别名映射（源列名 -> 统一列名）
+ALIASES = {
+    "functional_point": "功能点",
+    "difficulty_level": LEVEL_COL,
+}
+
 
 def load(path: Path):
     with open(path, encoding="utf-8-sig") as f:
@@ -105,6 +111,7 @@ def main():
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    levels = {}
     with open(out_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=HEADER)
         writer.writeheader()
@@ -113,18 +120,19 @@ def main():
             for c in HEADER:
                 if c in row and row[c] is not None:
                     out_row[c] = row[c]
+            for src_col, dst_col in ALIASES.items():
+                if not (out_row[dst_col] or "").strip() and (row.get(src_col) or "").strip():
+                    out_row[dst_col] = row[src_col]
             out_row["task_id"] = args.start_id + idx
             out_row["真机/模拟器"] = ""
+            lv = (out_row[LEVEL_COL] or "").strip() or "?"
+            levels[lv] = levels.get(lv, 0) + 1
             writer.writerow(out_row)
 
     print("合并明细：")
     for r in report:
         print("  %-36s %-8s 读入 %3d  保留 %3d  %s" % (r["源"], r["状态"], r["读入"], r["保留"], r["跳过原因"]))
     apps = sorted({(r.get("task_app") or "").strip() for r in kept})
-    levels = {}
-    for r in kept:
-        lv = (r.get(LEVEL_COL) or "").strip() or "?"
-        levels[lv] = levels.get(lv, 0) + 1
     print("合计保留: %d 条" % len(kept))
     print("覆盖 App: %d 个" % len(apps))
     print("level 分布: %s" % levels)
