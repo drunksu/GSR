@@ -14,7 +14,7 @@
 \usepackage{booktabs}
 \usepackage{amsmath}
 
-\title{GUI State Recovery: Auditing and Repairing Environment Contamination Left by Mobile GUI Agents}
+\title{SCAR: State Contamination and Remediation for Mobile GUI Agents}
 
 \author{Anonymous ACL submission}
 
@@ -26,15 +26,16 @@
 % (1) Mobile GUI agents leave persistent state changes (contamination)
 %     after task execution, e.g., search histories and settings toggles,
 %     which corrupt subsequent evaluations and real-user environments.
-% (2) We formalize GUI state recovery and propose a closed-loop framework:
-%     Audit Agent (infers a contamination list from execution trajectories),
-%     Planner Agent (generates recovery tasks), Execute Agent (repairs the
-%     state on real devices), with recovery trajectories re-audited until
-%     the state is clean or escalated to a human gate.
+% (2) We formalize state contamination and remediation, and propose the
+%     SCAR closed-loop framework: Audit Agent (infers a contamination list
+%     from execution trajectories), Planner Agent (generates remediation
+%     tasks), Execute Agent (repairs the state on real devices), with
+%     remediation trajectories re-audited until the state is clean or
+%     escalated to a human gate.
 % (3) Results on MobileBench-OL (310 tasks, 310 human golden labels) and
-%     the MBOL+ extension (859 tasks); end-to-end recovery success rate
-%     and inference precision/recall/F1 (all figures traceable to human
-%     annotations only).
+%     the SCAR-Bench extension (813 tasks, 93 apps); end-to-end
+%     remediation success rate and inference precision/recall/F1 (all
+%     figures traceable to human annotations only).
 \end{abstract}
 
 \section{Introduction}
@@ -45,20 +46,21 @@
 % reproducibility; memory/state editing and environment repair.
 
 \section{Task Formulation}
-% TODO: define contamination, contamination list schema
-% (contamination-list/v0.1), recovery task schema (recovery-task/v0.1),
-% success criterion, and the reset-free setting.
+% TODO: define state contamination and remediation, contamination list
+% schema (contamination-list/v0.1), remediation task schema
+% (recovery-task/v0.1, internal alias), success criterion, and the
+% reset-free setting.
 
 \section{Method}
 % TODO: overall closed-loop figure (contamination monitoring ->
-% recovery task generation -> execution -> re-audit).
+% remediation task generation -> execution -> re-audit).
 \subsection{Audit Agent: Contamination Inference}
 % TODO: deterministic ledger carry-over, search-term normalization,
 % bidirectional grounding, three deterministic guards with human gating.
-\subsection{Planner Agent: Recovery Task Generation}
+\subsection{Planner Agent: Remediation Task Generation}
 % TODO: four-layer constraint architecture: skeleton pre-fill,
 % per-mutation generation, prompt constraints, structured output validation.
-\subsection{Execute Agent and Recovery Harness}
+\subsection{Execute Agent and Remediation Harness}
 % TODO: benchmark-identical action space (7 actions), action contract,
 % three-way post-action verification, Policy Engine, dynamic control loop.
 \subsection{Closed-Loop Verification}
@@ -66,17 +68,17 @@
 % verification (task completion vs. contamination removal).
 
 \section{Experimental Setup}
-% TODO: datasets (MobileBench-OL base 310; MBOL+ 859), models
+% TODO: datasets (MobileBench-OL base 310; SCAR-Bench 813), models
 % (qwen3-vl-plus across all stages), human golden-label annotation
 % protocol and quality checks, evaluation metrics (P, R, strict F1,
-% type-only F1; recovery success rate, one-shot rate, iterations).
+% type-only F1; remediation success rate, one-shot rate, iterations).
 
 \section{Results}
 % TODO: tables only with human-traceable numbers.
 \subsection{Contamination Inference Quality}
 % TODO: modality ablation (text / +XML / +image / +XML+image) for the two
 % visually capable models.
-\subsection{End-to-End Recovery}
+\subsection{End-to-End Remediation}
 % TODO: full-run statistics and failure attribution (system vs. model).
 
 \section{Analysis}
