@@ -1,0 +1,94 @@
+\documentclass[11pt]{article}
+
+% ACL 2027 submission: keep [review] for double-blind submission.
+\usepackage[review]{acl}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\title{GUI State Recovery: Auditing and Repairing Environment Contamination Left by Mobile GUI Agents}
+
+\author{Anonymous ACL submission}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% TODO: draft abstract. Key points to cover:
+% (1) Mobile GUI agents leave persistent state changes (contamination)
+%     after task execution, e.g., search histories and settings toggles,
+%     which corrupt subsequent evaluations and real-user environments.
+% (2) We formalize GUI state recovery and propose a closed-loop framework:
+%     Audit Agent (infers a contamination list from execution trajectories),
+%     Planner Agent (generates recovery tasks), Execute Agent (repairs the
+%     state on real devices), with recovery trajectories re-audited until
+%     the state is clean or escalated to a human gate.
+% (3) Results on MobileBench-OL (310 tasks, 310 human golden labels) and
+%     the MBOL+ extension (859 tasks); end-to-end recovery success rate
+%     and inference precision/recall/F1 (all figures traceable to human
+%     annotations only).
+\end{abstract}
+
+\section{Introduction}
+% TODO: motivation, gap, contributions (3 bullets).
+
+\section{Related Work}
+% TODO: mobile GUI agents and benchmarks; environment state and
+% reproducibility; memory/state editing and environment repair.
+
+\section{Task Formulation}
+% TODO: define contamination, contamination list schema
+% (contamination-list/v0.1), recovery task schema (recovery-task/v0.1),
+% success criterion, and the reset-free setting.
+
+\section{Method}
+% TODO: overall closed-loop figure (contamination monitoring ->
+% recovery task generation -> execution -> re-audit).
+\subsection{Audit Agent: Contamination Inference}
+% TODO: deterministic ledger carry-over, search-term normalization,
+% bidirectional grounding, three deterministic guards with human gating.
+\subsection{Planner Agent: Recovery Task Generation}
+% TODO: four-layer constraint architecture: skeleton pre-fill,
+% per-mutation generation, prompt constraints, structured output validation.
+\subsection{Execute Agent and Recovery Harness}
+% TODO: benchmark-identical action space (7 actions), action contract,
+% three-way post-action verification, Policy Engine, dynamic control loop.
+\subsection{Closed-Loop Verification}
+% TODO: VLM verification anchored on contamination entities; two-stage
+% verification (task completion vs. contamination removal).
+
+\section{Experimental Setup}
+% TODO: datasets (MobileBench-OL base 310; MBOL+ 859), models
+% (qwen3-vl-plus across all stages), human golden-label annotation
+% protocol and quality checks, evaluation metrics (P, R, strict F1,
+% type-only F1; recovery success rate, one-shot rate, iterations).
+
+\section{Results}
+% TODO: tables only with human-traceable numbers.
+\subsection{Contamination Inference Quality}
+% TODO: modality ablation (text / +XML / +image / +XML+image) for the two
+% visually capable models.
+\subsection{End-to-End Recovery}
+% TODO: full-run statistics and failure attribution (system vs. model).
+
+\section{Analysis}
+% TODO: case studies, failure modes (model over-conservatism on
+% irreversible operations, repeated plans), iteration cost.
+
+\section{Limitations}
+
+\section*{Ethical Statement}
+
+\section{Conclusion}
+
+\bibliography{custom}
+
+\end{document}
